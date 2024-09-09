@@ -33,42 +33,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         });
-        ThemeColorChange.getInstance().addThemes(new ThemeColor(new Color(34, 34, 34), Color.WHITE) {
-            @Override
-            public void onColorChange(Color color) {
-                panelBackground1.setBackground(color);
-            }
-        });
-        ThemeColorChange.getInstance().addThemes(new ThemeColor(Color.WHITE, new Color(80, 80, 80)) {
-            @Override
-            public void onColorChange(Color color) {
-                mainBody.changeColor(color);
-            }
-        });
-        ThemeColorChange.getInstance().initBackground(panelBackground1);
-        SystemProperties pro = new SystemProperties();
-        pro.loadFromFile();
-        if (!pro.isDarkMode()) {
-            ThemeColorChange.getInstance().setMode(ThemeColorChange.Mode.LIGHT);
-            panelBackground1.setBackground(Color.WHITE);
-            mainBody.changeColor(new Color(80, 80, 80));
-        }
-        if (pro.getBackgroundImage() != null) {
-            ThemeColorChange.getInstance().changeBackgroundImage(pro.getBackgroundImage());
-        }
-        SystemTheme.mainColor = pro.getColor();
         settingForm = new Setting_Form();
-        settingForm.setEventColorChange(new EventColorChange() {
-            @Override
-            public void colorChange(Color color) {
-                SystemTheme.mainColor = color;
-                ThemeColorChange.getInstance().ruenEventColorChange(color);
-                repaint();
-                pro.save("theme_color", color.getRGB() + "");
-            }
-        });
-        settingForm.setSelectedThemeColor(pro.getColor());
-        settingForm.setDarkMode(pro.isDarkMode());
         mainBody.displayForm(new Home_Form());
     }
 

@@ -26,3 +26,5 @@ replay_pid*
 # No ignores directorios de recursos
 !src/main/com/
 !librerias/
+/build/
+/dist/
