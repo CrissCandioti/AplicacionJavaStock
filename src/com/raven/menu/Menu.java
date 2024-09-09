@@ -54,16 +54,16 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void initMenu() {
-        addMenu("Dashboard", "1", 0);
-        addMenu("Staff", "2", 1);
-        addMenu("Sale", "3", 2);
-        addMenu("Data", "4", 3);
-        addMenu("Report", "5", 4);
-        addMenu("User", "6", 5);
-        addMenu("Setting", "7", 6);
-        addMenu("Expense", "8", 7);
-        addMenu("Income", "9", 8);
-        addMenu("Message", "10", 9);
+        addMenu("Inicio", "1", 0);
+        addMenu("Clientes", "2", 1);
+        addMenu("Ventas", "3", 2);
+        addMenu("Datos", "4", 3);
+        addMenu("Reportes", "5", 4);
+        addMenu("Usuarios", "6", 5);
+        addMenu("Configuracion", "7", 6);
+        addMenu("Proveedores", "8", 7);
+        addMenu("Ganancias", "9", 8);
+        addMenu("Chat GPT", "10", 9);
         //  add more menu here
         menu.repaint();
         menu.revalidate();
