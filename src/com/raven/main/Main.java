@@ -1,13 +1,10 @@
 package com.raven.main;
 
-import com.raven.event.EventColorChange;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.raven.form.Home_Form;
 import com.raven.form.Setting_Form;
 import com.raven.menu.EventMenu;
-import com.raven.properties.SystemProperties;
-import com.raven.theme.SystemTheme;
-import com.raven.theme.ThemeColor;
-import com.raven.theme.ThemeColorChange;
 import java.awt.Color;
 
 public class Main extends javax.swing.JFrame {
@@ -29,7 +26,7 @@ public class Main extends javax.swing.JFrame {
                 if (index == 0) {
                     mainBody.displayForm(new Home_Form());
                 } else if (index == 6) {
-                    mainBody.displayForm(settingForm, "Setting");
+                    mainBody.displayForm(settingForm, "Configuracion");
                 }
             }
         });
@@ -93,30 +90,8 @@ public class Main extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        FlatLaf.registerCustomDefaultsSource("com.raven.style");
+        FlatMacLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
