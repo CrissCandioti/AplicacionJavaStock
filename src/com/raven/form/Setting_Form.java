@@ -1,6 +1,7 @@
 package com.raven.form;
 
 import com.raven.component.Form;
+import javax.swing.JOptionPane;
 
 public class Setting_Form extends Form {
 
@@ -16,6 +17,11 @@ public class Setting_Form extends Form {
         jLabel1 = new javax.swing.JLabel();
 
         jButton1.setText("Presione aqui");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -42,6 +48,10 @@ public class Setting_Form extends Form {
                 .addContainerGap(284, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+JOptionPane.showMessageDialog(jButton1, "Hola");
+    }//GEN-LAST:event_jButton1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

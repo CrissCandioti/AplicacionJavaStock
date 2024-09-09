@@ -1,6 +1,7 @@
 package com.raven.main;
 
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.raven.form.Home_Form;
 import com.raven.form.Setting_Form;
@@ -91,7 +92,7 @@ public class Main extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         FlatLaf.registerCustomDefaultsSource("com.raven.style");
-        FlatMacLightLaf.setup();
+        FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
