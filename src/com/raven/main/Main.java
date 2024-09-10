@@ -5,12 +5,14 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.raven.form.Home_Form;
 import com.raven.form.Setting_Form;
+import com.raven.form.Usuarios_Form1;
 import com.raven.menu.EventMenu;
 import java.awt.Color;
 
 public class Main extends javax.swing.JFrame {
 
     private Setting_Form settingForm;
+    private Usuarios_Form1 usuariosForm; 
 
     public Main() {
         initComponents();
@@ -26,11 +28,14 @@ public class Main extends javax.swing.JFrame {
             public void selectedMenu(int index) {
                 if (index == 0) {
                     mainBody.displayForm(new Home_Form());
+                } else if (index == 1) {
+                    mainBody.displayForm(usuariosForm, "Usuarios");
                 } else if (index == 6) {
                     mainBody.displayForm(settingForm, "Configuracion");
                 }
             }
         });
+        usuariosForm = new Usuarios_Form1();
         settingForm = new Setting_Form();
         mainBody.displayForm(new Home_Form());
     }
