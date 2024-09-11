@@ -7,6 +7,7 @@ import com.raven.crud.AgregarBaseDeDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import javax.swing.table.DefaultTableModel;
+import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.SimplePopupBorder;
@@ -186,7 +187,7 @@ public class Usuarios_Form extends Form {
         String actions[] = new String[]{"Cancelar", "Guardar"};
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Cliente", actions, (pc, i) -> {
             if (i == 1) {
-                //Se guarda los datos en la base de datos
+                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos",MessageAlerts.MessageType.SUCCESS);
             } else {
             pc.closePopup();
             }
