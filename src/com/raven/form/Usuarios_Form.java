@@ -33,7 +33,7 @@ public class Usuarios_Form extends Form {
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
-        
+            
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         testData();
     }
@@ -70,7 +70,7 @@ public class Usuarios_Form extends Form {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, true, true, true, true
+                true, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
