@@ -2,12 +2,10 @@ package com.raven.main;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.raven.form.Home_Form;
 import com.raven.form.Setting_Form;
 import com.raven.form.Usuarios_Form;
 import com.raven.menu.EventMenu;
-import java.awt.Color;
 
 public class Main extends javax.swing.JFrame {
 
@@ -26,7 +24,7 @@ public class Main extends javax.swing.JFrame {
                 if (index == 0) {
                     mainBody.displayForm(new Home_Form());
                 } else if (index == 1) {
-                    mainBody.displayForm(usuariosForm, "Usuarios");
+                    mainBody.displayForm(usuariosForm, "Clientes");
                 } else if (index == 6) {
                     mainBody.displayForm(settingForm, "Configuracion");
                 }

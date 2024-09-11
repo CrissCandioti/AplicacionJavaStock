@@ -2,15 +2,16 @@ package com.raven.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.raven.component.Form;
+import com.raven.table.TableHeaderAlignment;
 import javax.swing.table.DefaultTableModel;
 
 public class Usuarios_Form extends Form {
-
+    
     public Usuarios_Form() {
         initComponents();
         init();
     }
-
+    
     private void init() {
         jTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "height:30;"
@@ -18,7 +19,7 @@ public class Usuarios_Form extends Form {
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background;"
                 + "font:bold;");
-
+        
         jTable.putClientProperty(FlatClientProperties.STYLE, ""
                 + "rowHeight:30;"
                 + "showHorizontalLines:true;"
@@ -26,40 +27,24 @@ public class Usuarios_Form extends Form {
                 + "cellFocusColor:$TableHeader.hoverBackground;"
                 + "selectionBackground:$TableHeader.hoverBackground;"
                 + "selectionForeground:$Table.foreground;");
-
+        
         jScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
-
+        
+        jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         testData();
     }
-
+    
     private void testData() {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        
 
-        model.addRow(new Object[]{false, 1, "Hanna", "Chambers"});
-        model.addRow(new Object[]{true, 2, "Hanna", "Chambers"});
-        model.addRow(new Object[]{true, 3, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 4, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 5, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 6, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 7, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 8, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 9, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 10, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 11, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 12, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 13, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 14, "Hanna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 15, "anna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 16, "anna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 17, "anna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-        model.addRow(new Object[]{true, 18, "anna", "Chambers", "20-august-2020", "Saumerios", "Compra de todo"});
-
+        model.addRow(new Object[]{true,"Nombre","Apellido","Notas","1","2","3"});
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -71,20 +56,21 @@ public class Usuarios_Form extends Form {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "", "Title 2", "Title 3", "Title 4"
+                "Estado", "Nombre", "Apellido", "Nota", "null", "Title 6", "Title 7", "Title 8"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false
+                true, false, false, false, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -106,6 +92,8 @@ public class Usuarios_Form extends Form {
 
         jTextField1.setText("Ingrese el nombre del cliente");
 
+        jButton4.setText("Historial");
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -118,6 +106,8 @@ public class Usuarios_Form extends Form {
                 .addGap(45, 45, 45)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -133,7 +123,8 @@ public class Usuarios_Form extends Form {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addGap(56, 56, 56)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
@@ -155,6 +146,7 @@ public class Usuarios_Form extends Form {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
