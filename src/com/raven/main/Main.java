@@ -5,14 +5,14 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.raven.form.Home_Form;
 import com.raven.form.Setting_Form;
-import com.raven.form.Usuarios_Form1;
+import com.raven.form.Usuarios_Form;
 import com.raven.menu.EventMenu;
 import java.awt.Color;
 
 public class Main extends javax.swing.JFrame {
 
     private Setting_Form settingForm;
-    private Usuarios_Form1 usuariosForm; 
+    private Usuarios_Form usuariosForm; 
 
     public Main() {
         initComponents();
@@ -35,7 +35,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         });
-        usuariosForm = new Usuarios_Form1();
+        usuariosForm = new Usuarios_Form();
         settingForm = new Setting_Form();
         mainBody.displayForm(new Home_Form());
     }
