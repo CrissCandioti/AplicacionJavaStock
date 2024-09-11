@@ -3,9 +3,13 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
+import com.raven.crud.AgregarBaseDeDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import javax.swing.table.DefaultTableModel;
+import raven.popup.DefaultOption;
+import raven.popup.GlassPanePopup;
+import raven.popup.component.SimplePopupBorder;
 
 public class Usuarios_Form extends Form {
 
@@ -41,7 +45,7 @@ public class Usuarios_Form extends Form {
 
         jTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
         jTextField.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
-        
+
         jTextField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
@@ -105,6 +109,11 @@ public class Usuarios_Form extends Form {
         jButton2.setText("Modificar");
 
         jButton3.setText("Agregar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Historial");
 
@@ -164,6 +173,25 @@ public class Usuarios_Form extends Form {
             .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    @SuppressWarnings("empty-statement")
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        AgregarBaseDeDatos agregar = new AgregarBaseDeDatos();
+        DefaultOption option = new DefaultOption() {
+            @Override
+            public boolean closeWhenClickOutside() {
+                return true;
+            }
+        };
+        String actions[] = new String[]{"Cancelar", "Guardar"};
+        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Cliente", actions, (pc, i) -> {
+            if (i == 1) {
+                //Se guarda los datos en la base de datos
+            } else {
+            pc.closePopup();
+            }
+        }),option);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
