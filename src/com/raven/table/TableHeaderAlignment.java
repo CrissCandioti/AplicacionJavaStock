@@ -4,36 +4,35 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
 public class TableHeaderAlignment implements TableCellRenderer {
+
     private final TableCellRenderer oldHeaderRenderer;
+    private final TableCellRenderer oldCellRenderer;
 
     public TableHeaderAlignment(JTable table) {
         this.oldHeaderRenderer = table.getTableHeader().getDefaultRenderer();
-        alignColumnContent(table);
-    }
-
-    private void alignColumnContent(JTable table) {
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            TableColumn column = table.getColumnModel().getColumn(i);
-            DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-            renderer.setHorizontalAlignment(getAlignment(i));
-            column.setCellRenderer(renderer);
-        }
+        this.oldCellRenderer = table.getDefaultRenderer(Object.class);
+        table.setDefaultRenderer(Object.class, new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int row, int column) {
+                JLabel label = (JLabel) oldCellRenderer.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
+                label.setHorizontalAlignment(getAlignment(column));
+                return label;
+            }
+        });
     }
 
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        JLabel label = (JLabel) oldHeaderRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+    public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int row, int column) {
+        JLabel label = (JLabel) oldHeaderRenderer.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
         label.setHorizontalAlignment(getAlignment(column));
         return label;
     }
 
     protected int getAlignment(int column) {
-        if (column == 0 || column == 1) {
+        if (column == 1) {
             return SwingConstants.CENTER;
         }
         return SwingConstants.LEADING;
