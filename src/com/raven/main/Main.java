@@ -6,11 +6,14 @@ import com.raven.form.Home_Form;
 import com.raven.form.Setting_Form;
 import com.raven.form.Usuarios_Form;
 import com.raven.menu.EventMenu;
+import javax.management.Notification;
+import raven.popup.GlassPanePopup;
+import raven.toast.Notifications;
 
 public class Main extends javax.swing.JFrame {
 
     private Setting_Form settingForm;
-    private Usuarios_Form usuariosForm; 
+    private Usuarios_Form usuariosForm;
 
     public Main() {
         initComponents();
@@ -18,6 +21,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void init() {
+        GlassPanePopup.install(this);
+        Notifications.getInstance().setJFrame(this);
         menu.addEventMenu(new EventMenu() {
             @Override
             public void selectedMenu(int index) {
