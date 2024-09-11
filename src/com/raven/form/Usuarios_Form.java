@@ -2,6 +2,7 @@ package com.raven.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.raven.component.Form;
+import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +34,8 @@ public class Usuarios_Form extends Form {
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
-            
+        
+        jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable,0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         testData();
     }
