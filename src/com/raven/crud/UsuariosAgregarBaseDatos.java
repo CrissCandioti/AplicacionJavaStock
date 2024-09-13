@@ -111,7 +111,9 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
         jLabel8.setText("Notas");
 
         jTextAreaNotas.setColumns(20);
+        jTextAreaNotas.setLineWrap(true);
         jTextAreaNotas.setRows(5);
+        jTextAreaNotas.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextAreaNotas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
