@@ -75,7 +75,7 @@ public class ImageAvatar extends JComponent {
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        createBorder(g2);
+//        createBorder(g2);
         if (image != null) {
             int width = getWidth();
             int height = getHeight();
@@ -94,6 +94,7 @@ public class ImageAvatar extends JComponent {
             g2_img.setComposite(composite);
             g2_img.dispose();
             g2.drawImage(img, x, y, null);
+//                    g2.drawImage(toImage(image), 0, 0, width, height, this);
         }
         super.paintComponent(grphcs);
     }
