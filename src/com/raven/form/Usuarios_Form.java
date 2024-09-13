@@ -84,14 +84,14 @@ public class Usuarios_Form extends Form {
 
             },
             new String [] {
-                "Estado", "Nombre", "Apellido", "Nota", "null", "Title 6", "Title 7", "Title 8"
+                "Estado", "#", "Nombre", "Apellido", "N° Documento", "Email", "N° Whats App", "Localidad", "Direccion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -185,7 +185,7 @@ public class Usuarios_Form extends Form {
             }
         };
         String actions[] = new String[]{"Cancelar", "Guardar"};
-        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Cliente", actions, (pc, i) -> {
+        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
             if (i == 1) {
                 MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos",MessageAlerts.MessageType.SUCCESS);
             } else {
