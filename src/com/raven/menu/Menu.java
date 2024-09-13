@@ -186,7 +186,7 @@ public class Menu extends javax.swing.JPanel {
         imageAvatar1.setBorderSpace(2);
         imageAvatar1.setGradientColor1(new java.awt.Color(18, 130, 227));
         imageAvatar1.setGradientColor2(new java.awt.Color(226, 45, 60));
-        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/logo.jpg"))); // NOI18N
+        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/logo.png"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(117, 117, 117));
