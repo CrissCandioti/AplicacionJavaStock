@@ -3,7 +3,7 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
-import com.raven.crud.AgregarBaseDeDatos;
+import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import javax.swing.table.DefaultTableModel;
@@ -177,7 +177,7 @@ public class Usuarios_Form extends Form {
 
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        AgregarBaseDeDatos agregar = new AgregarBaseDeDatos();
+        UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
         DefaultOption option = new DefaultOption() {
             @Override
             public boolean closeWhenClickOutside() {
