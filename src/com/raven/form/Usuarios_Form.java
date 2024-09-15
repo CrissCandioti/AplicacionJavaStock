@@ -6,6 +6,7 @@ import com.raven.component.Form;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
@@ -187,12 +188,21 @@ public class Usuarios_Form extends Form {
         String actions[] = new String[]{"Cancelar", "Guardar"};
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
             if (i == 1) {
-                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos",MessageAlerts.MessageType.SUCCESS);
+                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
             } else {
-            pc.closePopup();
+                pc.closePopup();
             }
-        }),option);
+        }), option);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void cargarTablaClientes() {
+        try {
+//En el proyecto servicioSacerdotal en la clase ConsultaGuardinaes tenemos un ejemplo de como llenar una tabla.
+//O sino mirar el video Java Swing and MySQL | Select, Insert, Delete, Update and Desing using FlatLaf - Part #3 en el minuto 3:02 para otro ejemplo.
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error cargar tabla metodo: cargarTablaClientes() ; clase Usuarios_Form");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
