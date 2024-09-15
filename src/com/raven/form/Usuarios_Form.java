@@ -7,7 +7,9 @@ import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -58,12 +60,41 @@ public class Usuarios_Form extends Form {
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         testData();
+
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        jTable.setRowSorter(sorter);
+
+        // Add DocumentListener to jTextField
+        jTextField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                filter();
+            }
+        });
+
+        jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
+        jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
+//        testData();
+
     }
 
     private void testData() {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
-        model.addRow(new Object[]{true, "Nombre", "Apellido", "Notas", "1", "2", "3"});
+        model.addRow(new Object[]{true, "1", "Leslie", "Petreli", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
+        model.addRow(new Object[]{true, "2", "Marco", "MERLO", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
+        model.addRow(new Object[]{true, "3", "Polo", "RAUL", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
     }
 
     @SuppressWarnings("unchecked")
@@ -85,14 +116,14 @@ public class Usuarios_Form extends Form {
 
             },
             new String [] {
-                "Estado", "#", "Nombre", "Apellido", "N° Documento", "Email", "N° Whats App", "Localidad", "Direccion"
+                "Estado", "#", "Nombre", "Apellido", "N° Documento", "Email", "N° Whats App", "Localidad", "Direccion", "Notas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -204,6 +235,16 @@ public class Usuarios_Form extends Form {
         }
     }
 
+    private void filter() {
+        TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) jTable.getRowSorter();
+        RowFilter<DefaultTableModel, Object> rf = null;
+        try {
+            rf = RowFilter.regexFilter("(?i)" + jTextField.getText(), 2, 3); // Adjust column indices as needed
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        sorter.setRowFilter(rf);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
