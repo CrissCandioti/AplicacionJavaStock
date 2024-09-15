@@ -6,6 +6,8 @@ import com.raven.component.Form;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -91,9 +93,9 @@ public class Usuarios_Form extends Form {
     private void testData() {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
-        model.addRow(new Object[]{true, "1", "Leslie", "Petreli", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
-        model.addRow(new Object[]{true, "2", "Marco", "MERLO", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
-        model.addRow(new Object[]{true, "3", "Polo", "MARON", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
+        model.addRow(new Object[]{true, "1", "Leslie", "Petreli", "13123321", "l@hotmail.com", "03424123321", "ST", "ST 4321", "Exellente clienta"});
+        model.addRow(new Object[]{true, "2", "Marco", "MERLO", "13123321", "l@hotmail.com", "03424123321", "ST", "ST 4321", "Exellente clienta"});
+        model.addRow(new Object[]{true, "3", "Polo", "MARON", "13123321", "l@hotmail.com", "03424123321", "ST", "ST 4321", "Exellente clienta"});
     }
 
     @SuppressWarnings("unchecked")
@@ -139,6 +141,11 @@ public class Usuarios_Form extends Form {
         jButton1.setText("Eliminar");
 
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Agregar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +231,35 @@ public class Usuarios_Form extends Form {
             }
         }), option);
     }//GEN-LAST:event_jButton3ActionPerformed
+//Este es el action listener para el boton modificar
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        List<Object> list = Seleccionarusuario();
+        if (!list.isEmpty()) {
+            if (list.size() == 1) {
+MessageAlerts.getInstance().showMessage("Modificacion", "En breve se abrira una ventana para su modificacion", MessageAlerts.MessageType.SUCCESS);
+            } else {
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede seleccionar un cliente para modificar no varios", MessageAlerts.MessageType.DEFAULT);
+            }
+        } else {
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+//Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
+    private List<Object> Seleccionarusuario() {
+        try {
+            List<Object> list = new ArrayList<>();
+            for (int i = 0; i < jTable.getRowCount(); i++) {
+                if ((boolean) jTable.getValueAt(i, 0)) {
+                    Object data = (Object) jTable.getValueAt(i, 2);
+                    list.add(data);
+                }
+            }
+            return list;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error lista");
+        }
+        return null;
+    }
 
     private void cargarTablaClientes() {
         try {
