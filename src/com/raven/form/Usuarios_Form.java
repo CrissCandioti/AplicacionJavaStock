@@ -60,7 +60,7 @@ public class Usuarios_Form extends Form {
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         testData();
-
+//Este metodo hace posible el buscar el cliente por nombre y apellido
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         jTable.setRowSorter(sorter);
@@ -85,7 +85,6 @@ public class Usuarios_Form extends Form {
 
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
-//        testData();
 
     }
 
@@ -94,7 +93,7 @@ public class Usuarios_Form extends Form {
 
         model.addRow(new Object[]{true, "1", "Leslie", "Petreli", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
         model.addRow(new Object[]{true, "2", "Marco", "MERLO", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
-        model.addRow(new Object[]{true, "3", "Polo", "RAUL", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
+        model.addRow(new Object[]{true, "3", "Polo", "MARON", "13123321", "l@hotmail.com", "03424123321","ST","ST 4321","Exellente clienta"});
     }
 
     @SuppressWarnings("unchecked")
@@ -235,6 +234,7 @@ public class Usuarios_Form extends Form {
         }
     }
 
+    //EL metodo filter hace posible el poder ir actualizando la tabla a medida que va cargando las letras en el buscador
     private void filter() {
         TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) jTable.getRowSorter();
         RowFilter<DefaultTableModel, Object> rf = null;
