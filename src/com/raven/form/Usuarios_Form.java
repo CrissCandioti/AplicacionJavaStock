@@ -8,8 +8,10 @@ import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import raven.alerts.MessageAlerts;
@@ -139,6 +141,11 @@ public class Usuarios_Form extends Form {
         jScrollPane.setViewportView(jTable);
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Modificar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -264,6 +271,34 @@ public class Usuarios_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        List<Object> list = Seleccionarusuario();
+        if (!list.isEmpty()) {
+            DefaultOption option = new DefaultOption() {
+                @Override
+                public boolean closeWhenClickOutside() {
+                    return true;
+                }
+            };
+            String actions[] = new String[]{"Cancelar", "Eliminar"};
+            JLabel label = new JLabel("Estas seguro que deseas eliminar de forma permanente a estos clientes: " + list);
+            label.setBorder(new EmptyBorder(0, 25, 0, 25));
+            GlassPanePopup.showPopup(new SimplePopupBorder(label, "Confirmar eliminacion", actions, (pc, i) -> {
+                if (i == 1) {
+//                    for (Object aux : list) {
+//                        llamamos luego al metodo que va a eliminr por id dentro del bucle para eliminar uno por uno a esos clientes
+//                    }
+                    MessageAlerts.getInstance().showMessage("Se elimino correctamente de la base de datos", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    pc.closePopup();
+                } else {
+                    pc.closePopup();
+                }
+            }), option);
+        } else {
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su eliminacion", MessageAlerts.MessageType.WARNING);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
 
     private List<Object> Seleccionarusuario() {
