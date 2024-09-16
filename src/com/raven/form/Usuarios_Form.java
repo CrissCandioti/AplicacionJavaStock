@@ -233,10 +233,30 @@ public class Usuarios_Form extends Form {
     }//GEN-LAST:event_jButton3ActionPerformed
 //Este es el action listener para el boton modificar
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
+        UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
         List<Object> list = Seleccionarusuario();
         if (!list.isEmpty()) {
             if (list.size() == 1) {
-MessageAlerts.getInstance().showMessage("Modificacion", "En breve se abrira una ventana para su modificacion", MessageAlerts.MessageType.SUCCESS);
+                //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
+                Object data = list.get(0);
+                //Metodo probisorio para modificar
+                UsuariosAgregarBaseDatos.modificacionPrueba(data);
+                //Creamos nuevamente la ventana emergente para mostrar los datos
+                DefaultOption option = new DefaultOption() {
+                    @Override
+                    public boolean closeWhenClickOutside() {
+                        return true;
+                    }
+                };
+                String actions[] = new String[]{"Cancelar", "Guardar"};
+                GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
+                    if (i == 1) {
+                        MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    } else {
+                        pc.closePopup();
+                    }
+                }), option);
             } else {
                 MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede seleccionar un cliente para modificar no varios", MessageAlerts.MessageType.DEFAULT);
             }
@@ -245,6 +265,7 @@ MessageAlerts.getInstance().showMessage("Modificacion", "En breve se abrira una 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
+
     private List<Object> Seleccionarusuario() {
         try {
             List<Object> list = new ArrayList<>();

@@ -4,6 +4,10 @@
  */
 package com.raven.crud;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fabian A. Candioti
@@ -210,6 +214,13 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDireccionActionPerformed
 
+    public void modificacionPrueba(Object data) {
+        try {
+//Aqui seteamos los valores de los jTextField con lo de la entidad
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
