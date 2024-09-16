@@ -249,8 +249,8 @@ public class Usuarios_Form extends Form {
                         return true;
                     }
                 };
-                String actions[] = new String[]{"Cancelar", "Guardar"};
-                GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
+                String actions[] = new String[]{"Cancelar", "Modificar"};
+                GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Modificar cliente", actions, (pc, i) -> {
                     if (i == 1) {
                         MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                     } else {
