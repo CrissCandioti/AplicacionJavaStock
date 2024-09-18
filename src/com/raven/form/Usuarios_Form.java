@@ -3,6 +3,7 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
+import com.raven.crud.HistorialCliente;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
@@ -162,6 +163,11 @@ public class Usuarios_Form extends Form {
         });
 
         jButton4.setText("Historial");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel.setText("Ingrese el nombre del cliente");
 
@@ -299,6 +305,36 @@ public class Usuarios_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su eliminacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        HistorialCliente historialcliente = new HistorialCliente();
+        List<Object> list = Seleccionarusuario();
+        if (!list.isEmpty()) {
+            if (list.size() == 1) {
+                //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para ver su historial
+                Object data = list.get(0);
+                //Metodo probisorio para ver su historial
+                historialcliente.historialCompraSeteoValores(data);
+                //Creamos nuevamente la ventana emergente para mostrar los datos
+                DefaultOption option = new DefaultOption() {
+                    @Override
+                    public boolean closeWhenClickOutside() {
+                        return true;
+                    }
+                };
+                String actions[] = new String[]{"Cancelar"};
+                GlassPanePopup.showPopup(new SimplePopupBorder(historialcliente, "Historial de compras del cliente", actions, (pc, i) -> {
+                    if (i == 0) {
+                        pc.closePopup();
+                    }
+                }), option);
+            } else {
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede ver el historial de compras de un solo cliente", MessageAlerts.MessageType.DEFAULT);
+            }
+        } else {
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para ver su historial", MessageAlerts.MessageType.WARNING);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
 
     private List<Object> Seleccionarusuario() {
