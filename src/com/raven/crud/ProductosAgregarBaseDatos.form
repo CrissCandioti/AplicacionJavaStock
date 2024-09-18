@@ -39,16 +39,16 @@
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextFieldContenido" alignment="0" pref="253" max="32767" attributes="0"/>
+                  <Component id="jTextFieldContenido" alignment="0" max="32767" attributes="0"/>
                   <Component id="jFormattedTextFieldFecha" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jTextFieldCodigoProducto" alignment="0" pref="253" max="32767" attributes="0"/>
+                  <Component id="jTextFieldCodigoProducto" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTextFieldTipoProducto" alignment="0" max="32767" attributes="0"/>
                   <Component id="jComboBoxProveedor" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTextFieldStock" alignment="0" max="32767" attributes="0"/>
                   <Component id="jFormattedTextFieldPrecioCosto" alignment="0" max="32767" attributes="0"/>
                   <Component id="jFormattedTextFieldPrecioVenta" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTextFieldMarca" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jTextFieldVariedad" alignment="0" pref="253" max="32767" attributes="0"/>
+                  <Component id="jTextFieldVariedad" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTextFieldNombre" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Component id="jPanelImagenProducto" max="32767" attributes="0"/>
@@ -118,7 +118,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanelImagenProducto" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanelImagenProducto" min="-2" pref="60" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -289,18 +289,68 @@
     </Component>
     <Container class="javax.swing.JPanel" name="jPanelImagenProducto">
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="60" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <SubComponents>
+        <Container class="javaswingdev.picturebox.PictureBox" name="pictureBox">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="152" max="32767" attributes="0"/>
+                      <Component id="jToolBar1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jToolBar1" min="-2" pref="25" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JToolBar" name="jToolBar1">
+              <Properties>
+                <Property name="rollover" type="boolean" value="true"/>
+                <Property name="opaque" type="boolean" value="false"/>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="jButtonAgregarImagen">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Agregar"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                    <Property name="verticalTextPosition" type="int" value="3"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAgregarImagenActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButtonBorrarImagen">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Borrar"/>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                    <Property name="verticalTextPosition" type="int" value="3"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
     </Container>
   </SubComponents>
 </Form>

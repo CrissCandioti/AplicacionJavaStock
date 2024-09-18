@@ -5,7 +5,15 @@
 package com.raven.crud;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.util.UIScale;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.io.File;
+import javaswingdev.picturebox.DefaultPictureBoxRender;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import jnafilechooser.api.JnaFileChooser;
 
 /**
  *
@@ -20,6 +28,12 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         initComponents();
         datePicker.setCloseAfterSelected(true);
         datePicker.setEditor(jFormattedTextFieldFecha);
+        pictureBox.setPictureBoxRender(new DefaultPictureBoxRender() {
+            @Override
+            public Shape render(Rectangle rectangle) {
+                return createRound(rectangle,UIScale.scale(10));
+            }
+        });
         jPanelImagenProducto.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:0,0,0,0,$Component.borderColor,,10;"
                 + "background:$TextArea.background;");
@@ -62,6 +76,10 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jComboBoxProveedor = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jPanelImagenProducto = new javax.swing.JPanel();
+        pictureBox = new javaswingdev.picturebox.PictureBox();
+        jToolBar1 = new javax.swing.JToolBar();
+        jButtonAgregarImagen = new javax.swing.JButton();
+        jButtonBorrarImagen = new javax.swing.JButton();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Nombre");
@@ -154,16 +172,44 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel14.setText("Imagen producto");
 
-        javax.swing.GroupLayout jPanelImagenProductoLayout = new javax.swing.GroupLayout(jPanelImagenProducto);
-        jPanelImagenProducto.setLayout(jPanelImagenProductoLayout);
-        jPanelImagenProductoLayout.setHorizontalGroup(
-            jPanelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jPanelImagenProducto.setLayout(new java.awt.BorderLayout());
+
+        jToolBar1.setRollover(true);
+        jToolBar1.setOpaque(false);
+
+        jButtonAgregarImagen.setText("Agregar");
+        jButtonAgregarImagen.setFocusable(false);
+        jButtonAgregarImagen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAgregarImagen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAgregarImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarImagenActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonAgregarImagen);
+
+        jButtonBorrarImagen.setForeground(new java.awt.Color(255, 0, 0));
+        jButtonBorrarImagen.setText("Borrar");
+        jButtonBorrarImagen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonBorrarImagen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButtonBorrarImagen);
+
+        javax.swing.GroupLayout pictureBoxLayout = new javax.swing.GroupLayout(pictureBox);
+        pictureBox.setLayout(pictureBoxLayout);
+        pictureBoxLayout.setHorizontalGroup(
+            pictureBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pictureBoxLayout.createSequentialGroup()
+                .addGap(0, 152, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanelImagenProductoLayout.setVerticalGroup(
-            jPanelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+        pictureBoxLayout.setVerticalGroup(
+            pictureBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pictureBoxLayout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 35, Short.MAX_VALUE))
         );
+
+        jPanelImagenProducto.add(pictureBox, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -187,16 +233,16 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(jTextFieldContenido)
                     .addComponent(jFormattedTextFieldFecha)
-                    .addComponent(jTextFieldCodigoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(jTextFieldCodigoProducto)
                     .addComponent(jTextFieldTipoProducto)
                     .addComponent(jComboBoxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldStock)
                     .addComponent(jFormattedTextFieldPrecioCosto)
                     .addComponent(jFormattedTextFieldPrecioVenta)
                     .addComponent(jTextFieldMarca)
-                    .addComponent(jTextFieldVariedad, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(jTextFieldVariedad)
                     .addComponent(jTextFieldNombre)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanelImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -252,7 +298,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jPanelImagenProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelImagenProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -289,6 +335,16 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTipoProductoActionPerformed
 
+    private void jButtonAgregarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarImagenActionPerformed
+        JnaFileChooser ch = new JnaFileChooser();
+        ch.addFilter("Image", "png", "jpg");
+        boolean act = ch.showOpenDialog(SwingUtilities.getWindowAncestor(this));
+        if (act) {
+            File file = ch.getSelectedFile();
+            pictureBox.setImage(new ImageIcon(file.getAbsolutePath()));
+        }
+    }//GEN-LAST:event_jButtonAgregarImagenActionPerformed
+
     public void modificacionPrueba(Object data) {
         try {
 //Aqui seteamos los valores de los jTextField con lo de la entidad
@@ -299,6 +355,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private raven.datetime.component.date.DatePicker datePicker;
+    private javax.swing.JButton jButtonAgregarImagen;
+    private javax.swing.JButton jButtonBorrarImagen;
     private javax.swing.JComboBox<String> jComboBoxProveedor;
     private javax.swing.JFormattedTextField jFormattedTextFieldFecha;
     private javax.swing.JFormattedTextField jFormattedTextFieldPrecioCosto;
@@ -326,5 +384,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldStock;
     private javax.swing.JTextField jTextFieldTipoProducto;
     private javax.swing.JTextField jTextFieldVariedad;
+    private javax.swing.JToolBar jToolBar1;
+    private javaswingdev.picturebox.PictureBox pictureBox;
     // End of variables declaration//GEN-END:variables
 }
