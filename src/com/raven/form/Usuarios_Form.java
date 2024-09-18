@@ -140,6 +140,10 @@ public class Usuarios_Form extends Form {
         });
         jTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(0).setMaxWidth(30);
+            jTable.getColumnModel().getColumn(1).setMaxWidth(30);
+        }
 
         jButton1.setText("Eliminar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

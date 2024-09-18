@@ -3,7 +3,7 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
-import com.raven.crud.UsuariosAgregarBaseDatos;
+import com.raven.crud.ProductosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import javax.swing.table.DefaultTableModel;
@@ -62,7 +62,7 @@ public class Productos_Form extends Form {
     private void testData() {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
-        model.addRow(new Object[]{true, "Nombre", "Apellido", "Notas", "1", "2", "3"});
+        model.addRow(new Object[]{true, "1000", "Apellido", "Notas", "1", "2", "3"});
     }
 
     @SuppressWarnings("unchecked")
@@ -76,7 +76,6 @@ public class Productos_Form extends Form {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
         jLabel = new javax.swing.JLabel();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -84,14 +83,14 @@ public class Productos_Form extends Form {
 
             },
             new String [] {
-                "Estado", "Nombre", "Apellido", "Nota", "null", "Title 6", "Title 7", "Title 8"
+                "Estado", "#", "Nombre", "Fecha", "Contenido", "Codigo producto", "Variedad", "Precio costo", "Precio venta", "Stock", "Porcentaje Ganancia", "Ganancias", "Marca", "Tipo producto", "Proveedor", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -104,6 +103,10 @@ public class Productos_Form extends Form {
         });
         jTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(0).setMaxWidth(25);
+            jTable.getColumnModel().getColumn(1).setMaxWidth(50);
+        }
 
         jButton1.setText("Eliminar");
 
@@ -115,8 +118,6 @@ public class Productos_Form extends Form {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        jButton4.setText("Historial");
 
         jLabel.setText("Ingrese el nombre del producto");
 
@@ -137,8 +138,6 @@ public class Productos_Form extends Form {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
@@ -156,8 +155,7 @@ public class Productos_Form extends Form {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
@@ -177,7 +175,7 @@ public class Productos_Form extends Form {
 
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
+        ProductosAgregarBaseDatos agregar = new ProductosAgregarBaseDatos();
         DefaultOption option = new DefaultOption() {
             @Override
             public boolean closeWhenClickOutside() {
@@ -198,7 +196,6 @@ public class Productos_Form extends Form {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
