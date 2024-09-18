@@ -5,7 +5,6 @@
 package com.raven.crud;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -35,7 +34,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                 return createRound(rectangle, UIScale.scale(10));
             }
         });
-        pictureBox.setImage(new FlatSVGIcon("/com/raven/icon/profile.svg", 5f));
+        pictureBox.setImage(null);
         jPanelImagenProducto.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:0,0,0,0,$Component.borderColor,,10;"
                 + "background:$TextArea.background;");
@@ -353,7 +352,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAgregarImagenActionPerformed
 
     private void jButtonBorrarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarImagenActionPerformed
-        pictureBox.setImage(new FlatSVGIcon("/com/raven/icon/profile.svg", 5f));
+        pictureBox.setImage(null);
     }//GEN-LAST:event_jButtonBorrarImagenActionPerformed
 
     public void modificacionPrueba(Object data) {
