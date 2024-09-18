@@ -5,6 +5,7 @@
 package com.raven.crud;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -31,9 +32,10 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         pictureBox.setPictureBoxRender(new DefaultPictureBoxRender() {
             @Override
             public Shape render(Rectangle rectangle) {
-                return createRound(rectangle,UIScale.scale(10));
+                return createRound(rectangle, UIScale.scale(10));
             }
         });
+        pictureBox.setImage(new FlatSVGIcon("/com/raven/icon/search.svg", 5f));
         jPanelImagenProducto.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:0,0,0,0,$Component.borderColor,,10;"
                 + "background:$TextArea.background;");
@@ -192,6 +194,11 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jButtonBorrarImagen.setText("Borrar");
         jButtonBorrarImagen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonBorrarImagen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonBorrarImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarImagenActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonBorrarImagen);
 
         javax.swing.GroupLayout pictureBoxLayout = new javax.swing.GroupLayout(pictureBox);
@@ -344,6 +351,10 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             pictureBox.setImage(new ImageIcon(file.getAbsolutePath()));
         }
     }//GEN-LAST:event_jButtonAgregarImagenActionPerformed
+
+    private void jButtonBorrarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarImagenActionPerformed
+        pictureBox.setImage(new FlatSVGIcon("/com/raven/icon/profile.svg", 5f));
+    }//GEN-LAST:event_jButtonBorrarImagenActionPerformed
 
     public void modificacionPrueba(Object data) {
         try {
