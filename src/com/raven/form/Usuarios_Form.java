@@ -271,7 +271,7 @@ public class Usuarios_Form extends Form {
                     }
                 }), option);
             } else {
-                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede seleccionar un cliente para modificar no varios", MessageAlerts.MessageType.DEFAULT);
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un cliente a la vez", MessageAlerts.MessageType.DEFAULT);
             }
         } else {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
