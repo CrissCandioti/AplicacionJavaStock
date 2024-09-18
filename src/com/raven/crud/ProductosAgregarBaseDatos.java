@@ -35,7 +35,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                 return createRound(rectangle, UIScale.scale(10));
             }
         });
-        pictureBox.setImage(new FlatSVGIcon("/com/raven/icon/search.svg", 5f));
+        pictureBox.setImage(new FlatSVGIcon("/com/raven/icon/profile.svg", 5f));
         jPanelImagenProducto.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:0,0,0,0,$Component.borderColor,,10;"
                 + "background:$TextArea.background;");
