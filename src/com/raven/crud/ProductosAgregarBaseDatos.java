@@ -17,6 +17,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
      */
     public ProductosAgregarBaseDatos() {
         initComponents();
+        datePicker.setCloseAfterSelected(true);
+        datePicker.setEditor(jFormattedTextFieldFecha);
     }
 
     /**
@@ -28,6 +30,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        datePicker = new raven.datetime.component.date.DatePicker();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -52,7 +55,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jTextFieldTipoProducto = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxProveedor = new javax.swing.JComboBox<>();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Nombre");
@@ -107,6 +110,10 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jTextAreaNotas.setRows(5);
         jTextAreaNotas.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextAreaNotas);
+
+        jFormattedTextFieldPrecioCosto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
+
+        jFormattedTextFieldPrecioVenta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("Stock");
@@ -163,7 +170,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                     .addComponent(jFormattedTextFieldFecha)
                     .addComponent(jTextFieldCodigoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                     .addComponent(jTextFieldTipoProducto)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldStock)
                     .addComponent(jFormattedTextFieldPrecioCosto)
                     .addComponent(jFormattedTextFieldPrecioVenta)
@@ -219,7 +226,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,7 +272,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private raven.datetime.component.date.DatePicker datePicker;
+    private javax.swing.JComboBox<String> jComboBoxProveedor;
     private javax.swing.JFormattedTextField jFormattedTextFieldFecha;
     private javax.swing.JFormattedTextField jFormattedTextFieldPrecioCosto;
     private javax.swing.JFormattedTextField jFormattedTextFieldPrecioVenta;
