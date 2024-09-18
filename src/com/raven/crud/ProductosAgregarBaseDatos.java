@@ -4,6 +4,7 @@
  */
 package com.raven.crud;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,9 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         initComponents();
         datePicker.setCloseAfterSelected(true);
         datePicker.setEditor(jFormattedTextFieldFecha);
+        jPanelImagenProducto.putClientProperty(FlatClientProperties.STYLE, ""
+                + "border:0,0,0,0,$Component.borderColor,,10;"
+                + "background:$TextArea.background;");
     }
 
     /**
@@ -57,7 +61,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jComboBoxProveedor = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelImagenProducto = new javax.swing.JPanel();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Nombre");
@@ -150,14 +154,14 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel14.setText("Imagen producto");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelImagenProductoLayout = new javax.swing.GroupLayout(jPanelImagenProducto);
+        jPanelImagenProducto.setLayout(jPanelImagenProductoLayout);
+        jPanelImagenProductoLayout.setHorizontalGroup(
+            jPanelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelImagenProductoLayout.setVerticalGroup(
+            jPanelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
@@ -195,7 +199,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                     .addComponent(jTextFieldVariedad, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                     .addComponent(jTextFieldNombre)
                     .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -248,7 +252,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelImagenProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -312,7 +316,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelImagenProducto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaNotas;
     private javax.swing.JTextField jTextFieldCodigoProducto;
