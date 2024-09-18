@@ -17,7 +17,7 @@ import jnafilechooser.api.JnaFileChooser;
 
 /**
  *
- * @author Fabian A. Candioti
+ * @author Cristian Candioti
  */
 public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
 
