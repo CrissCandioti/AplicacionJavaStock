@@ -4,8 +4,12 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
 import com.raven.crud.ProductosAgregarBaseDatos;
+import com.raven.crud.VerProducto;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
@@ -77,20 +81,21 @@ public class Productos_Form extends Form {
         jButton3 = new javax.swing.JButton();
         jTextField = new javax.swing.JTextField();
         jLabel = new javax.swing.JLabel();
+        jButtonVer = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Estado", "#", "Nombre", "Fecha", "Contenido", "Codigo producto", "Variedad", "Precio costo", "Precio venta", "Stock", "Porcentaje Ganancia", "Ganancias", "Marca", "Tipo producto", "Proveedor", "Descripcion"
+                "Estado", "#", "Variedad", "Nombre", "Fecha ingreso", "Marca", "Tipo producto", "Contenido", "Stock", "Precio costo", "Precio venta", "Ganancias", "Porcentaje Ganancia", "Proveedor", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -121,6 +126,13 @@ public class Productos_Form extends Form {
 
         jLabel.setText("Ingrese el nombre del producto");
 
+        jButtonVer.setText("Ver");
+        jButtonVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -138,6 +150,8 @@ public class Productos_Form extends Form {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonVer)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
@@ -155,7 +169,8 @@ public class Productos_Form extends Form {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVer))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
@@ -185,21 +200,61 @@ public class Productos_Form extends Form {
         String actions[] = new String[]{"Cancelar", "Guardar"};
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Producto", actions, (pc, i) -> {
             if (i == 1) {
-                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos",MessageAlerts.MessageType.SUCCESS);
+                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
             } else {
-            pc.closePopup();
+                pc.closePopup();
             }
-        }),option);
+        }), option);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
+        VerProducto verproducto = new VerProducto();
+        List<Object> list = SeleccionarProducto();
+        if (!list.isEmpty()) {
+            DefaultOption option = new DefaultOption() {
+                @Override
+                public boolean closeWhenClickOutside() {
+                    return true;
+                }
+            };
+            String actions[] = new String[]{"Cancelar", "Imprimir PDF"};
+            GlassPanePopup.showPopup(new SimplePopupBorder(verproducto, "Ver Producto", actions, (pc, i) -> {
+                if (i == 1) {
+                    MessageAlerts.getInstance().showMessage("Digitalizacion PDF", "En instantes se generara un PDF con el producto seleccionado", MessageAlerts.MessageType.SUCCESS);
+                } else {
+                    pc.closePopup();
+                }
+            }), option);
+        } else {
+        }
+    }//GEN-LAST:event_jButtonVerActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonVer;
     private javax.swing.JLabel jLabel;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextField;
     // End of variables declaration//GEN-END:variables
+
+    //Este metodo consiste en poder seleccionar el producto de la tabla
+    private List<Object> SeleccionarProducto() {
+        try {
+            List<Object> list = new ArrayList<>();
+            for (int i = 0; i < jTable.getRowCount(); i++) {
+                if ((boolean) jTable.getValueAt(i, 0)) {
+                    Object data = (Object) jTable.getValueAt(i, 2);
+                    list.add(data);
+                }
+            }
+            return list;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error lista");
+        }
+        return null;
+    }
 }
