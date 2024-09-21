@@ -67,6 +67,7 @@ public class Productos_Form extends Form {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
         model.addRow(new Object[]{true, "1000", "Apellido", "Notas", "1", "2", "3"});
+        model.addRow(new Object[]{false, "1000", "Apellido", "Notas", "1", "2", "3"});
     }
 
     @SuppressWarnings("unchecked")
@@ -211,21 +212,28 @@ public class Productos_Form extends Form {
         VerProducto verproducto = new VerProducto();
         List<Object> list = SeleccionarProducto();
         if (!list.isEmpty()) {
-            DefaultOption option = new DefaultOption() {
-                @Override
-                public boolean closeWhenClickOutside() {
-                    return true;
-                }
-            };
-            String actions[] = new String[]{"Cancelar", "Imprimir PDF"};
-            GlassPanePopup.showPopup(new SimplePopupBorder(verproducto, "Ver Producto", actions, (pc, i) -> {
-                if (i == 1) {
-                    MessageAlerts.getInstance().showMessage("Digitalizacion PDF", "En instantes se generara un PDF con el producto seleccionado", MessageAlerts.MessageType.SUCCESS);
-                } else {
-                    pc.closePopup();
-                }
-            }), option);
+            if (list.size() == 1) {
+                Object data = list.get(0);
+                verproducto.seteoValores(data);
+                DefaultOption option = new DefaultOption() {
+                    @Override
+                    public boolean closeWhenClickOutside() {
+                        return true;
+                    }
+                };
+                String actions[] = new String[]{"Cancelar", "Imprimir PDF"};
+                GlassPanePopup.showPopup(new SimplePopupBorder(verproducto, "Ver Producto", actions, (pc, i) -> {
+                    if (i == 1) {
+                        MessageAlerts.getInstance().showMessage("Digitalizacion PDF", "En instantes se generara un PDF con el producto seleccionado", MessageAlerts.MessageType.SUCCESS);
+                    } else {
+                        pc.closePopup();
+                    }
+                }), option);
+            } else {
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede ver un producto", MessageAlerts.MessageType.DEFAULT);
+            }
         } else {
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un producto para ver", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButtonVerActionPerformed
 
