@@ -7,6 +7,7 @@ import com.raven.crud.HistorialCliente;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
+import entidades.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -19,6 +20,7 @@ import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.SimplePopupBorder;
+import services.ClienteServices;
 
 public class Usuarios_Form extends Form {
 
@@ -64,16 +66,7 @@ public class Usuarios_Form extends Form {
 
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
-        testData();
 
-    }
-
-    private void testData() {
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-
-        model.addRow(new Object[]{true, "1", "Leslie", "Petreli", "13123321", "l@hotmail.com", "03424123321", "ST", "ST 4321", "Exellente clienta"});
-        model.addRow(new Object[]{true, "2", "Marco", "MERLO", "13123321", "l@hotmail.com", "03424123321", "ST", "ST 4321", "Exellente clienta"});
-        model.addRow(new Object[]{true, "3", "Polo", "MARON", "13123321", "l@hotmail.com", "03424123321", "ST", "ST 4321", "Exellente clienta"});
     }
 
     @SuppressWarnings("unchecked")
@@ -314,8 +307,8 @@ public class Usuarios_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para ver su historial", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-//Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
 
+//Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
     private List<Object> Seleccionarusuario() {
         try {
             List<Object> list = new ArrayList<>();
@@ -332,12 +325,20 @@ public class Usuarios_Form extends Form {
         return null;
     }
 
-    private void cargarTablaClientes() {
+    public void loadData() {
         try {
-//En el proyecto servicioSacerdotal en la clase ConsultaGuardinaes tenemos un ejemplo de como llenar una tabla.
-//O sino mirar el video Java Swing and MySQL | Select, Insert, Delete, Update and Desing using FlatLaf - Part #3 en el minuto 3:02 para otro ejemplo.
+            ClienteServices cs = new ClienteServices();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            if (jTable.isEditing()) {
+                jTable.getCellEditor().stopCellEditing();
+            }
+            model.setRowCount(0);
+            List<Cliente> list = cs.listaCliente();
+            for (Cliente c : list) {
+                model.addRow(rowData);
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error cargar tabla metodo: cargarTablaClientes() ; clase Usuarios_Form");
+            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
         }
     }
 

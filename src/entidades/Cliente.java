@@ -126,9 +126,18 @@ public class Cliente {
         this.notas = notas;
     }
 
+    public Object[] toTableRow(int rowNum) {
+        try {
+            return new Object[]{false, rowNum, this, apellido, documento, email, whatsapp, localidad, notas};
+        } catch (Exception e) {
+            System.out.println("Error metodo toTableRow de la clase cliente");
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", documento=" + documento + ", email=" + email + ", whatsapp=" + whatsapp + ", localidad=" + localidad + ", direccion=" + direccion + ", notas=" + notas + '}';
+        return nombre;
     }
 
 }
