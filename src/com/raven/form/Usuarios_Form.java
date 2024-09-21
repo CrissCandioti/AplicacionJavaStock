@@ -66,7 +66,7 @@ public class Usuarios_Form extends Form {
 
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
-
+        loadData();
     }
 
     @SuppressWarnings("unchecked")
@@ -335,7 +335,7 @@ public class Usuarios_Form extends Form {
             model.setRowCount(0);
             List<Cliente> list = cs.listaCliente();
             for (Cliente c : list) {
-                model.addRow(rowData);
+                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
