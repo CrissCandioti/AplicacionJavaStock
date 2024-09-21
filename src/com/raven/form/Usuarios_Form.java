@@ -65,31 +65,6 @@ public class Usuarios_Form extends Form {
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         testData();
-//Este metodo hace posible el buscar el cliente por nombre y apellido
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        jTable.setRowSorter(sorter);
-
-        // Add DocumentListener to jTextField
-        jTextField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            @Override
-            public void insertUpdate(javax.swing.event.DocumentEvent e) {
-                filter();
-            }
-
-            @Override
-            public void removeUpdate(javax.swing.event.DocumentEvent e) {
-                filter();
-            }
-
-            @Override
-            public void changedUpdate(javax.swing.event.DocumentEvent e) {
-                filter();
-            }
-        });
-
-        jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
-        jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
 
     }
 
@@ -366,17 +341,6 @@ public class Usuarios_Form extends Form {
         }
     }
 
-    //EL metodo filter hace posible el poder ir actualizando la tabla a medida que va cargando las letras en el buscador
-    private void filter() {
-        TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) jTable.getRowSorter();
-        RowFilter<DefaultTableModel, Object> rf = null;
-        try {
-            rf = RowFilter.regexFilter("(?i)" + jTextField.getText(), 2, 3); // Adjust column indices as needed
-        } catch (java.util.regex.PatternSyntaxException e) {
-            return;
-        }
-        sorter.setRowFilter(rf);
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
