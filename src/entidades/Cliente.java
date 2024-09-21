@@ -23,7 +23,7 @@ public class Cliente {
     private String apellido;
     private int documento;
     private String email;
-    private int whatsapp;
+    private String whatsapp;
     private String localidad;
     private String direccion;
     private String notas;
@@ -31,7 +31,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apellido, int documento, String email, int whatsapp, String localidad, String direccion, String notas) {
+    public Cliente(String nombre, String apellido, int documento, String email, String whatsapp, String localidad, String direccion, String notas) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.documento = documento;
@@ -42,7 +42,7 @@ public class Cliente {
         this.notas = notas;
     }
 
-    public Cliente(int id, String nombre, String apellido, int documento, String email, int whatsapp, String localidad, String direccion, String notas) {
+    public Cliente(int id, String nombre, String apellido, int documento, String email, String whatsapp, String localidad, String direccion, String notas) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -94,11 +94,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public int getWhatsapp() {
+    public String getWhatsapp() {
         return whatsapp;
     }
 
-    public void setWhatsapp(int whatsapp) {
+    public void setWhatsapp(String whatsapp) {
         this.whatsapp = whatsapp;
     }
 
