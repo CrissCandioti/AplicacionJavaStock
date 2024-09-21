@@ -132,6 +132,12 @@ public class Usuarios_Form extends Form {
             }
         });
 
+        jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldKeyReleased(evt);
+            }
+        });
+
         jButton4.setText("Historial");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +220,7 @@ public class Usuarios_Form extends Form {
             }
         }), option);
     }//GEN-LAST:event_jButton3ActionPerformed
-//Este es el action listener para el boton modificar
+    //Este es el action listener para el boton modificar
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
         UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
@@ -306,7 +312,11 @@ public class Usuarios_Form extends Form {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-//Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
+    private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
+        search(jTextField.getText().trim());
+    }//GEN-LAST:event_jTextFieldKeyReleased
+
+    //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
     private List<Object> Seleccionarusuario() {
         try {
             List<Object> list = new ArrayList<>();
@@ -323,6 +333,7 @@ public class Usuarios_Form extends Form {
         return null;
     }
 
+    //Metodo la cual carga la tabla
     public void loadData() {
         try {
             ClienteServices cs = new ClienteServices();
@@ -340,6 +351,24 @@ public class Usuarios_Form extends Form {
         }
     }
 
+    //Metodo la cual busca el cliente en el jTextField
+    public void search(String search) {
+        try {
+            ClienteServices cs = new ClienteServices();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            if (jTable.isEditing()) {
+                jTable.getCellEditor().stopCellEditing();
+            }
+            model.setRowCount(0);
+            List<Cliente> list = cs.busquedaCliente(search);
+            for (Cliente c : list) {
+                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

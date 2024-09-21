@@ -39,4 +39,16 @@ public class ClienteDAO extends DAO<Cliente> {
         }
         return null;
     }
+
+    public List<Cliente> barraBusqueda(String busqueda) {
+        try {
+            conectar();
+            return (List<Cliente>) em.createQuery("Select f From Cliente f Where f.nombre LIKE :busqueda or f.apellido LIKE :busqueda").setParameter("busqueda", "%" + busqueda + "%").getResultList();
+        } catch (Exception e) {
+            System.out.println("Error en el metodo barraBusqueda en la clase ClienteDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
 }

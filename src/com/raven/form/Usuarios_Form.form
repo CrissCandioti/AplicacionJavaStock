@@ -189,6 +189,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>

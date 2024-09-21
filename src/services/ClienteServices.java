@@ -23,4 +23,14 @@ public class ClienteServices {
         }
         return null;
     }
+
+    public List<Cliente> busquedaCliente(String search) {
+        try {
+            ClienteDAO dao = new ClienteDAO();
+            return dao.barraBusqueda(search);
+        } catch (Exception e) {
+            System.out.println("Error metodo busquedaCliente en la clase clienteService");
+        }
+        return null;
+    }
 }
