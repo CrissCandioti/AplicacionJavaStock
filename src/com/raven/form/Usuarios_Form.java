@@ -201,7 +201,8 @@ public class Usuarios_Form extends Form {
             .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //JButton para abrir una ventana y guardar un cliente a la base de datos
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
@@ -220,7 +221,7 @@ public class Usuarios_Form extends Form {
             }
         }), option);
     }//GEN-LAST:event_jButton3ActionPerformed
-    //Este es el action listener para el boton modificar
+    //JButon para modificar un cliente de la base de datos
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
         UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
@@ -253,7 +254,7 @@ public class Usuarios_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    //JButton para eliminar el cliente de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<Object> list = Seleccionarusuario();
         if (!list.isEmpty()) {
@@ -281,7 +282,7 @@ public class Usuarios_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su eliminacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    //JButton para acceder al historial de compra del cliente
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         HistorialCliente historialcliente = new HistorialCliente();
         List<Object> list = Seleccionarusuario();
@@ -311,7 +312,7 @@ public class Usuarios_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para ver su historial", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    //jTextField la cual buscaremos el cliente por nombre o apellido
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
@@ -368,7 +369,7 @@ public class Usuarios_Form extends Form {
             JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
