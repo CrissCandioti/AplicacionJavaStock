@@ -14,7 +14,7 @@ import javax.persistence.Persistence;
  */
 public class DAO<T> {
 
-    protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("angelTienda");
+    protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("angeltienda");
     protected EntityManager em;
 
     /*

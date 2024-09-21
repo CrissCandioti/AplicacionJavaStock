@@ -4,6 +4,9 @@
  */
 package aplicacionjavastock;
 
+import baseDeDatos.ClienteDAO;
+import entidades.Cliente;
+
 /**
  *
  * @author criss
@@ -15,6 +18,9 @@ public class AplicacionJavaStock {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+                Cliente c = new Cliente("s", "S", 0, "S", "S", "D", "S", "S");
+        ClienteDAO dao = new ClienteDAO();
+        dao.persistirEntidad(c);
     }
     
 }
