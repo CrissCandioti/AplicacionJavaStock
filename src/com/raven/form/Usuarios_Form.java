@@ -224,7 +224,6 @@ public class Usuarios_Form extends Form {
     //JButon para modificar un cliente de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
-        UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
         ClienteServices cs = new ClienteServices();
         List<Cliente> list = Seleccionarusuario();
         if (!list.isEmpty()) {
@@ -241,7 +240,7 @@ public class Usuarios_Form extends Form {
                     }
                 };
                 String actions[] = new String[]{"Cancelar", "Modificar"};
-                GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Modificar cliente", actions, (pc, i) -> {
+                GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
                     if (i == 1) {
                         MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                     } else {

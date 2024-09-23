@@ -18,8 +18,6 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
      */
     public UsuariosAgregarBaseDatos() {
         initComponents();
-        Cliente aux = null;
-        modificacionPrueba(aux);
     }
 
     /**
@@ -214,10 +212,17 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
     private void jTextFieldDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDireccionActionPerformed
-
+    
     public void modificacionPrueba(Cliente aux) {
         try {
             jTextFieldNombre.setText(aux.getNombre());
+            jTextFieldApellido.setText(aux.getApellido());
+            jTextFieldNDocumento.setText(String.valueOf(aux.getDocumento()));
+            jTextFieldEmail.setText(aux.getEmail());
+            jTextFieldNWhatsApp.setText(aux.getWhatsapp());
+            jTextFieldLocalidad.setText(aux.getLocalidad());
+            jTextFieldDireccion.setText(aux.getDireccion());
+            jTextAreaNotas.setText(aux.getNotas());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
         }
