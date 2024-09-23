@@ -221,7 +221,7 @@ public class Usuarios_Form extends Form {
             }
         }), option);
     }//GEN-LAST:event_jButton3ActionPerformed
-    //JButon para modificar un cliente de la base de datos
+    //JButon para modificar un cliente de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
         UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();

@@ -18,6 +18,8 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
      */
     public UsuariosAgregarBaseDatos() {
         initComponents();
+        Cliente aux = null;
+        modificacionPrueba(aux);
     }
 
     /**
@@ -215,7 +217,7 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
 
     public void modificacionPrueba(Cliente aux) {
         try {
-            
+            jTextFieldNombre.setText(aux.getNombre());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
         }
