@@ -242,7 +242,10 @@ public class Usuarios_Form extends Form {
                 String actions[] = new String[]{"Cancelar", "Modificar"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
                     if (i == 1) {
-                        MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                        cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
+                        MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
+                        loadData();
+                        pc.closePopup();
                     } else {
                         pc.closePopup();
                     }
@@ -345,7 +348,7 @@ public class Usuarios_Form extends Form {
             model.setRowCount(0);
             List<Cliente> list = cs.listaCliente();
             for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
+                model.addRow(c.toTableRow(jTable.getRowCount()));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
