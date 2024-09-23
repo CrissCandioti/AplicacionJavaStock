@@ -18,6 +18,7 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
      */
     public UsuariosAgregarBaseDatos() {
         initComponents();
+        jTextFieldID.setVisible(false);
     }
 
     /**

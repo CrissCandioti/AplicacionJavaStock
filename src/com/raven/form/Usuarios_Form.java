@@ -264,6 +264,7 @@ public class Usuarios_Form extends Form {
     //JButton para eliminar el cliente de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<Cliente> list = Seleccionarusuario();
+        ClienteServices cs = new ClienteServices();
         if (!list.isEmpty()) {
             DefaultOption option = new DefaultOption() {
                 @Override
@@ -276,10 +277,11 @@ public class Usuarios_Form extends Form {
             label.setBorder(new EmptyBorder(0, 25, 0, 25));
             GlassPanePopup.showPopup(new SimplePopupBorder(label, "Confirmar eliminacion", actions, (pc, i) -> {
                 if (i == 1) {
-//                    for (Object aux : list) {
-//                        llamamos luego al metodo que va a eliminr por id dentro del bucle para eliminar uno por uno a esos clientes
-//                    }
-                    MessageAlerts.getInstance().showMessage("Se elimino correctamente de la base de datos", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    for (Cliente aux : list) {
+                        cs.borrarCliente(aux);
+                    }
+                    MessageAlerts.getInstance().showMessage("Se elimino correctamente", "El cliente fue eliminado correctamente de la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    loadData();
                     pc.closePopup();
                 } else {
                     pc.closePopup();
