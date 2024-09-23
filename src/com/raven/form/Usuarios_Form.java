@@ -201,7 +201,7 @@ public class Usuarios_Form extends Form {
             .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     //JButton para abrir una ventana y guardar un cliente a la base de datos
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -225,13 +225,14 @@ public class Usuarios_Form extends Form {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
         UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
-        List<Object> list = Seleccionarusuario();
+        ClienteServices cs = new ClienteServices();
+        List<Cliente> list = Seleccionarusuario();
         if (!list.isEmpty()) {
             if (list.size() == 1) {
                 //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
-                Object data = list.get(0);
+                Cliente aux = list.get(0);
                 //Metodo probisorio para modificar
-                UsuariosAgregarBaseDatos.modificacionPrueba(data);
+                UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
                 //Creamos nuevamente la ventana emergente para mostrar los datos
                 DefaultOption option = new DefaultOption() {
                     @Override
@@ -318,7 +319,7 @@ public class Usuarios_Form extends Form {
     }//GEN-LAST:event_jTextFieldKeyReleased
 
     //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
-    private List<Object> Seleccionarusuario() {
+    private List<Cliente> Seleccionarusuario() {
         try {
             List<Object> list = new ArrayList<>();
             for (int i = 0; i < jTable.getRowCount(); i++) {

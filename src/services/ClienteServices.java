@@ -65,4 +65,14 @@ public class ClienteServices {
         }
         return null;
     }
+
+    public Cliente buscarClienteID(int id) {
+        try {
+            ClienteDAO dao = new ClienteDAO();
+            return dao.buscarClienteID(id);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo busarClienteID de la clase ClienteServices");
+        }
+        return null;
+    }
 }

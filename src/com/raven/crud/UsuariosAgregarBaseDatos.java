@@ -4,6 +4,7 @@
  */
 package com.raven.crud;
 
+import entidades.Cliente;
 import javax.swing.JOptionPane;
 
 /**
@@ -212,9 +213,9 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDireccionActionPerformed
 
-    public void modificacionPrueba(Object data) {
+    public void modificacionPrueba(Cliente aux) {
         try {
-//Aqui seteamos los valores de los jTextField con lo de la entidad
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
         }
