@@ -14,6 +14,38 @@ import java.util.List;
  */
 public class ClienteServices {
 
+    public void persistirCliente(String nombre, String apellido, int documento, String email, String whatsapp, String localidad, String direccion, String nota) {
+        try {
+            Cliente c = new Cliente(nombre, apellido, documento, email, whatsapp, localidad, direccion, nota);
+            ClienteDAO dao = new ClienteDAO();
+            dao.persistirEntidad(c);
+            System.out.println("Se agrego con exito el cliente");
+        } catch (Exception e) {
+            System.out.println("Error en el metodo persistirCLiente() de la clase ClienteServices");
+        }
+    }
+
+    public void borrarCliente(Cliente aux) {
+        try {
+            ClienteDAO dao = new ClienteDAO();
+            dao.borrarEntidad(aux);
+            System.out.println("Se borro con exito el cliente");
+        } catch (Exception e) {
+            System.out.println("Error en el metodo borrarCliente de la clase ClienteServices");
+        }
+    }
+
+    public void modificarCliente(int id, String nombre, String apellido, int documento, String email, String whatsapp, String localidad, String direccion, String nota) {
+        try {
+            Cliente c = new Cliente(id, nombre, apellido, documento, email, whatsapp, localidad, direccion, nota);
+            ClienteDAO dao = new ClienteDAO();
+            dao.actualizarEntidad(c);
+            System.out.println("Se modifico con exitos el cliente");
+        } catch (Exception e) {
+            System.out.println("Error en el metodo modificarCliente() en la clase ClienteServices");
+        }
+    }
+
     public List<Cliente> listaCliente() {
         try {
             ClienteDAO dao = new ClienteDAO();

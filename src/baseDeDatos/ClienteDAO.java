@@ -51,4 +51,17 @@ public class ClienteDAO extends DAO<Cliente> {
         }
         return null;
     }
+
+    public Cliente buscarClienteID(int id) {
+        try {
+            conectar();
+            return em.find(Cliente.class, id);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo buscarClienteID() de la clase ClienteDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
+
 }
