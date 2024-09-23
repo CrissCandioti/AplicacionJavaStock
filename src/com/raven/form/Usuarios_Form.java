@@ -257,7 +257,7 @@ public class Usuarios_Form extends Form {
     }//GEN-LAST:event_jButton2ActionPerformed
     //JButton para eliminar el cliente de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        List<Object> list = Seleccionarusuario();
+        List<Cliente> list = Seleccionarusuario();
         if (!list.isEmpty()) {
             DefaultOption option = new DefaultOption() {
                 @Override
@@ -286,7 +286,7 @@ public class Usuarios_Form extends Form {
     //JButton para acceder al historial de compra del cliente
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         HistorialCliente historialcliente = new HistorialCliente();
-        List<Object> list = Seleccionarusuario();
+        List<Cliente> list = Seleccionarusuario();
         if (!list.isEmpty()) {
             if (list.size() == 1) {
                 //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para ver su historial
@@ -321,10 +321,10 @@ public class Usuarios_Form extends Form {
     //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
     private List<Cliente> Seleccionarusuario() {
         try {
-            List<Object> list = new ArrayList<>();
+            List<Cliente> list = new ArrayList<>();
             for (int i = 0; i < jTable.getRowCount(); i++) {
                 if ((boolean) jTable.getValueAt(i, 0)) {
-                    Object data = (Object) jTable.getValueAt(i, 2);
+                    Cliente data = (Cliente) jTable.getValueAt(i, 2);
                     list.add(data);
                 }
             }
