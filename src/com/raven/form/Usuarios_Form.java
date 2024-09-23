@@ -206,6 +206,7 @@ public class Usuarios_Form extends Form {
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
+        ClienteServices cs = new ClienteServices();
         DefaultOption option = new DefaultOption() {
             @Override
             public boolean closeWhenClickOutside() {
@@ -215,7 +216,10 @@ public class Usuarios_Form extends Form {
         String actions[] = new String[]{"Cancelar", "Guardar"};
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
             if (i == 1) {
+                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
                 MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                loadData();
+                pc.closePopup();
             } else {
                 pc.closePopup();
             }
@@ -348,7 +352,7 @@ public class Usuarios_Form extends Form {
             model.setRowCount(0);
             List<Cliente> list = cs.listaCliente();
             for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount()));
+                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");

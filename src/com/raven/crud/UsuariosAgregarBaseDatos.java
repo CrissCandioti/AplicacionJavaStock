@@ -240,7 +240,7 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
         }
     }
-    
+
     public Cliente retornarCliente() {
         try {
             Cliente aux = new Cliente();
@@ -260,6 +260,22 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
         return null;
     }
 
+    public Cliente retornarCLienteAgregar() {
+        try {
+            String nombre = jTextFieldNombre.getText();
+            String apellido = jTextFieldApellido.getText();
+            int documento = Integer.parseInt(jTextFieldNDocumento.getText());
+            String email = jTextFieldEmail.getText();
+            String whatsapp = jTextFieldNWhatsApp.getText();
+            String localalidad = jTextFieldLocalidad.getText();
+            String direccion = jTextFieldDireccion.getText();
+            String notas = jTextAreaNotas.getText();
+            return new Cliente(nombre, apellido, documento, email, whatsapp, localalidad, direccion, notas);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo retornarCLienteAgregar() de la clase usuariosAgregarBaseDatos");
+        }
+        return null;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
