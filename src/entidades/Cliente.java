@@ -128,7 +128,7 @@ public class Cliente {
 
     public Object[] toTableRow(int rowNum) {
         try {
-            return new Object[]{false, rowNum, this, apellido, documento, email, whatsapp, localidad, notas};
+            return new Object[]{false, rowNum, this, apellido, documento, email, whatsapp, localidad, direccion, notas};
         } catch (Exception e) {
             System.out.println("Error metodo toTableRow de la clase cliente");
         }
