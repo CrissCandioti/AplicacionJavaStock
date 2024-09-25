@@ -62,12 +62,13 @@ public class Proveedor {
 
     @Override
     public String toString() {
-        return "Proveedor{" + "nombre=" + nombre + '}';
+        return nombre;
     }
 
+    //No olvidar en este metodo en la frase "Aqui van los productos", vamos a agregar una logica que traiga los productos por medio del id
     public Object[] toTableRow(int rowNum) {
         try {
-            return new Object[]{false, rowNum, this, notas};
+            return new Object[]{false, rowNum, this, "Aqui van los productos", notas};
         } catch (Exception e) {
             System.out.println("Error metodo toTableRow de la clase proveedor");
         }

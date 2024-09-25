@@ -88,14 +88,14 @@ public class Proveedores_Form extends Form {
 
             },
             new String [] {
-                "Estado", "#", "Nombre", "Productos"
+                "Estado", "#", "Nombre", "Productos", "Notas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false
+                true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -214,7 +214,7 @@ public class Proveedores_Form extends Form {
         String actions[] = new String[]{"Cancelar", "Guardar"};
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Proveedor", actions, (pc, i) -> {
             if (i == 1) {
-//                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
+                ps.persistirProveedor(agregar.retornarProveedorAgregar().getNombre(), agregar.retornarProveedorAgregar().getNotas());
                 MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El Proveedor fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                 loadData();
                 pc.closePopup();
