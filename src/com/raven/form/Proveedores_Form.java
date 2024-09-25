@@ -3,6 +3,7 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
+import com.raven.crud.ProductosAsociados;
 import com.raven.crud.ProveedoresAgregarBaseDatos1;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
@@ -144,6 +145,11 @@ public class Proveedores_Form extends Form {
         jLabel.setText("Ingrese el nombre del proveedor");
 
         jButton4.setText("Productos Asociados");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -200,7 +206,7 @@ public class Proveedores_Form extends Form {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    //JButton para abrir una ventana y guardar un cliente a la base de datos
+    //JButton para abrir una ventana y guardar un proveedor a la base de datos
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         ProveedoresAgregarBaseDatos1 agregar = new ProveedoresAgregarBaseDatos1();
@@ -295,6 +301,41 @@ public class Proveedores_Form extends Form {
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
+    //JButton para ver con mas detalle los productos asociados
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ProductosAsociados pa = new ProductosAsociados();
+        ClienteServices cs = new ClienteServices();
+        ProveedorServices ps = new ProveedorServices();
+        List<Proveedor> list = Seleccionarproveedor();
+        if (!list.isEmpty()) {
+            if (list.size() == 1) {
+                //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
+                Proveedor aux = list.get(0);
+                //Metodo probisorio para modificar
+                pa.modificacionPrueba(ps.buscarProveedorPorId(aux.getId()));
+                //Creamos nuevamente la ventana emergente para mostrar los datos
+                DefaultOption option = new DefaultOption() {
+                    @Override
+                    public boolean closeWhenClickOutside() {
+                        return true;
+                    }
+                };
+                String actions[] = new String[]{"Cancelar", "Impirmir PDF"};
+                GlassPanePopup.showPopup(new SimplePopupBorder(pa, "Productos asociados", actions, (pc, i) -> {
+                    if (i == 1) {
+//Llamamos al metodo para imprimir el pdf
+                        pc.closePopup();
+                    } else {
+                        pc.closePopup();
+                    }
+                }), option);
+            } else {
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede ver los productos asociados de un proveedor a la vez", MessageAlerts.MessageType.DEFAULT);
+            }
+        } else {
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un proveedor para mostrar la informacion solicitada", MessageAlerts.MessageType.WARNING);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un proveedor o varios o ninguno.
     private List<Proveedor> Seleccionarproveedor() {
