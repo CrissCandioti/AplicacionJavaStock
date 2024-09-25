@@ -20,17 +20,20 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
+    private String notas;
 
     public Proveedor() {
     }
 
-    public Proveedor(String nombre) {
+    public Proveedor(String nombre, String notas) {
         this.nombre = nombre;
+        this.notas = notas;
     }
 
-    public Proveedor(int id, String nombre) {
+    public Proveedor(int id, String nombre, String notas) {
         this.id = id;
         this.nombre = nombre;
+        this.notas = notas;
     }
 
     public int getId() {
@@ -49,16 +52,24 @@ public class Proveedor {
         this.nombre = nombre;
     }
 
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+
     @Override
     public String toString() {
-        return "Proveedor{" + "id=" + id + ", nombre=" + nombre + '}';
+        return "Proveedor{" + "nombre=" + nombre + '}';
     }
 
     public Object[] toTableRow(int rowNum) {
         try {
-            return new Object[]{false, rowNum, this};
+            return new Object[]{false, rowNum, this, notas};
         } catch (Exception e) {
-            System.out.println("Error metodo toTableRow de la clase cliente");
+            System.out.println("Error metodo toTableRow de la clase proveedor");
         }
         return null;
     }

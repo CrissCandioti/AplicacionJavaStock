@@ -3,11 +3,12 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
-import com.raven.crud.HistorialCliente;
+import com.raven.crud.ProveedoresAgregarBaseDatos1;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
+import entidades.Proveedor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -19,6 +20,7 @@ import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
+import services.ProveedorServices;
 
 public class Proveedores_Form extends Form {
 
@@ -109,7 +111,7 @@ public class Proveedores_Form extends Form {
         if (jTable.getColumnModel().getColumnCount() > 0) {
             jTable.getColumnModel().getColumn(0).setMaxWidth(30);
             jTable.getColumnModel().getColumn(1).setMaxWidth(30);
-            jTable.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTable.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
         jButton1.setText("Eliminar");
@@ -201,8 +203,8 @@ public class Proveedores_Form extends Form {
     //JButton para abrir una ventana y guardar un cliente a la base de datos
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
-        ClienteServices cs = new ClienteServices();
+        ProveedoresAgregarBaseDatos1 agregar = new ProveedoresAgregarBaseDatos1();
+        ProveedorServices ps = new ProveedorServices();
         DefaultOption option = new DefaultOption() {
             @Override
             public boolean closeWhenClickOutside() {
@@ -210,9 +212,9 @@ public class Proveedores_Form extends Form {
             }
         };
         String actions[] = new String[]{"Cancelar", "Guardar"};
-        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
+        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Proveedor", actions, (pc, i) -> {
             if (i == 1) {
-                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
+//                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
                 MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                 loadData();
                 pc.closePopup();
@@ -288,18 +290,18 @@ public class Proveedores_Form extends Form {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-   //jTextField la cual buscaremos el cliente por nombre o apellido
+    //jTextField la cual buscaremos el cliente por nombre o apellido
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
 
     //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
-    private List<Cliente> Seleccionarusuario() {
+    private List<Proveedor> Seleccionarusuario() {
         try {
-            List<Cliente> list = new ArrayList<>();
+            List<Proveedor> list = new ArrayList<>();
             for (int i = 0; i < jTable.getRowCount(); i++) {
                 if ((boolean) jTable.getValueAt(i, 0)) {
-                    Cliente data = (Cliente) jTable.getValueAt(i, 2);
+                    Proveedor data = (Proveedor) jTable.getValueAt(i, 2);
                     list.add(data);
                 }
             }
@@ -313,36 +315,36 @@ public class Proveedores_Form extends Form {
     //Metodo la cual carga la tabla
     public void loadData() {
         try {
-            ClienteServices cs = new ClienteServices();
+            ProveedorServices ps = new ProveedorServices();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
             model.setRowCount(0);
-            List<Cliente> list = cs.listaCliente();
-            for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
+            List<Proveedor> list = ps.listaProveedores();
+            for (Proveedor p : list) {
+                model.addRow(p.toTableRow(jTable.getRowCount() + 1));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
+            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase proveedor_Form");
         }
     }
 
     //Metodo la cual busca el cliente en el jTextField
     public void search(String search) {
         try {
-            ClienteServices cs = new ClienteServices();
+            ProveedorServices ps = new ProveedorServices();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
             model.setRowCount(0);
-            List<Cliente> list = cs.busquedaCliente(search);
-            for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
+            List<Proveedor> list = ps.barraBusqueda(search);
+            for (Proveedor p : list) {
+                model.addRow(p.toTableRow(jTable.getRowCount() + 1));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
+            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase proveedor_Form");
         }
     }
 

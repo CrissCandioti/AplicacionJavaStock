@@ -14,9 +14,11 @@ import java.util.List;
  */
 public class ProveedorServices {
 
-    public void persistirProveedor(String nombre) {
+    public void persistirProveedor(String nombre, String notas) {
         try {
             ProveedorDAO dao = new ProveedorDAO();
+            dao.persistirEntidad(new Proveedor(nombre, notas));
+            System.out.println("Se agrego correctamente el proveedor a la base de datos");
         } catch (Exception e) {
             System.out.println("Error en el metodo persistirProveedor() en la clase proveedorService");
         }
@@ -25,6 +27,8 @@ public class ProveedorServices {
     public void modificarProveedor(int id, String nombre) {
         try {
             ProveedorDAO dao = new ProveedorDAO();
+            dao.persistirEntidad(new Proveedor(id, nombre, nombre));
+            System.out.println("Se modifico correctamente el proveedor a la base de datos");
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarProveedor() en la clase proveedorService");
         }
@@ -33,14 +37,17 @@ public class ProveedorServices {
     public void borrarProveedor(Proveedor aux) {
         try {
             ProveedorDAO dao = new ProveedorDAO();
+            System.out.println("Se agrego correctamente el proveedor a la base de datos");
+            dao.borrarEntidad(aux);
         } catch (Exception e) {
-            System.out.println("");
+            System.out.println("Error en el metodo borrarProveedor() de la clase proveedorServices");
         }
     }
 
     public Proveedor buscarProveedorPorId(int id) {
         try {
             ProveedorDAO dao = new ProveedorDAO();
+            return dao.buscarProveedorPorID(id);
         } catch (Exception e) {
             System.out.println("Error en el metodo buscarProveedorPorId() en la clase proveedorService");
         }
@@ -53,6 +60,16 @@ public class ProveedorServices {
             return dao.listaProveedores();
         } catch (Exception e) {
             System.out.println("Error en el metodo listaProveedores() en la clase proveedorService");
+        }
+        return null;
+    }
+
+    public List<Proveedor> barraBusqueda(String busqueda) {
+        try {
+            ProveedorDAO dao = new ProveedorDAO();
+            return dao.barraBusqueda(busqueda);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo barraBusqueda() de la clase proveedorService");
         }
         return null;
     }

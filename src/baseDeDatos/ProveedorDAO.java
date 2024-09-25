@@ -52,4 +52,15 @@ public final class ProveedorDAO extends DAO<Proveedor> {
         return null;
     }
 
+    public List<Proveedor> barraBusqueda(String busqueda) {
+        try {
+            conectar();
+            return (List<Proveedor>) em.createQuery("Select f From Proveedor f Where f.nombre LIKE :busqueda").setParameter("busqueda", "%" + busqueda + "%").getResultList();
+        } catch (Exception e) {
+            System.out.println("Error en el metodo barraBusqueda() de la clase proveedorDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
 }
