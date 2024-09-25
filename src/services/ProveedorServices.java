@@ -50,6 +50,7 @@ public class ProveedorServices {
     public List<Proveedor> listaProveedores() {
         try {
             ProveedorDAO dao = new ProveedorDAO();
+            return dao.listaProveedores();
         } catch (Exception e) {
             System.out.println("Error en el metodo listaProveedores() en la clase proveedorService");
         }

@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.raven.form.Home_Form;
 import com.raven.form.Productos_Form;
+import com.raven.form.Proveedores_Form;
 import com.raven.form.Setting_Form;
 import com.raven.form.Usuarios_Form;
 import com.raven.menu.EventMenu;
@@ -15,6 +16,7 @@ public class Main extends javax.swing.JFrame {
     private Setting_Form settingForm;
     private Usuarios_Form usuariosForm;
     private Productos_Form productosForm;
+    private Proveedores_Form proveedoresForm;
 
     public Main() {
         initComponents();
@@ -33,6 +35,8 @@ public class Main extends javax.swing.JFrame {
                     mainBody.displayForm(usuariosForm, "Clientes");
                 } else if (index == 2) {
                     mainBody.displayForm(productosForm, "Productos");
+                } else if (index == 3) {
+                    mainBody.displayForm(proveedoresForm, "Proveedores");
                 } else if (index == 6) {
                     mainBody.displayForm(settingForm, "Configuracion");
                 }
@@ -42,6 +46,7 @@ public class Main extends javax.swing.JFrame {
         productosForm = new Productos_Form();
         usuariosForm = new Usuarios_Form();
         settingForm = new Setting_Form();
+        proveedoresForm = new Proveedores_Form();
         mainBody.displayForm(new Home_Form());
     }
 
