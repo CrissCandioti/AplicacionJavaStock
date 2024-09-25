@@ -5,6 +5,7 @@
 package com.raven.crud;
 
 import entidades.Cliente;
+import entidades.Proveedor;
 import javax.swing.JOptionPane;
 
 /**
@@ -95,55 +96,39 @@ public class ProveedoresAgregarBaseDatos1 extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreActionPerformed
 
-    //Metodo para setear los valores del cliente en las celdas
-    public void modificacionPrueba(Cliente aux) {
+    //Metodo para setear los valores del Proveedor en las celdas
+    public void modificacionPrueba(Proveedor aux) {
         try {
             jTextFieldID.setText(String.valueOf(aux.getId()));
             jTextFieldNombre.setText(aux.getNombre());
-            jTextFieldApellido.setText(aux.getApellido());
-            jTextFieldNDocumento.setText(String.valueOf(aux.getDocumento()));
-            jTextFieldEmail.setText(aux.getEmail());
-            jTextFieldNWhatsApp.setText(aux.getWhatsapp());
-            jTextFieldLocalidad.setText(aux.getLocalidad());
-            jTextFieldDireccion.setText(aux.getDireccion());
             jTextAreaNotas.setText(aux.getNotas());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
+            JOptionPane.showMessageDialog(this, "Error -Clase: ProveedorAgregarBaseDatos - metodo: modificacionPrueba()");
         }
     }
 
-    public Cliente retornarCliente() {
+    //Metodo para devolver un proveedor modificado listo a la ventana emergente de la clase Proveedor_Form
+    public Proveedor retornarProveedor() {
         try {
-            Cliente aux = new Cliente();
+            Proveedor aux = new Proveedor();
             aux.setId(Integer.parseInt(jTextFieldID.getText()));
             aux.setNombre(jTextFieldNombre.getText());
-            aux.setApellido(jTextFieldApellido.getText());
-            aux.setDocumento(Integer.parseInt(jTextFieldNDocumento.getText()));
-            aux.setEmail(jTextFieldEmail.getText());
-            aux.setWhatsapp(jTextFieldNWhatsApp.getText());
-            aux.setLocalidad(jTextFieldLocalidad.getText());
-            aux.setDireccion(jTextFieldDireccion.getText());
             aux.setNotas(jTextAreaNotas.getText());
             return aux;
         } catch (Exception e) {
-            System.out.println("Error en el metodo retornarCliente() en la clase UsuariosAgregarBaseDeDatos");
+            System.out.println("Error en el metodo retornarProveedor() en la clase ProveedorAgregarBaseDeDatos");
         }
         return null;
     }
 
-    public Cliente retornarCLienteAgregar() {
+    //Metodo para devolver los datos del nuevo proveedor a la ventana emergente de la clase Proveedor_Form
+    public Proveedor retornarProveedorAgregar() {
         try {
             String nombre = jTextFieldNombre.getText();
-            String apellido = jTextFieldApellido.getText();
-            int documento = Integer.parseInt(jTextFieldNDocumento.getText());
-            String email = jTextFieldEmail.getText();
-            String whatsapp = jTextFieldNWhatsApp.getText();
-            String localalidad = jTextFieldLocalidad.getText();
-            String direccion = jTextFieldDireccion.getText();
             String notas = jTextAreaNotas.getText();
-            return new Cliente(nombre, apellido, documento, email, whatsapp, localalidad, direccion, notas);
+            return new Proveedor(nombre, notas);
         } catch (Exception e) {
-            System.out.println("Error en el metodo retornarCLienteAgregar() de la clase usuariosAgregarBaseDatos");
+            System.out.println("Error en el metodo retornarProveedorAgregar() de la clase proveedorAgregarBaseDatos");
         }
         return null;
     }
