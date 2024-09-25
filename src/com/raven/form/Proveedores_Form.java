@@ -215,7 +215,7 @@ public class Proveedores_Form extends Form {
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Proveedor", actions, (pc, i) -> {
             if (i == 1) {
 //                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
-                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El Proveedor fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                 loadData();
                 pc.closePopup();
             } else {
@@ -223,17 +223,18 @@ public class Proveedores_Form extends Form {
             }
         }), option);
     }//GEN-LAST:event_jButton3ActionPerformed
-    //JButon para modificar un cliente de la base de datos 
+    //JButon para modificar un provedor de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
+        ProveedoresAgregarBaseDatos1 ProveedorAgregarBaseDatos = new ProveedoresAgregarBaseDatos1();
         ClienteServices cs = new ClienteServices();
-        List<Cliente> list = Seleccionarusuario();
+        ProveedorServices ps = new ProveedorServices();
+        List<Proveedor> list = Seleccionarproveedor();
         if (!list.isEmpty()) {
             if (list.size() == 1) {
                 //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
-                Cliente aux = list.get(0);
+                Proveedor aux = list.get(0);
                 //Metodo probisorio para modificar
-                UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
+                ProveedorAgregarBaseDatos.modificacionPrueba(ps.buscarProveedorPorId(aux.getId()));
                 //Creamos nuevamente la ventana emergente para mostrar los datos
                 DefaultOption option = new DefaultOption() {
                     @Override
@@ -242,10 +243,10 @@ public class Proveedores_Form extends Form {
                     }
                 };
                 String actions[] = new String[]{"Cancelar", "Modificar"};
-                GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
+                GlassPanePopup.showPopup(new SimplePopupBorder(ProveedorAgregarBaseDatos, "Modificar proveedor", actions, (pc, i) -> {
                     if (i == 1) {
-                        cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
-                        MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
+                        ps.modificarProveedor(ProveedorAgregarBaseDatos.retornarProveedor().getId(), ProveedorAgregarBaseDatos.retornarProveedor().getNombre(), ProveedorAgregarBaseDatos.retornarProveedor().getNotas());
+                        MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El proveedore fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
                         loadData();
                         pc.closePopup();
                     } else {
@@ -253,7 +254,7 @@ public class Proveedores_Form extends Form {
                     }
                 }), option);
             } else {
-                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un cliente a la vez", MessageAlerts.MessageType.DEFAULT);
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un proveedor a la vez", MessageAlerts.MessageType.DEFAULT);
             }
         } else {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
@@ -261,8 +262,8 @@ public class Proveedores_Form extends Form {
     }//GEN-LAST:event_jButton2ActionPerformed
     //JButton para eliminar el cliente de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        List<Cliente> list = Seleccionarusuario();
-        ClienteServices cs = new ClienteServices();
+        List<Proveedor> list = Seleccionarproveedor();
+        ProveedorServices ps = new ProveedorServices();
         if (!list.isEmpty()) {
             DefaultOption option = new DefaultOption() {
                 @Override
@@ -271,14 +272,14 @@ public class Proveedores_Form extends Form {
                 }
             };
             String actions[] = new String[]{"Cancelar", "Eliminar"};
-            JLabel label = new JLabel("Estas seguro que deseas eliminar de forma permanente a estos clientes: " + list);
+            JLabel label = new JLabel("Estas seguro que deseas eliminar de forma permanente a estos proveedores: " + list);
             label.setBorder(new EmptyBorder(0, 25, 0, 25));
             GlassPanePopup.showPopup(new SimplePopupBorder(label, "Confirmar eliminacion", actions, (pc, i) -> {
                 if (i == 1) {
-                    for (Cliente aux : list) {
-                        cs.borrarCliente(aux);
+                    for (Proveedor aux : list) {
+                        ps.borrarProveedor(aux);
                     }
-                    MessageAlerts.getInstance().showMessage("Se elimino correctamente", "El cliente fue eliminado correctamente de la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    MessageAlerts.getInstance().showMessage("Se elimino correctamente", "El proveedor fue eliminado correctamente de la base de datos", MessageAlerts.MessageType.SUCCESS);
                     loadData();
                     pc.closePopup();
                 } else {
@@ -286,7 +287,7 @@ public class Proveedores_Form extends Form {
                 }
             }), option);
         } else {
-            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su eliminacion", MessageAlerts.MessageType.WARNING);
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un proveedor para su eliminacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -295,8 +296,8 @@ public class Proveedores_Form extends Form {
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
 
-    //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
-    private List<Proveedor> Seleccionarusuario() {
+    //Esta es la logica para que se aplique cuando se selecciona un proveedor o varios o ninguno.
+    private List<Proveedor> Seleccionarproveedor() {
         try {
             List<Proveedor> list = new ArrayList<>();
             for (int i = 0; i < jTable.getRowCount(); i++) {

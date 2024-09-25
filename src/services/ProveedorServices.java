@@ -24,10 +24,10 @@ public class ProveedorServices {
         }
     }
 
-    public void modificarProveedor(int id, String nombre) {
+    public void modificarProveedor(int id, String nombre, String notas) {
         try {
             ProveedorDAO dao = new ProveedorDAO();
-            dao.persistirEntidad(new Proveedor(id, nombre, nombre));
+            dao.persistirEntidad(new Proveedor(id, nombre, notas));
             System.out.println("Se modifico correctamente el proveedor a la base de datos");
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarProveedor() en la clase proveedorService");
