@@ -6,6 +6,7 @@ package com.raven.crud;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
+import entidades.Proveedor;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.io.File;
@@ -345,7 +346,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     private raven.datetime.component.date.DatePicker datePicker;
     private javax.swing.JButton jButtonAgregarImagen;
     private javax.swing.JButton jButtonBorrarImagen;
-    private javax.swing.JComboBox<String> jComboBoxProveedor;
+    private javax.swing.JComboBox<Proveedor> jComboBoxProveedor;
     private javax.swing.JFormattedTextField jFormattedTextFieldFecha;
     private javax.swing.JFormattedTextField jFormattedTextFieldPrecioCosto;
     private javax.swing.JFormattedTextField jFormattedTextFieldPrecioVenta;

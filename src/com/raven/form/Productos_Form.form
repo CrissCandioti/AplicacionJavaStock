@@ -99,7 +99,7 @@
                     <Column editable="false" title="Marca" type="java.lang.Object"/>
                     <Column editable="false" title="Tipo producto" type="java.lang.Object"/>
                     <Column editable="false" title="Contenido" type="java.lang.Object"/>
-                    <Column editable="false" title="Stock" type="java.lang.Integer"/>
+                    <Column editable="false" title="Stock" type="java.lang.Object"/>
                     <Column editable="false" title="Precio costo" type="java.lang.Object"/>
                     <Column editable="false" title="Precio venta" type="java.lang.Object"/>
                     <Column editable="false" title="Ganancias" type="java.lang.Object"/>

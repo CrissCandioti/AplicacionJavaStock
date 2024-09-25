@@ -87,7 +87,7 @@ public class ProductosAsociados extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    //Metodo para setear los valores del Proveedor en las celdas
+    //Metodo para setear los valores del Proveedor en los JLabel
     public void modificacionPrueba(Proveedor aux) {
         try {
             jLabelVerCodigo.setText(String.valueOf(aux.getId()));
