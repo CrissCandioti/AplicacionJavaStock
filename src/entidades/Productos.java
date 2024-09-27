@@ -16,7 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 /**
@@ -48,7 +47,6 @@ public class Productos {
     )
     private Proveedor proveedor;
     private String descripcion;
-    @Lob
     private ModelProfile ModelProfile;
 
     public Productos() {

@@ -219,8 +219,7 @@ public class Producto_Form extends Form {
         String actions[] = new String[]{"Cancelar", "Guardar"};
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar producto", actions, (pc, i) -> {
             if (i == 1) {
-//                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
-                System.out.println(agregar.retornarProductosAgregar());
+                ps.persistirProducto(agregar.retornarProductosAgregar().getVariedad(),agregar.retornarProductosAgregar().getNombre(),agregar.retornarProductosAgregar().getFechaIngreso(), agregar.retornarProductosAgregar().getMarca(), agregar.retornarProductosAgregar().getTipoProducto(), agregar.retornarProductosAgregar().getContenido(), agregar.retornarProductosAgregar().getStock(), agregar.retornarProductosAgregar().getPrecioCosto(), agregar.retornarProductosAgregar().getPrecioventa(), agregar.retornarProductosAgregar().getPrecioCosto(), agregar.retornarProductosAgregar().getPrecioventa(), agregar.retornarProductosAgregar().getProveedor(), agregar.retornarProductosAgregar().getDescripcion(), agregar.retornarProductosAgregar().getModelProfile());
                 MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El producto fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                 loadData();
                 pc.closePopup();
@@ -361,7 +360,7 @@ public class Producto_Form extends Form {
                 model.addRow(c.toTableRow(jTable.getRowCount() + 1));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
+            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase producto_Form");
         }
     }
 

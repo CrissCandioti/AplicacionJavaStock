@@ -11,16 +11,21 @@ import entidades.Productos;
 import entidades.Proveedor;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javaswingdev.picturebox.DefaultPictureBoxRender;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import jnafilechooser.api.JnaFileChooser;
+import net.coobird.thumbnailator.Thumbnails;
 import services.ProveedorServices;
 
 /**
@@ -381,9 +386,9 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             String tipoProducto = jTextFieldTipoProducto.getText();
             Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
             //Se trae la imagen
-
+            ModelProfile p = profile;
             String descipcion = jTextAreaNotas.getText();
-//            return date;
+            return new Productos(variedad, nombre, date, marca, tipoProducto, contenido, stock, precioCosto, precioVenta, precioCosto, precioVenta, positions, descipcion, profile);
         } catch (Exception e) {
             System.out.println("Error en el metodo retornarProductosAgregar() de la clase productosAgregarBaseDeDatos");
         }
