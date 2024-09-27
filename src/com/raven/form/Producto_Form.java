@@ -225,8 +225,9 @@ public class Producto_Form extends Form {
         String actions[] = new String[]{"Cancelar", "Guardar"};
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar producto", actions, (pc, i) -> {
             if (i == 1) {
-                ps.persistirProducto(agregar.retornarParaGuardar().getVariedad(), agregar.retornarParaGuardar().getNombre(), agregar.retornarParaGuardar().getFechaIngreso(), agregar.retornarParaGuardar().getMarca(), agregar.retornarParaGuardar().getTipoProducto(), agregar.retornarParaGuardar().getContenido(), agregar.retornarParaGuardar().getStock(), agregar.retornarParaGuardar().getPrecioCosto(), agregar.retornarParaGuardar().getPrecioventa(), agregar.retornarParaGuardar().getPrecioCosto(), agregar.retornarParaGuardar().getPrecioventa(), agregar.retornarParaGuardar().getProveedor(), agregar.retornarParaGuardar().getImagen(), agregar.retornarParaGuardar().getDescripcion());
-                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El producto fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+//                ps.persistirProducto(agregar.retornarParaGuardar().getVariedad(), agregar.retornarParaGuardar().getNombre(), agregar.retornarParaGuardar().getFechaIngreso(), agregar.retornarParaGuardar().getMarca(), agregar.retornarParaGuardar().getTipoProducto(), agregar.retornarParaGuardar().getContenido(), agregar.retornarParaGuardar().getStock(), agregar.retornarParaGuardar().getPrecioCosto(), agregar.retornarParaGuardar().getPrecioventa(), agregar.retornarParaGuardar().getPrecioCosto(), agregar.retornarParaGuardar().getPrecioventa(), agregar.retornarParaGuardar().getProveedor(), agregar.retornarParaGuardar().getImagen(), agregar.retornarParaGuardar().getDescripcion());
+System.out.println(agregar.retornarParaGuardar().getDescripcion());                
+MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El producto fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                 loadData();
                 pc.closePopup();
             } else {

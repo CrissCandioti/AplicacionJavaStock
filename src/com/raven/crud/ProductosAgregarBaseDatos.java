@@ -74,7 +74,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaNotas = new javax.swing.JTextArea();
+        jTextAreadescipcion = new javax.swing.JTextArea();
         jFormattedTextFieldFecha = new javax.swing.JFormattedTextField();
         jFormattedTextFieldPrecioCosto = new javax.swing.JFormattedTextField();
         jFormattedTextFieldPrecioVenta = new javax.swing.JFormattedTextField();
@@ -132,11 +132,11 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Descripcion");
 
-        jTextAreaNotas.setColumns(20);
-        jTextAreaNotas.setLineWrap(true);
-        jTextAreaNotas.setRows(5);
-        jTextAreaNotas.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextAreaNotas);
+        jTextAreadescipcion.setColumns(20);
+        jTextAreadescipcion.setLineWrap(true);
+        jTextAreadescipcion.setRows(5);
+        jTextAreadescipcion.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextAreadescipcion);
 
         jFormattedTextFieldPrecioCosto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
 
@@ -387,7 +387,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
             //Se trae la imagen
             byte[] imagen = getByteImage(profile.getPath());
-            String descipcion = jTextAreaNotas.getText();
+            String descipcion = jTextAreadescipcion.getText();
             return new Productos(variedad, nombre, date, marca, tipoProducto, contenido, stock, precioCosto, precioVenta, precioCosto, precioVenta, imagen, positions, descipcion);
         } catch (Exception e) {
         }
@@ -454,7 +454,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanelImagenProducto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextAreaNotas;
+    private javax.swing.JTextArea jTextAreadescipcion;
     private javax.swing.JTextField jTextFieldContenido;
     private javax.swing.JTextField jTextFieldMarca;
     private javax.swing.JTextField jTextFieldNombre;
