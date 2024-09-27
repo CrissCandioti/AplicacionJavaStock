@@ -6,26 +6,21 @@ package com.raven.crud;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
-import com.raven.other.ModelProfile;
+import entidades.ModelProfile;
 import entidades.Productos;
 import entidades.Proveedor;
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javaswingdev.picturebox.DefaultPictureBoxRender;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import jnafilechooser.api.JnaFileChooser;
-import net.coobird.thumbnailator.Thumbnails;
 import services.ProveedorServices;
 
 /**

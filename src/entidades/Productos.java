@@ -4,7 +4,7 @@
  */
 package entidades;
 
-import com.raven.other.ModelProfile;
+import entidades.ModelProfile;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -47,8 +48,13 @@ public class Productos {
     )
     private Proveedor proveedor;
     private String descripcion;
-    //Error aca investigar
-//    private ModelProfile ModelProfile;
+    @OneToOne
+    @JoinTable(
+            name = "productos_ModelProfile", // Nombre de la tabla de relación
+            joinColumns = @JoinColumn(name = "productos_id"), // Columna de productos en la tabla de relación
+            inverseJoinColumns = @JoinColumn(name = "ModelProfile_id") // Columna de proveedor en la tabla de relación
+    )
+    private ModelProfile ModelProfile;
 
     public Productos() {
     }

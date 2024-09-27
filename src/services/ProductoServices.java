@@ -5,7 +5,7 @@
 package services;
 
 import baseDeDatos.ProductoDAO;
-import com.raven.other.ModelProfile;
+import entidades.ModelProfile;
 import entidades.Productos;
 import entidades.Proveedor;
 import java.util.Date;
