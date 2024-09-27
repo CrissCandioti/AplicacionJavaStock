@@ -373,6 +373,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             String tipoProducto = jTextFieldTipoProducto.getText();
             Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
             //Se trae la imagen
+            
             String descipcion = jTextAreaNotas.getText();
 //            return date;
         } catch (Exception e) {
