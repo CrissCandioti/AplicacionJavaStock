@@ -9,6 +9,7 @@ import entidades.ModelProfile;
 import entidades.Productos;
 import entidades.Proveedor;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -42,5 +43,15 @@ public class ProductoServices {
         } catch (Exception e) {
             System.out.println("Error en el metodo eliminarProducto() de la clase ProductoServices");
         }
+    }
+    
+    public List<Productos> listaProductos(){
+        try {
+            ProductoDAO dao = new ProductoDAO();
+            return dao.listaProductos();
+        } catch (Exception e) {
+            System.out.println("Error en el metodo listaProductos() de la clase productosSerivces");
+        }
+        return null;
     }
 }

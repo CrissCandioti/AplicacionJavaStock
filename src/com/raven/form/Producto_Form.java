@@ -9,6 +9,7 @@ import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
+import entidades.Productos;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -94,14 +95,14 @@ public class Producto_Form extends Form {
 
             },
             new String [] {
-                "Estado", "#", "Nombre", "Apellido", "N° Documento", "Email", "N° Whats App", "Localidad", "Direccion", "Notas"
+                "Estado", "#", "Variedad", "Nombre", "Fecha ingreso", "Marca", "Tipo producto", "Contenido", "Stock", "Precio costo", "Precio venta", "Ganancias", "Porcentaje ganancia", "Proveedor", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -226,8 +227,7 @@ public class Producto_Form extends Form {
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar producto", actions, (pc, i) -> {
             if (i == 1) {
                 ps.persistirProducto(agregar.retornarParaGuardar().getVariedad(), agregar.retornarParaGuardar().getNombre(), agregar.retornarParaGuardar().getFechaIngreso(), agregar.retornarParaGuardar().getMarca(), agregar.retornarParaGuardar().getTipoProducto(), agregar.retornarParaGuardar().getContenido(), agregar.retornarParaGuardar().getStock(), agregar.retornarParaGuardar().getPrecioCosto(), agregar.retornarParaGuardar().getPrecioventa(), agregar.retornarParaGuardar().getPrecioCosto(), agregar.retornarParaGuardar().getPrecioventa(), agregar.retornarParaGuardar().getProveedor(), agregar.retornarParaGuardar().getImagen(), agregar.retornarParaGuardar().getDescripcion());
-System.out.println(agregar.retornarParaGuardar().getDescripcion());                
-MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El producto fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El producto fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                 loadData();
                 pc.closePopup();
             } else {
@@ -356,15 +356,15 @@ MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El producto 
     //Metodo la cual carga la tabla
     public void loadData() {
         try {
-            ClienteServices cs = new ClienteServices();
+            ProductoServices ps = new ProductoServices();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
             model.setRowCount(0);
-            List<Cliente> list = cs.listaCliente();
-            for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
+            List<Productos> list = ps.listaProductos();
+            for (Productos p: list) {
+                model.addRow(p.toTableRow(jTable.getRowCount() + 1));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase producto_Form");

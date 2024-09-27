@@ -5,6 +5,7 @@
 package baseDeDatos;
 
 import entidades.Productos;
+import java.util.List;
 
 /**
  *
@@ -25,6 +26,18 @@ public final class ProductoDAO extends DAO<Productos> {
     @Override
     public void borrarEntidad(Productos object) {
         super.borrarEntidad(object); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    public List<Productos> listaProductos() {
+        try {
+            conectar();
+            return (List<Productos>) em.createQuery("Select f From Productos f").getResultList();
+        } catch (Exception e) {
+            System.out.println("Error en el metodo listaProductos() de la clase productosDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
     }
 
 }
