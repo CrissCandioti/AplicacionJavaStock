@@ -11,6 +11,7 @@ import entidades.Proveedor;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.io.File;
+import java.util.Date;
 import javaswingdev.picturebox.DefaultPictureBoxRender;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -348,7 +349,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     //Metodo para retornar el producto para ser guardado en la base de datos
     public Productos retornarProductosAgregar() {
         try {
-
+            String nombre = jTextFieldNombre.getText();
+            Date date = datePicker.isDateSelected() ? Date.valueOf(datePicker.getSelectedDate()) : null;
             Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
 
         } catch (Exception e) {
