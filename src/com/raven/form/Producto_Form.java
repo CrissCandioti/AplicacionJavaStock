@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
 import com.raven.crud.HistorialCliente;
+import com.raven.crud.ProductosAgregarBaseDatos;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
@@ -19,6 +20,7 @@ import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
+import services.ProductoServices;
 
 public class Producto_Form extends Form {
 
@@ -145,7 +147,7 @@ public class Producto_Form extends Form {
             }
         });
 
-        jLabel.setText("Ingrese el nombre del cliente");
+        jLabel.setText("Ingrese el nombre del producto");
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -202,11 +204,12 @@ public class Producto_Form extends Form {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    //JButton para abrir una ventana y guardar un cliente a la base de datos
+    //JButton para abrir una ventana y guardar un producto a la base de datos
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
-        ClienteServices cs = new ClienteServices();
+        ProductosAgregarBaseDatos agregar = new ProductosAgregarBaseDatos();
+        agregar.loadData();
+        ProductoServices ps = new ProductoServices();
         DefaultOption option = new DefaultOption() {
             @Override
             public boolean closeWhenClickOutside() {
@@ -214,10 +217,11 @@ public class Producto_Form extends Form {
             }
         };
         String actions[] = new String[]{"Cancelar", "Guardar"};
-        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
+        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar producto", actions, (pc, i) -> {
             if (i == 1) {
-                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
-                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+//                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
+
+                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El producto fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                 loadData();
                 pc.closePopup();
             } else {
@@ -225,7 +229,7 @@ public class Producto_Form extends Form {
             }
         }), option);
     }//GEN-LAST:event_jButton3ActionPerformed
-    //JButon para modificar un cliente de la base de datos 
+    //JButon para modificar un producto de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
         ClienteServices cs = new ClienteServices();
@@ -261,7 +265,7 @@ public class Producto_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    //JButton para eliminar el cliente de la base de datos
+    //JButton para eliminar el produto de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<Cliente> list = Seleccionarusuario();
         ClienteServices cs = new ClienteServices();
@@ -291,7 +295,7 @@ public class Producto_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su eliminacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    //JButton para acceder al historial de compra del cliente
+    //JButton para acceder al historial del producto
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         HistorialCliente historialcliente = new HistorialCliente();
         List<Cliente> list = Seleccionarusuario();
@@ -321,12 +325,12 @@ public class Producto_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para ver su historial", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-    //jTextField la cual buscaremos el cliente por nombre o apellido
+    //jTextField la cual buscaremos el producto por su nombre
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
 
-    //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
+    //Esta es la logica para que se aplique cuando se selecciona un producto o varios o ninguno.
     private List<Cliente> Seleccionarusuario() {
         try {
             List<Cliente> list = new ArrayList<>();
@@ -361,7 +365,7 @@ public class Producto_Form extends Form {
         }
     }
 
-    //Metodo la cual busca el cliente en el jTextField
+    //Metodo la cual busca el prodcuto en el jTextField
     public void search(String search) {
         try {
             ClienteServices cs = new ClienteServices();

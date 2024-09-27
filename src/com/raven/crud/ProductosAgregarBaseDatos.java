@@ -6,6 +6,7 @@ package com.raven.crud;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
+import entidades.Productos;
 import entidades.Proveedor;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -15,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import jnafilechooser.api.JnaFileChooser;
+import services.ProveedorServices;
 
 /**
  *
@@ -334,14 +336,38 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         pictureBox.setImage(null);
     }//GEN-LAST:event_jButtonBorrarImagenActionPerformed
 
-    public void modificacionPrueba(Object data) {
+    //Metodo para seter los valores de los JTexfield para modificar
+    public void modificacionPrueba(Productos data) {
         try {
-//Aqui seteamos los valores de los jTextField con lo de la entidad
+            jTextFieldNombre.setText(data.getNombre());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
         }
     }
 
+    //Metodo para retornar el producto para ser guardado en la base de datos
+    public Productos retornarProductosAgregar() {
+        try {
+
+            Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
+
+        } catch (Exception e) {
+            System.out.println("Error en el metodo retornarProductosAgregar() de la clase productosAgregarBaseDeDatos");
+        }
+        return null;
+    }
+
+    //Metodo para cargar los datos en el comboBox
+    public void loadData() {
+        try {
+            ProveedorServices services = new ProveedorServices();
+            for (Proveedor pos : services.listaProveedores()) {
+                jComboBoxProveedor.addItem(pos);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en el metodo loadData() de la clase productoAgregarBaseDeDatos");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private raven.datetime.component.date.DatePicker datePicker;
     private javax.swing.JButton jButtonAgregarImagen;

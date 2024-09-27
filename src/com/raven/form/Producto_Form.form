@@ -203,7 +203,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ingrese el nombre del cliente"/>
+            <Property name="text" type="java.lang.String" value="Ingrese el nombre del producto"/>
           </Properties>
         </Component>
       </SubComponents>
