@@ -11,6 +11,9 @@ import entidades.Proveedor;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.io.File;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import javaswingdev.picturebox.DefaultPictureBoxRender;
 import javax.swing.ImageIcon;
@@ -350,9 +353,28 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     public Productos retornarProductosAgregar() {
         try {
             String nombre = jTextFieldNombre.getText();
-            Date date = datePicker.isDateSelected() ? Date.valueOf(datePicker.getSelectedDate()) : null;
+            //Se obtiene el localDate
+            LocalDate localDate = datePicker.getSelectedDate();
+            //se crea la variable dandole un valor null.
+            Date date = null;
+            //Se verifica si no es nulo y procede a convertir si tiene un valor
+            if (localDate != null) {
+                //Se crea un objeto Instant que representa el inicio del día (medianoche) en la zona horaria por defecto del sistema.
+                Instant instant = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                //Se convierte el Instant a un objeto Date utilizando el método Date.from()
+                date = Date.from(instant);
+            }
+            String contenido = jTextFieldContenido.getText();
+            String variedad = jTextFieldVariedad.getText();
+            double precioCosto = Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString());
+            double precioVenta = Double.parseDouble(jFormattedTextFieldPrecioVenta.getValue().toString());
+            int stock = Integer.parseInt(jTextFieldStock.getText());
+            String marca = jTextFieldMarca.getText();
+            String tipoProducto = jTextFieldTipoProducto.getText();
             Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
-
+            //Se trae la imagen
+            String descipcion = jTextAreaNotas.getText();
+//            return date;
         } catch (Exception e) {
             System.out.println("Error en el metodo retornarProductosAgregar() de la clase productosAgregarBaseDeDatos");
         }
