@@ -3,7 +3,7 @@ package com.raven.main;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.raven.form.Home_Form;
-import com.raven.form.Productos_Form;
+import com.raven.form.Producto_Form;
 import com.raven.form.Proveedores_Form;
 import com.raven.form.Setting_Form;
 import com.raven.form.Usuarios_Form;
@@ -15,7 +15,7 @@ public class Main extends javax.swing.JFrame {
 
     private Setting_Form settingForm;
     private Usuarios_Form usuariosForm;
-    private Productos_Form productosForm;
+    private Producto_Form productosForm;
     private Proveedores_Form proveedoresForm;
 
     public Main() {
@@ -43,7 +43,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        productosForm = new Productos_Form();
+        productosForm = new Producto_Form();
         usuariosForm = new Usuarios_Form();
         settingForm = new Setting_Form();
         proveedoresForm = new Proveedores_Form();
