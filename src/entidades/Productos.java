@@ -47,7 +47,8 @@ public class Productos {
     )
     private Proveedor proveedor;
     private String descripcion;
-    private ModelProfile ModelProfile;
+    //Error aca investigar
+//    private ModelProfile ModelProfile;
 
     public Productos() {
     }
