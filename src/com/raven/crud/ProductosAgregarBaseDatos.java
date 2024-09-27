@@ -6,6 +6,7 @@ package com.raven.crud;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
+import com.raven.other.ModelProfile;
 import entidades.Productos;
 import entidades.Proveedor;
 import java.awt.Rectangle;
@@ -325,7 +326,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     private void jTextFieldTipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTipoProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTipoProductoActionPerformed
-
+//Jbutton para cargar la imagen que selecciona el ususario
     private void jButtonAgregarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarImagenActionPerformed
         JnaFileChooser ch = new JnaFileChooser();
         ch.addFilter("Image", "png", "jpg");
@@ -333,17 +334,24 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         if (act) {
             File file = ch.getSelectedFile();
             pictureBox.setImage(new ImageIcon(file.getAbsolutePath()));
+            profile = new ModelProfile(file);
         }
     }//GEN-LAST:event_jButtonAgregarImagenActionPerformed
 
+    //Se crea una variable que representa la imagen
+    private ModelProfile profile;
+
     private void jButtonBorrarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarImagenActionPerformed
         pictureBox.setImage(null);
+        profile = null;
     }//GEN-LAST:event_jButtonBorrarImagenActionPerformed
 
     //Metodo para seter los valores de los JTexfield para modificar
     public void modificacionPrueba(Productos data) {
         try {
             jTextFieldNombre.setText(data.getNombre());
+            //traemos la imagen que selecciono el usuario
+            profile = new ModelProfile(data.getModelProfile().getIcon());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
         }
@@ -373,7 +381,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             String tipoProducto = jTextFieldTipoProducto.getText();
             Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
             //Se trae la imagen
-            
+
             String descipcion = jTextAreaNotas.getText();
 //            return date;
         } catch (Exception e) {
