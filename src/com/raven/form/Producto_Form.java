@@ -9,12 +9,18 @@ import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import net.coobird.thumbnailator.Thumbnails;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -219,7 +225,7 @@ public class Producto_Form extends Form {
         String actions[] = new String[]{"Cancelar", "Guardar"};
         GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar producto", actions, (pc, i) -> {
             if (i == 1) {
-                ps.persistirProducto(agregar.retornarProductosAgregar().getVariedad(),agregar.retornarProductosAgregar().getNombre(),agregar.retornarProductosAgregar().getFechaIngreso(), agregar.retornarProductosAgregar().getMarca(), agregar.retornarProductosAgregar().getTipoProducto(), agregar.retornarProductosAgregar().getContenido(), agregar.retornarProductosAgregar().getStock(), agregar.retornarProductosAgregar().getPrecioCosto(), agregar.retornarProductosAgregar().getPrecioventa(), agregar.retornarProductosAgregar().getPrecioCosto(), agregar.retornarProductosAgregar().getPrecioventa(), agregar.retornarProductosAgregar().getProveedor(), agregar.retornarProductosAgregar().getDescripcion(), agregar.retornarProductosAgregar().getModelProfile());
+                ps.persistirProducto(agregar.retornarParaGuardar().getVariedad(), agregar.retornarParaGuardar().getNombre(), agregar.retornarParaGuardar().getFechaIngreso(), agregar.retornarParaGuardar().getMarca(), agregar.retornarParaGuardar().getTipoProducto(), agregar.retornarParaGuardar().getContenido(), agregar.retornarParaGuardar().getStock(), agregar.retornarParaGuardar().getPrecioCosto(), agregar.retornarParaGuardar().getPrecioventa(), agregar.retornarParaGuardar().getPrecioCosto(), agregar.retornarParaGuardar().getPrecioventa(), agregar.retornarParaGuardar().getProveedor(), agregar.retornarParaGuardar().getImagen(), agregar.retornarParaGuardar().getDescripcion());
                 MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El producto fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                 loadData();
                 pc.closePopup();

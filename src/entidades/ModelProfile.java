@@ -5,11 +5,6 @@
 package entidades;
 
 import java.io.File;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import raven.extras.AvatarIcon;
@@ -18,7 +13,6 @@ import raven.extras.AvatarIcon;
  *
  * @author criss
  */
-@Entity
 public class ModelProfile {
 
     public Icon getIcon() {
@@ -51,35 +45,6 @@ public class ModelProfile {
         this.icon = icon;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public byte[] getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(byte[] contenido) {
-        this.contenido = contenido;
-    }
-
-    public Icon getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Icon avatar) {
-        this.avatar = avatar;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Lob
-    private byte[] contenido;
     private Icon icon;
     private Icon avatar;
     private File path;

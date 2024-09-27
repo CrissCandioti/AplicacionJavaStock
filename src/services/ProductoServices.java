@@ -16,10 +16,10 @@ import java.util.Date;
  */
 public class ProductoServices {
 
-    public void persistirProducto(String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, Proveedor proveedor, String descripcion, ModelProfile ModelProfile) {
+    public void persistirProducto(String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, Proveedor proveedor, byte[] imagen, String descripcion) {
         try {
             ProductoDAO dao = new ProductoDAO();
-            dao.persistirEntidad(new Productos(variedad, nombre, fechaIngreso, marca, tipoProducto, contenido, stock, precioCosto, precioventa, ganancias, porcentajeGanancias, proveedor, descripcion, ModelProfile));
+            dao.persistirEntidad(new Productos(variedad, nombre, fechaIngreso, marca, tipoProducto, contenido, stock, precioCosto, precioventa, ganancias, porcentajeGanancias, imagen, proveedor, descripcion));
             System.out.println("Se agrego correctamente");
         } catch (Exception e) {
             System.out.println("Error en el metodo persistirProducto() de la clase ProductoServices");

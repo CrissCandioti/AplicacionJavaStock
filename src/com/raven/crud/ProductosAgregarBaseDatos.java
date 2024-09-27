@@ -11,16 +11,21 @@ import entidades.Productos;
 import entidades.Proveedor;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javaswingdev.picturebox.DefaultPictureBoxRender;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import jnafilechooser.api.JnaFileChooser;
+import net.coobird.thumbnailator.Thumbnails;
 import services.ProveedorServices;
 
 /**
@@ -349,16 +354,16 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     //Metodo para seter los valores de los JTexfield para modificar
     public void modificacionPrueba(Productos data) {
         try {
-            jTextFieldNombre.setText(data.getNombre());
+//            jTextFieldNombre.setText(data.getNombre());
             //traemos la imagen que selecciono el usuario
-            profile = new ModelProfile(data.getModelProfile().getIcon());
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
         }
     }
 
     //Metodo para retornar el producto para ser guardado en la base de datos
-    public Productos retornarProductosAgregar() {
+    public Productos retornarParaGuardar() {
         try {
             String nombre = jTextFieldNombre.getText();
             //Se obtiene el localDate
@@ -381,11 +386,18 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             String tipoProducto = jTextFieldTipoProducto.getText();
             Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
             //Se trae la imagen
-            ModelProfile p = profile;
+            byte[] imagen = getByteImage(profile.getPath());
             String descipcion = jTextAreaNotas.getText();
-            return new Productos(variedad, nombre, date, marca, tipoProducto, contenido, stock, precioCosto, precioVenta, precioCosto, precioVenta, positions, descipcion, profile);
+            return new Productos(variedad, nombre, date, marca, tipoProducto, contenido, stock, precioCosto, precioVenta, precioCosto, precioVenta, imagen, positions, descipcion);
         } catch (Exception e) {
-            System.out.println("Error en el metodo retornarProductosAgregar() de la clase productosAgregarBaseDeDatos");
+        }
+        return null;
+    }
+
+    public byte[] profile() {
+        try {
+            return getByteImage(profile.getPath());
+        } catch (Exception e) {
         }
         return null;
     }
@@ -399,6 +411,25 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             System.out.println("Error en el metodo loadData() de la clase productoAgregarBaseDeDatos");
+        }
+    }
+
+    //Metodo creado para convertir en byte la imagen seleccionada por el usuario
+    private byte[] getByteImage(File file) throws IOException {
+        BufferedImage image = Thumbnails.of(file)
+                .width(500)
+                .outputQuality(0.7f)
+                .asBufferedImage();
+        ByteArrayOutputStream out = null;
+        try {
+            out = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", out);
+            byte[] data = out.toByteArray();
+            return data;
+        } finally {
+            if (out != null) {
+                out.close();
+            }
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

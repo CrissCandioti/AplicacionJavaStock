@@ -4,7 +4,6 @@
  */
 package entidades;
 
-import entidades.ModelProfile;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -16,8 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -46,20 +45,15 @@ public class Productos {
             joinColumns = @JoinColumn(name = "productos_id"), // Columna de productos en la tabla de relación
             inverseJoinColumns = @JoinColumn(name = "proveedor_id") // Columna de proveedor en la tabla de relación
     )
+    @Lob
+    private byte[] imagen;
     private Proveedor proveedor;
     private String descripcion;
-    @OneToOne
-    @JoinTable(
-            name = "productos_ModelProfile", // Nombre de la tabla de relación
-            joinColumns = @JoinColumn(name = "productos_id"), // Columna de productos en la tabla de relación
-            inverseJoinColumns = @JoinColumn(name = "ModelProfile_id") // Columna de proveedor en la tabla de relación
-    )
-    private ModelProfile ModelProfile;
 
     public Productos() {
     }
 
-    public Productos(String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, Proveedor proveedor, String descripcion, ModelProfile ModelProfile) {
+    public Productos(String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, byte[] imagen, Proveedor proveedor, String descripcion) {
         this.variedad = variedad;
         this.nombre = nombre;
         this.fechaIngreso = fechaIngreso;
@@ -71,12 +65,12 @@ public class Productos {
         this.precioventa = precioventa;
         this.ganancias = ganancias;
         this.porcentajeGanancias = porcentajeGanancias;
+        this.imagen = imagen;
         this.proveedor = proveedor;
         this.descripcion = descripcion;
-        this.ModelProfile = ModelProfile;
     }
 
-    public Productos(int id, String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, Proveedor proveedor, String descripcion, ModelProfile ModelProfile) {
+    public Productos(int id, String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, byte[] imagen, Proveedor proveedor, String descripcion) {
         this.id = id;
         this.variedad = variedad;
         this.nombre = nombre;
@@ -89,9 +83,9 @@ public class Productos {
         this.precioventa = precioventa;
         this.ganancias = ganancias;
         this.porcentajeGanancias = porcentajeGanancias;
+        this.imagen = imagen;
         this.proveedor = proveedor;
         this.descripcion = descripcion;
-        this.ModelProfile = ModelProfile;
     }
 
     public int getId() {
@@ -190,6 +184,14 @@ public class Productos {
         this.porcentajeGanancias = porcentajeGanancias;
     }
 
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
     public Proveedor getProveedor() {
         return proveedor;
     }
@@ -206,17 +208,9 @@ public class Productos {
         this.descripcion = descripcion;
     }
 
-    public ModelProfile getModelProfile() {
-        return ModelProfile;
-    }
-
-    public void setModelProfile(ModelProfile ModelProfile) {
-        this.ModelProfile = ModelProfile;
-    }
-
     @Override
     public String toString() {
-        return "Productos{" + "nombre=" + nombre + '}';
+        return "Productos{" + "id=" + id + ", variedad=" + variedad + ", nombre=" + nombre + ", fechaIngreso=" + fechaIngreso + ", marca=" + marca + ", tipoProducto=" + tipoProducto + ", contenido=" + contenido + ", stock=" + stock + ", precioCosto=" + precioCosto + ", precioventa=" + precioventa + ", ganancias=" + ganancias + ", porcentajeGanancias=" + porcentajeGanancias + ", imagen=" + imagen + ", proveedor=" + proveedor + ", descripcion=" + descripcion + '}';
     }
 
     public Object[] toTableRow(int rowNum) {
