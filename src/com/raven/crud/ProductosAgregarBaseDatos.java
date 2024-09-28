@@ -469,6 +469,25 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     public Productos retornarProductoModificado() {
         try {
             Productos aux = new Productos();
+            aux.setId(Integer.parseInt(jTextFieldID.getText()));
+            aux.setVariedad(jTextFieldVariedad.getText());
+            aux.setNombre(jTextFieldNombre.getText());
+            //Para la fecha
+            LocalDate localDate = datePicker.getSelectedDate();
+            Date date = null;
+            if (localDate != null) {
+                Instant instant = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                date = Date.from(instant);
+            }
+            aux.setFechaIngreso(date);
+            aux.setMarca(jTextFieldMarca.getText());
+            aux.setTipoProducto(jTextFieldTipoProducto.getText());
+            aux.setContenido(jTextFieldContenido.getText());
+            aux.setStock(Integer.parseInt(jTextFieldStock.getText()));
+            aux.setPrecioCosto(Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString()));
+            aux.setPrecioventa(Double.parseDouble(jFormattedTextFieldPrecioVenta.getValue().toString()));
+            
+            return aux;
         } catch (Exception e) {
             System.out.println("Error en el metodo retornarProductoModificado() de la clase ProductosAgregarBaseDatos");
         }
