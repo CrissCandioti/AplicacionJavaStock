@@ -27,9 +27,12 @@ public class ProductoServices {
         }
     }
 
-    public void modificarProducto(int id, String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, Proveedor proveedor, String descripcion, ModelProfile ModelProfile) {
+    public void modificarProducto(int id, String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, Proveedor proveedor, String descripcion, byte[] imagen) {
         try {
             ProductoDAO dao = new ProductoDAO();
+            Productos p = new Productos(id, variedad, nombre, fechaIngreso, marca, tipoProducto, contenido, stock, precioCosto, precioventa, ganancias, porcentajeGanancias, imagen, proveedor, descripcion);
+            dao.actualizarEntidad(p);
+            System.out.println("Se agrego correctamente en la base de datos");
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarProducto() de la clase ProductoServices");
         }

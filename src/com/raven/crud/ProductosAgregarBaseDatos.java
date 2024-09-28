@@ -486,7 +486,15 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             aux.setStock(Integer.parseInt(jTextFieldStock.getText()));
             aux.setPrecioCosto(Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString()));
             aux.setPrecioventa(Double.parseDouble(jFormattedTextFieldPrecioVenta.getValue().toString()));
-            
+            aux.setGanancias(Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString()));
+            aux.setPorcentajeGanancias(Double.parseDouble(jFormattedTextFieldPrecioVenta.getValue().toString()));
+            //Se trae la imagen
+            byte[] imagen = getByteImage(profile.getPath());
+            aux.setImagen(imagen);
+            //Para el proveedor
+            Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
+            aux.setProveedor(positions);
+            aux.setDescripcion(jTextAreadescipcion.getText());
             return aux;
         } catch (Exception e) {
             System.out.println("Error en el metodo retornarProductoModificado() de la clase ProductosAgregarBaseDatos");
