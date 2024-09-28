@@ -439,6 +439,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     //Este metodo sirve para traer el producto seleccionado por el usuario y setear sus valores para mostrarlos en las celdas
     public void modificarPrueba(Productos aux) {
         try {
+            ProveedorServices ps = new ProveedorServices();
             jTextFieldID.setText(String.valueOf(aux.getId()));
             jTextFieldNombre.setText(aux.getNombre());
             jTextFieldVariedad.setText(aux.getVariedad());
@@ -453,6 +454,19 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
             datePicker.setSelectedDate(localDate);
+            jFormattedTextFieldPrecioCosto.setText(String.valueOf(aux.getPrecioCosto()));
+            jFormattedTextFieldPrecioVenta.setText(String.valueOf(aux.getPrecioventa()));
+            jTextFieldStock.setText(String.valueOf(aux.getStock()));
+            Proveedor index = ps.buscarProveedorPorId(aux.getId());
+            ProveedorServices services = new ProveedorServices();
+            for (Proveedor pos : services.listaProveedores()) {
+                jComboBoxProveedor.addItem(pos);
+                if (aux.getId() == pos.getId()) {
+                    jComboBoxProveedor.setSelectedItem(pos);
+                }
+            }
+            System.out.println(index);
+
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarPrueba de la clase ProductosAgregarBaseDatos");
         }

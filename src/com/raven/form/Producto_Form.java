@@ -87,7 +87,7 @@ public class Producto_Form extends Form {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        jButtonVer = new javax.swing.JButton();
         jLabel = new javax.swing.JLabel();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -147,10 +147,10 @@ public class Producto_Form extends Form {
             }
         });
 
-        jButton4.setText("Historial");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVer.setText("Ver");
+        jButtonVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonVerActionPerformed(evt);
             }
         });
 
@@ -173,7 +173,7 @@ public class Producto_Form extends Form {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(jButtonVer)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
@@ -193,7 +193,7 @@ public class Producto_Form extends Form {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jButtonVer))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
@@ -303,7 +303,7 @@ public class Producto_Form extends Form {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     //JButton para acceder al historial del producto
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
         HistorialCliente historialcliente = new HistorialCliente();
         List<Productos> list = Seleccionarusuario();
         if (!list.isEmpty()) {
@@ -331,7 +331,7 @@ public class Producto_Form extends Form {
         } else {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para ver su historial", MessageAlerts.MessageType.WARNING);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonVerActionPerformed
     //jTextField la cual buscaremos el producto por su nombre
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
@@ -399,7 +399,7 @@ public class Producto_Form extends Form {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonVer;
     private javax.swing.JLabel jLabel;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
