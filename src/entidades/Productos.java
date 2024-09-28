@@ -210,7 +210,7 @@ public class Productos {
 
     @Override
     public String toString() {
-        return "Productos{" + "id=" + id + ", variedad=" + variedad + ", nombre=" + nombre + ", fechaIngreso=" + fechaIngreso + ", marca=" + marca + ", tipoProducto=" + tipoProducto + ", contenido=" + contenido + ", stock=" + stock + ", precioCosto=" + precioCosto + ", precioventa=" + precioventa + ", ganancias=" + ganancias + ", porcentajeGanancias=" + porcentajeGanancias + ", imagen=" + imagen + ", proveedor=" + proveedor + ", descripcion=" + descripcion + '}';
+        return nombre;
     }
 
     public Object[] toTableRow(int rowNum) {
