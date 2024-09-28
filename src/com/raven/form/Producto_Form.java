@@ -350,6 +350,7 @@ public class Producto_Form extends Form {
             return list;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error en el metodo Seleccionarusuario() de la clase Producto_Form");
+            System.out.println(e.fillInStackTrace());
         }
         return null;
     }
