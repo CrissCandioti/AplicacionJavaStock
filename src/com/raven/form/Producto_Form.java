@@ -340,10 +340,14 @@ public class Producto_Form extends Form {
     //Esta es la logica para que se aplique cuando se selecciona un producto o varios o ninguno.
     private List<Productos> Seleccionarusuario() {
         try {
+            ProductoServices ps = new ProductoServices();
             List<Productos> list = new ArrayList<>();
             for (int i = 0; i < jTable.getRowCount(); i++) {
                 if ((boolean) jTable.getValueAt(i, 0)) {
-                    Productos data = (Productos) jTable.getValueAt(i, 2);
+                    Object aux = jTable.getValueAt(i, 1);
+                    String index = aux.toString();
+                    int id = Integer.parseInt(index);
+                    Productos data = ps.buscarProductoPorID(id);
                     list.add(data);
                 }
             }
