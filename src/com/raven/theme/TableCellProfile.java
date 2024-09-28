@@ -7,6 +7,9 @@ package com.raven.theme;
 import entidades.ModelProfile;
 import entidades.Productos;
 import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import javaswingdev.picturebox.DefaultPictureBoxRender;
 
 /**
  *
@@ -27,6 +30,13 @@ public class TableCellProfile extends javax.swing.JPanel {
             profile = new ModelProfile(data.getImagen());
             pictureBox.setImage(profile.getIcon());
         }
+        pictureBox.setPictureBoxRender(new DefaultPictureBoxRender() {
+            @Override
+            public Shape render(Rectangle rec) {
+                return super.render(rec); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            }
+            
+        });
     }
 
     /**
