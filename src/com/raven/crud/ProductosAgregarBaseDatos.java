@@ -396,7 +396,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         }
         return null;
     }
-    
+
     public byte[] profile() {
         try {
             return getByteImage(profile.getPath());
@@ -446,7 +446,13 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             jTextFieldTipoProducto.setText(aux.getTipoProducto());
             jTextAreadescipcion.setText(aux.getDescripcion());
             jTextFieldContenido.setText(aux.getContenido());
-            
+            // Crear un objeto Date con el dato del producto
+            Date date = aux.getFechaIngreso();
+            // Convertir Instant a LocalDate
+            LocalDate localDate = date.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            datePicker.setSelectedDate(localDate);
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarPrueba de la clase ProductosAgregarBaseDatos");
         }

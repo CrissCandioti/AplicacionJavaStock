@@ -239,15 +239,14 @@ public class Producto_Form extends Form {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ProductosAgregarBaseDatos ProductosAgregarBaseDatos = new ProductosAgregarBaseDatos();
         ProductoServices ps = new ProductoServices();
-        List<Productos> list = ps.listaProductos();
+        List<Productos> list = Seleccionarusuario();
         if (!list.isEmpty()) {
             if (list.size() == 1) {
                 //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
                 Productos aux = list.get(0);
                 //Metodo probisorio para modificar
-                UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
-                
-//Creamos nuevamente la ventana emergente para mostrar los datos
+                ProductosAgregarBaseDatos.modificarPrueba(ps.buscarProductoPorID(aux.getId()));
+                //Creamos nuevamente la ventana emergente para mostrar los datos
                 DefaultOption option = new DefaultOption() {
                     @Override
                     public boolean closeWhenClickOutside() {
@@ -255,9 +254,9 @@ public class Producto_Form extends Form {
                     }
                 };
                 String actions[] = new String[]{"Cancelar", "Modificar"};
-                GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
+                GlassPanePopup.showPopup(new SimplePopupBorder(ProductosAgregarBaseDatos, "Modificar producto", actions, (pc, i) -> {
                     if (i == 1) {
-                        cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
+//                        cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
                         MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
                         loadData();
                         pc.closePopup();
@@ -266,16 +265,17 @@ public class Producto_Form extends Form {
                     }
                 }), option);
             } else {
-                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un cliente a la vez", MessageAlerts.MessageType.DEFAULT);
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un producto a la vez", MessageAlerts.MessageType.DEFAULT);
             }
         } else {
-            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un producto para su modificacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     //JButton para eliminar el produto de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        List<Cliente> list = Seleccionarusuario();
+        List<Productos> list = Seleccionarusuario();
         ClienteServices cs = new ClienteServices();
+        ProductoServices ps = new ProductoServices();
         if (!list.isEmpty()) {
             DefaultOption option = new DefaultOption() {
                 @Override
@@ -284,14 +284,14 @@ public class Producto_Form extends Form {
                 }
             };
             String actions[] = new String[]{"Cancelar", "Eliminar"};
-            JLabel label = new JLabel("Estas seguro que deseas eliminar de forma permanente a estos clientes: " + list);
+            JLabel label = new JLabel("Estas seguro que deseas eliminar de forma permanente a estos productos: " + list);
             label.setBorder(new EmptyBorder(0, 25, 0, 25));
             GlassPanePopup.showPopup(new SimplePopupBorder(label, "Confirmar eliminacion", actions, (pc, i) -> {
                 if (i == 1) {
-                    for (Cliente aux : list) {
-                        cs.borrarCliente(aux);
+                    for (Productos aux : list) {
+                        ps.eliminarProducto(aux);
                     }
-                    MessageAlerts.getInstance().showMessage("Se elimino correctamente", "El cliente fue eliminado correctamente de la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    MessageAlerts.getInstance().showMessage("Se elimino correctamente", "El producto fue eliminado correctamente de la base de datos", MessageAlerts.MessageType.SUCCESS);
                     loadData();
                     pc.closePopup();
                 } else {
@@ -299,13 +299,13 @@ public class Producto_Form extends Form {
                 }
             }), option);
         } else {
-            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su eliminacion", MessageAlerts.MessageType.WARNING);
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un producto para su eliminacion", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     //JButton para acceder al historial del producto
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         HistorialCliente historialcliente = new HistorialCliente();
-        List<Cliente> list = Seleccionarusuario();
+        List<Productos> list = Seleccionarusuario();
         if (!list.isEmpty()) {
             if (list.size() == 1) {
                 //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para ver su historial
@@ -338,18 +338,18 @@ public class Producto_Form extends Form {
     }//GEN-LAST:event_jTextFieldKeyReleased
 
     //Esta es la logica para que se aplique cuando se selecciona un producto o varios o ninguno.
-    private List<Cliente> Seleccionarusuario() {
+    private List<Productos> Seleccionarusuario() {
         try {
-            List<Cliente> list = new ArrayList<>();
+            List<Productos> list = new ArrayList<>();
             for (int i = 0; i < jTable.getRowCount(); i++) {
                 if ((boolean) jTable.getValueAt(i, 0)) {
-                    Cliente data = (Cliente) jTable.getValueAt(i, 2);
+                    Productos data = (Productos) jTable.getValueAt(i, 2);
                     list.add(data);
                 }
             }
             return list;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error lista");
+            JOptionPane.showMessageDialog(this, "Error en el metodo Seleccionarusuario() de la clase Producto_Form");
         }
         return null;
     }
@@ -364,7 +364,7 @@ public class Producto_Form extends Form {
             }
             model.setRowCount(0);
             List<Productos> list = ps.listaProductos();
-            for (Productos p: list) {
+            for (Productos p : list) {
                 model.addRow(p.toTableRow(jTable.getRowCount() + 1));
             }
         } catch (Exception e) {
