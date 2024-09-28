@@ -4,6 +4,7 @@
  */
 package com.raven.theme;
 
+import com.raven.util.SuperEllipse2D;
 import entidades.ModelProfile;
 import entidades.Productos;
 import java.awt.Font;
@@ -33,9 +34,9 @@ public class TableCellProfile extends javax.swing.JPanel {
         pictureBox.setPictureBoxRender(new DefaultPictureBoxRender() {
             @Override
             public Shape render(Rectangle rec) {
-                return super.render(rec); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+                return new SuperEllipse2D(rec.x, rec.y, rec.width, rec.height, 3f).getShape();
             }
-            
+
         });
     }
 

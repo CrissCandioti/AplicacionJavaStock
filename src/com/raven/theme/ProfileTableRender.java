@@ -24,6 +24,7 @@ public class ProfileTableRender implements TableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component com = oldCellRender.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        //revisar esta parte porque el codigo se esta rompiendo cuando se busca el producto
         Productos producto = (Productos) value; // Cast the value to Productos
         TableCellProfile cell = new TableCellProfile(producto, com.getFont());
         cell.setBackground(com.getBackground());
