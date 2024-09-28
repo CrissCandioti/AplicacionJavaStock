@@ -347,7 +347,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
 //Jbutton para cargar la imagen que selecciona el ususario
     private void jButtonAgregarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarImagenActionPerformed
         JnaFileChooser ch = new JnaFileChooser();
-        ch.addFilter("Image", "png", "jpg");
+        ch.addFilter("Image", "png", "jpg","jpeg");
         boolean act = ch.showOpenDialog(SwingUtilities.getWindowAncestor(this));
         if (act) {
             File file = ch.getSelectedFile();
