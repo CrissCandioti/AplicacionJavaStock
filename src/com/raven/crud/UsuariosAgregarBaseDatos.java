@@ -242,6 +242,7 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
         }
     }
 
+//Metodo que retorna al cliente modificado para ser modificado en la base de datos
     public Cliente retornarCliente() {
         try {
             Cliente aux = new Cliente();
@@ -260,7 +261,8 @@ public class UsuariosAgregarBaseDatos extends javax.swing.JPanel {
         }
         return null;
     }
-
+    
+//Metodo para retornar a los clientes para ser guardado en la base de datos
     public Cliente retornarCLienteAgregar() {
         try {
             String nombre = jTextFieldNombre.getText();

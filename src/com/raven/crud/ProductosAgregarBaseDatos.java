@@ -22,7 +22,6 @@ import java.util.Date;
 import javaswingdev.picturebox.DefaultPictureBoxRender;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import jnafilechooser.api.JnaFileChooser;
 import net.coobird.thumbnailator.Thumbnails;
@@ -397,14 +396,6 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         return null;
     }
 
-    public byte[] profile() {
-        try {
-            return getByteImage(profile.getPath());
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
     //Metodo para cargar los datos en el comboBox
     public void loadData() {
         try {
@@ -473,6 +464,17 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             System.out.println("Error en el metodo modificarPrueba de la clase ProductosAgregarBaseDatos");
         }
     }
+
+    //Metodo para retornar el producto modificado
+    public Productos retornarProductoModificado() {
+        try {
+            Productos aux = new Productos();
+        } catch (Exception e) {
+            System.out.println("Error en el metodo retornarProductoModificado() de la clase ProductosAgregarBaseDatos");
+        }
+        return null;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private raven.datetime.component.date.DatePicker datePicker;
     private javax.swing.JButton jButtonAgregarImagen;
