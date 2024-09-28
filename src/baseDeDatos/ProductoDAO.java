@@ -40,4 +40,27 @@ public final class ProductoDAO extends DAO<Productos> {
         return null;
     }
 
+    public Productos buscarProductoPorID(int id) {
+        try {
+            conectar();
+            return em.find(Productos.class, id);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo buscarProductoPorID de la clase ProductoDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
+
+    public List<Productos> barraBusquedaProductos(String busqueda) {
+        try {
+            conectar();
+            return (List<Productos>) em.createQuery("Select f From Productos f Where f.nombre LIKE :busqueda").setParameter("busqueda", "%" + busqueda + "%").getResultList();
+        } catch (Exception e) {
+            System.out.println("Error en el metodo barraBusquedaProductos de la clase ProductosDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
 }

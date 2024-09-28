@@ -44,13 +44,33 @@ public class ProductoServices {
             System.out.println("Error en el metodo eliminarProducto() de la clase ProductoServices");
         }
     }
-    
-    public List<Productos> listaProductos(){
+
+    public List<Productos> listaProductos() {
         try {
             ProductoDAO dao = new ProductoDAO();
             return dao.listaProductos();
         } catch (Exception e) {
             System.out.println("Error en el metodo listaProductos() de la clase productosSerivces");
+        }
+        return null;
+    }
+
+    public List<Productos> barraBusquedaProductos(String busqueda) {
+        try {
+            ProductoDAO dao = new ProductoDAO();
+            return dao.barraBusquedaProductos(busqueda);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo barraBusquedaProductos de la clase ProductoServices");
+        }
+        return null;
+    }
+
+    public Productos buscarProductoPorID(int id) {
+        try {
+            ProductoDAO dao = new ProductoDAO();
+            return dao.buscarProductoPorID(id);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo buscarProductoPorID de la clase ProductoServices");
         }
         return null;
     }

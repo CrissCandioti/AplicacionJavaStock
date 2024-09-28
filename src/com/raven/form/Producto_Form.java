@@ -237,16 +237,17 @@ public class Producto_Form extends Form {
     }//GEN-LAST:event_jButton3ActionPerformed
     //JButon para modificar un producto de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
-        ClienteServices cs = new ClienteServices();
-        List<Cliente> list = Seleccionarusuario();
+        ProductosAgregarBaseDatos ProductosAgregarBaseDatos = new ProductosAgregarBaseDatos();
+        ProductoServices ps = new ProductoServices();
+        List<Productos> list = ps.listaProductos();
         if (!list.isEmpty()) {
             if (list.size() == 1) {
                 //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
-                Cliente aux = list.get(0);
+                Productos aux = list.get(0);
                 //Metodo probisorio para modificar
                 UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
-                //Creamos nuevamente la ventana emergente para mostrar los datos
+                
+//Creamos nuevamente la ventana emergente para mostrar los datos
                 DefaultOption option = new DefaultOption() {
                     @Override
                     public boolean closeWhenClickOutside() {
