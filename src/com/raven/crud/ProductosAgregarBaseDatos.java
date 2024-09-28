@@ -457,6 +457,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             jFormattedTextFieldPrecioCosto.setText(String.valueOf(aux.getPrecioCosto()));
             jFormattedTextFieldPrecioVenta.setText(String.valueOf(aux.getPrecioventa()));
             jTextFieldStock.setText(String.valueOf(aux.getStock()));
+            //logica para setear el comboBox
             Proveedor index = ps.buscarProveedorPorId(aux.getId());
             ProveedorServices services = new ProveedorServices();
             for (Proveedor pos : services.listaProveedores()) {
@@ -465,8 +466,9 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                     jComboBoxProveedor.setSelectedItem(pos);
                 }
             }
-            System.out.println(index);
-
+            //Metodo para setear la imagen
+            profile = new ModelProfile(aux.getImagen());
+            pictureBox.setImage(profile.getIcon());
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarPrueba de la clase ProductosAgregarBaseDatos");
         }
