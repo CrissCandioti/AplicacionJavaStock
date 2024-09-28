@@ -432,6 +432,15 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             }
         }
     }
+
+    //Este metodo sirve para traer el producto seleccionado por el usuario y setear sus valores para mostrarlos en las celdas
+    public void modificarPrueba(Productos aux) {
+        try {
+            
+        } catch (Exception e) {
+            System.out.println("Error en el metodo modificarPrueba de la clase ProductosAgregarBaseDatos");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private raven.datetime.component.date.DatePicker datePicker;
     private javax.swing.JButton jButtonAgregarImagen;
