@@ -4,6 +4,10 @@
  */
 package com.raven.theme;
 
+import entidades.ModelProfile;
+import entidades.Productos;
+import java.awt.Font;
+
 /**
  *
  * @author criss
@@ -13,8 +17,16 @@ public class TableCellProfile extends javax.swing.JPanel {
     /**
      * Creates new form TableCellProfile
      */
-    public TableCellProfile() {
+    private ModelProfile profile;
+
+    public TableCellProfile(Productos data, Font font) {
         initComponents();
+        jLabelNombre.setFont(font);
+        jLabelNombre.setText(data.getNombre());
+        if (data.getImagen() != null) {
+            profile = new ModelProfile(data.getImagen());
+            pictureBox.setImage(profile.getIcon());
+        }
     }
 
     /**
