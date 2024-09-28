@@ -39,6 +39,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
      */
     public ProductosAgregarBaseDatos() {
         initComponents();
+        jTextFieldID.setVisible(false);
         datePicker.setCloseAfterSelected(true);
         datePicker.setEditor(jFormattedTextFieldFecha);
         pictureBox.setPictureBoxRender(new DefaultPictureBoxRender() {
@@ -92,6 +93,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jToolBar1 = new javax.swing.JToolBar();
         jButtonAgregarImagen = new javax.swing.JButton();
         jButtonBorrarImagen = new javax.swing.JButton();
+        jTextFieldID = new javax.swing.JTextField();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Nombre");
@@ -219,26 +221,34 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
 
         jPanelImagenProducto.add(pictureBox, java.awt.BorderLayout.CENTER);
 
+        jTextFieldID.setText("jTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(6, 6, 6)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldContenido)
                     .addComponent(jFormattedTextFieldFecha)
@@ -303,8 +313,12 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                     .addComponent(jPanelImagenProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(1, 1, 1)
+                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -351,17 +365,6 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         profile = null;
     }//GEN-LAST:event_jButtonBorrarImagenActionPerformed
 
-    //Metodo para seter los valores de los JTexfield para modificar
-    public void modificacionPrueba(Productos data) {
-        try {
-//            jTextFieldNombre.setText(data.getNombre());
-            //traemos la imagen que selecciono el usuario
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
-        }
-    }
-
     //Metodo para retornar el producto para ser guardado en la base de datos
     public Productos retornarParaGuardar() {
         try {
@@ -393,7 +396,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         }
         return null;
     }
-
+    
     public byte[] profile() {
         try {
             return getByteImage(profile.getPath());
@@ -436,6 +439,13 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     //Este metodo sirve para traer el producto seleccionado por el usuario y setear sus valores para mostrarlos en las celdas
     public void modificarPrueba(Productos aux) {
         try {
+            jTextFieldID.setText(String.valueOf(aux.getId()));
+            jTextFieldNombre.setText(aux.getNombre());
+            jTextFieldVariedad.setText(aux.getVariedad());
+            jTextFieldMarca.setText(aux.getMarca());
+            jTextFieldTipoProducto.setText(aux.getTipoProducto());
+            jTextAreadescipcion.setText(aux.getDescripcion());
+            jTextFieldContenido.setText(aux.getContenido());
             
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarPrueba de la clase ProductosAgregarBaseDatos");
@@ -465,6 +475,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreadescipcion;
     private javax.swing.JTextField jTextFieldContenido;
+    private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldMarca;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldStock;
