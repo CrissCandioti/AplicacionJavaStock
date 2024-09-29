@@ -5,24 +5,17 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
 import com.raven.crud.HistorialCliente;
 import com.raven.crud.ProductosAgregarBaseDatos;
-import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
-import com.raven.theme.ProfileTableRender;
+import com.raven.theme.ProfileTableRenderer;
 import entidades.Cliente;
 import entidades.Productos;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import net.coobird.thumbnailator.Thumbnails;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -74,7 +67,7 @@ public class Producto_Form extends Form {
         
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
-        jTable.getColumnModel().getColumn(3).setCellRenderer(new ProfileTableRender(jTable));
+        jTable.getColumnModel().getColumn(2).setCellRenderer(new ProfileTableRenderer(jTable));
         loadData();
     }
     
@@ -97,14 +90,14 @@ public class Producto_Form extends Form {
 
             },
             new String [] {
-                "Estado", "#", "Variedad", "Nombre", "Fecha ingreso", "Marca", "Tipo producto", "Contenido", "Stock", "Precio costo", "Precio venta", "Ganancias", "Porcentaje ganancia", "Proveedor", "Descripcion"
+                "Estado", "#", "Nombre", "Fecha ingreso", "Marca", "Tipo producto", "Contenido", "Stock", "Precio costo", "Precio venta", "Ganancias", "Porcentaje ganancia", "Proveedor", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -120,7 +113,7 @@ public class Producto_Form extends Form {
         if (jTable.getColumnModel().getColumnCount() > 0) {
             jTable.getColumnModel().getColumn(0).setMaxWidth(30);
             jTable.getColumnModel().getColumn(1).setMaxWidth(30);
-            jTable.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTable.getColumnModel().getColumn(2).setPreferredWidth(200);
         }
 
         jButton1.setText("Eliminar");

@@ -216,6 +216,6 @@ public class Productos {
     public Object[] toTableRow(int rowNum) {
         DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
         NumberFormat nf = new DecimalFormat("$ #,##0.##");
-        return new Object[]{false, rowNum, variedad, this, fechaIngreso == null ? "" : df.format(fechaIngreso), marca, tipoProducto, contenido, stock, nf.format(precioCosto), nf.format(precioventa), ganancias, porcentajeGanancias, proveedor, descripcion};
+        return new Object[]{false, rowNum, this, fechaIngreso == null ? "" : df.format(fechaIngreso), marca, tipoProducto, contenido, stock, nf.format(precioCosto), nf.format(precioventa), ganancias, porcentajeGanancias, proveedor, descripcion};
     }
 }
