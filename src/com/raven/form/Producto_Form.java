@@ -90,7 +90,7 @@ public class Producto_Form extends Form {
 
             },
             new String [] {
-                "Estado", "#", "Nombre", "Fecha ingreso", "Marca", "Tipo producto", "Contenido", "Stock", "Precio costo", "Precio venta", "Ganancias", "Porcentaje ganancia", "Proveedor", "Descripcion"
+                "Estado", "#", "Nombre y Variedad", "Fecha ingreso", "Marca", "Tipo producto", "Contenido", "Stock", "Precio costo", "Precio venta", "Ganancias", "Porcentaje ganancia", "Proveedor", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {

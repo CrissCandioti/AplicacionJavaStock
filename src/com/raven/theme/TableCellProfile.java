@@ -1,9 +1,13 @@
 package com.raven.theme;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.raven.util.SuperEllipse2D;
 import entidades.ModelProfile;
 import entidades.Productos;
 import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import javaswingdev.picturebox.DefaultPictureBoxRender;
 
 /**
  *
@@ -23,8 +27,15 @@ public class TableCellProfile extends javax.swing.JPanel {
                 + "foreground:$Label.disabledForeground");
         if (data.getImagen() != null) {
             profile = new ModelProfile(data.getImagen());
-            pic.setIcon(profile.getIcon());
+            pictureBox1.setImage(profile.getIcon());
         }
+        pictureBox1.setPictureBoxRender(new DefaultPictureBoxRender() {
+            @Override
+            public Shape render(Rectangle rec) {
+                return new SuperEllipse2D(rec.x, rec.y, rec.width, rec.height, 3f).getShape();
+            }
+
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -33,7 +44,7 @@ public class TableCellProfile extends javax.swing.JPanel {
 
         lbName = new javax.swing.JLabel();
         lbLocation = new javax.swing.JLabel();
-        pic = new javax.swing.JLabel();
+        pictureBox1 = new javaswingdev.picturebox.PictureBox();
 
         lbName.setText("Nombre");
 
@@ -44,25 +55,26 @@ public class TableCellProfile extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addContainerGap()
+                .addComponent(pictureBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbName)
                     .addComponent(lbLocation))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbLocation)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pictureBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(lbName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbLocation)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -71,6 +83,6 @@ public class TableCellProfile extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbLocation;
     private javax.swing.JLabel lbName;
-    private javax.swing.JLabel pic;
+    private javaswingdev.picturebox.PictureBox pictureBox1;
     // End of variables declaration//GEN-END:variables
 }
