@@ -24,12 +24,12 @@ import services.ClienteServices;
 import services.ProductoServices;
 
 public class Producto_Form extends Form {
-    
+
     public Producto_Form() {
         initComponents();
         init();
     }
-    
+
     private void init() {
         jTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "height:30;"
@@ -37,7 +37,7 @@ public class Producto_Form extends Form {
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background;"
                 + "font:bold;");
-        
+
         jTable.putClientProperty(FlatClientProperties.STYLE, ""
                 + "rowHeight:70;"
                 + "showHorizontalLines:true;"
@@ -45,32 +45,32 @@ public class Producto_Form extends Form {
                 + "cellFocusColor:$TableHeader.hoverBackground;"
                 + "selectionBackground:$TableHeader.hoverBackground;"
                 + "selectionForeground:$Table.foreground;");
-        
+
         jScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
-        
+
         jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
-        
+
         jTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
         jTextField.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
-        
+
         jTextField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;");
-        
+
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         jTable.getColumnModel().getColumn(2).setCellRenderer(new ProfileTableRenderer(jTable));
         loadData();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -252,8 +252,9 @@ public class Producto_Form extends Form {
                 String actions[] = new String[]{"Cancelar", "Modificar"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(ProductosAgregarBaseDatos, "Modificar producto", actions, (pc, i) -> {
                     if (i == 1) {
-                        ps.modificarProducto(ProductosAgregarBaseDatos.retornarProductoModificado().getId(), ProductosAgregarBaseDatos.retornarProductoModificado().getVariedad(), ProductosAgregarBaseDatos.retornarProductoModificado().getNombre(), ProductosAgregarBaseDatos.retornarProductoModificado().getFechaIngreso(), ProductosAgregarBaseDatos.retornarProductoModificado().getMarca(), ProductosAgregarBaseDatos.retornarProductoModificado().getTipoProducto(), ProductosAgregarBaseDatos.retornarProductoModificado().getContenido(), ProductosAgregarBaseDatos.retornarProductoModificado().getStock(), ProductosAgregarBaseDatos.retornarProductoModificado().getPrecioCosto(), ProductosAgregarBaseDatos.retornarProductoModificado().getPrecioventa(), ProductosAgregarBaseDatos.retornarProductoModificado().getGanancias(), ProductosAgregarBaseDatos.retornarProductoModificado().getPorcentajeGanancias(), ProductosAgregarBaseDatos.retornarProductoModificado().getProveedor(), ProductosAgregarBaseDatos.retornarProductoModificado().getDescripcion(), ProductosAgregarBaseDatos.retornarProductoModificado().getImagen());
-                        MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
+//                        ps.modificarProducto(ProductosAgregarBaseDatos.retornarProductoModificado().getId(), ProductosAgregarBaseDatos.retornarProductoModificado().getVariedad(), ProductosAgregarBaseDatos.retornarProductoModificado().getNombre(), ProductosAgregarBaseDatos.retornarProductoModificado().getFechaIngreso(), ProductosAgregarBaseDatos.retornarProductoModificado().getMarca(), ProductosAgregarBaseDatos.retornarProductoModificado().getTipoProducto(), ProductosAgregarBaseDatos.retornarProductoModificado().getContenido(), ProductosAgregarBaseDatos.retornarProductoModificado().getStock(), ProductosAgregarBaseDatos.retornarProductoModificado().getPrecioCosto(), ProductosAgregarBaseDatos.retornarProductoModificado().getPrecioventa(), ProductosAgregarBaseDatos.retornarProductoModificado().getGanancias(), ProductosAgregarBaseDatos.retornarProductoModificado().getPorcentajeGanancias(), ProductosAgregarBaseDatos.retornarProductoModificado().getProveedor(), ProductosAgregarBaseDatos.retornarProductoModificado().getDescripcion(), ProductosAgregarBaseDatos.retornarProductoModificado().getImagen());
+System.out.println(ProductosAgregarBaseDatos.retornarProductoModificado());
+                        MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El producto fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
                         loadData();
                         pc.closePopup();
                     } else {
