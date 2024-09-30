@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import jnafilechooser.api.JnaFileChooser;
 import net.coobird.thumbnailator.Thumbnails;
+import services.ProductoServices;
 import services.ProveedorServices;
 
 /**
@@ -449,7 +450,9 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     //Metodo para retornar el producto modificado
     public Productos retornarProductoModificado() {
         try {
+            ProductoServices ps = new ProductoServices();
             Productos aux = new Productos();
+            int ids = Integer.parseInt(jTextFieldID.getText());
             aux.setId(Integer.parseInt(jTextFieldID.getText()));
             aux.setVariedad(jTextFieldVariedad.getText());
             aux.setNombre(jTextFieldNombre.getText());
@@ -465,13 +468,20 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             aux.setTipoProducto(jTextFieldTipoProducto.getText());
             aux.setContenido(jTextFieldContenido.getText());
             aux.setStock(Integer.parseInt(jTextFieldStock.getText()));
-            aux.setPrecioCosto(Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString()));
-            aux.setPrecioventa(Double.parseDouble(jFormattedTextFieldPrecioVenta.getValue().toString()));
-            aux.setGanancias(Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString()));
-            aux.setPorcentajeGanancias(Double.parseDouble(jFormattedTextFieldPrecioVenta.getValue().toString()));
+            //Problemas con los double verificar y correguir
+            aux.setPrecioCosto(2);
+            aux.setPrecioventa(2);
+            aux.setGanancias(2);
+            aux.setPorcentajeGanancias(2);
             //Se trae la imagen
-            byte[] imagen = getByteImage(profile.getPath());
-            aux.setImagen(imagen);
+            byte[] imagen = null;
+            if (profile.getPath() == null) {
+                imagen = ps.buscarProductoPorID(ids).getImagen();
+                aux.setImagen(imagen);
+            } else {
+                imagen = getByteImage(profile.getPath());
+                aux.setImagen(imagen);
+            }
             //Para el proveedor
             Proveedor positions = (Proveedor) jComboBoxProveedor.getSelectedItem();
             aux.setProveedor(positions);
