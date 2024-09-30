@@ -347,7 +347,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
 //Jbutton para cargar la imagen que selecciona el ususario
     private void jButtonAgregarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarImagenActionPerformed
         JnaFileChooser ch = new JnaFileChooser();
-        ch.addFilter("Image", "png", "jpg","jpeg");
+        ch.addFilter("Image", "png", "jpg", "jpeg");
         boolean act = ch.showOpenDialog(SwingUtilities.getWindowAncestor(this));
         if (act) {
             File file = ch.getSelectedFile();
@@ -405,25 +405,6 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             System.out.println("Error en el metodo loadData() de la clase productoAgregarBaseDeDatos");
-        }
-    }
-
-    //Metodo creado para convertir en byte la imagen seleccionada por el usuario
-    private byte[] getByteImage(File file) throws IOException {
-        BufferedImage image = Thumbnails.of(file)
-                .width(500)
-                .outputQuality(0.7f)
-                .asBufferedImage();
-        ByteArrayOutputStream out = null;
-        try {
-            out = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", out);
-            byte[] data = out.toByteArray();
-            return data;
-        } finally {
-            if (out != null) {
-                out.close();
-            }
         }
     }
 
@@ -500,6 +481,25 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             System.out.println("Error en el metodo retornarProductoModificado() de la clase ProductosAgregarBaseDatos");
         }
         return null;
+    }
+
+    //Metodo creado para convertir en byte la imagen seleccionada por el usuario
+    private byte[] getByteImage(File file) throws IOException {
+        BufferedImage image = Thumbnails.of(file)
+                .width(500)
+                .outputQuality(0.7f)
+                .asBufferedImage();
+        ByteArrayOutputStream out = null;
+        try {
+            out = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", out);
+            byte[] data = out.toByteArray();
+            return data;
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
