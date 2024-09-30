@@ -376,18 +376,18 @@ public class Producto_Form extends Form {
     //Metodo la cual busca el prodcuto en el jTextField
     public void search(String search) {
         try {
-            ClienteServices cs = new ClienteServices();
+            ProductoServices ps = new ProductoServices();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
             model.setRowCount(0);
-            List<Cliente> list = cs.busquedaCliente(search);
-            for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
+            List<Productos> list = ps.barraBusquedaProductos(search);
+            for (Productos p : list) {
+                model.addRow(p.toTableRow(jTable.getRowCount() + 1));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
+            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase productos_Form");
         }
     }
 
