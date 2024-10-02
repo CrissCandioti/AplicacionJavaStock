@@ -4,8 +4,7 @@
  */
 package aplicacionjavastock;
 
-import baseDeDatos.ClienteDAO;
-import entidades.Cliente;
+import baseDeDatos.ProductoDAO;
 
 /**
  *
@@ -18,9 +17,8 @@ public class AplicacionJavaStock {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-                Cliente c = new Cliente("s", "S", 0, "S", "S", "D", "S", "S");
-        ClienteDAO dao = new ClienteDAO();
-        dao.persistirEntidad(c);
+        ProductoDAO dao = new ProductoDAO();
+        System.out.println(dao.listaDeProductosDeXProveedor(1));
     }
-    
+
 }

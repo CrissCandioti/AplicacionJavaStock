@@ -67,6 +67,7 @@ public final class ProductoDAO extends DAO<Productos> {
     public List<Productos> listaDeProductosDeXProveedor(int id) {
         try {
             conectar();
+            return (List<Productos>) em.createQuery("SELECT p FROM Productos p WHERE p.proveedor.id = :proveedorId").setParameter("proveedorId", id).getResultList();
         } catch (Exception e) {
             System.out.println("Error en el metodo listaDeProductosDeXProveedor() de la clase ProductoDAO");
         } finally {
