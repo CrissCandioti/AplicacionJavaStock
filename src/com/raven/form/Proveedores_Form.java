@@ -369,7 +369,8 @@ public class Proveedores_Form extends Form {
             model.setRowCount(0);
             List<Proveedor> list = ps.listaProveedores();
             for (Proveedor p : list) {
-                model.addRow(p.toTableRow(jTable.getRowCount() + 1));
+//                model.addRow(p.toTableRow(jTable.getRowCount() + 1));
+                model.addRow(p.toTableRow(p.getId()));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase proveedor_Form");

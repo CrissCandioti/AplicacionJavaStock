@@ -370,7 +370,8 @@ public class Usuarios_Form extends Form {
             model.setRowCount(0);
             List<Cliente> list = cs.listaCliente();
             for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
+//                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
+                model.addRow(c.toTableRow(c.getId()));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");

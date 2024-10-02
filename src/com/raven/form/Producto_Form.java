@@ -8,7 +8,6 @@ import com.raven.crud.ProductosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import com.raven.theme.ProfileTableRenderer;
-import entidades.Cliente;
 import entidades.Productos;
 import java.util.ArrayList;
 import java.util.List;
@@ -372,7 +371,8 @@ public class Producto_Form extends Form {
             model.setRowCount(0);
             List<Productos> list = ps.listaProductos();
             for (Productos p : list) {
-                model.addRow(p.toTableRow(jTable.getRowCount() + 1));
+//                model.addRow(p.toTableRow(jTable.getRowCount() + 1));
+                model.addRow(p.toTableRow(p.getId()));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase producto_Form");
