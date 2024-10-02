@@ -7,6 +7,7 @@ package services;
 import baseDeDatos.ClienteDAO;
 import entidades.Cliente;
 import java.util.List;
+import raven.alerts.MessageAlerts;
 
 /**
  *
@@ -16,8 +17,12 @@ public class ClienteServices {
 
     public void persistirCliente(String nombre, String apellido, int documento, String email, String whatsapp, String localidad, String direccion, String nota) {
         try {
-            Cliente c = new Cliente(nombre, apellido, documento, email, whatsapp, localidad, direccion, nota);
             ClienteDAO dao = new ClienteDAO();
+            if (nombre.isEmpty()) {
+                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del nombre vacio", MessageAlerts.MessageType.ERROR);
+                return;
+            }
+            Cliente c = new Cliente(nombre, apellido, documento, email, whatsapp, localidad, direccion, nota);
             dao.persistirEntidad(c);
             System.out.println("Se agrego con exito el cliente");
         } catch (Exception e) {
