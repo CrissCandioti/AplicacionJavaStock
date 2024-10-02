@@ -32,9 +32,9 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 1) {
                     mainBody.displayForm(usuariosForm, "Clientes");
                 } else if (index == 3) {
-                    mainBody.displayForm(productosForm, "Proveedores");
+                    mainBody.displayForm(productosForm, "Productos");
                 } else if (index == 2) {
-                    mainBody.displayForm(proveedoresForm, "Productos");
+                    mainBody.displayForm(proveedoresForm, "Proveedores");
                 }
             }
         });

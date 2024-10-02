@@ -6,6 +6,7 @@ package com.raven.crud;
 
 import entidades.Proveedor;
 import javax.swing.JOptionPane;
+import services.ProductoServices;
 
 /**
  *
@@ -34,7 +35,9 @@ public class ProductosAsociados extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabelVerCodigo = new javax.swing.JLabel();
         jLabelVerNombre = new javax.swing.JLabel();
-        jLabelVerNotas = new javax.swing.JLabel();
+        jLabelVerProductos = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelNotas = new javax.swing.JLabel();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Codigo");
@@ -43,13 +46,17 @@ public class ProductosAsociados extends javax.swing.JPanel {
         jLabel2.setText("Nombre");
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel8.setText("Notas");
+        jLabel8.setText("Productos");
 
         jLabelVerCodigo.setText("Ver Codigo");
 
         jLabelVerNombre.setText("Ver Nombre");
 
-        jLabelVerNotas.setText("Ver Notas");
+        jLabelVerProductos.setText("Ver Productos");
+
+        jLabel3.setText("Notas");
+
+        jLabelNotas.setText("Ver Notas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,15 +64,18 @@ public class ProductosAsociados extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelVerCodigo)
                     .addComponent(jLabelVerNombre)
-                    .addComponent(jLabelVerNotas))
+                    .addComponent(jLabelVerProductos)
+                    .addComponent(jLabelNotas))
                 .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
@@ -82,7 +92,11 @@ public class ProductosAsociados extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabelVerNotas))
+                    .addComponent(jLabelVerProductos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabelNotas))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -90,9 +104,11 @@ public class ProductosAsociados extends javax.swing.JPanel {
     //Metodo para setear los valores del Proveedor en los JLabel
     public void modificacionPrueba(Proveedor aux) {
         try {
+            ProductoServices ps = new ProductoServices();
             jLabelVerCodigo.setText(String.valueOf(aux.getId()));
             jLabelVerNombre.setText(aux.getNombre());
-            jLabelVerNotas.setText(aux.getNotas());
+            jLabelVerProductos.setText(ps.listaDeProductosDeXProveedor(aux.getId()).toString());
+            jLabelNotas.setText(aux.getNotas());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error -Clase: ProveedorAgregarBaseDatos - metodo: modificacionPrueba()");
         }
@@ -100,10 +116,12 @@ public class ProductosAsociados extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelNotas;
     private javax.swing.JLabel jLabelVerCodigo;
     private javax.swing.JLabel jLabelVerNombre;
-    private javax.swing.JLabel jLabelVerNotas;
+    private javax.swing.JLabel jLabelVerProductos;
     // End of variables declaration//GEN-END:variables
     public void seteoValores(Object data) {
     }
