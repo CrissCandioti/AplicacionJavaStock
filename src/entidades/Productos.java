@@ -39,14 +39,14 @@ public class Productos {
     private double precioventa;
     private double ganancias;
     private double porcentajeGanancias;
+    @Lob
+    private byte[] imagen;
     @ManyToOne
     @JoinTable(
             name = "productos_proveedor", // Nombre de la tabla de relación
             joinColumns = @JoinColumn(name = "productos_id"), // Columna de productos en la tabla de relación
             inverseJoinColumns = @JoinColumn(name = "proveedor_id") // Columna de proveedor en la tabla de relación
     )
-    @Lob
-    private byte[] imagen;
     private Proveedor proveedor;
     private String descripcion;
 
