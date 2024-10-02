@@ -7,6 +7,7 @@ package services;
 import baseDeDatos.ProveedorDAO;
 import entidades.Proveedor;
 import java.util.List;
+import raven.alerts.MessageAlerts;
 
 /**
  *
@@ -17,8 +18,12 @@ public class ProveedorServices {
     public void persistirProveedor(String nombre, String notas) {
         try {
             ProveedorDAO dao = new ProveedorDAO();
+            if (nombre.isEmpty()) {
+                MessageAlerts.getInstance().showMessage("Se produjo un error", "El Proveedor no puede tener la celda del nombre vacia", MessageAlerts.MessageType.ERROR);
+                return;
+            }
             dao.persistirEntidad(new Proveedor(nombre, notas));
-            System.out.println("Se agrego correctamente el proveedor a la base de datos");
+            MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El Proveedor fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             System.out.println("Error en el metodo persistirProveedor() en la clase proveedorService");
         }
@@ -27,8 +32,12 @@ public class ProveedorServices {
     public void modificarProveedor(int id, String nombre, String notas) {
         try {
             ProveedorDAO dao = new ProveedorDAO();
+            if (nombre.isEmpty()) {
+                MessageAlerts.getInstance().showMessage("Se produjo un error", "El Proveedor no puede tener la celda del nombre vacia", MessageAlerts.MessageType.ERROR);
+                return;
+            }
             dao.actualizarEntidad(new Proveedor(id, nombre, notas));
-            System.out.println("Se modifico correctamente el proveedor a la base de datos");
+            MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El proveedore fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarProveedor() en la clase proveedorService");
         }

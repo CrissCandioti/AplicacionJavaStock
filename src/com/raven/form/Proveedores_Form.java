@@ -220,7 +220,6 @@ public class Proveedores_Form extends Form {
             GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Proveedor", actions, (pc, i) -> {
                 if (i == 1) {
                     ps.persistirProveedor(agregar.retornarProveedorAgregar().getNombre(), agregar.retornarProveedorAgregar().getNotas());
-                    MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El Proveedor fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                     loadData();
                     pc.closePopup();
                 } else {
@@ -233,39 +232,42 @@ public class Proveedores_Form extends Form {
     }//GEN-LAST:event_jButton3ActionPerformed
     //JButon para modificar un provedor de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ProveedoresAgregarBaseDatos1 ProveedorAgregarBaseDatos = new ProveedoresAgregarBaseDatos1();
-        ClienteServices cs = new ClienteServices();
-        ProveedorServices ps = new ProveedorServices();
-        List<Proveedor> list = Seleccionarproveedor();
-        if (!list.isEmpty()) {
-            if (list.size() == 1) {
-                //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
-                Proveedor aux = list.get(0);
-                //Metodo probisorio para modificar
-                ProveedorAgregarBaseDatos.modificacionPrueba(ps.buscarProveedorPorId(aux.getId()));
-                //Creamos nuevamente la ventana emergente para mostrar los datos
-                DefaultOption option = new DefaultOption() {
-                    @Override
-                    public boolean closeWhenClickOutside() {
-                        return true;
-                    }
-                };
-                String actions[] = new String[]{"Cancelar", "Modificar"};
-                GlassPanePopup.showPopup(new SimplePopupBorder(ProveedorAgregarBaseDatos, "Modificar proveedor", actions, (pc, i) -> {
-                    if (i == 1) {
-                        ps.modificarProveedor(ProveedorAgregarBaseDatos.retornarProveedor().getId(), ProveedorAgregarBaseDatos.retornarProveedor().getNombre(), ProveedorAgregarBaseDatos.retornarProveedor().getNotas());
-                        MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El proveedore fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
-                        loadData();
-                        pc.closePopup();
-                    } else {
-                        pc.closePopup();
-                    }
-                }), option);
+        try {
+            ProveedoresAgregarBaseDatos1 ProveedorAgregarBaseDatos = new ProveedoresAgregarBaseDatos1();
+            ClienteServices cs = new ClienteServices();
+            ProveedorServices ps = new ProveedorServices();
+            List<Proveedor> list = Seleccionarproveedor();
+            if (!list.isEmpty()) {
+                if (list.size() == 1) {
+                    //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
+                    Proveedor aux = list.get(0);
+                    //Metodo probisorio para modificar
+                    ProveedorAgregarBaseDatos.modificacionPrueba(ps.buscarProveedorPorId(aux.getId()));
+                    //Creamos nuevamente la ventana emergente para mostrar los datos
+                    DefaultOption option = new DefaultOption() {
+                        @Override
+                        public boolean closeWhenClickOutside() {
+                            return true;
+                        }
+                    };
+                    String actions[] = new String[]{"Cancelar", "Modificar"};
+                    GlassPanePopup.showPopup(new SimplePopupBorder(ProveedorAgregarBaseDatos, "Modificar proveedor", actions, (pc, i) -> {
+                        if (i == 1) {
+                            ps.modificarProveedor(ProveedorAgregarBaseDatos.retornarProveedor().getId(), ProveedorAgregarBaseDatos.retornarProveedor().getNombre(), ProveedorAgregarBaseDatos.retornarProveedor().getNotas());
+                            loadData();
+                            pc.closePopup();
+                        } else {
+                            pc.closePopup();
+                        }
+                    }), option);
+                } else {
+                    MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un proveedor a la vez", MessageAlerts.MessageType.DEFAULT);
+                }
             } else {
-                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un proveedor a la vez", MessageAlerts.MessageType.DEFAULT);
+                MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
             }
-        } else {
-            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     //JButton para eliminar el cliente de la base de datos
