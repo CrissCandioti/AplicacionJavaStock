@@ -229,7 +229,7 @@ public class Usuarios_Form extends Form {
                 }
             }), option);
         } catch (Exception e) {
-            System.out.println(e.fillInStackTrace());
+            System.out.println("Error en el JButton de guardar cliente de la clase Usuarios_Form");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     //JButon para modificar un cliente de la base de datos 
