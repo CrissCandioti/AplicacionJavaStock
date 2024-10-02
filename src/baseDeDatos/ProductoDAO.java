@@ -63,4 +63,15 @@ public final class ProductoDAO extends DAO<Productos> {
         }
         return null;
     }
+
+    public List<Productos> listaDeProductosDeXProveedor(int id) {
+        try {
+            conectar();
+        } catch (Exception e) {
+            System.out.println("Error en el metodo listaDeProductosDeXProveedor() de la clase ProductoDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
 }
