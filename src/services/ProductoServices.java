@@ -5,7 +5,6 @@
 package services;
 
 import baseDeDatos.ProductoDAO;
-import entidades.ModelProfile;
 import entidades.Productos;
 import entidades.Proveedor;
 import java.util.Date;
@@ -74,6 +73,16 @@ public class ProductoServices {
             return dao.buscarProductoPorID(id);
         } catch (Exception e) {
             System.out.println("Error en el metodo buscarProductoPorID de la clase ProductoServices");
+        }
+        return null;
+    }
+    
+    public List<Productos> listaDeProductosDeXProveedor(int id) {
+        try {
+            ProductoDAO dao = new ProductoDAO();
+            return dao.listaDeProductosDeXProveedor(id);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo listaDeProductosDeXProveedor() de la clase ProductoServices");
         }
         return null;
     }

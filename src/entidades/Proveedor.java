@@ -4,10 +4,13 @@
  */
 package entidades;
 
+import baseDeDatos.ProductoDAO;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import services.ProductoServices;
 
 /**
  *
@@ -68,7 +71,8 @@ public class Proveedor {
     //No olvidar en este metodo en la frase "Aqui van los productos", vamos a agregar una logica que traiga los productos por medio del id
     public Object[] toTableRow(int rowNum) {
         try {
-            return new Object[]{false, rowNum, this, "Aqui van los productos", notas};
+            ProductoServices ps = new ProductoServices();
+            return new Object[]{false, rowNum, this, ps.listaDeProductosDeXProveedor(id) , notas};
         } catch (Exception e) {
             System.out.println("Error metodo toTableRow de la clase proveedor");
         }

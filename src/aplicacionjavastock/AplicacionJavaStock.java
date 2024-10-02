@@ -4,8 +4,6 @@
  */
 package aplicacionjavastock;
 
-import baseDeDatos.ProductoDAO;
-
 /**
  *
  * @author criss
@@ -17,8 +15,6 @@ public class AplicacionJavaStock {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ProductoDAO dao = new ProductoDAO();
-        System.out.println(dao.listaDeProductosDeXProveedor(1));
     }
 
 }
