@@ -7,7 +7,6 @@ package services;
 import baseDeDatos.ClienteDAO;
 import entidades.Cliente;
 import java.util.List;
-import raven.alerts.MessageAlerts;
 
 /**
  *
@@ -20,7 +19,6 @@ public class ClienteServices {
             ClienteDAO dao = new ClienteDAO();
             Cliente c = new Cliente(nombre, apellido, documento, email, whatsapp, localidad, direccion, nota);
             dao.persistirEntidad(c);
-            MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             System.out.println("Error en el metodo persistirCLiente() de la clase ClienteServices");
         }

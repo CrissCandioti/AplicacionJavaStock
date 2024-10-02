@@ -221,6 +221,7 @@ public class Usuarios_Form extends Form {
                         MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del documento vacia o con letras", MessageAlerts.MessageType.ERROR);
                     } else {
                         cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
+                        MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
                         loadData();
                         pc.closePopup();
                     }
@@ -234,38 +235,42 @@ public class Usuarios_Form extends Form {
     }//GEN-LAST:event_jButton3ActionPerformed
     //JButon para modificar un cliente de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
-        ClienteServices cs = new ClienteServices();
-        List<Cliente> list = Seleccionarusuario();
-        if (!list.isEmpty()) {
-            if (list.size() == 1) {
-                //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
-                Cliente aux = list.get(0);
-                //Metodo probisorio para modificar
-                UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
-                //Creamos nuevamente la ventana emergente para mostrar los datos
-                DefaultOption option = new DefaultOption() {
-                    @Override
-                    public boolean closeWhenClickOutside() {
-                        return true;
-                    }
-                };
-                String actions[] = new String[]{"Cancelar", "Modificar"};
-                GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
-                    if (i == 1) {
-                        cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
-                        MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
-                        loadData();
-                        pc.closePopup();
-                    } else {
-                        pc.closePopup();
-                    }
-                }), option);
+        try {
+            UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
+            ClienteServices cs = new ClienteServices();
+            List<Cliente> list = Seleccionarusuario();
+            if (!list.isEmpty()) {
+                if (list.size() == 1) {
+                    //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
+                    Cliente aux = list.get(0);
+                    //Metodo probisorio para modificar
+                    UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
+                    //Creamos nuevamente la ventana emergente para mostrar los datos
+                    DefaultOption option = new DefaultOption() {
+                        @Override
+                        public boolean closeWhenClickOutside() {
+                            return true;
+                        }
+                    };
+                    String actions[] = new String[]{"Cancelar", "Modificar"};
+                    GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
+                        if (i == 1) {
+                            cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
+                            MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
+                            loadData();
+                            pc.closePopup();
+                        } else {
+                            pc.closePopup();
+                        }
+                    }), option);
+                } else {
+                    MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un cliente a la vez", MessageAlerts.MessageType.DEFAULT);
+                }
             } else {
-                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un cliente a la vez", MessageAlerts.MessageType.DEFAULT);
+                MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
             }
-        } else {
-            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     //JButton para eliminar el cliente de la base de datos
