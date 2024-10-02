@@ -18,34 +18,6 @@ public class ClienteServices {
     public void persistirCliente(String nombre, String apellido, int documento, String email, String whatsapp, String localidad, String direccion, String nota) {
         try {
             ClienteDAO dao = new ClienteDAO();
-            if (nombre.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del nombre vacio", MessageAlerts.MessageType.ERROR);
-                return;
-            }
-            if (apellido.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del apellido vacio", MessageAlerts.MessageType.ERROR);
-                return;
-            }
-            if (email.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del email vacia", MessageAlerts.MessageType.ERROR);
-                return;
-            }
-            if (whatsapp.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del Whats app vacia", MessageAlerts.MessageType.ERROR);
-                return;
-            }
-            if (localidad.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda de la localidad vacia", MessageAlerts.MessageType.ERROR);
-                return;
-            }
-            if (direccion.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda de la direccion vacia", MessageAlerts.MessageType.ERROR);
-                return;
-            }
-            if (nota.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda de las notas vacia", MessageAlerts.MessageType.ERROR);
-                return;
-            }
             Cliente c = new Cliente(nombre, apellido, documento, email, whatsapp, localidad, direccion, nota);
             dao.persistirEntidad(c);
             MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
