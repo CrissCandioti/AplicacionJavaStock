@@ -255,10 +255,14 @@ public class Usuarios_Form extends Form {
                     String actions[] = new String[]{"Cancelar", "Modificar"};
                     GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
                         if (i == 1) {
-                            cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
-                            MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
-                            loadData();
-                            pc.closePopup();
+                            if (UsuariosAgregarBaseDatos.retornarCliente() == null) {
+                                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del documento vacia o con letras", MessageAlerts.MessageType.ERROR);
+                            } else {
+                                cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
+                                MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
+                                loadData();
+                                pc.closePopup();
+                            }
                         } else {
                             pc.closePopup();
                         }
