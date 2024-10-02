@@ -205,25 +205,32 @@ public class Usuarios_Form extends Form {
     //JButton para abrir una ventana y guardar un cliente a la base de datos
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
-        ClienteServices cs = new ClienteServices();
-        DefaultOption option = new DefaultOption() {
-            @Override
-            public boolean closeWhenClickOutside() {
-                return true;
-            }
-        };
-        String actions[] = new String[]{"Cancelar", "Guardar"};
-        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
-            if (i == 1) {
-                cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
-                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
-                loadData();
-                pc.closePopup();
-            } else {
-                pc.closePopup();
-            }
-        }), option);
+        try {
+            UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
+            ClienteServices cs = new ClienteServices();
+            DefaultOption option = new DefaultOption() {
+                @Override
+                public boolean closeWhenClickOutside() {
+                    return true;
+                }
+            };
+            String actions[] = new String[]{"Cancelar", "Guardar"};
+            GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
+                if (i == 1) {
+                    if (agregar.retornarCLienteAgregar() == null) {
+                        MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del documento vacia o con letras", MessageAlerts.MessageType.ERROR);
+                    } else {
+                        cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
+                        loadData();
+                        pc.closePopup();
+                    }
+                } else {
+                    pc.closePopup();
+                }
+            }), option);
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
     //JButon para modificar un cliente de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
