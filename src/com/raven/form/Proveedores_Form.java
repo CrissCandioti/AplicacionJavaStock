@@ -5,10 +5,8 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
 import com.raven.crud.ProductosAsociados;
 import com.raven.crud.ProveedoresAgregarBaseDatos1;
-import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
-import entidades.Cliente;
 import entidades.Proveedor;
 import java.util.ArrayList;
 import java.util.List;
@@ -209,25 +207,29 @@ public class Proveedores_Form extends Form {
     //JButton para abrir una ventana y guardar un proveedor a la base de datos
     @SuppressWarnings("empty-statement")
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ProveedoresAgregarBaseDatos1 agregar = new ProveedoresAgregarBaseDatos1();
-        ProveedorServices ps = new ProveedorServices();
-        DefaultOption option = new DefaultOption() {
-            @Override
-            public boolean closeWhenClickOutside() {
-                return true;
-            }
-        };
-        String actions[] = new String[]{"Cancelar", "Guardar"};
-        GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Proveedor", actions, (pc, i) -> {
-            if (i == 1) {
-                ps.persistirProveedor(agregar.retornarProveedorAgregar().getNombre(), agregar.retornarProveedorAgregar().getNotas());
-                MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El Proveedor fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
-                loadData();
-                pc.closePopup();
-            } else {
-                pc.closePopup();
-            }
-        }), option);
+        try {
+            ProveedoresAgregarBaseDatos1 agregar = new ProveedoresAgregarBaseDatos1();
+            ProveedorServices ps = new ProveedorServices();
+            DefaultOption option = new DefaultOption() {
+                @Override
+                public boolean closeWhenClickOutside() {
+                    return true;
+                }
+            };
+            String actions[] = new String[]{"Cancelar", "Guardar"};
+            GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar Proveedor", actions, (pc, i) -> {
+                if (i == 1) {
+                    ps.persistirProveedor(agregar.retornarProveedorAgregar().getNombre(), agregar.retornarProveedorAgregar().getNotas());
+                    MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El Proveedor fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    loadData();
+                    pc.closePopup();
+                } else {
+                    pc.closePopup();
+                }
+            }), option);
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
     //JButon para modificar un provedor de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
