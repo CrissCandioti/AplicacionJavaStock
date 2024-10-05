@@ -14,10 +14,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entidades.Cliente;
-import entidades.Proveedor;
 import java.io.File;
 import java.io.FileOutputStream;
-import javax.swing.JOptionPane;
 import raven.alerts.MessageAlerts;
 import services.ClienteServices;
 
