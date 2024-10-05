@@ -80,6 +80,7 @@ public class Usuarios_Form extends Form {
         jTextField = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel = new javax.swing.JLabel();
+        jButtonPDFTabla = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,6 +148,8 @@ public class Usuarios_Form extends Form {
 
         jLabel.setText("Ingrese el nombre del cliente");
 
+        jButtonPDFTabla.setText("PDF Tabla");
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -161,16 +164,21 @@ public class Usuarios_Form extends Form {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonPDFTabla))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))
                         .addGap(45, 45, 45))))
         );
         jPanelLayout.setVerticalGroup(
@@ -187,7 +195,9 @@ public class Usuarios_Form extends Form {
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                .addGap(10, 10, 10))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonPDFTabla)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -401,6 +411,7 @@ public class Usuarios_Form extends Form {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonPDFTabla;
     private javax.swing.JLabel jLabel;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;

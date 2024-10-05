@@ -87,7 +87,7 @@ public class ProductosAsociadosPDF {
             documento.close();
             MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF del proveedor se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error al crear el PDF" + e);
+            MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }
     }
 
@@ -145,7 +145,7 @@ public class ProductosAsociadosPDF {
             documento.close();
             MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error al crear el PDF" + e);
+            MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }
     }
 

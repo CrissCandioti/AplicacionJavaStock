@@ -66,9 +66,9 @@ public class ClientePDF {
             tabla.addCell("Codigo");
             tabla.addCell("Nombre");
             tabla.addCell("Apellido");
-            tabla.addCell("Documento");
+            tabla.addCell("N° Documento");
             tabla.addCell("Email");
-            tabla.addCell("WhatsApp");
+            tabla.addCell("N° WhatsApp");
             tabla.addCell("Localidad");
             tabla.addCell("Direccion");
             tabla.addCell("Notas");
