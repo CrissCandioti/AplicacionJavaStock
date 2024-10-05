@@ -122,7 +122,7 @@ public class ProductosAsociadosPDF {
 
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Angel Tienda Holistica y Esoterica © © \n\n");
+            parrafo.add("Angel Tienda Holistica y Esoterica © \n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Proveedores \n\n");
 
@@ -130,7 +130,7 @@ public class ProductosAsociadosPDF {
             documento.add(header);
             documento.add(parrafo);
 
-            PdfPTable tabla = new PdfPTable(6);
+            PdfPTable tabla = new PdfPTable(4);
             tabla.addCell("Codigo");
             tabla.addCell("Nombre");
             tabla.addCell("Productos");
@@ -142,8 +142,8 @@ public class ProductosAsociadosPDF {
                 tabla.addCell(aux.getNombre());
                 tabla.addCell(index);
                 tabla.addCell(aux.getNotas());
-                documento.add(tabla);
             }
+            documento.add(tabla);
             documento.close();
             MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
