@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import pdf.ProductosAsociadosPDF;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -22,12 +23,12 @@ import services.ClienteServices;
 import services.ProveedorServices;
 
 public class Proveedores_Form extends Form {
-
+    
     public Proveedores_Form() {
         initComponents();
         init();
     }
-
+    
     private void init() {
         jTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "height:30;"
@@ -35,7 +36,7 @@ public class Proveedores_Form extends Form {
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background;"
                 + "font:bold;");
-
+        
         jTable.putClientProperty(FlatClientProperties.STYLE, ""
                 + "rowHeight:30;"
                 + "showHorizontalLines:true;"
@@ -43,31 +44,31 @@ public class Proveedores_Form extends Form {
                 + "cellFocusColor:$TableHeader.hoverBackground;"
                 + "selectionBackground:$TableHeader.hoverBackground;"
                 + "selectionForeground:$Table.foreground;");
-
+        
         jScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
-
+        
         jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
-
+        
         jTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
         jTextField.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
-
+        
         jTextField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;");
-
+        
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         loadData();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -327,7 +328,8 @@ public class Proveedores_Form extends Form {
                 String actions[] = new String[]{"Cancelar", "Impirmir PDF"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(pa, "Productos asociados", actions, (pc, i) -> {
                     if (i == 1) {
-//Llamamos al metodo para imprimir el pdf
+                        ProductosAsociadosPDF pdf = new ProductosAsociadosPDF();
+                        pdf.pdfPorPaciente(aux.getId());
                         pc.closePopup();
                     } else {
                         pc.closePopup();

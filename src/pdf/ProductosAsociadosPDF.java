@@ -11,11 +11,11 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import entidades.Productos;
 import entidades.Proveedor;
 import java.io.File;
 import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
+import raven.alerts.MessageAlerts;
 import services.ProductoServices;
 import services.ProveedorServices;
 
@@ -83,7 +83,7 @@ public class ProductosAsociadosPDF {
             documento.add(texto);
 
             documento.close();
-            JOptionPane.showMessageDialog(null, "Se generó con éxito el Reporte del Proveedor");
+            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF del proveedor se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Se produjo un error al crear el PDF" + e);
         }
