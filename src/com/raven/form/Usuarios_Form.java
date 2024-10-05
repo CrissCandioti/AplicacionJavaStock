@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import pdf.ClientePDF;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -149,6 +150,11 @@ public class Usuarios_Form extends Form {
         jLabel.setText("Ingrese el nombre del cliente");
 
         jButtonPDFTabla.setText("PDF Tabla");
+        jButtonPDFTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPDFTablaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -351,6 +357,11 @@ public class Usuarios_Form extends Form {
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
+
+    private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFTablaActionPerformed
+        ClientePDF pdf = new ClientePDF();
+        pdf.pdfTablaProveedores();
+    }//GEN-LAST:event_jButtonPDFTablaActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
     private List<Cliente> Seleccionarusuario() {

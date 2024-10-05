@@ -75,7 +75,6 @@ public class ClientePDF {
                 tabla.addCell(String.valueOf(aux.getId()));
                 tabla.addCell(aux.getNombre());
                 tabla.addCell(aux.getApellido());
-                tabla.addCell(aux.getNotas());
                 tabla.addCell(String.valueOf(aux.getDocumento()));
                 tabla.addCell(aux.getEmail());
                 tabla.addCell(aux.getWhatsapp());
