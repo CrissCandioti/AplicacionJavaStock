@@ -7,6 +7,7 @@ package pdf;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
@@ -16,6 +17,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import entidades.Proveedor;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 import javax.swing.JOptionPane;
 import raven.alerts.MessageAlerts;
 import services.ProductoServices;
@@ -94,6 +96,10 @@ public class ProductosAsociadosPDF {
     public void pdfTablaProveedores() {
         try {
 
+            ProductoServices pros = new ProductoServices();
+            ProveedorServices ps = new ProveedorServices();
+            String index = null;
+
             int contador = 0;
             Document documento = new Document();
             //------------------------------------------------------------------------------------------------------
@@ -125,23 +131,19 @@ public class ProductosAsociadosPDF {
             documento.add(parrafo);
 
             PdfPTable tabla = new PdfPTable(6);
-            tabla.addCell("CODIGO");
-            tabla.addCell("Apellido");
+            tabla.addCell("Codigo");
             tabla.addCell("Nombre");
-            tabla.addCell("DNI");
-            tabla.addCell("Domicilio");
-            tabla.addCell("Telefono");
-            if (resultado.next()) {
-                do {
-                    tabla.addCell(resultado.getString(1));
-                    tabla.addCell(resultado.getString(2));
-                    tabla.addCell(resultado.getString(3));
-                    tabla.addCell(resultado.getString(4));
-                    tabla.addCell(resultado.getString(5));
-                    tabla.addCell(resultado.getString(6));
-                } while (resultado.next());
-                documento.add(tabla);
+            tabla.addCell("Productos");
+            tabla.addCell("Notas");
+
+            for (Proveedor aux : ps.listaProveedores()) {
+                index = pros.listaDeProductosDeXProveedor(aux.getId()).toString();
+                tabla.addCell(String.valueOf(aux.getId()));
+                tabla.addCell(aux.getNombre());
+                tabla.addCell(index);
+                tabla.addCell(aux.getNotas());
             }
+            documento.add(tabla);
             documento.close();
             MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
