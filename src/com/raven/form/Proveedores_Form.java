@@ -23,12 +23,12 @@ import services.ClienteServices;
 import services.ProveedorServices;
 
 public class Proveedores_Form extends Form {
-    
+
     public Proveedores_Form() {
         initComponents();
         init();
     }
-    
+
     private void init() {
         jTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "height:30;"
@@ -36,7 +36,7 @@ public class Proveedores_Form extends Form {
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background;"
                 + "font:bold;");
-        
+
         jTable.putClientProperty(FlatClientProperties.STYLE, ""
                 + "rowHeight:30;"
                 + "showHorizontalLines:true;"
@@ -44,31 +44,31 @@ public class Proveedores_Form extends Form {
                 + "cellFocusColor:$TableHeader.hoverBackground;"
                 + "selectionBackground:$TableHeader.hoverBackground;"
                 + "selectionForeground:$Table.foreground;");
-        
+
         jScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
-        
+
         jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
-        
+
         jTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
         jTextField.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
-        
+
         jTextField.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;");
-        
+
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         loadData();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -82,6 +82,7 @@ public class Proveedores_Form extends Form {
         jTextField = new javax.swing.JTextField();
         jLabel = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jButtonPDFTabla = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,6 +151,13 @@ public class Proveedores_Form extends Form {
             }
         });
 
+        jButtonPDFTabla.setText("PDF Tabla");
+        jButtonPDFTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPDFTablaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -164,16 +172,21 @@ public class Proveedores_Form extends Form {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonPDFTabla))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))
                         .addGap(45, 45, 45))))
         );
         jPanelLayout.setVerticalGroup(
@@ -190,7 +203,9 @@ public class Proveedores_Form extends Form {
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                .addGap(10, 10, 10))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonPDFTabla)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -308,6 +323,7 @@ public class Proveedores_Form extends Form {
     }//GEN-LAST:event_jTextFieldKeyReleased
     //JButton para ver con mas detalle los productos asociados
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ProductosAsociadosPDF pdf = new ProductosAsociadosPDF();
         ProductosAsociados pa = new ProductosAsociados();
         ClienteServices cs = new ClienteServices();
         ProveedorServices ps = new ProveedorServices();
@@ -328,7 +344,6 @@ public class Proveedores_Form extends Form {
                 String actions[] = new String[]{"Cancelar", "Impirmir PDF"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(pa, "Productos asociados", actions, (pc, i) -> {
                     if (i == 1) {
-                        ProductosAsociadosPDF pdf = new ProductosAsociadosPDF();
                         pdf.pdfPorPaciente(aux.getId());
                         pc.closePopup();
                     } else {
@@ -342,6 +357,11 @@ public class Proveedores_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un proveedor para mostrar la informacion solicitada", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFTablaActionPerformed
+        ProductosAsociadosPDF pdf = new ProductosAsociadosPDF();
+        pdf.pdfTablaProveedores();
+    }//GEN-LAST:event_jButtonPDFTablaActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un proveedor o varios o ninguno.
     private List<Proveedor> Seleccionarproveedor() {
@@ -402,6 +422,7 @@ public class Proveedores_Form extends Form {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonPDFTabla;
     private javax.swing.JLabel jLabel;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;

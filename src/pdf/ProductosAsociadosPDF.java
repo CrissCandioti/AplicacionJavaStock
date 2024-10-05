@@ -142,8 +142,8 @@ public class ProductosAsociadosPDF {
                 tabla.addCell(aux.getNombre());
                 tabla.addCell(index);
                 tabla.addCell(aux.getNotas());
+                documento.add(tabla);
             }
-            documento.add(tabla);
             documento.close();
             MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
