@@ -55,7 +55,7 @@ public class ProductosAsociadosPDF {
 
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Angel Tienda Holistica y Esoterica © \n\n");
+            parrafo.add("Angel Tienda Holística y Esotérica © \n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Proveedor \n\n");
 
@@ -120,7 +120,7 @@ public class ProductosAsociadosPDF {
 
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Angel Tienda Holistica y Esoterica © \n\n");
+            parrafo.add("Angel Tienda Holística y Esotérica © \n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Proveedores \n\n");
 

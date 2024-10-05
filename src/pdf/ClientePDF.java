@@ -54,7 +54,7 @@ public class ClientePDF {
 
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Angel Tienda Holistica y Esoterica © \n\n");
+            parrafo.add("Angel Tienda Holística y Esotérica © \n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Clientes \n\n");
 
@@ -62,23 +62,34 @@ public class ClientePDF {
             documento.add(header);
             documento.add(parrafo);
 
-            PdfPTable tabla = new PdfPTable(4);
+            PdfPTable tabla = new PdfPTable(9);
             tabla.addCell("Codigo");
             tabla.addCell("Nombre");
-            tabla.addCell("Productos");
+            tabla.addCell("Apellido");
+            tabla.addCell("Documento");
+            tabla.addCell("Email");
+            tabla.addCell("WhatsApp");
+            tabla.addCell("Localidad");
+            tabla.addCell("Direccion");
             tabla.addCell("Notas");
 
             for (Cliente aux : cs.listaCliente()) {
                 tabla.addCell(String.valueOf(aux.getId()));
                 tabla.addCell(aux.getNombre());
-                tabla.addCell(index);
+                tabla.addCell(aux.getApellido());
+                tabla.addCell(aux.getNotas());
+                tabla.addCell(String.valueOf(aux.getDocumento()));
+                tabla.addCell(aux.getEmail());
+                tabla.addCell(aux.getWhatsapp());
+                tabla.addCell(aux.getLocalidad());
+                tabla.addCell(aux.getDireccion());
                 tabla.addCell(aux.getNotas());
             }
             documento.add(tabla);
             documento.close();
-            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los clientes se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error al crear el PDF" + e);
+            MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }
     }
 
