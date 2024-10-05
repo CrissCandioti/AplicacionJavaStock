@@ -6,10 +6,12 @@ package pdf;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entidades.Proveedor;
 import java.io.File;
@@ -84,6 +86,64 @@ public class ProductosAsociadosPDF {
 
             documento.close();
             MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF del proveedor se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al crear el PDF" + e);
+        }
+    }
+
+    public void pdfTablaProveedores() {
+        try {
+
+            int contador = 0;
+            Document documento = new Document();
+            //------------------------------------------------------------------------------------------------------
+            String ruta = System.getProperty("user.home"); // Se encarga de obtener la ubicación del directorio de inicio del usuario actual del sistema. 
+            String nombrePDF = "/OneDrive/Escritorio/Tabla_Proveedores.pdf"; // Se construye la direccion donde se va a generar y el nombre del PDF.
+            /**
+             * El bucle while se encarga de comprobar si un PDF con el mismo
+             * nombre ya existe. Si existe un PDF con ese nombre, se incrementa
+             * el contador y se agrega ese contador al nombre.
+             */
+            while (new File(ruta + nombrePDF).exists()) {
+                contador++;
+                nombrePDF = "/OneDrive/Escritorio/Tabla_Proveedores(" + contador + ").pdf";
+            }
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + nombrePDF));
+            //-------------------------------------------------------------------------------------------------------
+            Image header = Image.getInstance("src/com/raven/icon/inicio.png");
+            header.scaleToFit(650, 1000);
+            header.setAlignment(Chunk.ALIGN_CENTER);
+
+            Paragraph parrafo = new Paragraph();
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.add("Angel Tienda Holistica y Esoterica © © \n\n");
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
+            parrafo.add("Proveedores \n\n");
+
+            documento.open();
+            documento.add(header);
+            documento.add(parrafo);
+
+            PdfPTable tabla = new PdfPTable(6);
+            tabla.addCell("CODIGO");
+            tabla.addCell("Apellido");
+            tabla.addCell("Nombre");
+            tabla.addCell("DNI");
+            tabla.addCell("Domicilio");
+            tabla.addCell("Telefono");
+            if (resultado.next()) {
+                do {
+                    tabla.addCell(resultado.getString(1));
+                    tabla.addCell(resultado.getString(2));
+                    tabla.addCell(resultado.getString(3));
+                    tabla.addCell(resultado.getString(4));
+                    tabla.addCell(resultado.getString(5));
+                    tabla.addCell(resultado.getString(6));
+                } while (resultado.next());
+                documento.add(tabla);
+            }
+            documento.close();
+            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Se produjo un error al crear el PDF" + e);
         }
