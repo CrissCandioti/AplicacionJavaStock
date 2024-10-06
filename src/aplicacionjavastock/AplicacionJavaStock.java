@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -28,14 +30,32 @@ public class AplicacionJavaStock {
         create();
     }
 
+    //Metodo para crear el Excel
     private static void create() {
-
+        //Creamos un archivo en Excel
         Workbook book = new XSSFWorkbook();
-        Sheet sheet = book.createSheet("hola java");
-
+        //Creamos una nueva pestaña
+        Sheet sheet = book.createSheet("hola java");//A esta pestaña le damos un nombre
+        //Le agregamos contenido a nuestro excel
+        //Necesariamente necesitamos crear una fila y dentro de esa fila crear columnas para colocar los valores
+        //Creamos la fila primero
+        Row row = sheet.createRow(0);//Y le indicamos el valor de la fila
+        //Ya que tenemos la fila creada, creamos la celda
+        row.createCell(0).setCellValue("Hola joni");//Le indicamos la posicion de la celda en este caso cero y el siguiente 1, asi susesivamente
+        row.createCell(1).setCellValue(7.5);//Valos double
+        row.createCell(2).setCellValue(true);//Valor boolean
+        
+        
+        //Podemos crear la celda separado para mejor diseño e informacion
+        Cell celda = row.createCell(3);
+        //Podemos agregar una formula a una celda
+        celda.setCellFormula(String.format("1+1", ""));//El primer dato es la formula y el otro son los campos
         try {
-            FileOutputStream fileout = new FileOutputStream("Excel.xlsx");
+            //Ya que creamos los archivos ahora lo guardamos
+            FileOutputStream fileout = new FileOutputStream("Excel.xlsx");//Le agregamos el nombre y ademas la extension
+            //Impactamos directamente en el archivo excel creado
             book.write(fileout);
+            //Cerramos el archivo
             fileout.close();
 
         } catch (FileNotFoundException ex) {
