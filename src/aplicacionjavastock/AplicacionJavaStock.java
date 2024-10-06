@@ -50,6 +50,9 @@ public class AplicacionJavaStock {
         Cell celda = row.createCell(3);
         //Podemos agregar una formula a una celda
         celda.setCellFormula(String.format("1+1", ""));//El primer dato es la formula y el otro son los campos
+        
+        //Creamos otra fila
+        Row rowuno = sheet.createRow(1);
         try {
             //Ya que creamos los archivos ahora lo guardamos
             FileOutputStream fileout = new FileOutputStream("Excel.xlsx");//Le agregamos el nombre y ademas la extension
