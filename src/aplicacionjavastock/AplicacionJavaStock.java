@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -29,11 +30,11 @@ public class AplicacionJavaStock {
 
     private static void create() {
 
-        Workbook book = new HSSFWorkbook();
+        Workbook book = new XSSFWorkbook();
         Sheet sheet = book.createSheet("hola java");
 
         try {
-            FileOutputStream fileout = new FileOutputStream("Excel.xls");
+            FileOutputStream fileout = new FileOutputStream("Excel.xlsx");
             book.write(fileout);
             fileout.close();
 
