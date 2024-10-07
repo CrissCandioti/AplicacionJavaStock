@@ -46,6 +46,7 @@ public class ClientesExcel {
     public static void main(String[] args) {
         // TODO code application logic here
         ClientesExcelReporte();
+        TablaClientesExcelReporte();
     }
 
     public static void ClientesExcelReporte() {
@@ -349,9 +350,23 @@ public class ClientesExcel {
             headerSyleContenido.setBorderBottom(BorderStyle.THIN);
             //Agregamos el contenido a la tabla desde nuestra base de datos
 
-            
+            //Fila de la cual voy a trabajar el contenido
+            int filaDato = 6;
             //Contenido de nuestro reporte
             
+            for (Cliente aux : listaClienntes) {
+                Row folaDatos = sheet.createRow(filaDato);
+                for (int i = 0; i < 8; i++) {
+                    Cell celdaDatos = folaDatos.createCell(i);
+                    celdaDatos.setCellStyle(headerSyleContenido);
+                    
+                    if (i==3) {
+                        celdaDatos.setCellValue(aux.getDocumento());
+                    } else if (i==0){
+                        celdaDatos.setCellValue(aux.getId());
+                    }
+                }
+            }
             //Empezamos a generar el reporte.
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
