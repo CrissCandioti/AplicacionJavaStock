@@ -44,15 +44,23 @@ public class AplicacionJavaStock {
         row.createCell(0).setCellValue("Hola joni");//Le indicamos la posicion de la celda en este caso cero y el siguiente 1, asi susesivamente
         row.createCell(1).setCellValue(7.5);//Valos double
         row.createCell(2).setCellValue(true);//Valor boolean
-        
-        
+
         //Podemos crear la celda separado para mejor diseño e informacion
         Cell celda = row.createCell(3);
         //Podemos agregar una formula a una celda
         celda.setCellFormula(String.format("1+1", ""));//El primer dato es la formula y el otro son los campos
-        
+
         //Creamos otra fila
         Row rowuno = sheet.createRow(1);
+        //Creamos las celdas rapidamente
+        rowuno.createCell(0).setCellValue(7);
+        rowuno.createCell(1).setCellValue(8);
+
+        //Creamos una celda por separado y la agregamos a la fila
+        Cell celdados = rowuno.createCell(2);
+//        celdados.setCellFormula(String.format("A2+B2", ""));
+        //Si los valores son dinamicos constantemente
+        celdados.setCellFormula(String.format("A%d+B%d", 2,2));//El signo de porcentajo indica que va a recibir el parametro
         try {
             //Ya que creamos los archivos ahora lo guardamos
             FileOutputStream fileout = new FileOutputStream("Excel.xlsx");//Le agregamos el nombre y ademas la extension
