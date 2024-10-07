@@ -4,6 +4,11 @@
  */
 package pdf;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import com.itextpdf.text.*; // Asegúrate de tener las importaciones necesarias
+import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -24,28 +29,41 @@ import services.ClienteServices;
  * @author criss
  */
 public class ClientePDF {
-
+   
     public void pdfTablaProveedores() {
         try {
 
             ClienteServices cs = new ClienteServices();
 
-            int contador = 0;
-            Document documento = new Document();
-            //------------------------------------------------------------------------------------------------------
-            String ruta = System.getProperty("user.home"); // Se encarga de obtener la ubicación del directorio de inicio del usuario actual del sistema. 
-            String nombrePDF = "/OneDrive/Escritorio/Tabla_Clientes.pdf"; // Se construye la direccion donde se va a generar y el nombre del PDF.
-            /**
-             * El bucle while se encarga de comprobar si un PDF con el mismo
-             * nombre ya existe. Si existe un PDF con ese nombre, se incrementa
-             * el contador y se agrega ese contador al nombre.
-             */
-            while (new File(ruta + nombrePDF).exists()) {
-                contador++;
-                nombrePDF = "/OneDrive/Escritorio/Tabla_Clientes(" + contador + ").pdf";
+            // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar PDF de Clientes");
+            fileChooser.setSelectedFile(new File("Tabla_Clientes.pdf")); // Nombre por defecto
+
+            // Mostrar el diálogo de guardar
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection != JFileChooser.APPROVE_OPTION) {
+                System.out.println("Operación de guardado cancelada por el usuario.");
+                return; // Salir si el usuario cancela
             }
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + nombrePDF));
-            //-------------------------------------------------------------------------------------------------------
+
+            File fileToSave = fileChooser.getSelectedFile();
+            String finalFileName = fileToSave.getAbsolutePath();
+
+            // Verifica si el archivo ya existe
+            if (fileToSave.exists()) {
+                int overwrite = JOptionPane.showConfirmDialog(null,
+                        "El archivo ya existe. ¿Quieres sobrescribirlo?", "Confirmar",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (overwrite != JOptionPane.YES_OPTION) {
+                    return; // Si el usuario elige no sobrescribir, salimos
+                }
+            }
+
+            Document documento = new Document();
+            PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
+
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
             header.scaleToFit(650, 1000);
             header.setAlignment(Chunk.ALIGN_CENTER);
@@ -82,9 +100,10 @@ public class ClientePDF {
                 tabla.addCell(aux.getDireccion());
                 tabla.addCell(aux.getNotas());
             }
+
             documento.add(tabla);
             documento.close();
-            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los clientes se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("EL PDF se creó correctamente", "El PDF de los clientes se generó en la ubicación seleccionada", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }

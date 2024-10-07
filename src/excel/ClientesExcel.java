@@ -202,7 +202,8 @@ public class ClientesExcel {
             //Contenido de nuestro reporte
 
             //Empezamos a generar el reporte.
-// Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
+            
+            // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Guardar Archivo Excel");
             fileChooser.setSelectedFile(new File("ReporteCliente.xlsx")); // Nombre por defecto
