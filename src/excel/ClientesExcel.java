@@ -35,19 +35,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author criss
  */
 public class ClientesExcel {
-
+    
     public static void main(String[] args) {
         // TODO code application logic here
         ClientesExcelReporte();
     }
-
+    
     public static void ClientesExcelReporte() {
 
         //Creamos el archivo Excel
         Workbook book = new XSSFWorkbook();
         //Creamos la pestaña
         Sheet sheet = book.createSheet("Clientes");
-
+        
         try {
             //Agregamos una imagen
             InputStream is = new FileInputStream("src\\com\\raven\\icon\\Logo Angel 1.png");
@@ -108,12 +108,36 @@ public class ClientesExcel {
             String[] cabecera = new String[]{"Codigo", "Nombre", "Apellido", "Documento", "WhatsApp", "Email", "Localidad", "Direccion", "Notas"};
             //Creamos el estilo para las celdas del encabezado
             CellStyle headerSyle = book.createCellStyle();
-            headerSyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-            headerSyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            headerSyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());//Color de relleno
+            headerSyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);//Que el relleno sea solido
+            //Le estamos agregando la cuadricula a estos bordes
             headerSyle.setBorderBottom(BorderStyle.THIN);
             headerSyle.setBorderLeft(BorderStyle.THIN);
             headerSyle.setBorderRight(BorderStyle.THIN);
             headerSyle.setBorderBottom(BorderStyle.THIN);
+
+            //Le agregamos una fuente a nuestra cabecera
+            Font font = book.createFont();
+            font.setFontName("Arial");
+            font.setBold(true);
+            font.setColor(IndexedColors.WHITE.getIndex());
+            font.setFontHeightInPoints((short) 12);
+            headerSyle.setFont(font);
+            
+            //Agregamos una nueva fila para nuestros encabezados
+            Row filaEncabezados = sheet.createRow(9);
+            //Imprimimos el valor de nuestra cabecera a nuestras celdas
+            for (int i = 0; i < cabecera.length; i++) {
+                //Le agregamos los estilos de la celda por separado
+                Cell celdaEnzabezado = filaEncabezados.createCell(i);
+                //Agregamos el estilo a la celda
+                celdaEnzabezado.setCellStyle(headerSyle);
+                //Agregamos el arreglo String
+                celdaEnzabezado.setCellValue(cabecera[i]);
+            }
+            
+            
+            
             //Contenido de nuestro reporte
             //Empezamos a generar el reporte.
             FileOutputStream fileOut = new FileOutputStream("ReporteCliente.xlsx");
