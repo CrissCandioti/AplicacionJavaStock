@@ -4,6 +4,7 @@
  */
 package excel;
 
+import entidades.Cliente;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,25 +30,29 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import services.ClienteServices;
 
 /**
  *
  * @author criss
  */
 public class ClientesExcel {
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
         ClientesExcelReporte();
     }
-    
+
     public static void ClientesExcelReporte() {
 
+        //Conexion a services
+        ClienteServices cs = new ClienteServices();
+        Cliente aux = cs.buscarClienteID(5);
         //Creamos el archivo Excel
         Workbook book = new XSSFWorkbook();
         //Creamos la pestaña
         Sheet sheet = book.createSheet("Clientes");
-        
+
         try {
             //Agregamos una imagen
             InputStream is = new FileInputStream("src\\com\\raven\\icon\\Logo Angel 1.png");
@@ -123,7 +128,7 @@ public class ClientesExcel {
             font.setColor(IndexedColors.WHITE.getIndex());
             font.setFontHeightInPoints((short) 12);
             headerSyle.setFont(font);
-            
+
             //Agregamos una nueva fila para nuestros encabezados
             Row filaEncabezados = sheet.createRow(5); //Seleccionamos la fila donde se va a ubicar nuestra cabecera
             //Imprimimos el valor de nuestra cabecera a nuestras celdas
@@ -135,10 +140,63 @@ public class ClientesExcel {
                 //Agregamos el arreglo String
                 celdaEnzabezado.setCellValue(cabecera[i]);
             }
-            
-            
-            
+
+            //Creamos el estilo para las celdas del contenido
+            CellStyle headerSyleContenido = book.createCellStyle();
+            //Le estamos agregando la cuadricula a estos bordes
+            headerSyleContenido.setBorderBottom(BorderStyle.THIN);
+            headerSyleContenido.setBorderLeft(BorderStyle.THIN);
+            headerSyleContenido.setBorderRight(BorderStyle.THIN);
+            headerSyleContenido.setBorderBottom(BorderStyle.THIN);
+            //Agregamos el contenido a la tabla desde nuestra base de datos
+
+            Row row1 = sheet.createRow(6);
+            //Celda Codigo
+            Cell celdaCodigo = row1.createCell(0);
+            celdaCodigo.setCellStyle(headerSyleContenido);
+            celdaCodigo.setCellValue(aux.getId());
+
+            //CeldaNombre
+            Cell celdaNombre = row1.createCell(1);
+            celdaNombre.setCellStyle(headerSyleContenido);
+            celdaNombre.setCellValue(aux.getNombre());
+
+            //CeldaApellido
+            Cell celdaApellido = row1.createCell(2);
+            celdaApellido.setCellStyle(headerSyleContenido);
+            celdaApellido.setCellValue(aux.getApellido());
+
+            //CeldaDocumento
+            Cell celdaDocumento = row1.createCell(3);
+            celdaDocumento.setCellStyle(headerSyleContenido);
+            celdaDocumento.setCellValue(aux.getDocumento());
+
+            //CeldaEmail
+            Cell celdaEmail = row1.createCell(4);
+            celdaEmail.setCellStyle(headerSyleContenido);
+            celdaEmail.setCellValue(aux.getEmail());
+
+            //CeldaWhatsapp
+            Cell celdaWhatsApp = row1.createCell(5);
+            celdaWhatsApp.setCellStyle(headerSyleContenido);
+            celdaWhatsApp.setCellValue(aux.getWhatsapp());
+
+            //CeldaLocalidad
+            Cell celdaLocalidad = row1.createCell(6);
+            celdaLocalidad.setCellStyle(headerSyleContenido);
+            celdaLocalidad.setCellValue(aux.getLocalidad());
+
+            //CeldaDireccion
+            Cell celdaDireccion = row1.createCell(7);
+            celdaDireccion.setCellStyle(headerSyleContenido);
+            celdaDireccion.setCellValue(aux.getDireccion());
+
+            //CeldaNotas
+            Cell celdaNotas = row1.createCell(8);
+            celdaNotas.setCellStyle(headerSyleContenido);
+            celdaNotas.setCellValue(aux.getNotas());
             //Contenido de nuestro reporte
+            
             //Empezamos a generar el reporte.
             FileOutputStream fileOut = new FileOutputStream("ReporteCliente.xlsx");
             book.write(fileOut);
