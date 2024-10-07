@@ -4,6 +4,10 @@
  */
 package excel;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import entidades.Cliente;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -196,11 +200,40 @@ public class ClientesExcel {
             celdaNotas.setCellStyle(headerSyleContenido);
             celdaNotas.setCellValue(aux.getNotas());
             //Contenido de nuestro reporte
-            
+
             //Empezamos a generar el reporte.
-            FileOutputStream fileOut = new FileOutputStream("ReporteCliente.xlsx");
-            book.write(fileOut);
-            fileOut.close();
+// Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar Archivo Excel");
+            fileChooser.setSelectedFile(new File("ReporteCliente.xlsx")); // Nombre por defecto
+
+            // Mostrar el diálogo de guardar
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                String finalFileName = fileToSave.getAbsolutePath();
+
+                // Verifica si el archivo ya existe
+                if (fileToSave.exists()) {
+                    int overwrite = JOptionPane.showConfirmDialog(null,
+                            "El archivo ya existe. ¿Quieres sobrescribirlo?", "Confirmar",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (overwrite != JOptionPane.YES_OPTION) {
+                        return; // Si el usuario elige no sobrescribir, salimos
+                    }
+                }
+
+                try (FileOutputStream fileOut = new FileOutputStream(finalFileName)) {
+                    book.write(fileOut);
+                    System.out.println("Archivo generado: " + finalFileName);
+                } catch (IOException ex) {
+                    Logger.getLogger(ClientesExcel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                System.out.println("Operación de guardado cancelada por el usuario.");
+            }
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ClientesExcel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
