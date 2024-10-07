@@ -45,7 +45,7 @@ public class ClientesExcel {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        ClientesExcelReporte();
+//        ClientesExcelReporte();
         TablaClientesExcelReporte();
     }
 
@@ -350,20 +350,46 @@ public class ClientesExcel {
             headerSyleContenido.setBorderBottom(BorderStyle.THIN);
             //Agregamos el contenido a la tabla desde nuestra base de datos
 
-            //Fila de la cual voy a trabajar el contenido
-            int filaDato = 6;
             //Contenido de nuestro reporte
-            
+            // Inicializamos el contador de filas a partir de donde comenzarán los datos
+            int folaDatos = 6; // La fila donde comienzas a agregar datos
+
+            // Contenido de nuestro reporte
             for (Cliente aux : listaClienntes) {
-                Row folaDatos = sheet.createRow(filaDato);
+                Row filaDatos = sheet.createRow(folaDatos++); // Crear nueva fila y luego incrementar filaDatos
                 for (int i = 0; i < 8; i++) {
-                    Cell celdaDatos = folaDatos.createCell(i);
+                    Cell celdaDatos = filaDatos.createCell(i);
                     celdaDatos.setCellStyle(headerSyleContenido);
-                    
-                    if (i==3) {
-                        celdaDatos.setCellValue(aux.getDocumento());
-                    } else if (i==0){
-                        celdaDatos.setCellValue(aux.getId());
+
+                    // Asigna los valores correspondientes según el índice
+                    switch (i) {
+                        case 0:
+                            celdaDatos.setCellValue(aux.getId());
+                            break;
+                        case 1:
+                            celdaDatos.setCellValue(aux.getNombre());
+                            break;
+                        case 2:
+                            celdaDatos.setCellValue(aux.getApellido());
+                            break;
+                        case 3:
+                            celdaDatos.setCellValue(aux.getDocumento());
+                            break;
+                        case 4:
+                            celdaDatos.setCellValue(aux.getWhatsapp());
+                            break;
+                        case 5:
+                            celdaDatos.setCellValue(aux.getEmail());
+                            break;
+                        case 6:
+                            celdaDatos.setCellValue(aux.getLocalidad());
+                            break;
+                        case 7:
+                            celdaDatos.setCellValue(aux.getDireccion());
+                            break;
+                        case 8:
+                            celdaDatos.setCellValue(aux.getNotas());
+                            break;
                     }
                 }
             }
