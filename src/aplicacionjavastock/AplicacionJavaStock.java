@@ -58,7 +58,7 @@ public class AplicacionJavaStock {
 
         //Creamos una celda por separado y la agregamos a la fila
         Cell celdados = rowuno.createCell(2);
-//        celdados.setCellFormula(String.format("A2+B2", ""));
+//      celdados.setCellFormula(String.format("A2+B2", ""));
         //Si los valores son dinamicos constantemente
         celdados.setCellFormula(String.format("A%d+B%d", 2,2));//El signo de porcentajo indica que va a recibir el parametro
         try {
