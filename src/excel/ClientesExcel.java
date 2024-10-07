@@ -357,7 +357,7 @@ public class ClientesExcel {
             // Contenido de nuestro reporte
             for (Cliente aux : listaClienntes) {
                 Row filaDatos = sheet.createRow(folaDatos++); // Crear nueva fila y luego incrementar filaDatos
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < 9; i++) {//El 9 es por la cantidad de valores de la entidad
                     Cell celdaDatos = filaDatos.createCell(i);
                     celdaDatos.setCellStyle(headerSyleContenido);
 
