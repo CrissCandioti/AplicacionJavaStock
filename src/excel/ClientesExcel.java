@@ -11,13 +11,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Picture;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -102,7 +105,15 @@ public class ClientesExcel {
              */
 
             //Continuamos con los titulos que va a contener los reportes
-            String [] cabecera = new String[]{"Codigo",""};
+            String[] cabecera = new String[]{"Codigo", "Nombre", "Apellido", "Documento", "WhatsApp", "Email", "Localidad", "Direccion", "Notas"};
+            //Creamos el estilo para las celdas del encabezado
+            CellStyle headerSyle = book.createCellStyle();
+            headerSyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+            headerSyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            headerSyle.setBorderBottom(BorderStyle.THIN);
+            headerSyle.setBorderLeft(BorderStyle.THIN);
+            headerSyle.setBorderRight(BorderStyle.THIN);
+            headerSyle.setBorderBottom(BorderStyle.THIN);
             //Contenido de nuestro reporte
             //Empezamos a generar el reporte.
             FileOutputStream fileOut = new FileOutputStream("ReporteCliente.xlsx");
