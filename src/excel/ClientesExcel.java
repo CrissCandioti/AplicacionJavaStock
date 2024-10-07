@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -18,9 +19,11 @@ import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Picture;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -29,19 +32,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author criss
  */
 public class ClientesExcel {
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
         ClientesExcelReporte();
     }
-    
+
     public static void ClientesExcelReporte() {
 
         //Creamos el archivo Excel
         Workbook book = new XSSFWorkbook();
         //Creamos la pestaña
         Sheet sheet = book.createSheet("Clientes");
-        
+
         try {
             //Agregamos una imagen
             InputStream is = new FileInputStream("src\\com\\raven\\icon\\Logo Angel 1.png");
@@ -82,6 +85,21 @@ public class ClientesExcel {
             fuenteTitulo.setFontHeightInPoints((short) 14);//Acepta un tipo de dato short
             //Se lo asignamis al estilo
             tituloEstilo.setFont(fuenteTitulo);
+            //Creamos la fila donde va a estar el titulo
+            Row filaTitulo = sheet.createRow(1);
+            //Rango de celdas combinadas
+            Cell celdaTitulo = filaTitulo.createCell(1);
+            //A la celda le agregamos el estilo
+            celdaTitulo.setCellStyle(tituloEstilo);
+            //Agregamos el contenido de esta celda
+            celdaTitulo.setCellValue("Reporte del Cliente");
+            //Indicamos la combinacion de las celdas
+            sheet.addMergedRegion(new CellRangeAddress(1, 2, 1, 3));
+            /*El primer parametro indica la fila donde inicia
+            La segunda indica la ultima fila que va a ocupar
+            La tercera la primera columna que va a utilizar
+            La cuarta la ultima columna que va a utilizar
+             */
             //Contenido de nuestro reporte
 
             //Empezamos a generar el reporte.
