@@ -125,7 +125,7 @@ public class ClientesExcel {
             headerSyle.setFont(font);
             
             //Agregamos una nueva fila para nuestros encabezados
-            Row filaEncabezados = sheet.createRow(9);
+            Row filaEncabezados = sheet.createRow(5); //Seleccionamos la fila donde se va a ubicar nuestra cabecera
             //Imprimimos el valor de nuestra cabecera a nuestras celdas
             for (int i = 0; i < cabecera.length; i++) {
                 //Le agregamos los estilos de la celda por separado
