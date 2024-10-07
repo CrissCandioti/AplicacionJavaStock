@@ -6,8 +6,6 @@ package excel;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import entidades.Cliente;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,6 +33,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import raven.alerts.MessageAlerts;
 import services.ClienteServices;
 
 /**
@@ -43,13 +42,7 @@ import services.ClienteServices;
  */
 public class ClientesExcel {
 
-    public static void main(String[] args) {
-        // TODO code application logic here
-//        ClientesExcelReporte();
-        TablaClientesExcelReporte();
-    }
-
-    public static void ClientesExcelReporte() {
+    public void ClientesExcelReporte() {
 
         //Conexion a services
         ClienteServices cs = new ClienteServices();
@@ -243,7 +236,7 @@ public class ClientesExcel {
         }
     }
 
-    public static void TablaClientesExcelReporte() {
+    public void TablaClientesExcelReporte() {
 
         //Conexion a services
         ClienteServices cs = new ClienteServices();
@@ -300,7 +293,7 @@ public class ClientesExcel {
             //A la celda le agregamos el estilo
             celdaTitulo.setCellStyle(tituloEstilo);
             //Agregamos el contenido de esta celda
-            celdaTitulo.setCellValue("Reporte del Cliente");
+            celdaTitulo.setCellValue("Tabla de los Clientes");
             //Indicamos la combinacion de las celdas
             sheet.addMergedRegion(new CellRangeAddress(1, 3, 1, 3));
             /*El primer parametro indica la fila donde inicia
@@ -418,7 +411,7 @@ public class ClientesExcel {
 
                 try (FileOutputStream fileOut = new FileOutputStream(finalFileName)) {
                     book.write(fileOut);
-                    System.out.println("Archivo generado: " + finalFileName);
+                    MessageAlerts.getInstance().showMessage("EL Excel se creó correctamente", "El Excel se genero en: " + finalFileName , MessageAlerts.MessageType.SUCCESS);
                 } catch (IOException ex) {
                     Logger.getLogger(ClientesExcel.class.getName()).log(Level.SEVERE, null, ex);
                 }
