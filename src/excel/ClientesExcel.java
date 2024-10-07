@@ -94,14 +94,16 @@ public class ClientesExcel {
             //Agregamos el contenido de esta celda
             celdaTitulo.setCellValue("Reporte del Cliente");
             //Indicamos la combinacion de las celdas
-            sheet.addMergedRegion(new CellRangeAddress(1, 2, 1, 3));
+            sheet.addMergedRegion(new CellRangeAddress(1, 3, 1, 3));
             /*El primer parametro indica la fila donde inicia
             La segunda indica la ultima fila que va a ocupar
             La tercera la primera columna que va a utilizar
             La cuarta la ultima columna que va a utilizar
              */
-            //Contenido de nuestro reporte
 
+            //Continuamos con los titulos que va a contener los reportes
+            
+            //Contenido de nuestro reporte
             //Empezamos a generar el reporte.
             FileOutputStream fileOut = new FileOutputStream("ReporteCliente.xlsx");
             book.write(fileOut);
