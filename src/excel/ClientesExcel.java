@@ -102,7 +102,7 @@ public class ClientesExcel {
              */
 
             //Continuamos con los titulos que va a contener los reportes
-            
+            String [] cabecera = new String[]{"Codigo",""};
             //Contenido de nuestro reporte
             //Empezamos a generar el reporte.
             FileOutputStream fileOut = new FileOutputStream("ReporteCliente.xlsx");
