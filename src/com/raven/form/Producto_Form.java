@@ -282,16 +282,14 @@ public class Producto_Form extends Form {
                 String actions[] = new String[]{"Cancelar", "Modificar"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(ProductosAgregarBaseDatos, "Modificar producto", actions, (pc, i) -> {
                     if (i == 1) {
-                        //Este condicional if me ayuda para que el usuario no elimine la imagen y la deje vacia
-                        if (ProductosAgregarBaseDatos.retornarProductoModificado() != null) {
-                            System.out.println(ProductosAgregarBaseDatos.retornarProductoModificado());
-//                            ps.modificarProducto(ProductosAgregarBaseDatos.retornarProductoModificado().getId(), ProductosAgregarBaseDatos.retornarProductoModificado().getVariedad(), ProductosAgregarBaseDatos.retornarProductoModificado().getNombre(), ProductosAgregarBaseDatos.retornarProductoModificado().getFechaIngreso(), ProductosAgregarBaseDatos.retornarProductoModificado().getMarca(), ProductosAgregarBaseDatos.retornarProductoModificado().getTipoProducto(), ProductosAgregarBaseDatos.retornarProductoModificado().getContenido(), ProductosAgregarBaseDatos.retornarProductoModificado().getStock(), ProductosAgregarBaseDatos.retornarProductoModificado().getPrecioCosto(), ProductosAgregarBaseDatos.retornarProductoModificado().getPrecioventa(), ProductosAgregarBaseDatos.retornarProductoModificado().getGanancias(), ProductosAgregarBaseDatos.retornarProductoModificado().getPorcentajeGanancias(), ProductosAgregarBaseDatos.retornarProductoModificado().getProveedor(), ProductosAgregarBaseDatos.retornarProductoModificado().getDescripcion(), ProductosAgregarBaseDatos.retornarProductoModificado().getImagen());
-                            MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El producto fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
+                        if (ProductosAgregarBaseDatos.retornarProductoModificado() == null) {
+                            MessageAlerts.getInstance().showMessage("Se produjo un error", "Este error se puede producir por dos motivos: \n*Esta dejando celda vacias que debe completar. \n*Esta ingresando informacion en la celda equivocada", MessageAlerts.MessageType.ERROR);
                         } else {
-                            MessageAlerts.getInstance().showMessage("Error", "Verificar que la imagen no este vacia", MessageAlerts.MessageType.ERROR);
+                            ps.modificarProducto(ProductosAgregarBaseDatos.retornarProductoModificado().getId(), ProductosAgregarBaseDatos.retornarProductoModificado().getVariedad(), ProductosAgregarBaseDatos.retornarProductoModificado().getNombre(), ProductosAgregarBaseDatos.retornarProductoModificado().getFechaIngreso(), ProductosAgregarBaseDatos.retornarProductoModificado().getMarca(), ProductosAgregarBaseDatos.retornarProductoModificado().getTipoProducto(), ProductosAgregarBaseDatos.retornarProductoModificado().getContenido(), ProductosAgregarBaseDatos.retornarProductoModificado().getStock(), ProductosAgregarBaseDatos.retornarProductoModificado().getPrecioCosto(), ProductosAgregarBaseDatos.retornarProductoModificado().getPrecioventa(), ProductosAgregarBaseDatos.retornarProductoModificado().getGanancias(), ProductosAgregarBaseDatos.retornarProductoModificado().getPorcentajeGanancias(), ProductosAgregarBaseDatos.retornarProductoModificado().getProveedor(), ProductosAgregarBaseDatos.retornarProductoModificado().getDescripcion(), ProductosAgregarBaseDatos.retornarProductoModificado().getImagen());
+                            MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El producto fue modifico correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                            loadData();
+                            pc.closePopup();
                         }
-                        loadData();
-                        pc.closePopup();
                     } else {
                         pc.closePopup();
                     }
