@@ -84,6 +84,7 @@ public class Producto_Form extends Form {
         jButtonVer = new javax.swing.JButton();
         jLabel = new javax.swing.JLabel();
         jButtonPDFTabla = new javax.swing.JButton();
+        jButtonExcelTabla = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,6 +154,18 @@ public class Producto_Form extends Form {
         jLabel.setText("Ingrese el nombre del producto");
 
         jButtonPDFTabla.setText("PDF Tabla");
+        jButtonPDFTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPDFTablaActionPerformed(evt);
+            }
+        });
+
+        jButtonExcelTabla.setText("Excel Tabla");
+        jButtonExcelTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcelTablaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -172,6 +185,8 @@ public class Producto_Form extends Form {
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonExcelTabla)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButtonPDFTabla))
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,7 +215,9 @@ public class Producto_Form extends Form {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonPDFTabla)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonPDFTabla)
+                    .addComponent(jButtonExcelTabla))
                 .addContainerGap())
         );
 
@@ -347,6 +364,14 @@ public class Producto_Form extends Form {
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
+    //JButton para imprimir el PDF de la tabla
+    private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFTablaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonPDFTablaActionPerformed
+    //JButton para imprimir el Excel de la tabla
+    private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelTablaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonExcelTablaActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un producto o varios o ninguno.
     private List<Productos> Seleccionarusuario() {
@@ -411,6 +436,7 @@ public class Producto_Form extends Form {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonExcelTabla;
     private javax.swing.JButton jButtonPDFTabla;
     private javax.swing.JButton jButtonVer;
     private javax.swing.JLabel jLabel;
