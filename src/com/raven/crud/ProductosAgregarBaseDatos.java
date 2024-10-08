@@ -469,7 +469,13 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             aux.setContenido(jTextFieldContenido.getText());
             aux.setStock(Integer.parseInt(jTextFieldStock.getText()));
             //Problemas con los double verificar y correguir
-            aux.setPrecioCosto(2);
+            if (jFormattedTextFieldPrecioCosto.getValue() == null) {
+                double precioCosto = ps.buscarProductoPorID(4).getPrecioCosto();
+                aux.setPrecioCosto(precioCosto);
+            } else {
+                double precioCosto = Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString());
+                aux.setPrecioCosto(precioCosto);
+            }
             aux.setPrecioventa(2);
             aux.setGanancias(2);
             aux.setPorcentajeGanancias(2);
