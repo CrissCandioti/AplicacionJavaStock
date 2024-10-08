@@ -84,6 +84,7 @@ public class Proveedores_Form extends Form {
         jLabel = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButtonPDFTabla = new javax.swing.JButton();
+        jButtonExcelTabla = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,6 +160,13 @@ public class Proveedores_Form extends Form {
             }
         });
 
+        jButtonExcelTabla.setText("Excel Tabla");
+        jButtonExcelTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcelTablaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -177,6 +185,8 @@ public class Proveedores_Form extends Form {
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonExcelTabla)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButtonPDFTabla))
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,7 +215,9 @@ public class Proveedores_Form extends Form {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonPDFTabla)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonPDFTabla)
+                    .addComponent(jButtonExcelTabla))
                 .addContainerGap())
         );
 
@@ -343,16 +355,16 @@ public class Proveedores_Form extends Form {
                         return true;
                     }
                 };
-                String actions[] = new String[]{"Cancelar", "Impirmir PDF","Imprimir Excel"};
+                String actions[] = new String[]{"Cancelar", "Impirmir PDF", "Imprimir Excel"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(pa, "Productos asociados", actions, (pc, i) -> {
                     if (i == 1) {
                         pdf.pdfPorPaciente(aux.getId());
                         pc.closePopup();
-                    } else if ( i == 2) {
+                    } else if (i == 2) {
                         excel.productoAsociadoExcel(aux.getId());
                         pc.closePopup();
                     } else {
-                    pc.closePopup();
+                        pc.closePopup();
                     }
                 }), option);
             } else {
@@ -367,6 +379,11 @@ public class Proveedores_Form extends Form {
         ProductosAsociadosPDF pdf = new ProductosAsociadosPDF();
         pdf.pdfTablaProveedores();
     }//GEN-LAST:event_jButtonPDFTablaActionPerformed
+//JButton para imprimir la tabla Excel
+    private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelTablaActionPerformed
+        ProductosAsociadoExcel pae = new ProductosAsociadoExcel();
+        pae.TablaClientesExcelReporte();
+    }//GEN-LAST:event_jButtonExcelTablaActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un proveedor o varios o ninguno.
     private List<Proveedor> Seleccionarproveedor() {
@@ -427,6 +444,7 @@ public class Proveedores_Form extends Form {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonExcelTabla;
     private javax.swing.JButton jButtonPDFTabla;
     private javax.swing.JLabel jLabel;
     private javax.swing.JPanel jPanel;
