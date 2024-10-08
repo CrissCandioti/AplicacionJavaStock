@@ -400,6 +400,7 @@ public class ClientesExcel {
                 String finalFileName = fileToSave.getAbsolutePath();
 
                 // Verifica si el archivo ya existe
+                //Aplicamos la misma logica para la ventana de los form. En usuario Form se muestra correctamente
                 if (fileToSave.exists()) {
                     int overwrite = JOptionPane.showConfirmDialog(null,
                             "El archivo ya existe. ¿Quieres sobrescribirlo?", "Confirmar",
@@ -411,7 +412,7 @@ public class ClientesExcel {
 
                 try (FileOutputStream fileOut = new FileOutputStream(finalFileName)) {
                     book.write(fileOut);
-                    MessageAlerts.getInstance().showMessage("EL Excel se creó correctamente", "El Excel se genero en: " + finalFileName , MessageAlerts.MessageType.SUCCESS);
+                    MessageAlerts.getInstance().showMessage("EL Excel se creó correctamente", "El Excel se genero en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
                 } catch (IOException ex) {
                     Logger.getLogger(ClientesExcel.class.getName()).log(Level.SEVERE, null, ex);
                 }
