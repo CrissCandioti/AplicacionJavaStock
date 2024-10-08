@@ -221,7 +221,7 @@ public class ClientesExcel {
 
                 try (FileOutputStream fileOut = new FileOutputStream(finalFileName)) {
                     book.write(fileOut);
-                    System.out.println("Archivo generado: " + finalFileName);
+                    MessageAlerts.getInstance().showMessage("EL Excel se creó correctamente", "El Excel se genero en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
                 } catch (IOException ex) {
                     Logger.getLogger(ClientesExcel.class.getName()).log(Level.SEVERE, null, ex);
                 }

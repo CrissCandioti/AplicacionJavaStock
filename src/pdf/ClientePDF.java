@@ -25,12 +25,12 @@ import services.ClienteServices;
  * @author criss
  */
 public class ClientePDF {
-   
+
     public void pdfTablaProveedores() {
         try {
 
             ClienteServices cs = new ClienteServices();
-
+            //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Guardar PDF de Clientes");
@@ -56,10 +56,9 @@ public class ClientePDF {
                     return; // Si el usuario elige no sobrescribir, salimos
                 }
             }
-
             Document documento = new Document();
             PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
-
+            //Logica para guardar-----------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
             header.scaleToFit(650, 1000);
             header.setAlignment(Chunk.ALIGN_CENTER);

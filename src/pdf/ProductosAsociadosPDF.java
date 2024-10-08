@@ -16,6 +16,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import entidades.Proveedor;
 import java.io.File;
 import java.io.FileOutputStream;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import raven.alerts.MessageAlerts;
 import services.ProductoServices;
 import services.ProveedorServices;
@@ -32,21 +34,36 @@ public class ProductosAsociadosPDF {
             ProveedorServices ps = new ProveedorServices();
             Proveedor aux = ps.buscarProveedorPorId(id);
             String index = pros.listaDeProductosDeXProveedor(id).toString();
-            int contador = 0;
 
-            com.itextpdf.text.Document documento = new com.itextpdf.text.Document();
-            String ruta = System.getProperty("user.home");// Se encarga de obtener la ubicación del directorio de inicio del usuario actual del sistema. 
-            String nombrePDF = "/OneDrive/Escritorio/Reporte_Proveedores.pdf";// Se construye la direccion donde se va a generar y el nombre del PDF.
-            /**
-             * El bucle while se encarga de comprobar si un PDF con el mismo
-             * nombre ya existe. Si existe un PDF con ese nombre, se incrementa
-             * el contador y se agrega ese contador al nombre.
-             */
-            while (new File(ruta + nombrePDF).exists()) {
-                contador++;
-                nombrePDF = "/OneDrive/Escritorio/Reporte_Proveedores(" + contador + ").pdf";
+            //Logica para guardar-----------------------------------------------
+            // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar PDF del producto asociado");
+            fileChooser.setSelectedFile(new File("Producto_Asociado.pdf")); // Nombre por defecto
+
+            // Mostrar el diálogo de guardar
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection != JFileChooser.APPROVE_OPTION) {
+                System.out.println("Operación de guardado cancelada por el usuario.");
+                return; // Salir si el usuario cancela
             }
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + nombrePDF));
+
+            File fileToSave = fileChooser.getSelectedFile();
+            String finalFileName = fileToSave.getAbsolutePath();
+
+            // Verifica si el archivo ya existe
+            if (fileToSave.exists()) {
+                int overwrite = JOptionPane.showConfirmDialog(null,
+                        "El archivo ya existe. ¿Quieres sobrescribirlo?", "Confirmar",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (overwrite != JOptionPane.YES_OPTION) {
+                    return; // Si el usuario elige no sobrescribir, salimos
+                }
+            }
+            Document documento = new Document();
+            PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
+            //Logica para guardar-----------------------------------------------
             //-------------------------------------------------------------------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
             header.scaleToFit(650, 1000);
@@ -84,7 +101,7 @@ public class ProductosAsociadosPDF {
             documento.add(texto);
 
             documento.close();
-            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF del proveedor se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("EL PDF se creó correctamente", "El PDF se genero en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }
