@@ -8,6 +8,7 @@ import com.raven.crud.ProveedoresAgregarBaseDatos1;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Proveedor;
+import excel.ProductosAsociadoExcel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -323,6 +324,7 @@ public class Proveedores_Form extends Form {
     }//GEN-LAST:event_jTextFieldKeyReleased
     //JButton para ver con mas detalle los productos asociados
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ProductosAsociadoExcel excel = new ProductosAsociadoExcel();
         ProductosAsociadosPDF pdf = new ProductosAsociadosPDF();
         ProductosAsociados pa = new ProductosAsociados();
         ClienteServices cs = new ClienteServices();
@@ -347,7 +349,8 @@ public class Proveedores_Form extends Form {
                         pdf.pdfPorPaciente(aux.getId());
                         pc.closePopup();
                     } else if ( i == 2) {
-                        //Aqui llamamos al metodo para imprimir el excel
+                        excel.productoAsociadoExcel(aux.getId());
+                        pc.closePopup();
                     } else {
                     pc.closePopup();
                     }

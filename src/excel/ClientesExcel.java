@@ -244,7 +244,7 @@ public class ClientesExcel {
         //Creamos el archivo Excel
         Workbook book = new XSSFWorkbook();
         //Creamos la pestaña
-        Sheet sheet = book.createSheet("Clientes");
+        Sheet sheet = book.createSheet("Cliente");
 
         try {
             //Agregamos una imagen
