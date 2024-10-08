@@ -390,7 +390,7 @@ public class ClientesExcel {
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Guardar Archivo Excel");
-            fileChooser.setSelectedFile(new File("ReporteCliente.xlsx")); // Nombre por defecto
+            fileChooser.setSelectedFile(new File("ReporteClientes.xlsx")); // Nombre por defecto
 
             // Mostrar el diálogo de guardar
             int userSelection = fileChooser.showSaveDialog(null);
