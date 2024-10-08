@@ -341,13 +341,15 @@ public class Proveedores_Form extends Form {
                         return true;
                     }
                 };
-                String actions[] = new String[]{"Cancelar", "Impirmir PDF"};
+                String actions[] = new String[]{"Cancelar", "Impirmir PDF","Imprimir Excel"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(pa, "Productos asociados", actions, (pc, i) -> {
                     if (i == 1) {
                         pdf.pdfPorPaciente(aux.getId());
                         pc.closePopup();
+                    } else if ( i == 2) {
+                        //Aqui llamamos al metodo para imprimir el excel
                     } else {
-                        pc.closePopup();
+                    pc.closePopup();
                     }
                 }), option);
             } else {
@@ -357,7 +359,7 @@ public class Proveedores_Form extends Form {
             MessageAlerts.getInstance().showMessage("Error", "Seleccione un proveedor para mostrar la informacion solicitada", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    //JButton para imprimir el pdf de la tabla
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFTablaActionPerformed
         ProductosAsociadosPDF pdf = new ProductosAsociadosPDF();
         pdf.pdfTablaProveedores();
