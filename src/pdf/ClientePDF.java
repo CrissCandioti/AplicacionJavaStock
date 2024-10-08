@@ -5,10 +5,6 @@
 package pdf;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import com.itextpdf.text.*; // Asegúrate de tener las importaciones necesarias
-import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
