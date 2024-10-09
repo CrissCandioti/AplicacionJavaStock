@@ -221,6 +221,10 @@ public class ProductoExcel {
             celdaDescripcion.setCellStyle(headerSyleContenido);
             celdaDescripcion.setCellValue(aux.getDescripcion());
 
+            //CeldaImagen
+            Cell celdaImagen = row1.createCell(14);
+            celdaImagen.setCellStyle(headerSyleContenido);
+            celdaImagen.setCellValue(aux.getDescripcion());
             //Contenido de nuestro reporte
             //Empezamos a generar el reporte.
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
