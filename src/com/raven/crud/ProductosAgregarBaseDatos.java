@@ -380,6 +380,9 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             String variedad = jTextFieldVariedad.getText();
             double precioCosto = Double.parseDouble(jTextFieldPrecioCosto.getText());
             double precioVenta = Double.parseDouble(jTextFieldPrecioVenta.getText());
+            //Logica para ganancia y porcentaje
+
+            //Logica para ganancia y porcentaje
             int stock = Integer.parseInt(jTextFieldStock.getText());
             String marca = jTextFieldMarca.getText();
             String tipoProducto = jTextFieldTipoProducto.getText();
@@ -466,9 +469,11 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             aux.setStock(Integer.parseInt(jTextFieldStock.getText()));
             //Problemas con los double verificar y correguir
             aux.setPrecioCosto(Double.parseDouble(jTextFieldPrecioCosto.getText()));
-            aux.setPrecioventa(2);
+            aux.setPrecioventa(Double.parseDouble(jTextFieldPrecioVenta.getText()));
+            //Logica para la ganancia y el porcentaje
             aux.setGanancias(2);
             aux.setPorcentajeGanancias(2);
+            //Logica para la ganancia y el porcentaje            
             //Se trae la imagen
             byte[] imagen = null;
             if (profile.getPath() == null) {
