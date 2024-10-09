@@ -52,13 +52,13 @@
                   <Component id="jTextFieldTipoProducto" alignment="0" max="32767" attributes="0"/>
                   <Component id="jComboBoxProveedor" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTextFieldStock" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jFormattedTextFieldPrecioCosto" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jFormattedTextFieldPrecioVenta" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTextFieldMarca" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTextFieldVariedad" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTextFieldNombre" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Component id="jPanelImagenProducto" max="32767" attributes="0"/>
+                  <Component id="jTextFieldPrecioCosto" max="32767" attributes="0"/>
+                  <Component id="jTextFieldPrecioVenta" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
           </Group>
@@ -90,12 +90,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextFieldPrecioCosto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldPrecioCosto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextFieldPrecioVenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldPrecioVenta" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -212,20 +212,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldFecha">
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldPrecioCosto">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#,##0.##" subtype="-1" type="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldPrecioVenta">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#,##0.##" subtype="-1" type="0"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
@@ -354,6 +340,10 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldPrecioCosto">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldPrecioVenta">
     </Component>
   </SubComponents>
 </Form>

@@ -77,8 +77,6 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreadescipcion = new javax.swing.JTextArea();
         jFormattedTextFieldFecha = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldPrecioCosto = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldPrecioVenta = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
         jTextFieldStock = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -94,6 +92,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jButtonAgregarImagen = new javax.swing.JButton();
         jButtonBorrarImagen = new javax.swing.JButton();
         jTextFieldID = new javax.swing.JTextField();
+        jTextFieldPrecioCosto = new javax.swing.JTextField();
+        jTextFieldPrecioVenta = new javax.swing.JTextField();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Nombre");
@@ -139,10 +139,6 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         jTextAreadescipcion.setRows(5);
         jTextAreadescipcion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextAreadescipcion);
-
-        jFormattedTextFieldPrecioCosto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
-
-        jFormattedTextFieldPrecioVenta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("Stock");
@@ -255,13 +251,13 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                     .addComponent(jTextFieldTipoProducto)
                     .addComponent(jComboBoxProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldStock)
-                    .addComponent(jFormattedTextFieldPrecioCosto)
-                    .addComponent(jFormattedTextFieldPrecioVenta)
                     .addComponent(jTextFieldMarca)
                     .addComponent(jTextFieldVariedad)
                     .addComponent(jTextFieldNombre)
                     .addComponent(jScrollPane1)
-                    .addComponent(jPanelImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldPrecioCosto)
+                    .addComponent(jTextFieldPrecioVenta))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -286,11 +282,11 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jFormattedTextFieldPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jFormattedTextFieldPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -382,8 +378,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             }
             String contenido = jTextFieldContenido.getText();
             String variedad = jTextFieldVariedad.getText();
-            double precioCosto = Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString());
-            double precioVenta = Double.parseDouble(jFormattedTextFieldPrecioVenta.getValue().toString());
+            double precioCosto = Double.parseDouble(jTextFieldPrecioCosto.getText());
+            double precioVenta = Double.parseDouble(jTextFieldPrecioVenta.getText());
             int stock = Integer.parseInt(jTextFieldStock.getText());
             String marca = jTextFieldMarca.getText();
             String tipoProducto = jTextFieldTipoProducto.getText();
@@ -427,8 +423,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
             datePicker.setSelectedDate(localDate);
-            jFormattedTextFieldPrecioCosto.setText(String.valueOf(aux.getPrecioCosto()));
-            jFormattedTextFieldPrecioVenta.setText(String.valueOf(aux.getPrecioventa()));
+            jTextFieldPrecioCosto.setText(String.valueOf(aux.getPrecioCosto()));
+            jTextFieldPrecioVenta.setText(String.valueOf(aux.getPrecioventa()));
             jTextFieldStock.setText(String.valueOf(aux.getStock()));
             //logica para setear el comboBox
             Proveedor index = ps.buscarProveedorPorId(aux.getId());
@@ -469,13 +465,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             aux.setContenido(jTextFieldContenido.getText());
             aux.setStock(Integer.parseInt(jTextFieldStock.getText()));
             //Problemas con los double verificar y correguir
-            if (jFormattedTextFieldPrecioCosto.getValue() == null) {
-                double precioCosto = ps.buscarProductoPorID(4).getPrecioCosto();
-                aux.setPrecioCosto(precioCosto);
-            } else {
-                double precioCosto = Double.parseDouble(jFormattedTextFieldPrecioCosto.getValue().toString());
-                aux.setPrecioCosto(precioCosto);
-            }
+            aux.setPrecioCosto(Double.parseDouble(jTextFieldPrecioCosto.getText()));
             aux.setPrecioventa(2);
             aux.setGanancias(2);
             aux.setPorcentajeGanancias(2);
@@ -524,8 +514,6 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     private javax.swing.JButton jButtonBorrarImagen;
     private javax.swing.JComboBox<Proveedor> jComboBoxProveedor;
     private javax.swing.JFormattedTextField jFormattedTextFieldFecha;
-    private javax.swing.JFormattedTextField jFormattedTextFieldPrecioCosto;
-    private javax.swing.JFormattedTextField jFormattedTextFieldPrecioVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -545,6 +533,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldMarca;
     private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldPrecioCosto;
+    private javax.swing.JTextField jTextFieldPrecioVenta;
     private javax.swing.JTextField jTextFieldStock;
     private javax.swing.JTextField jTextFieldTipoProducto;
     private javax.swing.JTextField jTextFieldVariedad;
