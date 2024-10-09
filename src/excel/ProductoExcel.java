@@ -41,9 +41,14 @@ import services.ProductoServices;
  * @author criss
  */
 public class ProductoExcel {
-    //Metodo creado para crear el PDF de un producto
 
-    public void excelProductoSeleccionado(int id) {
+    public static void main(String[] args) {
+        // TODO code application logic here
+        excelProductoSeleccionado(4);
+    }
+
+    //Metodo creado para crear el PDF de un producto
+    public static void excelProductoSeleccionado(int id) {
 
         //Conexion a services
         ProductoServices ps = new ProductoServices();
@@ -110,7 +115,7 @@ public class ProductoExcel {
              */
 
             //Continuamos con los titulos que va a contener los reportes
-            String[] cabecera = new String[]{"Codigo", "Variedad", "Nombre", "Fecha de ingreso", "Marca", "Tipo de producto", "Contenido", "Stock", "Precio costo", "Precio venta", "Ganancia", "Porcentaje ganancia", "Proveedor", "Descripcion"};
+            String[] cabecera = new String[]{"Codigo", "Imagen", "Variedad", "Nombre", "Fecha de ingreso", "Marca", "Tipo de producto", "Contenido", "Stock", "Precio costo", "Precio venta", "Ganancia", "Porcentaje ganancia", "Proveedor", "Descripcion"};
             //Creamos el estilo para las celdas del encabezado
             CellStyle headerSyle = book.createCellStyle();
             headerSyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());//Color de relleno
@@ -157,74 +162,90 @@ public class ProductoExcel {
             celdaCodigo.setCellValue(aux.getId());
 
             //Celda Variedad
-            Cell celdaVariedad = row1.createCell(1);
+            Cell celdaVariedad = row1.createCell(2);
             celdaVariedad.setCellStyle(headerSyleContenido);
-            celdaCodigo.setCellValue(aux.getVariedad());
+            celdaVariedad.setCellValue(aux.getVariedad());
 
             //CeldaNombre
-            Cell celdaNombre = row1.createCell(2);
+            Cell celdaNombre = row1.createCell(3);
             celdaNombre.setCellStyle(headerSyleContenido);
             celdaNombre.setCellValue(aux.getNombre());
 
             //CeldaFechaIngreso
-            Cell celdaFechaIngreso = row1.createCell(3);
+            Cell celdaFechaIngreso = row1.createCell(4);
             celdaFechaIngreso.setCellStyle(headerSyleContenido);
             celdaFechaIngreso.setCellValue(aux.getFechaIngreso());
 
             //CeldaMarca
-            Cell celdaMarca = row1.createCell(4);
+            Cell celdaMarca = row1.createCell(5);
             celdaMarca.setCellStyle(headerSyleContenido);
             celdaMarca.setCellValue(aux.getMarca());
 
             //CeldaTipoProducto
-            Cell celdaTipoProducto = row1.createCell(5);
+            Cell celdaTipoProducto = row1.createCell(6);
             celdaTipoProducto.setCellStyle(headerSyleContenido);
             celdaTipoProducto.setCellValue(aux.getTipoProducto());
 
             //CeldaContenido
-            Cell celdaContenido = row1.createCell(6);
+            Cell celdaContenido = row1.createCell(7);
             celdaContenido.setCellStyle(headerSyleContenido);
             celdaContenido.setCellValue(aux.getContenido());
 
             //CeldaStock
-            Cell celdaStock = row1.createCell(7);
+            Cell celdaStock = row1.createCell(8);
             celdaStock.setCellStyle(headerSyleContenido);
             celdaStock.setCellValue(aux.getStock());
 
             //CeldaPrecioCosto
-            Cell celdaPrecioCosto = row1.createCell(8);
+            Cell celdaPrecioCosto = row1.createCell(9);
             celdaPrecioCosto.setCellStyle(headerSyleContenido);
             celdaPrecioCosto.setCellValue(aux.getPrecioCosto());
 
             //CeldaPrecioVenta
-            Cell celdaPrecioVenta = row1.createCell(9);
+            Cell celdaPrecioVenta = row1.createCell(10);
             celdaPrecioVenta.setCellStyle(headerSyleContenido);
             celdaPrecioVenta.setCellValue(aux.getTipoProducto());
 
             //CeldaGanancia
-            Cell celdaGanancia = row1.createCell(10);
+            Cell celdaGanancia = row1.createCell(11);
             celdaGanancia.setCellStyle(headerSyleContenido);
             celdaGanancia.setCellValue(aux.getGanancias());
 
             //CeldaPorcentajeGanancia
-            Cell celdaPorcentajeGanancia = row1.createCell(11);
+            Cell celdaPorcentajeGanancia = row1.createCell(12);
             celdaPorcentajeGanancia.setCellStyle(headerSyleContenido);
             celdaPorcentajeGanancia.setCellValue(aux.getPorcentajeGanancias());
 
             //CeldaProveedor
-            Cell celdaProveedor = row1.createCell(12);
+            Cell celdaProveedor = row1.createCell(13);
             celdaProveedor.setCellStyle(headerSyleContenido);
             celdaProveedor.setCellValue(aux.getProveedor().toString());
 
             //CeldaDescripcion
-            Cell celdaDescripcion = row1.createCell(13);
+            Cell celdaDescripcion = row1.createCell(14);
             celdaDescripcion.setCellStyle(headerSyleContenido);
             celdaDescripcion.setCellValue(aux.getDescripcion());
 
             //CeldaImagen
-            Cell celdaImagen = row1.createCell(14);
-            celdaImagen.setCellStyle(headerSyleContenido);
-            celdaImagen.setCellValue(aux.getDescripcion());
+            //Traemos la imagen
+            byte[] Image = aux.getImagen();
+            //Traemos el index de la imagen
+            int imageIndex = book.addPicture(Image, Workbook.PICTURE_TYPE_JPEG);
+
+            //Ahora agregamos esta imagen a nuestro archivo
+            CreationHelper help2 = book.getCreationHelper();
+            Drawing draw2 = sheet.createDrawingPatriarch();//Para poder cargar la imagen
+            //Sacamos el ancho de esta imagen para colocarla de forma correcta
+            ClientAnchor anchor2 = help2.createClientAnchor();
+            //Le vamos a indicar en donde se posiciona la imagen, en que columna
+            anchor2.setCol1(1);
+            anchor2.setRow1(6);
+
+            //Para crear la imagen
+            Picture pict2 = draw2.createPicture(anchor2, imageIndex);
+            //Cambiamos el tamaño
+            pict2.resize(1, 3);//El parametro donde va a empezar; y cuanto va a consumir de espacio
+
             //Contenido de nuestro reporte
             //Empezamos a generar el reporte.
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
