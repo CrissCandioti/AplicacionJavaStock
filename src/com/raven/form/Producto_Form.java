@@ -9,6 +9,7 @@ import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import com.raven.theme.ProfileTableRenderer;
 import entidades.Productos;
+import excel.ProductoExcel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -372,7 +373,8 @@ public class Producto_Form extends Form {
     }//GEN-LAST:event_jButtonPDFTablaActionPerformed
     //JButton para imprimir el Excel de la tabla
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelTablaActionPerformed
-        // TODO add your handling code here:
+        ProductoExcel pe = new ProductoExcel();
+        pe.excelTablaProductos();
     }//GEN-LAST:event_jButtonExcelTablaActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un producto o varios o ninguno.

@@ -5,7 +5,6 @@
 package excel;
 
 import entidades.Productos;
-import entidades.Proveedor;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,13 +43,8 @@ import services.ProductoServices;
  */
 public class ProductoExcel {
 
-    public static void main(String[] args) {
-        // TODO code application logic here
-        excelTablaProductos();
-    }
-
     //Metodo creado para crear el PDF de un producto
-    public static void excelProductoSeleccionado(int id) {
+    public void excelProductoSeleccionado(int id) {
 
         //Conexion a services
         ProductoServices ps = new ProductoServices();
@@ -288,7 +282,7 @@ public class ProductoExcel {
     }
 
     //Metodo para construir el excel del JButton de la tabla excel ubicado en productos
-    public static void excelTablaProductos() {
+    public void excelTablaProductos() {
 
         //Conexion a services
         ProductoServices ps = new ProductoServices();
