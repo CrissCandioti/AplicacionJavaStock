@@ -166,22 +166,67 @@ public class ProductoExcel {
             celdaNombre.setCellStyle(headerSyleContenido);
             celdaNombre.setCellValue(aux.getNombre());
 
-            //CeldaProducto
-            Cell celdaApellido = row1.createCell(2);
-            celdaApellido.setCellStyle(headerSyleContenido);
-            celdaApellido.setCellValue(index);
+            //CeldaFechaIngreso
+            Cell celdaFechaIngreso = row1.createCell(3);
+            celdaFechaIngreso.setCellStyle(headerSyleContenido);
+            celdaFechaIngreso.setCellValue(aux.getFechaIngreso());
 
-            //CeldaNotas
-            Cell celdaNotas = row1.createCell(3);
-            celdaNotas.setCellStyle(headerSyleContenido);
-            celdaNotas.setCellValue(aux.getNotas());
+            //CeldaMarca
+            Cell celdaMarca = row1.createCell(4);
+            celdaMarca.setCellStyle(headerSyleContenido);
+            celdaMarca.setCellValue(aux.getMarca());
+
+            //CeldaTipoProducto
+            Cell celdaTipoProducto = row1.createCell(5);
+            celdaTipoProducto.setCellStyle(headerSyleContenido);
+            celdaTipoProducto.setCellValue(aux.getTipoProducto());
+
+            //CeldaContenido
+            Cell celdaContenido = row1.createCell(6);
+            celdaContenido.setCellStyle(headerSyleContenido);
+            celdaContenido.setCellValue(aux.getContenido());
+
+            //CeldaStock
+            Cell celdaStock = row1.createCell(7);
+            celdaStock.setCellStyle(headerSyleContenido);
+            celdaStock.setCellValue(aux.getStock());
+
+            //CeldaPrecioCosto
+            Cell celdaPrecioCosto = row1.createCell(8);
+            celdaPrecioCosto.setCellStyle(headerSyleContenido);
+            celdaPrecioCosto.setCellValue(aux.getPrecioCosto());
+
+            //CeldaPrecioVenta
+            Cell celdaPrecioVenta = row1.createCell(9);
+            celdaPrecioVenta.setCellStyle(headerSyleContenido);
+            celdaPrecioVenta.setCellValue(aux.getTipoProducto());
+
+            //CeldaGanancia
+            Cell celdaGanancia = row1.createCell(10);
+            celdaGanancia.setCellStyle(headerSyleContenido);
+            celdaGanancia.setCellValue(aux.getGanancias());
+
+            //CeldaPorcentajeGanancia
+            Cell celdaPorcentajeGanancia = row1.createCell(11);
+            celdaPorcentajeGanancia.setCellStyle(headerSyleContenido);
+            celdaPorcentajeGanancia.setCellValue(aux.getPorcentajeGanancias());
+
+            //CeldaProveedor
+            Cell celdaProveedor = row1.createCell(12);
+            celdaProveedor.setCellStyle(headerSyleContenido);
+            celdaProveedor.setCellValue(aux.getProveedor().toString());
+
+            //CeldaDescripcion
+            Cell celdaDescripcion = row1.createCell(13);
+            celdaDescripcion.setCellStyle(headerSyleContenido);
+            celdaDescripcion.setCellValue(aux.getDescripcion());
+
             //Contenido de nuestro reporte
-
             //Empezamos a generar el reporte.
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Guardar Archivo Excel");
-            fileChooser.setSelectedFile(new File("ReporteProveedor.xlsx")); // Nombre por defecto
+            fileChooser.setSelectedFile(new File("ReporteProducto.xlsx")); // Nombre por defecto
 
             // Mostrar el diálogo de guardar
             int userSelection = fileChooser.showSaveDialog(null);
