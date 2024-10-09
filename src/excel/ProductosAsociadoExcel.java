@@ -4,8 +4,6 @@
  */
 package excel;
 
-import entidades.Cliente;
-import entidades.Productos;
 import entidades.Proveedor;
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,6 +44,7 @@ import services.ProveedorServices;
  */
 public class ProductosAsociadoExcel {
 
+    //Metodo para construir el excel del JButton de productosAsociados ubicado en proveedores
     public void productoAsociadoExcel(int id) {
 
         //Conexion a services
@@ -217,7 +216,8 @@ public class ProductosAsociadoExcel {
         }
     }
 
-    public void TablaClientesExcelReporte() {
+    //Metodo para construir el excel del JButton de la tabla excel ubicado en proveedores
+    public void TablaProveedoresExcelReporte() {
 
         //Conexion a services
         ProductoServices pros = new ProductoServices();

@@ -42,6 +42,7 @@ import services.ClienteServices;
  */
 public class ClientesExcel {
 
+    //Metodo creado para crear el excel del cliente, para agregar a un JButton proximamente
     public void ClientesExcelReporte() {
 
         //Conexion a services
@@ -236,6 +237,7 @@ public class ClientesExcel {
         }
     }
 
+    //Metodo creado para crear la tabla de los clientes ubicado en el JButton de los clientes
     public void TablaClientesExcelReporte() {
 
         //Conexion a services

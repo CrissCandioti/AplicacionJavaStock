@@ -382,7 +382,7 @@ public class Proveedores_Form extends Form {
 //JButton para imprimir la tabla Excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelTablaActionPerformed
         ProductosAsociadoExcel pae = new ProductosAsociadoExcel();
-        pae.TablaClientesExcelReporte();
+        pae.TablaProveedoresExcelReporte();
     }//GEN-LAST:event_jButtonExcelTablaActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un proveedor o varios o ninguno.
