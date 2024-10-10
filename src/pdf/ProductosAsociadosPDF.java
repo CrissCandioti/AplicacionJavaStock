@@ -116,8 +116,8 @@ public class ProductosAsociadosPDF {
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar PDF del producto asociado");
-            fileChooser.setSelectedFile(new File("Producto_Asociado.pdf")); // Nombre por defecto
+            fileChooser.setDialogTitle("Guardar PDF de la tabla proveedores");
+            fileChooser.setSelectedFile(new File("Tabla_Proveedores.pdf")); // Nombre por defecto
 
             // Mostrar el diálogo de guardar
             int userSelection = fileChooser.showSaveDialog(null);
