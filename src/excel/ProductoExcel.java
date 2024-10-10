@@ -268,7 +268,7 @@ public class ProductoExcel {
                     book.write(fileOut);
                     MessageAlerts.getInstance().showMessage("EL Excel se creó correctamente", "El Excel se genero en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
                 } catch (IOException ex) {
-                    Logger.getLogger(ClientesExcel.class.getName()).log(Level.SEVERE, null, ex);
+                    MessageAlerts.getInstance().showMessage("EL Excel no se pudo crear", "Este error se produjo debido a que el excel que se desea sobreescribir esta abierto. Cierrelo e intente nuevamente ", MessageAlerts.MessageType.ERROR);
                 }
             } else {
                 System.out.println("Operación de guardado cancelada por el usuario.");
@@ -496,7 +496,7 @@ public class ProductoExcel {
                     book.write(fileOut);
                     MessageAlerts.getInstance().showMessage("EL Excel se creó correctamente", "El Excel se genero en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
                 } catch (IOException ex) {
-                    Logger.getLogger(ClientesExcel.class.getName()).log(Level.SEVERE, null, ex);
+                    MessageAlerts.getInstance().showMessage("EL Excel no se pudo crear", "Este error se produjo debido a que el excel que se desea sobreescribir esta abierto. Cierrelo e intente nuevamente ", MessageAlerts.MessageType.ERROR);
                 }
             } else {
                 System.out.println("Operación de guardado cancelada por el usuario.");
