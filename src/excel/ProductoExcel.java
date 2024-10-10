@@ -399,6 +399,7 @@ public class ProductoExcel {
             // Contenido de nuestro reporte
             for (Productos aux : listaProductos) {
                 Row filaDatos = sheet.createRow(folaDatos++); // Crear nueva fila y luego incrementar filaDatos
+                filaDatos.setHeightInPoints(50); // Ajusta la altura a 50 puntos
                 for (int i = 0; i < 15; i++) {//El 9 es por la cantidad de valores de la entidad
                     Cell celdaDatos = filaDatos.createCell(i);
                     celdaDatos.setCellStyle(headerSyleContenido);
