@@ -113,23 +113,35 @@ public class ProductosAsociadosPDF {
             ProductoServices pros = new ProductoServices();
             ProveedorServices ps = new ProveedorServices();
             String index = null;
+            //Logica para guardar-----------------------------------------------
+            // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar PDF del producto asociado");
+            fileChooser.setSelectedFile(new File("Producto_Asociado.pdf")); // Nombre por defecto
 
-            int contador = 0;
-            Document documento = new Document();
-            //------------------------------------------------------------------------------------------------------
-            String ruta = System.getProperty("user.home"); // Se encarga de obtener la ubicación del directorio de inicio del usuario actual del sistema. 
-            String nombrePDF = "/OneDrive/Escritorio/Tabla_Proveedores.pdf"; // Se construye la direccion donde se va a generar y el nombre del PDF.
-            /**
-             * El bucle while se encarga de comprobar si un PDF con el mismo
-             * nombre ya existe. Si existe un PDF con ese nombre, se incrementa
-             * el contador y se agrega ese contador al nombre.
-             */
-            while (new File(ruta + nombrePDF).exists()) {
-                contador++;
-                nombrePDF = "/OneDrive/Escritorio/Tabla_Proveedores(" + contador + ").pdf";
+            // Mostrar el diálogo de guardar
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection != JFileChooser.APPROVE_OPTION) {
+                System.out.println("Operación de guardado cancelada por el usuario.");
+                return; // Salir si el usuario cancela
             }
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + nombrePDF));
-            //-------------------------------------------------------------------------------------------------------
+
+            File fileToSave = fileChooser.getSelectedFile();
+            String finalFileName = fileToSave.getAbsolutePath();
+
+            // Verifica si el archivo ya existe
+            if (fileToSave.exists()) {
+                int overwrite = JOptionPane.showConfirmDialog(null,
+                        "El archivo ya existe. ¿Quieres sobrescribirlo?", "Confirmar",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (overwrite != JOptionPane.YES_OPTION) {
+                    return; // Si el usuario elige no sobrescribir, salimos
+                }
+            }
+            Document documento = new Document();
+            PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
+            //Logica para guardar-----------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
             header.scaleToFit(650, 1000);
             header.setAlignment(Chunk.ALIGN_CENTER);
