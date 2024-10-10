@@ -423,7 +423,7 @@ public class ProductoExcel {
                                 anchor2.setRow1(folaDatos - 1);
                                 // Para crear la imagen
                                 pict2 = draw2.createPicture(anchor2, imageIndex); // Usa imageIndex en vez de imgIndex
-                                pict2.resize(1, 3); // Cambiar el tamaño
+                                pict2.resize(1, 1); // Cambiar el tamaño
                             }
                             break; // Agregar break aquí
                         case 2:
