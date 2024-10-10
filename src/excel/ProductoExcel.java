@@ -392,35 +392,40 @@ public class ProductoExcel {
             //Contenido de nuestro reporte
             // Inicializamos el contador de filas a partir de donde comenzarán los datos
             int folaDatos = 6; // La fila donde comienzas a agregar datos
-
+            CreationHelper help2 = null;
+            Drawing draw2 = null;
+            ClientAnchor anchor2 = null;
+            Picture pict2 = null;
             // Contenido de nuestro reporte
             for (Productos aux : listaProductos) {
                 Row filaDatos = sheet.createRow(folaDatos++); // Crear nueva fila y luego incrementar filaDatos
-                for (int i = 0; i < 4; i++) {//El 9 es por la cantidad de valores de la entidad
+                for (int i = 0; i < 15; i++) {//El 9 es por la cantidad de valores de la entidad
                     Cell celdaDatos = filaDatos.createCell(i);
                     celdaDatos.setCellStyle(headerSyleContenido);
                     // Asigna los valores correspondientes según el índice
                     switch (i) {
                         case 0:
                             celdaDatos.setCellValue(aux.getId());
+                            break;
                         case 1:
                             byte[] image = aux.getImagen();
-                            //Traemos el index de la imagen
-                            int imageIndex = book.addPicture(image, Workbook.PICTURE_TYPE_JPEG);
+                            if (image != null && image.length > 0) { // Verificar que la imagen no sea nula
+                                // Traemos el index de la imagen
+                                int imageIndex = book.addPicture(image, Workbook.PICTURE_TYPE_JPEG);
 
-                            //Ahora agregamos esta imagen a nuestro archivo
-                            CreationHelper help2 = book.getCreationHelper();
-                            Drawing draw2 = sheet.createDrawingPatriarch();//Para poder cargar la imagen
-                            //Sacamos el ancho de esta imagen para colocarla de forma correcta
-                            ClientAnchor anchor2 = help2.createClientAnchor();
-                            //Le vamos a indicar en donde se posiciona la imagen, en que columna
-                            anchor2.setCol1(i);
-                            anchor2.setRow1(folaDatos - 1);
-                            //Para crear la imagen
-                            Picture pict2 = draw2.createPicture(anchor, imgIndex);
-                            //Cambiamos el tamaño
-                            pict.resize(1, 3);//El parametro donde va a empezar; y cuanto va a consumir de espacio
-                            break;
+                                // Ahora agregamos esta imagen a nuestro archivo
+                                help2 = book.getCreationHelper();
+                                draw2 = sheet.createDrawingPatriarch(); // Para poder cargar la imagen
+                                // Sacamos el ancho de esta imagen para colocarla de forma correcta
+                                anchor2 = help2.createClientAnchor();
+                                // Le vamos a indicar en donde se posiciona la imagen, en que columna
+                                anchor2.setCol1(i);
+                                anchor2.setRow1(folaDatos - 1);
+                                // Para crear la imagen
+                                pict2 = draw2.createPicture(anchor2, imageIndex); // Usa imageIndex en vez de imgIndex
+                                pict2.resize(1, 3); // Cambiar el tamaño
+                            }
+                            break; // Agregar break aquí
                         case 2:
                             celdaDatos.setCellValue(aux.getVariedad());
                             break;
