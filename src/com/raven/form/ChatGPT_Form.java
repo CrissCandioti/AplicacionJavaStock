@@ -13,16 +13,17 @@ public class ChatGPT_Form extends Form {
     private void initComponents() {
 
         background1 = new raven.chat.swing.Background();
+        chatArea1 = new raven.chat.component.ChatArea();
 
         javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background1);
         background1.setLayout(background1Layout);
         background1Layout.setHorizontalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 603, Short.MAX_VALUE)
+            .addComponent(chatArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
         );
         background1Layout.setVerticalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 531, Short.MAX_VALUE)
+            .addComponent(chatArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -39,5 +40,6 @@ public class ChatGPT_Form extends Form {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private raven.chat.swing.Background background1;
+    private raven.chat.component.ChatArea chatArea1;
     // End of variables declaration//GEN-END:variables
 }
