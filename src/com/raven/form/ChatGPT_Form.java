@@ -12,30 +12,32 @@ public class ChatGPT_Form extends Form {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelLogo = new javax.swing.JLabel();
+        background1 = new raven.chat.swing.Background();
 
-        jLabelLogo.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/inicio.png"))); // NOI18N
+        javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background1);
+        background1.setLayout(background1Layout);
+        background1Layout.setHorizontalGroup(
+            background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 603, Short.MAX_VALUE)
+        );
+        background1Layout.setVerticalGroup(
+            background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 531, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jLabelLogo)
-                .addContainerGap(100, Short.MAX_VALUE))
+            .addComponent(background1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabelLogo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(background1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelLogo;
+    private raven.chat.swing.Background background1;
     // End of variables declaration//GEN-END:variables
 }
