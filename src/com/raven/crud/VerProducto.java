@@ -4,6 +4,10 @@
  */
 package com.raven.crud;
 
+import entidades.Productos;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author criss
@@ -213,6 +217,23 @@ public class VerProducto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelVerTipoProducto;
     private javax.swing.JLabel jLabelVerVariedad;
     // End of variables declaration//GEN-END:variables
-    public void seteoValores(Object data) {
+
+    public void seteoValores(Productos aux) {
+        try {
+            DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
+            jLabelVerNombre.setText(aux.getNombre());
+            jLabelVerContenido.setText(aux.getContenido());
+            jLabelVerMarca.setText(aux.getMarca());
+            jLabelVerProveedor.setText(aux.getProveedor().getNombre());
+            jLabelVerFecha.setText(df.format(aux.getFechaIngreso()));
+            jLabelVerVariedad.setText(aux.getVariedad());
+            jLabelVerPrecioCosto.setText(String.valueOf(aux.getPrecioCosto()));
+            jLabelVerPrecioVenta.setText(String.valueOf(aux.getPrecioventa()));
+            jLabelVerStock.setText(String.valueOf(aux.getStock()));
+            jLabelVerTipoProducto.setText(aux.getTipoProducto());
+            jLabelVerDescripcion.setText(aux.getDescripcion());
+        } catch (Exception e) {
+            System.out.println("Error en el metodo seteoValores de la clase VerProducto");
+        }
     }
 }

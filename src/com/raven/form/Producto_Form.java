@@ -5,6 +5,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
 import com.raven.crud.HistorialCliente;
 import com.raven.crud.ProductosAgregarBaseDatos;
+import com.raven.crud.VerProducto;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import com.raven.theme.ProfileTableRenderer;
@@ -335,14 +336,14 @@ public class Producto_Form extends Form {
     }//GEN-LAST:event_jButton1ActionPerformed
     //JButton para acceder al historial del producto
     private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
-        HistorialCliente historialcliente = new HistorialCliente();
+        VerProducto vp = new VerProducto();
         List<Productos> list = Seleccionarusuario();
         if (!list.isEmpty()) {
             if (list.size() == 1) {
                 //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para ver su historial
-                Object data = list.get(0);
-                //Metodo probisorio para ver su historial
-                historialcliente.historialCompraSeteoValores(data);
+                Productos data = list.get(0);
+                //Metodo probisorio para ver el producto con mas detalle
+                vp.seteoValores(data);
                 //Creamos nuevamente la ventana emergente para mostrar los datos
                 DefaultOption option = new DefaultOption() {
                     @Override
@@ -351,16 +352,16 @@ public class Producto_Form extends Form {
                     }
                 };
                 String actions[] = new String[]{"Cancelar"};
-                GlassPanePopup.showPopup(new SimplePopupBorder(historialcliente, "Historial de compras del cliente", actions, (pc, i) -> {
+                GlassPanePopup.showPopup(new SimplePopupBorder(vp, "Historial de compras del cliente", actions, (pc, i) -> {
                     if (i == 0) {
                         pc.closePopup();
                     }
                 }), option);
             } else {
-                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede ver el historial de compras de un solo cliente", MessageAlerts.MessageType.DEFAULT);
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede ver los detalles de un producto", MessageAlerts.MessageType.DEFAULT);
             }
         } else {
-            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para ver su historial", MessageAlerts.MessageType.WARNING);
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un producto para ver sus detalles", MessageAlerts.MessageType.WARNING);
         }
     }//GEN-LAST:event_jButtonVerActionPerformed
     //jTextField la cual buscaremos el producto por su nombre
