@@ -16,34 +16,49 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel12" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel10" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel11" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel5" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel6" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel7" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel8" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" pref="94" max="32767" attributes="0"/>
-                  <Component id="jLabel13" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelVerNombre" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerFecha" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerContenido" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerVariedad" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerPrecioCosto" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerPrecioVenta" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerMarca" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerStock" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerTipoProducto" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerProveedor" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelVerDescripcion" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel14" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelVerGanancia" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerPorcentajeGanancia" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel12" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel10" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel11" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" pref="94" max="32767" attributes="0"/>
+                          <Component id="jLabel13" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelVerNombre" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerFecha" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerContenido" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerVariedad" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerPrecioCosto" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerPrecioVenta" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerMarca" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerStock" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerTipoProducto" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerProveedor" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelVerDescripcion" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
@@ -81,6 +96,16 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelVerPrecioVenta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelVerGanancia" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelVerPorcentajeGanancia" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -232,6 +257,28 @@
     <Component class="javax.swing.JLabel" name="jLabelVerDescripcion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ver Descripcion"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelVerGanancia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Ganancia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelVerPorcentajeGanancia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Porcentaje Ganancia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="text" type="java.lang.String" value="Ganancia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel14">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="text" type="java.lang.String" value="Porcentaje Ganancia"/>
       </Properties>
     </Component>
   </SubComponents>

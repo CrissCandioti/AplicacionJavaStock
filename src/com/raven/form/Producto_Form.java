@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import pdf.ProductoPDF;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -351,9 +352,17 @@ public class Producto_Form extends Form {
                         return true;
                     }
                 };
-                String actions[] = new String[]{"Cancelar"};
+                String actions[] = new String[]{"Cancelar", "Imprimir Excel", "Imprimir PDF"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(vp, "Historial de compras del cliente", actions, (pc, i) -> {
                     if (i == 0) {
+                        pc.closePopup();
+                    } else if (i == 1) {
+                        ProductoExcel pe = new ProductoExcel();
+                        pe.excelProductoSeleccionado(data.getId());
+                        pc.closePopup();
+                    } else if (i == 2) {
+                        ProductoPDF pdf = new ProductoPDF();
+                        pdf.pdfPorProducto(data.getId());
                         pc.closePopup();
                     }
                 }), option);

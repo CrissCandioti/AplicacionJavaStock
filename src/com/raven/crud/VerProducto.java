@@ -52,6 +52,10 @@ public class VerProducto extends javax.swing.JPanel {
         jLabelVerTipoProducto = new javax.swing.JLabel();
         jLabelVerProveedor = new javax.swing.JLabel();
         jLabelVerDescripcion = new javax.swing.JLabel();
+        jLabelVerGanancia = new javax.swing.JLabel();
+        jLabelVerPorcentajeGanancia = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("Stock");
@@ -108,37 +112,57 @@ public class VerProducto extends javax.swing.JPanel {
 
         jLabelVerDescripcion.setText("Ver Descripcion");
 
+        jLabelVerGanancia.setText("Ver Ganancia");
+
+        jLabelVerPorcentajeGanancia.setText("Ver Porcentaje Ganancia");
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel9.setText("Ganancia");
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel14.setText("Porcentaje Ganancia");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelVerNombre)
-                    .addComponent(jLabelVerFecha)
-                    .addComponent(jLabelVerContenido)
-                    .addComponent(jLabelVerVariedad)
-                    .addComponent(jLabelVerPrecioCosto)
-                    .addComponent(jLabelVerPrecioVenta)
-                    .addComponent(jLabelVerMarca)
-                    .addComponent(jLabelVerStock)
-                    .addComponent(jLabelVerTipoProducto)
-                    .addComponent(jLabelVerProveedor)
-                    .addComponent(jLabelVerDescripcion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelVerGanancia)
+                            .addComponent(jLabelVerPorcentajeGanancia)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelVerNombre)
+                            .addComponent(jLabelVerFecha)
+                            .addComponent(jLabelVerContenido)
+                            .addComponent(jLabelVerVariedad)
+                            .addComponent(jLabelVerPrecioCosto)
+                            .addComponent(jLabelVerPrecioVenta)
+                            .addComponent(jLabelVerMarca)
+                            .addComponent(jLabelVerStock)
+                            .addComponent(jLabelVerTipoProducto)
+                            .addComponent(jLabelVerProveedor)
+                            .addComponent(jLabelVerDescripcion))))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -170,6 +194,14 @@ public class VerProducto extends javax.swing.JPanel {
                     .addComponent(jLabelVerPrecioVenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabelVerGanancia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabelVerPorcentajeGanancia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabelVerStock))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -199,17 +231,21 @@ public class VerProducto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelVerContenido;
     private javax.swing.JLabel jLabelVerDescripcion;
     private javax.swing.JLabel jLabelVerFecha;
+    private javax.swing.JLabel jLabelVerGanancia;
     private javax.swing.JLabel jLabelVerMarca;
     private javax.swing.JLabel jLabelVerNombre;
+    private javax.swing.JLabel jLabelVerPorcentajeGanancia;
     private javax.swing.JLabel jLabelVerPrecioCosto;
     private javax.swing.JLabel jLabelVerPrecioVenta;
     private javax.swing.JLabel jLabelVerProveedor;
@@ -232,6 +268,8 @@ public class VerProducto extends javax.swing.JPanel {
             jLabelVerStock.setText(String.valueOf(aux.getStock()));
             jLabelVerTipoProducto.setText(aux.getTipoProducto());
             jLabelVerDescripcion.setText(aux.getDescripcion());
+            jLabelVerPorcentajeGanancia.setText(String.valueOf(aux.getGanancias()));
+            jLabelVerPorcentajeGanancia.setText(String.valueOf(aux.getPorcentajeGanancias()));
         } catch (Exception e) {
             System.out.println("Error en el metodo seteoValores de la clase VerProducto");
         }
