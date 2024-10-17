@@ -171,7 +171,7 @@ public class ProductosAsociadosPDF {
             }
             documento.add(tabla);
             documento.close();
-            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }

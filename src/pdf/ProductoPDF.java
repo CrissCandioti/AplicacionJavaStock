@@ -17,6 +17,8 @@ import entidades.Productos;
 import entidades.Proveedor;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import raven.alerts.MessageAlerts;
@@ -33,6 +35,12 @@ public class ProductoPDF {
         try {
             ProductoServices ps = new ProductoServices();
             Productos aux = ps.buscarProductoPorID(id);
+            byte[] imagenBytes = aux.getImagen(); // Suponiendo que este método devuelve el arreglo de bytes
+            // Crear una imagen a partir de los bytes
+            Image imagen = Image.getInstance(imagenBytes);
+            // Ajustar el tamaño y alineación de la imagen
+            imagen.scaleToFit(200, 200);
+            imagen.setAlignment(Chunk.ALIGN_CENTER);
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
@@ -132,6 +140,7 @@ public class ProductoPDF {
             documento.open();
             documento.add(header);
             documento.add(parrafo);
+            documento.add(imagen);
             documento.add(texto);
 
             documento.close();
@@ -145,13 +154,11 @@ public class ProductoPDF {
         try {
 
             ProductoServices pros = new ProductoServices();
-            ProveedorServices ps = new ProveedorServices();
-            String index = null;
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Guardar PDF de la tabla productos");
-            fileChooser.setSelectedFile(new File("Tabla_Proveedores.pdf")); // Nombre por defecto
+            fileChooser.setSelectedFile(new File("Tabla_Productos.pdf")); // Nombre por defecto
 
             // Mostrar el diálogo de guardar
             int userSelection = fileChooser.showSaveDialog(null);
@@ -190,22 +197,32 @@ public class ProductoPDF {
             documento.add(header);
             documento.add(parrafo);
 
-            PdfPTable tabla = new PdfPTable(4);
+            PdfPTable tabla = new PdfPTable(14);
             tabla.addCell("Codigo");
+            tabla.addCell("Variedad");
             tabla.addCell("Nombre");
-            tabla.addCell("Productos");
-            tabla.addCell("Notas");
+            tabla.addCell("FechaIngreso");
 
-            for (Proveedor aux : ps.listaProveedores()) {
-                index = pros.listaDeProductosDeXProveedor(aux.getId()).toString();
+            for (Productos aux : pros.listaProductos()) {
+                DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
                 tabla.addCell(String.valueOf(aux.getId()));
+                tabla.addCell(aux.getVariedad());
                 tabla.addCell(aux.getNombre());
-                tabla.addCell(index);
-                tabla.addCell(aux.getNotas());
+                tabla.addCell(df.format(aux.getFechaIngreso()));
+                tabla.addCell(aux.getMarca());
+                tabla.addCell(aux.getTipoProducto());
+                tabla.addCell(aux.getContenido());
+                tabla.addCell(String.valueOf(aux.getStock()));
+                tabla.addCell(String.valueOf(aux.getPrecioCosto()));
+                tabla.addCell(String.valueOf(aux.getPrecioventa()));
+                tabla.addCell(String.valueOf(aux.getGanancias()));
+                tabla.addCell(String.valueOf(aux.getPorcentajeGanancias()));
+                tabla.addCell(aux.getProveedor().toString());
+                tabla.addCell(aux.getDescripcion());
             }
             documento.add(tabla);
             documento.close();
-            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de los proveedores se genero en el escritorio", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de la tabla de los productos se genero correctamente en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }

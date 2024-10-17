@@ -98,7 +98,7 @@ public class ClientePDF {
 
             documento.add(tabla);
             documento.close();
-            MessageAlerts.getInstance().showMessage("EL PDF se creó correctamente", "El PDF de los clientes se generó en la ubicación seleccionada", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("EL PDF se creó correctamente", "El PDF de los clientes se generó en la ubicación seleccionada: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }
