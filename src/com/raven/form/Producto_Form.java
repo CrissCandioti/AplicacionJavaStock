@@ -379,7 +379,8 @@ public class Producto_Form extends Form {
     }//GEN-LAST:event_jTextFieldKeyReleased
     //JButton para imprimir el PDF de la tabla
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFTablaActionPerformed
-        // TODO add your handling code here:
+        ProductoPDF pdf = new ProductoPDF();
+        pdf.pdfTablaProductos();
     }//GEN-LAST:event_jButtonPDFTablaActionPerformed
     //JButton para imprimir el Excel de la tabla
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelTablaActionPerformed
