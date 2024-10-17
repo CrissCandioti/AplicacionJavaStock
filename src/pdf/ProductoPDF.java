@@ -13,6 +13,7 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import entidades.Productos;
 import entidades.Proveedor;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,11 +31,8 @@ public class ProductoPDF {
 
     public void pdfPorProducto(int id) {
         try {
-            ProductoServices pros = new ProductoServices();
-            ProveedorServices ps = new ProveedorServices();
-            Proveedor aux = ps.buscarProveedorPorId(id);
-            String index = pros.listaDeProductosDeXProveedor(id).toString();
-
+            ProductoServices ps = new ProductoServices();
+            Productos aux = ps.buscarProductoPorID(id);
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
@@ -79,21 +77,57 @@ public class ProductoPDF {
             texto.setAlignment(Paragraph.ALIGN_LEFT);
 
             Chunk CODIGO = new Chunk("CODIGO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk VARIEDAD = new Chunk("VARIEDAD:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk NOMBRE = new Chunk("NOMBRE:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
-            Chunk PRODUCTOS = new Chunk("PRODUCTOS:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
-            Chunk NOTAS = new Chunk("NOTAS:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk MARCA = new Chunk("MARCA:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk TIPOPRODUCTO = new Chunk("TIPO PRODUCTO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk CONTENIDO = new Chunk("TCONTENIDO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk STOCK = new Chunk("STOCK:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk PRECIOCOSTO = new Chunk("PRECIO COSTO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk PRECIOVENTA = new Chunk("PRECIO VENTA:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk GANANCIAS = new Chunk("GANANCIAS:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk PORCENTAJEGANANCIA = new Chunk("PORCENTAJE GANANCIA:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk PROVEEDOR = new Chunk("PROVEEDOR:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk DESCRIPCION = new Chunk("DESCRIPCION:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
 //-------------------------------------------------------------------------------------------------------
             texto.add(CODIGO);
             texto.add(" " + aux.getId() + "\n\n");
 
+            texto.add(VARIEDAD);
+            texto.add(" " + aux.getVariedad() + "\n\n");
+
             texto.add(NOMBRE);
             texto.add(" " + aux.getNombre() + "\n\n");
 
-            texto.add(PRODUCTOS);
-            texto.add(" " + index + "\n\n");
+            texto.add(MARCA);
+            texto.add(" " + aux.getMarca() + "\n\n");
 
-            texto.add(NOTAS);
-            texto.add(" " + aux.getNotas() + "\n\n");
+            texto.add(TIPOPRODUCTO);
+            texto.add(" " + aux.getTipoProducto() + "\n\n");
+
+            texto.add(CONTENIDO);
+            texto.add(" " + aux.getContenido() + "\n\n");
+
+            texto.add(STOCK);
+            texto.add(" " + aux.getStock() + "\n\n");
+
+            texto.add(PRECIOCOSTO);
+            texto.add(" " + aux.getPrecioCosto() + "\n\n");
+
+            texto.add(PRECIOVENTA);
+            texto.add(" " + aux.getPrecioventa() + "\n\n");
+
+            texto.add(GANANCIAS);
+            texto.add(" " + aux.getGanancias() + "\n\n");
+
+            texto.add(PORCENTAJEGANANCIA);
+            texto.add(" " + aux.getPorcentajeGanancias() + "\n\n");
+
+            texto.add(PROVEEDOR);
+            texto.add(" " + aux.getProveedor().toString() + "\n\n");
+
+            texto.add(DESCRIPCION);
+            texto.add(" " + aux.getDescripcion() + "\n\n");
 //-------------------------------------------------------------------------------------------------------
             documento.open();
             documento.add(header);
