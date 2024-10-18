@@ -90,6 +90,14 @@ public class Compra_Form extends Form {
         jTextFieldDocumentoCliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jTextFieldWhatsApp = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldLocalidad = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldDireccion = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -165,6 +173,14 @@ public class Compra_Form extends Form {
 
         jLabel4.setText("Correo electronico");
 
+        jLabel5.setText("WhatsApp:");
+
+        jLabel6.setText("Localidad:");
+
+        jLabel7.setText("Direccion:");
+
+        jLabel8.setText("Ingrese el producto");
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -194,21 +210,31 @@ public class Compra_Form extends Form {
                                 .addComponent(jButtonEliminarCliente)))
                         .addGap(45, 45, 45))
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNombreCliente)
-                            .addComponent(jTextFieldDocumentoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1ApellidoCliente)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldNombreCliente)
+                                    .addComponent(jTextFieldDocumentoCliente)
+                                    .addComponent(jTextFieldWhatsApp)
+                                    .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField1ApellidoCliente)
+                                    .addComponent(jTextFieldEmail)
+                                    .addComponent(jTextFieldLocalidad, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                            .addComponent(jLabel8)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelLayout.setVerticalGroup(
@@ -233,8 +259,22 @@ public class Compra_Form extends Form {
                     .addComponent(jTextFieldDocumentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(423, 423, 423)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(231, 231, 231)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPDFTabla)
@@ -415,18 +455,26 @@ public class Compra_Form extends Form {
     private javax.swing.JButton jButtonEliminarCliente;
     private javax.swing.JButton jButtonExcelTabla;
     private javax.swing.JButton jButtonPDFTabla;
+    private javax.swing.JComboBox<Productos> jComboBox1;
     private javax.swing.JComboBox<Cliente> jComboBoxClientes;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextField1ApellidoCliente;
+    private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldDocumentoCliente;
     private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldLocalidad;
     private javax.swing.JTextField jTextFieldNombreCliente;
+    private javax.swing.JTextField jTextFieldWhatsApp;
     // End of variables declaration//GEN-END:variables
 }
