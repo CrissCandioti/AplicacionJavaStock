@@ -3,11 +3,11 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
-import com.raven.crud.HistorialCliente;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
+import entidades.Productos;
 import excel.ClientesExcel;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
+import services.ProductoServices;
 
 public class Compra_Form extends Form {
 
@@ -97,7 +98,9 @@ public class Compra_Form extends Form {
         jLabel7 = new javax.swing.JLabel();
         jTextFieldDireccion = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxProductos = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,6 +184,10 @@ public class Compra_Form extends Form {
 
         jLabel8.setText("Ingrese el producto");
 
+        jButton1.setText("Eliminar");
+
+        jButton2.setText("Añadir");
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -195,20 +202,6 @@ public class Compra_Form extends Form {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonExcelTabla)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonPDFTabla))
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonBuscarCliente)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonEliminarCliente)))
-                        .addGap(45, 45, 45))
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelLayout.createSequentialGroup()
@@ -233,9 +226,28 @@ public class Compra_Form extends Form {
                                     .addComponent(jTextField1ApellidoCliente)
                                     .addComponent(jTextFieldEmail)
                                     .addComponent(jTextFieldLocalidad, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
-                            .addComponent(jLabel8)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jComboBoxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonExcelTabla)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonPDFTabla))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonBuscarCliente)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonEliminarCliente)))
+                        .addGap(45, 45, 45))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,8 +284,11 @@ public class Compra_Form extends Form {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(231, 231, 231)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -450,13 +465,27 @@ public class Compra_Form extends Form {
         }
     }
 
+    //Metodo para setear los valores del comboBox de los productos
+    public void seteoComboBoxProductos() {
+        try {
+            ProductoServices ps = new ProductoServices();
+            for (Productos pro : ps.listaProductos()) {
+                jComboBoxProductos.addItem(pro);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en el metodo seteoComboBoxClientes() de la clase compra_form: " + e.fillInStackTrace());
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonBuscarCliente;
     private javax.swing.JButton jButtonEliminarCliente;
     private javax.swing.JButton jButtonExcelTabla;
     private javax.swing.JButton jButtonPDFTabla;
-    private javax.swing.JComboBox<Productos> jComboBox1;
     private javax.swing.JComboBox<Cliente> jComboBoxClientes;
+    private javax.swing.JComboBox<Productos> jComboBoxProductos;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
