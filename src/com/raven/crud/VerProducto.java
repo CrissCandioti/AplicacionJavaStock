@@ -270,6 +270,7 @@ public class VerProducto extends javax.swing.JPanel {
             jLabelVerDescripcion.setText(aux.getDescripcion());
             jLabelVerPorcentajeGanancia.setText(String.valueOf(aux.getGanancias()));
             jLabelVerPorcentajeGanancia.setText(String.valueOf(aux.getPorcentajeGanancias()));
+            jLabelVerGanancia.setText(String.valueOf(aux.getGanancias()));
         } catch (Exception e) {
             System.out.println("Error en el metodo seteoValores de la clase VerProducto");
         }

@@ -381,7 +381,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             double precioCosto = Double.parseDouble(jTextFieldPrecioCosto.getText());
             double precioVenta = Double.parseDouble(jTextFieldPrecioVenta.getText());
             //Logica para ganancia y porcentaje
-
+            //La implementamos en el constructor
             //Logica para ganancia y porcentaje
             int stock = Integer.parseInt(jTextFieldStock.getText());
             String marca = jTextFieldMarca.getText();
@@ -390,7 +390,7 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             //Se trae la imagen
             byte[] imagen = getByteImage(profile.getPath());
             String descipcion = jTextAreadescipcion.getText();
-            return new Productos(variedad, nombre, date, marca, tipoProducto, contenido, stock, precioCosto, precioVenta, precioCosto, precioVenta, imagen, positions, descipcion);
+            return new Productos(variedad, nombre, date, marca, tipoProducto, contenido, stock, precioCosto, precioVenta, precioGanancia(precioCosto, precioVenta), precioPorcentajeGanancia(precioCosto, precioVenta), imagen, positions, descipcion);
         } catch (Exception e) {
         }
         return null;
@@ -471,8 +471,8 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
             aux.setPrecioCosto(Double.parseDouble(jTextFieldPrecioCosto.getText()));
             aux.setPrecioventa(Double.parseDouble(jTextFieldPrecioVenta.getText()));
             //Logica para la ganancia y el porcentaje
-            aux.setGanancias(2);
-            aux.setPorcentajeGanancias(2);
+            aux.setGanancias(precioGanancia(Double.parseDouble(jTextFieldPrecioCosto.getText()), Double.parseDouble(jTextFieldPrecioVenta.getText())));
+            aux.setPorcentajeGanancias(precioPorcentajeGanancia(Double.parseDouble(jTextFieldPrecioCosto.getText()), Double.parseDouble(jTextFieldPrecioVenta.getText())));
             //Logica para la ganancia y el porcentaje            
             //Se trae la imagen
             byte[] imagen = null;
@@ -513,6 +513,25 @@ public class ProductosAgregarBaseDatos extends javax.swing.JPanel {
         }
     }
 
+    //Metodo para ganancia
+    public static double precioGanancia(double precioCosto, double precioVenta) {
+        try {
+            return precioVenta - precioCosto;
+        } catch (Exception e) {
+            System.out.println("Error en el metodo para la ganancia");
+        }
+        return 0;
+    }
+
+    //metodo para el porcentaje ganancia
+    public static double precioPorcentajeGanancia(double precioCosto, double precioVenta) {
+        try {
+            return (precioVenta - precioCosto) / precioCosto * 100;
+        } catch (Exception e) {
+            System.out.println("Error en e netodo para el porcentaje ganancia");
+        }
+        return 0;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private raven.datetime.component.date.DatePicker datePicker;
     private javax.swing.JButton jButtonAgregarImagen;
