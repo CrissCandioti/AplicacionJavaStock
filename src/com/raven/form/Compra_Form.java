@@ -3,34 +3,23 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
-import com.raven.crud.HistorialCliente;
-import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
 import entidades.Productos;
-import entidades.Proveedor;
 import excel.ClientesExcel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import pdf.ClientePDF;
-import raven.alerts.MessageAlerts;
-import raven.popup.DefaultOption;
-import raven.popup.GlassPanePopup;
-import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
 import services.ProductoServices;
-import services.ProveedorServices;
 
 public class Compra_Form extends Form {
 
@@ -38,6 +27,8 @@ public class Compra_Form extends Form {
         initComponents();
         init();
         fechaYHora();
+        seteoComboBoxClientes();
+        seteoComboBoxProductos();
     }
 
     private void init() {
@@ -112,7 +103,7 @@ public class Compra_Form extends Form {
 
             },
             new String [] {
-                "Estado", "Codigo", "Nombre", "Stock", "Descripcion"
+                "Estado", "#", "Nombre", "Stock", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
@@ -171,10 +162,6 @@ public class Compra_Form extends Form {
             }
         });
 
-        jComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBoxProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jButton2.setText("Buscar");
 
         jButton3.setText("Buscar");
@@ -198,7 +185,7 @@ public class Compra_Form extends Form {
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(100, 100, 100)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel)
@@ -233,7 +220,7 @@ public class Compra_Form extends Form {
                                         .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jButton2)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -245,7 +232,7 @@ public class Compra_Form extends Form {
                                         .addComponent(jButtonExcelTabla)
                                         .addGap(18, 18, 18)
                                         .addComponent(jButtonPDFTabla)))))
-                        .addGap(45, 45, 45))))
+                        .addGap(100, 100, 100))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
