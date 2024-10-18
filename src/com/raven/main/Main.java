@@ -3,6 +3,7 @@ package com.raven.main;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.raven.form.ChatGPT_Form;
+import com.raven.form.Compra_Form;
 import com.raven.form.Home_Form;
 import com.raven.form.Producto_Form;
 import com.raven.form.Proveedores_Form;
@@ -17,6 +18,7 @@ public class Main extends javax.swing.JFrame {
     private Producto_Form productosForm;
     private Proveedores_Form proveedoresForm;
     private ChatGPT_Form ChatGPTForm;
+    private Compra_Form Compra_Form;
     public Main() {
         initComponents();
         init();
@@ -38,9 +40,12 @@ public class Main extends javax.swing.JFrame {
                     mainBody.displayForm(proveedoresForm, "Proveedores");
                 } else if (index == 7) {
                     mainBody.displayForm(ChatGPTForm, "ChatGPT");
+                } else if (index == 4) {
+                    mainBody.displayForm(Compra_Form, "Compra");
                 }
             }
         });
+        Compra_Form = new Compra_Form();
         ChatGPTForm = new ChatGPT_Form();
         productosForm = new Producto_Form();
         usuariosForm = new Usuarios_Form();
