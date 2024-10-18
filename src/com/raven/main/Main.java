@@ -41,7 +41,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 7) {
                     mainBody.displayForm(ChatGPTForm, "ChatGPT");
                 } else if (index == 4) {
-                    mainBody.displayForm(Compra_Form, "Compra");
+                    mainBody.displayForm(Compra_Form, "Facturacion Compra");
                 }
             }
         });

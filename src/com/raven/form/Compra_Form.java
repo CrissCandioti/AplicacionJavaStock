@@ -3,32 +3,30 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
+import com.raven.crud.HistorialCliente;
+import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
-import entidades.Productos;
 import excel.ClientesExcel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import pdf.ClientePDF;
+import raven.alerts.MessageAlerts;
+import raven.popup.DefaultOption;
+import raven.popup.GlassPanePopup;
+import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
-import services.ProductoServices;
 
 public class Compra_Form extends Form {
 
     public Compra_Form() {
         initComponents();
         init();
-        fechaYHora();
-        seteoComboBoxClientes();
-        seteoComboBoxProductos();
     }
 
     private void init() {
@@ -78,39 +76,28 @@ public class Compra_Form extends Form {
         jPanel = new javax.swing.JPanel();
         jScrollPane = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jTextField = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jLabel = new javax.swing.JLabel();
         jButtonPDFTabla = new javax.swing.JButton();
         jButtonExcelTabla = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabelVerFechaYHora = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBoxClientes = new javax.swing.JComboBox<>();
-        jComboBoxProductos = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Estado", "#", "Nombre", "Stock", "Descripcion"
+                "Estado", "#", "Nombre", "Apellido", "N° Documento", "Email", "N° Whats App", "Localidad", "Direccion", "Notas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false
+                true, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -128,13 +115,41 @@ public class Compra_Form extends Form {
             jTable.getColumnModel().getColumn(1).setMaxWidth(30);
         }
 
+        jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Agregar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldKeyReleased(evt);
             }
         });
 
-        jLabel.setText("Ingrese el cliente");
+        jButton4.setText("Historial");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel.setText("Ingrese el nombre del cliente");
 
         jButtonPDFTabla.setText("PDF Tabla");
         jButtonPDFTabla.addActionListener(new java.awt.event.ActionListener() {
@@ -150,124 +165,53 @@ public class Compra_Form extends Form {
             }
         });
 
-        jLabel1.setText("Fecha y Hora:");
-
-        jLabelVerFechaYHora.setText("Ver fecha y hora");
-
-        jLabel2.setText("Ingrese el producto");
-
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
-            }
-        });
-
-        jButton2.setText("Buscar");
-
-        jButton3.setText("Buscar");
-
-        jLabel3.setText("Cantidad (Stock) del producto");
-
-        jTextField2.setText("jTextField2");
-
-        jButton4.setText("Añadir");
-
-        jButton5.setText("Eliminar");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jLabel4.setText("Observacion:");
-
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                .addGap(100, 100, 100))
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton5))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane1))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jComboBoxProductos, 0, 200, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton3))
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                        .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton2)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
-                            .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabelVerFechaYHora))
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                        .addComponent(jButtonExcelTabla)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonPDFTabla)))))
-                        .addGap(100, 100, 100))))
+                                .addComponent(jButtonExcelTabla)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonPDFTabla))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))
+                        .addGap(45, 45, 45))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelVerFechaYHora))
-                .addGap(18, 18, 18)
+                .addGap(57, 57, 57)
                 .addComponent(jLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
                     .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton4))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPDFTabla)
@@ -287,6 +231,141 @@ public class Compra_Form extends Form {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //JButton para abrir una ventana y guardar un cliente a la base de datos
+    @SuppressWarnings("empty-statement")
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
+            ClienteServices cs = new ClienteServices();
+            DefaultOption option = new DefaultOption() {
+                @Override
+                public boolean closeWhenClickOutside() {
+                    return true;
+                }
+            };
+            String actions[] = new String[]{"Cancelar", "Guardar"};
+            GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
+                if (i == 1) {
+                    if (agregar.retornarCLienteAgregar() == null) {
+                        MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del documento vacia o con letras", MessageAlerts.MessageType.ERROR);
+                    } else {
+                        cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
+                        MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
+                        loadData();
+                        pc.closePopup();
+                    }
+                } else {
+                    pc.closePopup();
+                }
+            }), option);
+        } catch (Exception e) {
+            System.out.println("Error en el JButton de guardar cliente de la clase Usuarios_Form");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+    //JButon para modificar un cliente de la base de datos 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
+            ClienteServices cs = new ClienteServices();
+            List<Cliente> list = Seleccionarusuario();
+            if (!list.isEmpty()) {
+                if (list.size() == 1) {
+                    //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
+                    Cliente aux = list.get(0);
+                    //Metodo probisorio para modificar
+                    UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
+                    //Creamos nuevamente la ventana emergente para mostrar los datos
+                    DefaultOption option = new DefaultOption() {
+                        @Override
+                        public boolean closeWhenClickOutside() {
+                            return true;
+                        }
+                    };
+                    String actions[] = new String[]{"Cancelar", "Modificar"};
+                    GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
+                        if (i == 1) {
+                            if (UsuariosAgregarBaseDatos.retornarCliente() == null) {
+                                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del documento vacia o con letras", MessageAlerts.MessageType.ERROR);
+                            } else {
+                                cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
+                                MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
+                                loadData();
+                                pc.closePopup();
+                            }
+                        } else {
+                            pc.closePopup();
+                        }
+                    }), option);
+                } else {
+                    MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede modificar un cliente a la vez", MessageAlerts.MessageType.DEFAULT);
+                }
+            } else {
+                MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su modificacion", MessageAlerts.MessageType.WARNING);
+            }
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    //JButton para eliminar el cliente de la base de datos
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        List<Cliente> list = Seleccionarusuario();
+        ClienteServices cs = new ClienteServices();
+        if (!list.isEmpty()) {
+            DefaultOption option = new DefaultOption() {
+                @Override
+                public boolean closeWhenClickOutside() {
+                    return true;
+                }
+            };
+            String actions[] = new String[]{"Cancelar", "Eliminar"};
+            JLabel label = new JLabel("Estas seguro que deseas eliminar de forma permanente a estos clientes: " + list);
+            label.setBorder(new EmptyBorder(0, 25, 0, 25));
+            GlassPanePopup.showPopup(new SimplePopupBorder(label, "Confirmar eliminacion", actions, (pc, i) -> {
+                if (i == 1) {
+                    for (Cliente aux : list) {
+                        cs.borrarCliente(aux);
+                    }
+                    MessageAlerts.getInstance().showMessage("Se elimino correctamente", "El cliente fue eliminado correctamente de la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    loadData();
+                    pc.closePopup();
+                } else {
+                    pc.closePopup();
+                }
+            }), option);
+        } else {
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para su eliminacion", MessageAlerts.MessageType.WARNING);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    //JButton para acceder al historial de compra del cliente
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        HistorialCliente historialcliente = new HistorialCliente();
+        List<Cliente> list = Seleccionarusuario();
+        if (!list.isEmpty()) {
+            if (list.size() == 1) {
+                //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para ver su historial
+                Object data = list.get(0);
+                //Metodo probisorio para ver su historial
+                historialcliente.historialCompraSeteoValores(data);
+                //Creamos nuevamente la ventana emergente para mostrar los datos
+                DefaultOption option = new DefaultOption() {
+                    @Override
+                    public boolean closeWhenClickOutside() {
+                        return true;
+                    }
+                };
+                String actions[] = new String[]{"Cancelar"};
+                GlassPanePopup.showPopup(new SimplePopupBorder(historialcliente, "Historial de compras del cliente", actions, (pc, i) -> {
+                    if (i == 0) {
+                        pc.closePopup();
+                    }
+                }), option);
+            } else {
+                MessageAlerts.getInstance().showMessage("Atencion", "Solamente puede ver el historial de compras de un solo cliente", MessageAlerts.MessageType.DEFAULT);
+            }
+        } else {
+            MessageAlerts.getInstance().showMessage("Error", "Seleccione un cliente para ver su historial", MessageAlerts.MessageType.WARNING);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
     //jTextField la cual buscaremos el cliente por nombre o apellido
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
@@ -301,10 +380,6 @@ public class Compra_Form extends Form {
         ClientesExcel ce = new ClientesExcel();
         ce.TablaClientesExcelReporte();
     }//GEN-LAST:event_jButtonExcelTablaActionPerformed
-
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1KeyReleased
 
     //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
     private List<Cliente> Seleccionarusuario() {
@@ -360,75 +435,17 @@ public class Compra_Form extends Form {
         }
     }
 
-    //Metodo para la fecha y hora del producto
-    public void fechaYHora() {
-        try {
-            //Se crea un timer para que el tiempo se actualice en tiempo real
-            Timer timer = new Timer(1000, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Obtener la fecha y la hora actual
-                    Date now = new Date();
-                    // Formatear la fecha y hora
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    //Se setea el date con el formato de la fecha y hora creado
-                    String tiempoFormateado = sdf.format(now);
-                    // Establecer el texto del JLabel
-                    jLabelVerFechaYHora.setText(tiempoFormateado);
-                }
-            });
-            timer.start();  // Iniciar el timer para que empiece a actualizarse
-        } catch (Exception e) {
-            System.out.println("Error en la hora");
-        }
-    }
-    //Metodo para setear los valores del comboBox de los productos
-
-    public void seteoComboBoxProductos() {
-        try {
-            ProductoServices ps = new ProductoServices();
-            for (Productos pro : ps.listaProductos()) {
-                jComboBoxProductos.addItem(pro);
-            }
-        } catch (Exception e) {
-            System.out.println("Error en el metodo seteoComboBoxClientes() de la clase compra_form: " + e.fillInStackTrace());
-        }
-    }
-
-    //Seteo para el comboBox de los clientes
-    public void seteoComboBoxClientes() {
-        try {
-            ClienteServices cs = new ClienteServices();
-            for (Cliente aux : cs.listaCliente()) {
-                jComboBoxClientes.addItem(aux);
-            }
-        } catch (Exception e) {
-            System.out.println("Error en el metodo seteoComboBoxClientes() de la clase compra_form: " + e.fillInStackTrace());
-        }
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonExcelTabla;
     private javax.swing.JButton jButtonPDFTabla;
-    private javax.swing.JComboBox<Cliente> jComboBoxClientes;
-    private javax.swing.JComboBox<Productos> jComboBoxProductos;
     private javax.swing.JLabel jLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabelVerFechaYHora;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
