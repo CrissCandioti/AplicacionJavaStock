@@ -9,10 +9,15 @@ import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
 import entidades.Productos;
 import excel.ClientesExcel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import pdf.ClientePDF;
@@ -289,7 +294,7 @@ public class Compra_Form extends Form {
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPDFTabla)
@@ -474,6 +479,33 @@ public class Compra_Form extends Form {
             }
         } catch (Exception e) {
             System.out.println("Error en el metodo seteoComboBoxClientes() de la clase compra_form: " + e.fillInStackTrace());
+        }
+    }
+
+    //Timer para el date
+    public void timerDate() {
+        try {
+            // Crear el formato de fecha
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+            // Crear un ActionListener para actualizar la hora
+            ActionListener updateTime = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Obtener la fecha y hora actual
+                    Date now = new Date();
+                    // Formatear la fecha y hora
+                    String formattedDate = dateFormat.format(now);
+                    // Imprimir la fecha y hora formateada
+                    System.out.println(formattedDate);
+                }
+            };
+
+            // Crear un Timer que llame al ActionListener cada 1000 milisegundos (1 segundo)
+            Timer timer = new Timer(1000, updateTime);
+            // Iniciar el Timer
+            timer.start();
+        } catch (Exception e) {
         }
     }
 
