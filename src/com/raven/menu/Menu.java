@@ -58,7 +58,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu("Clientes", "6", 1);
         addMenu("Proveedores", "2", 2);
         addMenu("Productos", "3", 3);
-        addMenu("Compras", "8", 4);
+        addMenu("Facturacion Compra", "8", 4);
         addMenu("Registro Compras", "9", 5);
         addMenu("Reportes", "5", 6);
         addMenu("Chat GPT", "10", 7);
