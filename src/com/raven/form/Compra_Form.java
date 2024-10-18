@@ -54,10 +54,10 @@ public class Compra_Form extends Form {
         jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
 
-        jTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
-        jTextField.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
+        jTextFieldNombreCliente.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        jTextFieldNombreCliente.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
 
-        jTextField.putClientProperty(FlatClientProperties.STYLE, ""
+        jTextFieldNombreCliente.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
@@ -78,11 +78,18 @@ public class Compra_Form extends Form {
         jTable = new javax.swing.JTable();
         jButtonEliminarCliente = new javax.swing.JButton();
         jButtonBuscarCliente = new javax.swing.JButton();
-        jTextField = new javax.swing.JTextField();
+        jTextFieldNombreCliente = new javax.swing.JTextField();
         jLabel = new javax.swing.JLabel();
         jButtonPDFTabla = new javax.swing.JButton();
         jButtonExcelTabla = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxClientes = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1ApellidoCliente = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldDocumentoCliente = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldEmail = new javax.swing.JTextField();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,9 +135,9 @@ public class Compra_Form extends Form {
             }
         });
 
-        jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldNombreCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldKeyReleased(evt);
+                jTextFieldNombreClienteKeyReleased(evt);
             }
         });
 
@@ -150,10 +157,22 @@ public class Compra_Form extends Form {
             }
         });
 
+        jLabel1.setText("Nombre cliente:");
+
+        jLabel2.setText("Apellido cliente:");
+
+        jLabel3.setText("Documento:");
+
+        jLabel4.setText("Correo electronico");
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                .addGap(100, 100, 100))
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,21 +187,29 @@ public class Compra_Form extends Form {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonPDFTabla))
                             .addGroup(jPanelLayout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonBuscarCliente)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonEliminarCliente)))
-                        .addGap(45, 45, 45))))
-            .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(45, 45, 45))
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
-                        .addGap(100, 100, 100))))
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldNombreCliente)
+                            .addComponent(jTextFieldDocumentoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1ApellidoCliente)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,11 +220,21 @@ public class Compra_Form extends Form {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEliminarCliente)
                     .addComponent(jButtonBuscarCliente)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(155, 155, 155)
-                .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(323, 323, 323)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                    .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1ApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldDocumentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(423, 423, 423)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPDFTabla)
@@ -217,7 +254,7 @@ public class Compra_Form extends Form {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-   //JButon para modificar un cliente de la base de datos 
+    //JButon para modificar un cliente de la base de datos 
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarClienteActionPerformed
         try {
             UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
@@ -292,10 +329,10 @@ public class Compra_Form extends Form {
         }
     }//GEN-LAST:event_jButtonEliminarClienteActionPerformed
 
-   //jTextField la cual buscaremos el cliente por nombre o apellido
-    private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
-        search(jTextField.getText().trim());
-    }//GEN-LAST:event_jTextFieldKeyReleased
+    //jTextField la cual buscaremos el cliente por nombre o apellido
+    private void jTextFieldNombreClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreClienteKeyReleased
+        search(jTextFieldNombreCliente.getText().trim());
+    }//GEN-LAST:event_jTextFieldNombreClienteKeyReleased
 
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFTablaActionPerformed
         ClientePDF pdf = new ClientePDF();
@@ -361,16 +398,35 @@ public class Compra_Form extends Form {
         }
     }
 
+    //Seteo para el comboBox de los clientes
+    public void seteoComboBoxClientes() {
+        try {
+            ClienteServices cs = new ClienteServices();
+            for (Cliente aux : cs.listaCliente()) {
+                jComboBoxClientes.addItem(aux);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en el metodo seteoComboBoxClientes() de la clase compra_form: " + e.fillInStackTrace());
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscarCliente;
     private javax.swing.JButton jButtonEliminarCliente;
     private javax.swing.JButton jButtonExcelTabla;
     private javax.swing.JButton jButtonPDFTabla;
-    private javax.swing.JComboBox<Cliente> jComboBox1;
+    private javax.swing.JComboBox<Cliente> jComboBoxClientes;
     private javax.swing.JLabel jLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
-    private javax.swing.JTextField jTextField;
+    private javax.swing.JTextField jTextField1ApellidoCliente;
+    private javax.swing.JTextField jTextFieldDocumentoCliente;
+    private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldNombreCliente;
     // End of variables declaration//GEN-END:variables
 }
