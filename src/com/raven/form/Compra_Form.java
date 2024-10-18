@@ -8,6 +8,8 @@ import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
+import entidades.Productos;
+import entidades.Proveedor;
 import excel.ClientesExcel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +29,8 @@ import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
+import services.ProductoServices;
+import services.ProveedorServices;
 
 public class Compra_Form extends Form {
 
@@ -91,8 +95,8 @@ public class Compra_Form extends Form {
         jLabelVerFechaYHora = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxClientes = new javax.swing.JComboBox<>();
+        jComboBoxProductos = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -167,9 +171,9 @@ public class Compra_Form extends Form {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton2.setText("Buscar");
 
@@ -217,8 +221,8 @@ public class Compra_Form extends Form {
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jComboBox2, 0, 200, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jComboBoxProductos, 0, 200, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelLayout.createSequentialGroup()
@@ -255,14 +259,14 @@ public class Compra_Form extends Form {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
@@ -296,7 +300,7 @@ public class Compra_Form extends Form {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-   //jTextField la cual buscaremos el cliente por nombre o apellido
+    //jTextField la cual buscaremos el cliente por nombre o apellido
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
@@ -391,6 +395,30 @@ public class Compra_Form extends Form {
             System.out.println("Error en la hora");
         }
     }
+    //Metodo para setear los valores del comboBox de los productos
+
+    public void seteoComboBoxProductos() {
+        try {
+            ProductoServices ps = new ProductoServices();
+            for (Productos pro : ps.listaProductos()) {
+                jComboBoxProductos.addItem(pro);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en el metodo seteoComboBoxClientes() de la clase compra_form: " + e.fillInStackTrace());
+        }
+    }
+
+    //Seteo para el comboBox de los clientes
+    public void seteoComboBoxClientes() {
+        try {
+            ClienteServices cs = new ClienteServices();
+            for (Cliente aux : cs.listaCliente()) {
+                jComboBoxClientes.addItem(aux);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en el metodo seteoComboBoxClientes() de la clase compra_form: " + e.fillInStackTrace());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
@@ -399,8 +427,8 @@ public class Compra_Form extends Form {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonExcelTabla;
     private javax.swing.JButton jButtonPDFTabla;
-    private javax.swing.JComboBox<Cliente> jComboBox1;
-    private javax.swing.JComboBox<Productos> jComboBox2;
+    private javax.swing.JComboBox<Cliente> jComboBoxClientes;
+    private javax.swing.JComboBox<Productos> jComboBoxProductos;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
