@@ -75,6 +75,7 @@ public class Compra_Form extends Form {
         loadData();
         seteoComboBoxClientes();
         seteoComboBoxProductos();
+        timerDate();
     }
 
     @SuppressWarnings("unchecked")
@@ -108,6 +109,8 @@ public class Compra_Form extends Form {
         jComboBoxProductos = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelVerFechaYHora = new javax.swing.JLabel();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -195,6 +198,10 @@ public class Compra_Form extends Form {
 
         jButton2.setText("Añadir");
 
+        jLabel9.setText("Fecha y Hora:");
+
+        jLabelVerFechaYHora.setText("Ver Fecha y hora");
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -244,22 +251,32 @@ public class Compra_Form extends Form {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1))
                             .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonExcelTabla)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonPDFTabla))
-                            .addGroup(jPanelLayout.createSequentialGroup()
                                 .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonBuscarCliente)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonEliminarCliente)))
+                                .addComponent(jButtonEliminarCliente))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabelVerFechaYHora))
+                                    .addGroup(jPanelLayout.createSequentialGroup()
+                                        .addComponent(jButtonExcelTabla)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonPDFTabla)))))
                         .addGap(45, 45, 45))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(23, 23, 23)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabelVerFechaYHora))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -499,7 +516,7 @@ public class Compra_Form extends Form {
                     // Formatear la fecha y hora
                     String formattedDate = dateFormat.format(now);
                     // Imprimir la fecha y hora formateada
-                    System.out.println(formattedDate);
+                    jLabelVerFechaYHora.setText(formattedDate);
                 }
             };
 
@@ -529,6 +546,8 @@ public class Compra_Form extends Form {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelVerFechaYHora;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
