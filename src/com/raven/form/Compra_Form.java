@@ -73,6 +73,8 @@ public class Compra_Form extends Form {
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         loadData();
+        seteoComboBoxClientes();
+        seteoComboBoxProductos();
     }
 
     @SuppressWarnings("unchecked")
