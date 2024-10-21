@@ -63,12 +63,8 @@ public class Compra_Form extends Form {
         jLabel8.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
 
-        jTextFieldNombreCliente.putClientProperty(FlatClientProperties.STYLE, ""
-                + "arc:15;"
-                + "borderWidth:0;"
-                + "focusWidth:0;"
-                + "innerFocusWidth:0;"
-        );
+        //Metodo para las celdas del cliente y enable boolean false
+        styleCeldasCliente();
 
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
@@ -540,7 +536,55 @@ public class Compra_Form extends Form {
     //Metodo con los estilos de las celdas del dato del cliente
     public void styleCeldasCliente() {
         try {
-
+            jTextFieldNombreCliente.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "arc:15;"
+                    + "borderWidth:0;"
+                    + "focusWidth:0;"
+                    + "innerFocusWidth:0;"
+            );
+            jTextField1ApellidoCliente.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "arc:15;"
+                    + "borderWidth:0;"
+                    + "focusWidth:0;"
+                    + "innerFocusWidth:0;"
+            );
+            jTextFieldDocumentoCliente.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "arc:15;"
+                    + "borderWidth:0;"
+                    + "focusWidth:0;"
+                    + "innerFocusWidth:0;"
+            );
+            jTextFieldEmail.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "arc:15;"
+                    + "borderWidth:0;"
+                    + "focusWidth:0;"
+                    + "innerFocusWidth:0;"
+            );
+            jTextFieldWhatsApp.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "arc:15;"
+                    + "borderWidth:0;"
+                    + "focusWidth:0;"
+                    + "innerFocusWidth:0;"
+            );
+            jTextFieldLocalidad.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "arc:15;"
+                    + "borderWidth:0;"
+                    + "focusWidth:0;"
+                    + "innerFocusWidth:0;"
+            );
+            jTextFieldDireccion.putClientProperty(FlatClientProperties.STYLE, ""
+                    + "arc:15;"
+                    + "borderWidth:0;"
+                    + "focusWidth:0;"
+                    + "innerFocusWidth:0;"
+            );
+            jTextFieldNombreCliente.setEnabled(false);
+            jTextField1ApellidoCliente.setEnabled(false);
+            jTextFieldDocumentoCliente.setEnabled(false);
+            jTextFieldEmail.setEnabled(false);
+            jTextFieldWhatsApp.setEnabled(false);
+            jTextFieldLocalidad.setEnabled(false);
+            jTextFieldDireccion.setEnabled(false);
         } catch (Exception e) {
             System.out.println("Error en el metodo styleCeldasCliente() de la clase compra_form");
         }
