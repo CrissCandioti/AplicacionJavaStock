@@ -1,16 +1,13 @@
 package com.raven.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
-import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
 import entidades.Productos;
 import excel.ClientesExcel;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -18,20 +15,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import pdf.ClientePDF;
-import raven.alerts.MessageAlerts;
-import raven.popup.DefaultOption;
-import raven.popup.GlassPanePopup;
-import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
 import services.ProductoServices;
 
@@ -499,20 +490,17 @@ public class Compra_Form extends Form {
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
     }
-
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
     private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
     }
-
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }
-
-    //JButton para crear el excel
+    //JButo
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
         ce.TablaClientesExcelReporte();
