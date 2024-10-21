@@ -60,15 +60,15 @@ public class Compra_Form extends Form {
         jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
 
-        jTextFieldNombreCliente.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
-        jTextFieldNombreCliente.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
+        jLabel8.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:bold +5;");
 
         jTextFieldNombreCliente.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
-                + "margin:5,20,5,20;");
+        );
 
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
@@ -537,6 +537,14 @@ public class Compra_Form extends Form {
         }
     }
 
+    //Metodo con los estilos de las celdas del dato del cliente
+    public void styleCeldasCliente() {
+        try {
+
+        } catch (Exception e) {
+            System.out.println("Error en el metodo styleCeldasCliente() de la clase compra_form");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
