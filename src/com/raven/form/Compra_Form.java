@@ -10,6 +10,7 @@ import entidades.Cliente;
 import entidades.Productos;
 import excel.ClientesExcel;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -704,6 +705,7 @@ public class Compra_Form extends Form {
         }
     }
 
+    //Metodo la cual se crea una scroll bar para los productos
     public void ScrollBarComboBoxProductos() {
         // Configurar el ComboBox de productos para mostrar 3 elementos y agregar una barra de desplazamiento
         try {
@@ -734,9 +736,6 @@ public class Compra_Form extends Form {
         }
     }
 
-    public void ScrollBarComboBoxClientes() {
-    // Configurar el ComboBox de los clientes para mostrar 3 elementos y agregar una barra de desplazamiento
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
