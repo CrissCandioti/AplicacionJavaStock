@@ -215,4 +215,8 @@ public class Productos {
         DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
         return new Object[]{false, rowNum, this, fechaIngreso == null ? "" : df.format(fechaIngreso), marca, tipoProducto, contenido, stock, precioCosto, precioventa, ganancias, porcentajeGanancias, proveedor, descripcion};
     }
+
+    public Object[] toTableRowCompraForm(int rowNum) {
+        return new Object[]{false, rowNum, this, contenido, stock, precioventa};
+    }
 }
