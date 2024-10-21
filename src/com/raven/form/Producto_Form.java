@@ -3,7 +3,6 @@ package com.raven.form;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
-import com.raven.crud.HistorialCliente;
 import com.raven.crud.ProductosAgregarBaseDatos;
 import com.raven.crud.VerProducto;
 import com.raven.table.CheckBoxTableHeaderRenderer;

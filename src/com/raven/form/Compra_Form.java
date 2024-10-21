@@ -23,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import pdf.ClientePDF;
+import raven.alerts.MessageAlerts;
 import services.ClienteServices;
 import services.ProductoServices;
 
@@ -414,6 +415,7 @@ public class Compra_Form extends Form {
     //Jbutton para agregar los productos a la tabla
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         loadData();
+        seteoJLabelGanancias();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // JButon que llama a un metodo para setear las celdas del cliente
@@ -460,20 +462,23 @@ public class Compra_Form extends Form {
     // Metodo la cual carga la tabla con los prodcutos seleccionado por el usuario
     public void loadData() {
         try {
-            ProductoServices ps = new ProductoServices();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
 
             Productos productoSeleccionado = (Productos) jComboBoxProductos.getSelectedItem();
+            int cantidad = Integer.parseInt(jTextFieldContenidoStock.getText());
             if (productoSeleccionado != null) {
-                int cantidad = Integer.parseInt(jTextFieldContenidoStock.getText());
-                Object[] fila = productoSeleccionado.toTableRowCompraForm(productoSeleccionado.getId());
-                fila[4] = cantidad; // Asumiendo que la columna 3 es la cantidad
-                model.addRow(fila);
+                if (cantidad <= productoSeleccionado.getStock()) {
+                    Object[] fila = productoSeleccionado.toTableRowCompraForm(productoSeleccionado.getId());
+                    fila[4] = cantidad; // Asumiendo que la columna 3 es la cantidad
+                    model.addRow(fila);
+                } else {
+                    MessageAlerts.getInstance().showMessage("Error en la cantidad (stock)", "La cantidad que desea añadir es superior a la disponible", MessageAlerts.MessageType.ERROR);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto");
+                MessageAlerts.getInstance().showMessage("Importante", "Seleccione la cantidad(stock)", MessageAlerts.MessageType.WARNING);
             }
             seteoJLabelTotal();
         } catch (NumberFormatException e) {
@@ -622,6 +627,7 @@ public class Compra_Form extends Form {
         }
     }
 
+    //Metod creado para setear las celdas
     public void setCeldasClienteEmpty() {
         try {
             jTextFieldNombreCliente.setText("");
@@ -667,7 +673,7 @@ public class Compra_Form extends Form {
         }
     }
 
-    //Metodo creado para para setear los label para obtener las ganancias, el porcentaje y el total
+    //Metodo creado para setear el label para obtener el total
     public void seteoJLabelTotal() {
         try {
             double total = 0.0;
@@ -688,6 +694,36 @@ public class Compra_Form extends Form {
             jLabel12.setText(String.format("%.2f", total));
         } catch (Exception e) {
             System.out.println("Error en el método seteoJLabelGananciaPorcentajeTotal() de la clase Compra_Form");
+            e.printStackTrace();
+        }
+    }
+
+    //Metodo creado para setear el jlabel para obtener la ganancia
+    public void seteoJLabelGanancias() {
+        try {
+            ProductoServices ps = new ProductoServices();
+            double gananciaTotal = 0.0;
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            int rowCount = model.getRowCount();
+            Productos aux = null;
+
+            for (int i = 0; i < rowCount; i++) {
+                Object codigo = model.getValueAt(i, 1); // Obtenemos el codigo de la base de datos para obtener el precio de venta
+                Object cantidadObj = model.getValueAt(i, 4); // Obtenemos la cantidad(stock)
+
+                if (cantidadObj instanceof Integer) {
+                    aux = ps.buscarProductoPorID((int) codigo);
+                    double precioCompra = aux.getPrecioCosto();
+                    double precioVenta = aux.getPrecioventa();
+                    int cantidad = (Integer) cantidadObj;
+                    double gananciaProducto = (precioVenta - precioCompra) * cantidad;
+                    gananciaTotal += gananciaProducto;
+                }
+            }
+
+            jLabeVerGanancia.setText(String.format("%.2f", gananciaTotal));
+        } catch (Exception e) {
+            System.out.println("Error en el método seteoJLabelGanancias() de la clase Compra_Form");
             e.printStackTrace();
         }
     }
