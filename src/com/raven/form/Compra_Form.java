@@ -496,25 +496,27 @@ public class Compra_Form extends Form {
     }// </editor-fold>//GEN-END:initComponents
 
     // JButon que llama a un metodo para setear las celdas del cliente
-    private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonBuscarClienteActionPerformed
+    private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
-    }// GEN-LAST:event_jButtonBuscarClienteActionPerformed
+    }
+
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
-
-    private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonEliminarClienteActionPerformed
+    private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
-    }// GEN-LAST:event_jButtonEliminarClienteActionPerformed
+    }
 
-    private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPDFTablaActionPerformed
+    //Jbutton para crear el pdf
+    private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
-    }// GEN-LAST:event_jButtonPDFTablaActionPerformed
+    }
 
-    private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonExcelTablaActionPerformed
+    //JButton para crear el excel
+    private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
         ce.TablaClientesExcelReporte();
-    }// GEN-LAST:event_jButtonExcelTablaActionPerformed
+    }
 
     // Esta es la logica para que se aplique cuando se selecciona un cliente o
     // varios o ninguno.
