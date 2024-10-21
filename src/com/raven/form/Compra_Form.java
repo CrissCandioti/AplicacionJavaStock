@@ -59,10 +59,13 @@ public class Compra_Form extends Form {
 
         jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
-
         jLabel8.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
-
+        jLabel11.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:bold +5;");
+        jLabel12.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font:bold +5;");
+        
         //Metodo para las celdas del cliente y enable boolean false
         styleCeldasCliente();
 
@@ -110,6 +113,12 @@ public class Compra_Form extends Form {
         jLabel10 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabeVerGanancia = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabelVerPorcentajeDeLaGanancia = new javax.swing.JLabel();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,14 +166,14 @@ public class Compra_Form extends Form {
 
         jLabel.setText("Ingrese el cliente");
 
-        jButtonPDFTabla.setText("PDF Tabla");
+        jButtonPDFTabla.setText("Imprimir factura PDF");
         jButtonPDFTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPDFTablaActionPerformed(evt);
             }
         });
 
-        jButtonExcelTabla.setText("Excel Tabla");
+        jButtonExcelTabla.setText("Imprimir factura Excel");
         jButtonExcelTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcelTablaActionPerformed(evt);
@@ -197,8 +206,20 @@ public class Compra_Form extends Form {
 
         jLabel10.setText("Cantidad (Stock):");
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/9_s.png"))); // NOI18N
-        jButton3.setText("Comprar");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/8_s.png"))); // NOI18N
+        jButton3.setText("Realizar compra");
+
+        jLabel11.setText("Total a pagar:");
+
+        jLabel12.setText("Ver total");
+
+        jLabel13.setText("Ganancias de la compra:");
+
+        jLabeVerGanancia.setText("Ver ganancias");
+
+        jLabel15.setText("Porcentaje de la ganancia:");
+
+        jLabelVerPorcentajeDeLaGanancia.setText("Ver porcentaje de la ganancia");
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -273,7 +294,22 @@ public class Compra_Form extends Form {
                                         .addComponent(jLabel6)
                                         .addGap(18, 18, 18)
                                         .addComponent(jTextFieldLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelVerPorcentajeDeLaGanancia))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabeVerGanancia))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel12)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +356,19 @@ public class Compra_Form extends Form {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                        .addGap(100, 100, 100)
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabeVerGanancia))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabelVerPorcentajeDeLaGanancia))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(30, 30, 30)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonPDFTabla)
                             .addComponent(jButtonExcelTabla)
@@ -599,9 +647,14 @@ public class Compra_Form extends Form {
     private javax.swing.JButton jButtonPDFTabla;
     private javax.swing.JComboBox<Cliente> jComboBoxClientes;
     private javax.swing.JComboBox<Productos> jComboBoxProductos;
+    private javax.swing.JLabel jLabeVerGanancia;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -611,6 +664,7 @@ public class Compra_Form extends Form {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelVerFechaYHora;
+    private javax.swing.JLabel jLabelVerPorcentajeDeLaGanancia;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
