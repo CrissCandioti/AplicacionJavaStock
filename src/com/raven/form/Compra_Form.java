@@ -80,7 +80,6 @@ public class Compra_Form extends Form {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -203,6 +202,11 @@ public class Compra_Form extends Form {
         jLabel8.setText("Ingrese el producto");
 
         jButton1.setText("Quitar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Añadir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -412,43 +416,44 @@ public class Compra_Form extends Form {
             .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
     //Jbutton para agregar los productos a la tabla
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         loadData();
         seteoJLabelGanancias();
     }//GEN-LAST:event_jButton2ActionPerformed
+    //JButton para quitar el producto de la lista
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+    }//GEN-LAST:event_jButton1ActionPerformed
     // JButon que llama a un metodo para setear las celdas del cliente
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
     }
-
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
     private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
     }
-
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }
-
     //JButon para crear el excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
         ce.TablaClientesExcelReporte();
     }
 
-    // Esta es la logica para que se aplique cuando se selecciona un cliente o
-    // varios o ninguno.
-    private List<Cliente> SeleccionarProducto() {
+    // Esta es la logica para que se aplique cuando se selecciona un producto o
+    // varios o ninguno de la tabla
+    private List<Productos> SeleccionarProducto() {
         try {
-            List<Cliente> list = new ArrayList<>();
+            List<Productos> list = new ArrayList<>();
             for (int i = 0; i < jTable.getRowCount(); i++) {
                 if ((boolean) jTable.getValueAt(i, 0)) {
-                    Cliente data = (Cliente) jTable.getValueAt(i, 2);
+                    Productos data = (Productos) jTable.getValueAt(i, 2);
                     list.add(data);
                 }
             }
@@ -681,8 +686,8 @@ public class Compra_Form extends Form {
             int rowCount = model.getRowCount();
 
             for (int i = 0; i < rowCount; i++) {
-                Object precioObj = model.getValueAt(i, 5); // Asumiendo que el precio está en la columna 5
-                Object cantidadObj = model.getValueAt(i, 4); // Asumiendo que la cantidad está en la columna 4
+                Object precioObj = model.getValueAt(i, 5); // Obtengo el precio que esta en la columna 5
+                Object cantidadObj = model.getValueAt(i, 4); // Obtengo la cantidad que esta en la columna 4
 
                 if (precioObj instanceof Double && cantidadObj instanceof Integer) {
                     double precio = (Double) precioObj;

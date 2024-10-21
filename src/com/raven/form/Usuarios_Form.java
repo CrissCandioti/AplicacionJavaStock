@@ -370,12 +370,12 @@ public class Usuarios_Form extends Form {
     private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
         search(jTextField.getText().trim());
     }//GEN-LAST:event_jTextFieldKeyReleased
-
+    //JButton para crear el PDF
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFTablaActionPerformed
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }//GEN-LAST:event_jButtonPDFTablaActionPerformed
-
+    //JButton para crear el Excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelTablaActionPerformed
         ClientesExcel ce = new ClientesExcel();
         ce.TablaClientesExcelReporte();
