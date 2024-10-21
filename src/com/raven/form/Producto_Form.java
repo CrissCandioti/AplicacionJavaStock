@@ -306,7 +306,6 @@ public class Producto_Form extends Form {
     //JButton para eliminar el produto de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<Productos> list = Seleccionarusuario();
-        ClienteServices cs = new ClienteServices();
         ProductoServices ps = new ProductoServices();
         if (!list.isEmpty()) {
             DefaultOption option = new DefaultOption() {

@@ -424,22 +424,32 @@ public class Compra_Form extends Form {
     }//GEN-LAST:event_jButton2ActionPerformed
     //JButton para quitar el producto de la lista
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        List<Productos> list = SeleccionarProducto();
+        if (!list.isEmpty()) {
+            for (Productos aux : list) {
+                list.remove(aux);
+            }
+        } else {
+            MessageAlerts.getInstance().showMessage("Importante", "Debe seleccionar un producto o varios para poder quitar/los de la lista", MessageAlerts.MessageType.WARNING);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     // JButon que llama a un metodo para setear las celdas del cliente
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
     }
+
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
     private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
     }
+
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }
+
     //JButon para crear el excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
@@ -482,12 +492,10 @@ public class Compra_Form extends Form {
                 } else {
                     MessageAlerts.getInstance().showMessage("Error en la cantidad (stock)", "La cantidad que desea añadir es superior a la disponible", MessageAlerts.MessageType.ERROR);
                 }
-            } else {
-                MessageAlerts.getInstance().showMessage("Importante", "Seleccione la cantidad(stock)", MessageAlerts.MessageType.WARNING);
             }
             seteoJLabelTotal();
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese una cantidad válida en el campo de stock");
+            MessageAlerts.getInstance().showMessage("Importante", "Seleccione la cantidad(stock)", MessageAlerts.MessageType.WARNING);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al agregar el producto a la tabla");
             e.printStackTrace();
