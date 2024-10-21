@@ -420,16 +420,19 @@ public class Compra_Form extends Form {
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
     }
+
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
     private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
     }
+
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }
+
     //JButon para crear el excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
@@ -462,7 +465,7 @@ public class Compra_Form extends Form {
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
-            
+
             Productos productoSeleccionado = (Productos) jComboBoxProductos.getSelectedItem();
             if (productoSeleccionado != null) {
                 int cantidad = Integer.parseInt(jTextFieldContenidoStock.getText());
@@ -472,6 +475,7 @@ public class Compra_Form extends Form {
             } else {
                 JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto");
             }
+            seteoJLabelTotal();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese una cantidad válida en el campo de stock");
         } catch (Exception e) {
@@ -663,6 +667,30 @@ public class Compra_Form extends Form {
         }
     }
 
+    //Metodo creado para para setear los label para obtener las ganancias, el porcentaje y el total
+    public void seteoJLabelTotal() {
+        try {
+            double total = 0.0;
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            int rowCount = model.getRowCount();
+
+            for (int i = 0; i < rowCount; i++) {
+                Object precioObj = model.getValueAt(i, 5); // Asumiendo que el precio está en la columna 5
+                Object cantidadObj = model.getValueAt(i, 4); // Asumiendo que la cantidad está en la columna 4
+
+                if (precioObj instanceof Double && cantidadObj instanceof Integer) {
+                    double precio = (Double) precioObj;
+                    int cantidad = (Integer) cantidadObj;
+                    total += precio * cantidad;
+                }
+            }
+
+            jLabel12.setText(String.format("%.2f", total));
+        } catch (Exception e) {
+            System.out.println("Error en el método seteoJLabelGananciaPorcentajeTotal() de la clase Compra_Form");
+            e.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
