@@ -290,7 +290,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="jButtonEliminarCliente">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="text" type="java.lang.String" value="Borrar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEliminarClienteActionPerformed"/>
@@ -311,7 +311,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonPDFTabla">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Imprimir factura PDF"/>
+            <Property name="text" type="java.lang.String" value="Imprimir factura previa PDF"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPDFTablaActionPerformed"/>
@@ -319,7 +319,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonExcelTabla">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Imprimir factura Excel"/>
+            <Property name="text" type="java.lang.String" value="Imprimir factura previa Excel"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcelTablaActionPerformed"/>
@@ -399,7 +399,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="text" type="java.lang.String" value="Quitar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
@@ -428,6 +428,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/raven/icon/8_s.png"/>
             </Property>
