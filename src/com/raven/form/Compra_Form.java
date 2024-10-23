@@ -236,15 +236,15 @@ public class Compra_Form extends Form {
 
         jLabel11.setText("Total a pagar:");
 
-        jLabel12.setText("Ver total");
+        jLabel12.setText("0,00");
 
         jLabel13.setText("Ganancias de la compra:");
 
-        jLabeVerGanancia.setText("Ver ganancias");
+        jLabeVerGanancia.setText("0,00");
 
         jLabel15.setText("Porcentaje de la ganancia:");
 
-        jLabelVerPorcentajeDeLaGanancia.setText("Ver porcentaje de la ganancia");
+        jLabelVerPorcentajeDeLaGanancia.setText("NaN%");
 
         jLabel14.setText("Detalles");
 
@@ -438,6 +438,7 @@ public class Compra_Form extends Form {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         loadData();
         seteoJLabelGanancias();
+        calcularYSetearPorcentajeGanancia();
     }//GEN-LAST:event_jButton2ActionPerformed
     //Metodo la cual al pulsar el JButton se realiza la compra
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -473,6 +474,7 @@ public class Compra_Form extends Form {
         // Actualizar cálculos si es necesario
         seteoJLabelGanancias();
         seteoJLabelTotal();
+        calcularYSetearPorcentajeGanancia();
     }
 
     // JButon que llama a un metodo para setear las celdas del cliente
@@ -826,6 +828,40 @@ public class Compra_Form extends Form {
             System.out.println("Error en el método obtenerFechaHoraActual() de la clase Compra_Form");
             e.printStackTrace();
             return null;
+        }
+    }
+
+    // Método para calcular y setear el porcentaje de ganancia
+    public void calcularYSetearPorcentajeGanancia() {
+        try {
+            ProductoServices ps = new ProductoServices();
+            double totalCompra = 0.0;
+            double totalVenta = 0.0;
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            int rowCount = model.getRowCount();
+            Productos aux = null;
+
+            for (int i = 0; i < rowCount; i++) {
+                Object codigo = model.getValueAt(i, 1);
+                Object cantidadObj = model.getValueAt(i, 4);
+
+                if (cantidadObj instanceof Integer) {
+                    aux = ps.buscarProductoPorID((int) codigo);
+                    double precioCompra = aux.getPrecioCosto();
+                    double precioVenta = aux.getPrecioventa();
+                    int cantidad = (Integer) cantidadObj;
+                    totalCompra += precioCompra * cantidad;
+                    totalVenta += precioVenta * cantidad;
+                }
+            }
+
+            double ganancia = totalVenta - totalCompra;
+            double porcentajeGanancia = (ganancia / totalCompra) * 100;
+
+            jLabelVerPorcentajeDeLaGanancia.setText(String.format("%.2f%%", porcentajeGanancia));
+        } catch (Exception e) {
+            System.out.println("Error en el método calcularYSetearPorcentajeGanancia() de la clase Compra_Form");
+            e.printStackTrace();
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
