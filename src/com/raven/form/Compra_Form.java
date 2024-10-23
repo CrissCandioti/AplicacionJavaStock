@@ -578,24 +578,20 @@ public class Compra_Form extends Form {
         seteoJLabelTotal();
         calcularYSetearPorcentajeGanancia();
     }
-
     // JButon que llama a un metodo para setear las celdas del cliente
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
     }
-
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
     private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
     }
-
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }
-
     //JButon para crear el excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
@@ -645,24 +641,6 @@ public class Compra_Form extends Form {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al agregar el producto a la tabla");
             e.printStackTrace();
-        }
-    }
-
-    // Metodo la cual busca el cliente en el jTextField
-    public void search(String search) {
-        try {
-            ClienteServices cs = new ClienteServices();
-            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            if (jTable.isEditing()) {
-                jTable.getCellEditor().stopCellEditing();
-            }
-            model.setRowCount(0);
-            List<Cliente> list = cs.busquedaCliente(search);
-            for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
         }
     }
 
@@ -838,7 +816,6 @@ public class Compra_Form extends Form {
 
     //Metodo la cual se crea una scroll bar para los productos
     public void ScrollBarComboBoxProductos() {
-        // Configurar el ComboBox de productos para mostrar 3 elementos y agregar una barra de desplazamiento
         try {
             jComboBoxProductos.setMaximumRowCount(3);
             jComboBoxProductos.setRenderer(new DefaultListCellRenderer() {
