@@ -126,7 +126,7 @@ public class Compra_Form extends Form {
         jLabelVerPorcentajeDeLaGanancia = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaDetalles = new javax.swing.JTextArea();
         jTextFieldIdCliente = new javax.swing.JTextField();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -248,9 +248,9 @@ public class Compra_Form extends Form {
 
         jLabel14.setText("Detalles");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaDetalles.setColumns(20);
+        jTextAreaDetalles.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaDetalles);
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -442,16 +442,32 @@ public class Compra_Form extends Form {
     }//GEN-LAST:event_jButton2ActionPerformed
     //Metodo la cual al pulsar el JButton se realiza la compra
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ProductoServices ps = new ProductoServices();
-        Productos aux = null;
-        List<Productos> listaProductos = new ArrayList<>();
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        int rowCount = model.getRowCount();
+        try {
+            //Variables para utilizar
+            ProductoServices ps = new ProductoServices();
+            ClienteServices cs = new ClienteServices();
+            Productos aux = null;
+            Cliente index = null;
+            //Variale la cual se obtiene lo del campo detalles
+            String detalles = jTextAreaDetalles.getText();
+            //Logica para obtener la lista de la Jtable
+            List<Productos> listaProductos = new ArrayList<>();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            int rowCount = model.getRowCount();
 
-        for (int i = 0; i < rowCount; i++) {
-            int codigo = (int) model.getValueAt(i, 1);
-            aux = ps.buscarProductoPorID(codigo);
-            listaProductos.add(aux);
+            for (int i = 0; i < rowCount; i++) {
+                int codigo = (int) model.getValueAt(i, 1);
+                aux = ps.buscarProductoPorID(codigo);
+                listaProductos.add(aux);
+            }
+            //Logica para obtener el cliente
+            index = cs.buscarClienteID(Integer.parseInt(jTextFieldIdCliente.getText()));
+            //Metodo que me retorna la fecha y hora actual
+            obtenerFechaHoraActual();
+        } catch (NumberFormatException e) {
+            MessageAlerts.getInstance().showMessage("Surgio un problema al realizar la compra", "Debe seleccionar el cliente", MessageAlerts.MessageType.ERROR);
+        } catch (Exception f) {
+            System.out.println(f.fillInStackTrace());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     //JButton para quitar el producto de la lista
@@ -897,7 +913,7 @@ public class Compra_Form extends Form {
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextAreaDetalles;
     private javax.swing.JTextField jTextField1ApellidoCliente;
     private javax.swing.JTextField jTextFieldContenidoStock;
     private javax.swing.JTextField jTextFieldDireccion;
