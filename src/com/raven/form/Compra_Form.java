@@ -817,6 +817,17 @@ public class Compra_Form extends Form {
             e.printStackTrace();
         }
     }
+
+    // Método para obtener la fecha y hora actual
+    public Date obtenerFechaHoraActual() {
+        try {
+            return new Date();
+        } catch (Exception e) {
+            System.out.println("Error en el método obtenerFechaHoraActual() de la clase Compra_Form");
+            e.printStackTrace();
+            return null;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
