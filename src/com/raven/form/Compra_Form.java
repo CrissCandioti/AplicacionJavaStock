@@ -423,33 +423,39 @@ public class Compra_Form extends Form {
         seteoJLabelGanancias();
     }//GEN-LAST:event_jButton2ActionPerformed
     //JButton para quitar el producto de la lista
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        List<Productos> list = SeleccionarProducto();
-        if (!list.isEmpty()) {
-            for (Productos aux : list) {
-                list.remove(aux);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    // Lógica para eliminar productos seleccionados de la tabla
+        DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+        int filas = jTable.getRowCount();
+
+        for (int i = filas - 1; i >= 0; i--) {
+            Boolean seleccionado = (Boolean) jTable.getValueAt(i, 0);
+            if (seleccionado) {
+                modelo.removeRow(i);
             }
-        } else {
-            MessageAlerts.getInstance().showMessage("Importante", "Debe seleccionar un producto o varios para poder quitar/los de la lista", MessageAlerts.MessageType.WARNING);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    // Actualizar la tabla
+        jTable.setModel(modelo);
+        jTable.repaint();
+
+    // Actualizar cálculos si es necesario
+        seteoJLabelGanancias();
+    }
     // JButon que llama a un metodo para setear las celdas del cliente
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
     }
-
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
     private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
     }
-
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }
-
     //JButon para crear el excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
