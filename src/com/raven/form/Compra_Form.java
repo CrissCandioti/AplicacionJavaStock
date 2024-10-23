@@ -35,6 +35,8 @@ public class Compra_Form extends Form {
     }
 
     private void init() {
+        jTextFieldIdCliente.setVisible(false);
+
         jTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "height:30;"
                 + "hoverBackground:null;"
@@ -76,6 +78,7 @@ public class Compra_Form extends Form {
         seteoComboBoxClientes();
         seteoComboBoxProductos();
         timerDate();
+        ScrollBarComboBoxClientes();
         ScrollBarComboBoxProductos();
     }
 
@@ -124,6 +127,7 @@ public class Compra_Form extends Form {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jTextFieldIdCliente = new javax.swing.JTextField();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -339,6 +343,10 @@ public class Compra_Form extends Form {
                                 .addComponent(jLabel12))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(379, 379, 379)
+                .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +407,11 @@ public class Compra_Form extends Form {
                             .addComponent(jLabel12))
                         .addGap(50, 50, 50)
                         .addComponent(jLabel14))
-                    .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
@@ -440,7 +452,6 @@ public class Compra_Form extends Form {
             aux = ps.buscarProductoPorID(codigo);
             listaProductos.add(aux);
         }
-        System.out.println(listaProductos);
     }//GEN-LAST:event_jButton3ActionPerformed
     //JButton para quitar el producto de la lista
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -461,6 +472,7 @@ public class Compra_Form extends Form {
 
         // Actualizar cálculos si es necesario
         seteoJLabelGanancias();
+        seteoJLabelTotal();
     }
 
     // JButon que llama a un metodo para setear las celdas del cliente
@@ -658,6 +670,7 @@ public class Compra_Form extends Form {
     public void setCeldasCliente() {
         try {
             Cliente aux = (Cliente) jComboBoxClientes.getSelectedItem();
+            jTextFieldIdCliente.setText(String.valueOf(aux.getId()));
             jTextFieldNombreCliente.setText(aux.getNombre());
             jTextField1ApellidoCliente.setText(aux.getApellido());
             jTextFieldDocumentoCliente.setText(String.valueOf(aux.getDocumento()));
@@ -673,6 +686,7 @@ public class Compra_Form extends Form {
     //Metod creado para setear las celdas
     public void setCeldasClienteEmpty() {
         try {
+            jTextFieldIdCliente.setText("");
             jTextFieldNombreCliente.setText("");
             jTextField1ApellidoCliente.setText("");
             jTextFieldDocumentoCliente.setText("");
@@ -682,6 +696,39 @@ public class Compra_Form extends Form {
             jTextFieldDireccion.setText("");
         } catch (Exception e) {
             System.out.println("Error en el metodo setCeldasClienteEmpty() de la clase Compra_Form");
+        }
+    }
+
+    //Metodo la cual se crea la scroll bar para el comboBox de los CLientes
+    public void ScrollBarComboBoxClientes() {
+        try {
+            // Configurar el ComboBox de clientes para mostrar 3 elementos
+            jComboBoxClientes.setMaximumRowCount(3);
+
+            // Personalizar el renderizador para mostrar solo el nombre del cliente
+            jComboBoxClientes.setRenderer(new DefaultListCellRenderer() {
+                @Override
+                public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if (value instanceof Cliente) {
+                        Cliente cliente = (Cliente) value;
+                        setText(cliente.getNombre() + " " + cliente.getApellido());
+                    }
+                    return this;
+                }
+            });
+
+            // Agregar una barra de desplazamiento al popup del ComboBox
+            Object comp = jComboBoxClientes.getUI().getAccessibleChild(jComboBoxClientes, 0);
+            if (comp instanceof JPopupMenu) {
+                JPopupMenu popup = (JPopupMenu) comp;
+                JScrollPane scrollPane = (JScrollPane) popup.getComponent(0);
+                scrollPane.setHorizontalScrollBar(new JScrollBar(JScrollBar.HORIZONTAL));
+                scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en el metodo ScrollBarComboBoxClientes() de la clase Compra_Form");
         }
     }
 
@@ -809,6 +856,7 @@ public class Compra_Form extends Form {
     private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldDocumentoCliente;
     private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldIdCliente;
     private javax.swing.JTextField jTextFieldLocalidad;
     private javax.swing.JTextField jTextFieldNombreCliente;
     private javax.swing.JTextField jTextFieldWhatsApp;
