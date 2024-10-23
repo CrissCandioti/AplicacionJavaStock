@@ -65,6 +65,15 @@ public class Compra_Form extends Form {
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;");
 
+        jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
+        jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:15;"
+                + "borderWidth:0;"
+                + "focusWidth:0;"
+                + "innerFocusWidth:0;"
+                + "margin:5,20,5,20;");
+
         jScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
@@ -142,6 +151,7 @@ public class Compra_Form extends Form {
         jTextAreaDetalles = new javax.swing.JTextArea();
         jTextFieldIdCliente = new javax.swing.JTextField();
         jTextFieldBuscador = new javax.swing.JTextField();
+        jTextFieldBuscadorProductos = new javax.swing.JTextField();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,6 +282,12 @@ public class Compra_Form extends Form {
             }
         });
 
+        jTextFieldBuscadorProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBuscadorProductosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -287,6 +303,8 @@ public class Compra_Form extends Form {
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldContenidoStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldBuscadorProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
@@ -413,7 +431,8 @@ public class Compra_Form extends Form {
                             .addComponent(jButton1)
                             .addComponent(jButton2)
                             .addComponent(jLabel10)
-                            .addComponent(jTextFieldContenidoStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldContenidoStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldBuscadorProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                         .addGap(30, 30, 30)
@@ -493,21 +512,21 @@ public class Compra_Form extends Form {
             System.out.println(f.fillInStackTrace());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    //JTextfield la cual busca al cliente en el comboBox
     private void jTextFieldBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscadorActionPerformed
         // Lógica para buscar clientes por nombre en el jComboBoxClientes mientras el usuario escribe
         ClienteServices cs = new ClienteServices();
         String busqueda = jTextFieldBuscador.getText().toLowerCase();
         DefaultComboBoxModel<Cliente> model = (DefaultComboBoxModel<Cliente>) jComboBoxClientes.getModel();
         model.removeAllElements();
-        
+
         for (Cliente cliente : cs.listaCliente()) {
             String nombreCompleto = (cliente.getNombre() + " " + cliente.getApellido()).toLowerCase();
             if (nombreCompleto.contains(busqueda)) {
                 model.addElement(cliente);
             }
         }
-        
+
         if (model.getSize() > 0) {
             jComboBoxClientes.setSelectedIndex(0);
             jComboBoxClientes.showPopup();
@@ -515,6 +534,28 @@ public class Compra_Form extends Form {
             jComboBoxClientes.hidePopup();
         }
     }//GEN-LAST:event_jTextFieldBuscadorActionPerformed
+    //JTexfield la cual busca el producto por el nombre
+    private void jTextFieldBuscadorProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscadorProductosActionPerformed
+        // Lógica para buscar productos por nombre en el jComboBoxProductos mientras el usuario escribe
+        ProductoServices ps = new ProductoServices();
+        String busqueda = jTextFieldBuscadorProductos.getText().toLowerCase();
+        DefaultComboBoxModel<Productos> model = (DefaultComboBoxModel<Productos>) jComboBoxProductos.getModel();
+        model.removeAllElements();
+
+        for (Productos producto : ps.listaProductos()) {
+            String nombreProducto = producto.getNombre().toLowerCase();
+            if (nombreProducto.contains(busqueda)) {
+                model.addElement(producto);
+            }
+        }
+
+        if (model.getSize() > 0) {
+            jComboBoxProductos.setSelectedIndex(0);
+            jComboBoxProductos.showPopup();
+        } else {
+            jComboBoxProductos.hidePopup();
+        }
+    }//GEN-LAST:event_jTextFieldBuscadorProductosActionPerformed
     //JButton para quitar el producto de la lista
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Lógica para eliminar productos seleccionados de la tabla
@@ -961,6 +1002,7 @@ public class Compra_Form extends Form {
     private javax.swing.JTextArea jTextAreaDetalles;
     private javax.swing.JTextField jTextField1ApellidoCliente;
     private javax.swing.JTextField jTextFieldBuscador;
+    private javax.swing.JTextField jTextFieldBuscadorProductos;
     private javax.swing.JTextField jTextFieldContenidoStock;
     private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldDocumentoCliente;
