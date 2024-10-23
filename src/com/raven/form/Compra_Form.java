@@ -1,6 +1,7 @@
 package com.raven.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
@@ -14,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -51,6 +54,16 @@ public class Compra_Form extends Form {
                 + "cellFocusColor:$TableHeader.hoverBackground;"
                 + "selectionBackground:$TableHeader.hoverBackground;"
                 + "selectionForeground:$Table.foreground;");
+
+        jTextFieldBuscador.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        jTextFieldBuscador.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
+
+        jTextFieldBuscador.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:15;"
+                + "borderWidth:0;"
+                + "focusWidth:0;"
+                + "innerFocusWidth:0;"
+                + "margin:5,20,5,20;");
 
         jScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
@@ -128,6 +141,7 @@ public class Compra_Form extends Form {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDetalles = new javax.swing.JTextArea();
         jTextFieldIdCliente = new javax.swing.JTextField();
+        jTextFieldBuscador = new javax.swing.JTextField();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,6 +266,12 @@ public class Compra_Form extends Form {
         jTextAreaDetalles.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDetalles);
 
+        jTextFieldBuscador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBuscadorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -273,6 +293,8 @@ public class Compra_Form extends Form {
                                 .addComponent(jButton1))
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonBuscarCliente)
                                 .addGap(18, 18, 18)
@@ -361,7 +383,8 @@ public class Compra_Form extends Form {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEliminarCliente)
                     .addComponent(jButtonBuscarCliente)
-                    .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -470,6 +493,28 @@ public class Compra_Form extends Form {
             System.out.println(f.fillInStackTrace());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextFieldBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscadorActionPerformed
+        // Lógica para buscar clientes por nombre en el jComboBoxClientes mientras el usuario escribe
+        ClienteServices cs = new ClienteServices();
+        String busqueda = jTextFieldBuscador.getText().toLowerCase();
+        DefaultComboBoxModel<Cliente> model = (DefaultComboBoxModel<Cliente>) jComboBoxClientes.getModel();
+        model.removeAllElements();
+        
+        for (Cliente cliente : cs.listaCliente()) {
+            String nombreCompleto = (cliente.getNombre() + " " + cliente.getApellido()).toLowerCase();
+            if (nombreCompleto.contains(busqueda)) {
+                model.addElement(cliente);
+            }
+        }
+        
+        if (model.getSize() > 0) {
+            jComboBoxClientes.setSelectedIndex(0);
+            jComboBoxClientes.showPopup();
+        } else {
+            jComboBoxClientes.hidePopup();
+        }
+    }//GEN-LAST:event_jTextFieldBuscadorActionPerformed
     //JButton para quitar el producto de la lista
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Lógica para eliminar productos seleccionados de la tabla
@@ -915,6 +960,7 @@ public class Compra_Form extends Form {
     private javax.swing.JTable jTable;
     private javax.swing.JTextArea jTextAreaDetalles;
     private javax.swing.JTextField jTextField1ApellidoCliente;
+    private javax.swing.JTextField jTextFieldBuscador;
     private javax.swing.JTextField jTextFieldContenidoStock;
     private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldDocumentoCliente;
