@@ -224,6 +224,11 @@ public class Compra_Form extends Form {
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/8_s.png"))); // NOI18N
         jButton3.setText("Realizar compra");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Total a pagar:");
 
@@ -422,9 +427,24 @@ public class Compra_Form extends Form {
         loadData();
         seteoJLabelGanancias();
     }//GEN-LAST:event_jButton2ActionPerformed
+    //Metodo la cual al pulsar el JButton se realiza la compra
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ProductoServices ps = new ProductoServices();
+        Productos aux = null;
+        List<Productos> listaProductos = new ArrayList<>();
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        int rowCount = model.getRowCount();
+
+        for (int i = 0; i < rowCount; i++) {
+            int codigo = (int) model.getValueAt(i, 1);
+            aux = ps.buscarProductoPorID(codigo);
+            listaProductos.add(aux);
+        }
+        System.out.println(listaProductos);
+    }//GEN-LAST:event_jButton3ActionPerformed
     //JButton para quitar el producto de la lista
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-    // Lógica para eliminar productos seleccionados de la tabla
+        // Lógica para eliminar productos seleccionados de la tabla
         DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
         int filas = jTable.getRowCount();
 
@@ -435,27 +455,31 @@ public class Compra_Form extends Form {
             }
         }
 
-    // Actualizar la tabla
+        // Actualizar la tabla
         jTable.setModel(modelo);
         jTable.repaint();
 
-    // Actualizar cálculos si es necesario
+        // Actualizar cálculos si es necesario
         seteoJLabelGanancias();
     }
+
     // JButon que llama a un metodo para setear las celdas del cliente
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
     }
+
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
     private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
     }
+
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }
+
     //JButon para crear el excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
