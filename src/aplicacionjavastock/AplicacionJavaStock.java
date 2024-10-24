@@ -28,15 +28,20 @@ public class AplicacionJavaStock {
         ClienteServices cs = new ClienteServices();
         ProductoServices ps = new ProductoServices();
         CompraDAO dao = new CompraDAO();
-        Cliente aux = cs.buscarClienteID(5);
-        List<Productos> listaProductos = new ArrayList<>();
-        Productos index = ps.buscarProductoPorID(9);
-        listaProductos.add(index);
-        int total = 500;
-        Date now = new Date();
-        String detalles = "Que grande el pibe";
-        Compra compra = new Compra(now, aux, listaProductos, detalles, total);
-        dao.persistirEntidad(compra);
+//        Cliente aux = cs.buscarClienteID(13);
+//        List<Productos> listaProductos = new ArrayList<>();
+//        Productos index = ps.buscarProductoPorID(9);
+//        Productos index2 = ps.buscarProductoPorID(5);
+//        Productos index3 = ps.buscarProductoPorID(4);
+//        listaProductos.add(index);
+//        listaProductos.add(index2);
+//        listaProductos.add(index3);
+//        int total = 500;
+//        Date now = new Date();
+//        String detalles = "Que grande el pibe";
+//        Compra compra = new Compra(now, aux, listaProductos, detalles, total);
+//        dao.persistirEntidad(compra);
+          System.out.println(dao.listaDeCompraDeXCliente(13));
     }
 
 }

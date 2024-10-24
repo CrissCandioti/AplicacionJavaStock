@@ -39,6 +39,7 @@ public class Compra {
             joinColumns = @JoinColumn(name = "compra_id"), // Columna de compra en la tabla de relación
             inverseJoinColumns = @JoinColumn(name = "productos_id") // Columna de productos en la tabla de relación
     )
+    
     private List<Productos> listaProductos;
     private String detalles;
     private double total;
