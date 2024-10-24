@@ -23,6 +23,11 @@ public final class CompraDAO extends DAO<Compra> {
         super.actualizarEntidad(object); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
+    @Override
+    public void borrarEntidad(Compra object) {
+        super.borrarEntidad(object); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
     /**
      * El JOIN FETCH se utiliza para que JPA haga una unión con la lista de
      * productos de la compra, cargando todo en una única consulta. Esto
@@ -56,6 +61,33 @@ public final class CompraDAO extends DAO<Compra> {
             return compras;
         } catch (Exception e) {
             System.out.println("Error en el metodo listaDeProductosDeXProveedor() de la clase CompraDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
+
+    public Compra compraPorID(int id) {
+        try {
+            conectar();
+            return em.find(Compra.class, id);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo compraPorID de la clase compraDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
+
+    public List<Compra> barraBusquedaDeCompras(String busqueda) {
+        try {
+            conectar();
+            return (List<Compra>) em.createQuery(
+                    "SELECT c FROM Compra c JOIN c.cliente cl WHERE cl.nombre LIKE :busqueda OR cl.apellido LIKE :busqueda", Compra.class)
+                    .setParameter("busqueda", "%" + busqueda + "%")
+                    .getResultList();
+        } catch (Exception e) {
+            System.out.println("Error en el metodo barraBusquedaDeCompras en la clase CompraDAO: " + e.getMessage());
         } finally {
             desconectar();
         }

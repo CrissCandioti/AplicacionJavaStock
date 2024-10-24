@@ -4,6 +4,12 @@
  */
 package aplicacionjavastock;
 
+import baseDeDatos.CompraDAO;
+import entidades.Compra;
+import services.ClienteServices;
+import services.CompraServices;
+import services.ProductoServices;
+
 /**
  *
  * @author criss
@@ -14,7 +20,11 @@ public class AplicacionJavaStock {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        CompraServices cs = new CompraServices();
+        ClienteServices css = new ClienteServices();
+        ProductoServices ps = new ProductoServices();
+        CompraDAO dao = new CompraDAO();
+        System.out.println(dao.barraBusquedaDeCompras("cris"));
     }
 
 }

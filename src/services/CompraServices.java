@@ -39,6 +39,16 @@ public class CompraServices {
         }
     }
 
+    public void borrarEntidad(Compra aux) {
+        try {
+            CompraDAO dao = new CompraDAO();
+            dao.borrarEntidad(aux);
+            System.out.println("Se elimino correctamente la compra");
+        } catch (Exception e) {
+            System.out.println("Error en el metodo BorrarEntidad de la clase CompraServices");
+        }
+    }
+
     public List<Compra> listaCompra() {
         try {
             CompraDAO dao = new CompraDAO();
@@ -55,6 +65,16 @@ public class CompraServices {
             return dao.listaDeCompraDeXCliente(id);
         } catch (Exception e) {
             System.out.println("Error en el metodo listaCompraPorCliente de la clase ComprServices");
+        }
+        return null;
+    }
+
+    public Compra compraPorID(int id) {
+        try {
+            CompraDAO dao = new CompraDAO();
+            return dao.compraPorID(id);
+        } catch (Exception e) {
+            System.out.println("Error en la compraPorID de la compraServices");
         }
         return null;
     }
