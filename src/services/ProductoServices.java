@@ -15,7 +15,7 @@ import java.util.List;
  * @author criss
  */
 public class ProductoServices {
-
+    
     public void persistirProducto(String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, Proveedor proveedor, byte[] imagen, String descripcion) {
         try {
             ProductoDAO dao = new ProductoDAO();
@@ -25,7 +25,7 @@ public class ProductoServices {
             System.out.println("Error en el metodo persistirProducto() de la clase ProductoServices");
         }
     }
-
+    
     public void modificarProducto(int id, String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, Proveedor proveedor, String descripcion, byte[] imagen) {
         try {
             ProductoDAO dao = new ProductoDAO();
@@ -36,7 +36,7 @@ public class ProductoServices {
             System.out.println("Error en el metodo modificarProducto() de la clase ProductoServices");
         }
     }
-
+    
     public void eliminarProducto(Productos aux) {
         try {
             ProductoDAO dao = new ProductoDAO();
@@ -46,7 +46,7 @@ public class ProductoServices {
             System.out.println("Error en el metodo eliminarProducto() de la clase ProductoServices");
         }
     }
-
+    
     public List<Productos> listaProductos() {
         try {
             ProductoDAO dao = new ProductoDAO();
@@ -56,7 +56,7 @@ public class ProductoServices {
         }
         return null;
     }
-
+    
     public List<Productos> barraBusquedaProductos(String busqueda) {
         try {
             ProductoDAO dao = new ProductoDAO();
@@ -66,7 +66,7 @@ public class ProductoServices {
         }
         return null;
     }
-
+    
     public Productos buscarProductoPorID(int id) {
         try {
             ProductoDAO dao = new ProductoDAO();
@@ -85,5 +85,14 @@ public class ProductoServices {
             System.out.println("Error en el metodo listaDeProductosDeXProveedor() de la clase ProductoServices");
         }
         return null;
+    }
+    
+    public void modificarStock(Productos aux) {
+        try {
+            ProductoDAO dao = new ProductoDAO();
+            dao.actualizarEntidad(aux);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo modificarStock()");
+        }
     }
 }

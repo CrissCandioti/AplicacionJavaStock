@@ -10,6 +10,7 @@ import entidades.Compra;
 import entidades.Productos;
 import java.util.Date;
 import java.util.List;
+import raven.alerts.MessageAlerts;
 
 /**
  *
@@ -20,9 +21,17 @@ public class CompraServices {
     public void persistirEntidad(Date date, Cliente aux, List<Productos> listaProductos, String detalles, double total) {
         try {
             CompraDAO dao = new CompraDAO();
+            if (listaProductos.isEmpty()) {
+                MessageAlerts.getInstance().showMessage("Error al realizar la compra", "La lista de productos se encuentra vacia", MessageAlerts.MessageType.ERROR);
+                return;
+            }
+            if (detalles.isEmpty()) {
+                detalles = "Ver detalles";
+            }
             Compra index = new Compra(date, aux, listaProductos, detalles, total);
             dao.persistirEntidad(index);
-            System.out.println("La compra se realizo con exito");
+            MessageAlerts.getInstance().showMessage("Compra exitosa", "La compra fue realizada correctamente a continuacion se imprimira la factura", MessageAlerts.MessageType.SUCCESS);
+            stockProductosRestar(listaProductos);
         } catch (Exception e) {
             System.out.println("Error en la clase persistirEntidad de la clase CompraDAO");
         }
@@ -77,5 +86,20 @@ public class CompraServices {
             System.out.println("Error en la compraPorID de la compraServices");
         }
         return null;
+    }
+
+    //Metodo la cualme descuente el stock de lo comprado a la base de datos
+    public void stockProductosRestar(List<Productos> listaProductos) {
+        try {
+            ProductoServices ps = new ProductoServices();
+            Productos index = null;
+            for (Productos aux : listaProductos) {
+                index = ps.buscarProductoPorID(aux.getId());
+                index.setStock(index.getStock() - aux.getStock());
+                ps.modificarStock(index);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en la lista de productos del metodo stockProductosRestar de la clase Compra_Form");
+        }
     }
 }

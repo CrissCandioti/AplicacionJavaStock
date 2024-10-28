@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
@@ -27,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import pdf.ClientePDF;
 import raven.alerts.MessageAlerts;
 import services.ClienteServices;
+import services.CompraServices;
 import services.ProductoServices;
 
 public class Compra_Form extends Form {
@@ -259,7 +261,7 @@ public class Compra_Form extends Form {
 
         jLabel11.setText("Total a pagar:");
 
-        jLabel12.setText("0,00");
+        jLabel12.setText("0.00");
 
         jLabel13.setText("Ganancias de la compra:");
 
@@ -489,8 +491,10 @@ public class Compra_Form extends Form {
             ClienteServices cs = new ClienteServices();
             Productos aux = null;
             Cliente index = null;
-            //Variale la cual se obtiene lo del campo detalles
-            String detalles = jTextAreaDetalles.getText();
+            CompraServices css = new CompraServices();
+
+            //Logica para obtener el cliente
+            index = cs.buscarClienteID(Integer.parseInt(jTextFieldIdCliente.getText()));
             //Logica para obtener la lista de la Jtable
             List<Productos> listaProductos = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -501,12 +505,16 @@ public class Compra_Form extends Form {
                 aux = ps.buscarProductoPorID(codigo);
                 listaProductos.add(aux);
             }
-            //Logica para obtener el cliente
-            index = cs.buscarClienteID(Integer.parseInt(jTextFieldIdCliente.getText()));
-            //Metodo que me retorna la fecha y hora actual
-            obtenerFechaHoraActual();
+            //Metodo que me retorna la fecha y hora actual obtenerFechaHoraActual();
+            //Variale la cual se obtiene lo del campo detalles
+            String detalles = jTextAreaDetalles.getText();
+            //Total a pagar
+            double total = Double.parseDouble(jLabel12.getText());
+            //Llamamos a CompraServices para ejecutar la compra
+            css.persistirEntidad(obtenerFechaHoraActual(), index, listaProductos, detalles, total);
         } catch (NumberFormatException e) {
-            MessageAlerts.getInstance().showMessage("Surgio un problema al realizar la compra", "Debe seleccionar el cliente", MessageAlerts.MessageType.ERROR);
+            MessageAlerts.getInstance().showMessage("Error al realizar la compra", "No selecciono un cliente", MessageAlerts.MessageType.ERROR);
+            System.out.println(e.fillInStackTrace());
         } catch (Exception f) {
             System.out.println(f.fillInStackTrace());
         }
@@ -577,20 +585,24 @@ public class Compra_Form extends Form {
         seteoJLabelTotal();
         calcularYSetearPorcentajeGanancia();
     }
+
     // JButon que llama a un metodo para setear las celdas del cliente
     private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasCliente();
     }
+
     // JButton que llama a un metodo para setear todos los valores de las celdas de
     // los clientes pero en este caso los deja vacio
     private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {
         setCeldasClienteEmpty();
     }
+
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientePDF pdf = new ClientePDF();
         pdf.pdfTablaProveedores();
     }
+
     //JButon para crear el excel
     private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {
         ClientesExcel ce = new ClientesExcel();
@@ -861,7 +873,7 @@ public class Compra_Form extends Form {
                 }
             }
 
-            jLabel12.setText(String.format("%.2f", total));
+            jLabel12.setText(String.format(Locale.US, "%.2f", total));
         } catch (Exception e) {
             System.out.println("Error en el método seteoJLabelGananciaPorcentajeTotal() de la clase Compra_Form");
             e.printStackTrace();
