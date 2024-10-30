@@ -4,6 +4,7 @@
  */
 package entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -39,7 +40,7 @@ public class Compra {
             joinColumns = @JoinColumn(name = "compra_id"), // Columna de compra en la tabla de relación
             inverseJoinColumns = @JoinColumn(name = "productos_id") // Columna de productos en la tabla de relación
     )
-    
+
     private List<Productos> listaProductos;
     private String detalles;
     private double total;
@@ -115,6 +116,16 @@ public class Compra {
     @Override
     public String toString() {
         return "Compra{" + "id=" + id + ", date=" + date + ", cliente=" + cliente + ", listaProductos=" + listaProductos + ", detalles=" + detalles + ", total=" + total + '}';
+    }
+
+    public Object[] toTableRow(int rowNum) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            return new Object[]{rowNum, dateFormat.format(date), listaProductos, total, detalles};
+        } catch (Exception e) {
+            System.out.println("Error metodo toTableRow de la clase cliente");
+        }
+        return null;
     }
 
 }

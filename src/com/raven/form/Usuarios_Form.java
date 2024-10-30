@@ -343,7 +343,7 @@ public class Usuarios_Form extends Form {
         if (!list.isEmpty()) {
             if (list.size() == 1) {
                 //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para ver su historial
-                Object data = list.get(0);
+                Cliente data = list.get(0);
                 //Metodo probisorio para ver su historial
                 historialcliente.historialCompraSeteoValores(data);
                 //Creamos nuevamente la ventana emergente para mostrar los datos
@@ -353,9 +353,13 @@ public class Usuarios_Form extends Form {
                         return true;
                     }
                 };
-                String actions[] = new String[]{"Cancelar"};
+                String actions[] = new String[]{"Imprimir Excel", "Imprimir PDF", "Cancelar"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(historialcliente, "Historial de compras del cliente", actions, (pc, i) -> {
                     if (i == 0) {
+                        System.out.println("Se imprime el excel");
+                    } else if (i == 1) {
+                        System.out.println("Se imprime el PDF");
+                    } else if (i == 2) {
                         pc.closePopup();
                     }
                 }), option);

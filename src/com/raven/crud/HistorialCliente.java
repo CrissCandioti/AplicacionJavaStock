@@ -4,6 +4,13 @@
  */
 package com.raven.crud;
 
+import entidades.Cliente;
+import entidades.Compra;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import services.CompraServices;
+
 /**
  *
  * @author criss
@@ -39,11 +46,22 @@ public class HistorialCliente extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "#", "Fecha y Hora", "Contenido", "Total", "Detalles"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(0).setMaxWidth(30);
+        }
 
         jLabelNombreCliente.setText("Cliente en tabla");
 
@@ -75,8 +93,28 @@ public class HistorialCliente extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void historialCompraSeteoValores(Object data) {
-        //Aqui va la logica para setear los valores del JLabel con el nombre del cliente y la JTable con los valores que traiga de las compras que realizo
+    //Metodo para setear los valores
+    public void historialCompraSeteoValores(Cliente aux) {
+        jLabelNombreCliente.setText(aux.getNombre() + " " + aux.getApellido());
+        loadData(aux.getId());
+    }
+
+    //Metodo la cual carga la tabla
+    public void loadData(int id) {
+        try {
+            CompraServices cs = new CompraServices();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            if (jTable.isEditing()) {
+                jTable.getCellEditor().stopCellEditing();
+            }
+            model.setRowCount(0);
+            List<Compra> list = cs.listaCompraPorCliente(id);
+            for (Compra c : list) {
+                model.addRow(c.toTableRow(c.getId()));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
