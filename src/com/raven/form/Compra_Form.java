@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import pdf.ClientePDF;
+import pdf.CompraPDF;
 import raven.alerts.MessageAlerts;
 import services.ClienteServices;
 import services.CompraServices;
@@ -599,8 +600,8 @@ public class Compra_Form extends Form {
 
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
-        ClientePDF pdf = new ClientePDF();
-        pdf.pdfTablaProveedores();
+        CompraPDF pdf = new CompraPDF();
+        pdf.pdfPresupuesto(obtenerFechaHoraActual(), listaCompra, WIDTH);
     }
 
     //JButon para crear el excel
@@ -653,6 +654,16 @@ public class Compra_Form extends Form {
             JOptionPane.showMessageDialog(this, "Error al agregar el producto a la tabla");
             e.printStackTrace();
         }
+    }
+
+    //Metodo la cual me retorna los productos de la tabla para el pdf u excel
+    public List<Productos> listaProductos() {
+        try {
+            
+        } catch (Exception e) {
+            System.out.println("Error en la lista de productos de la clase Compra_Form");
+        }
+        return null;
     }
 
     // Seteo para el comboBox de los clientes

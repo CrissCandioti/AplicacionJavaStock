@@ -11,10 +11,14 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entidades.Compra;
+import entidades.Productos;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -28,8 +32,9 @@ import raven.alerts.MessageAlerts;
 public class CompraPDF {
 
     //Metodo para imprimir el pdf del presupuesto
-    public void pdfPresupuesto(Date fechaYHora, List<Compra> listaCompra, int total) {
+    public void pdfPresupuesto(Date fechaYHora, List<Productos> listaProductos, int total) {
         try {
+            DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
@@ -77,17 +82,42 @@ public class CompraPDF {
             Chunk TOTAL = new Chunk("TOTAL:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
 //-------------------------------------------------------------------------------------------------------
             texto.add(CODIGO);
-            texto.add(" " + fechaYHora + "\n\n");
+            texto.add(" " + df.format(fechaYHora) + "\n\n");
 
             texto.add(TOTAL);
             texto.add(" " + total + "\n\n");
 
 //-------------------------------------------------------------------------------------------------------
+//TABLA
+//-------------------------------------------------------------------------------------------------------
+            PdfPTable tabla = new PdfPTable(14);
+            tabla.addCell("Codigo");
+            tabla.addCell("Variedad");
+            tabla.addCell("Nombre");
+            tabla.addCell("FechaIngreso");
+
+            for (Productos aux : listaProductos) {
+                tabla.addCell(String.valueOf(aux.getId()));
+                tabla.addCell(aux.getVariedad());
+                tabla.addCell(aux.getNombre());
+                tabla.addCell(df.format(aux.getFechaIngreso()));
+                tabla.addCell(aux.getMarca());
+                tabla.addCell(aux.getTipoProducto());
+                tabla.addCell(aux.getContenido());
+                tabla.addCell(String.valueOf(aux.getStock()));
+                tabla.addCell(String.valueOf(aux.getPrecioCosto()));
+                tabla.addCell(String.valueOf(aux.getPrecioventa()));
+                tabla.addCell(String.valueOf(aux.getGanancias()));
+                tabla.addCell(String.valueOf(aux.getPorcentajeGanancias()));
+                tabla.addCell(aux.getProveedor().toString());
+                tabla.addCell(aux.getDescripcion());
+            }
+//-------------------------------------------------------------------------------------------------------
             documento.open();
             documento.add(header);
             documento.add(parrafo);
             documento.add(texto);
-            //documento.add(); aca ponemos la tabla
+            documento.add(tabla);
 
             documento.close();
             MessageAlerts.getInstance().showMessage("EL PDF se creó correctamente", "El PDF se genero en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
