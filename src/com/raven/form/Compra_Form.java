@@ -643,7 +643,7 @@ public class Compra_Form extends Form {
                     fila[4] = cantidad; // Asumiendo que la columna 3 es la cantidad
                     model.addRow(fila);
                 } else {
-                    MessageAlerts.getInstance().showMessage("Error en la cantidad (stock)", "La cantidad que desea añadir es superior a la disponible", MessageAlerts.MessageType.ERROR);
+                    MessageAlerts.getInstance().showMessage("Error en la cantidad (stock)", "La cantidad que desea añadir es superior a la disponible" + "\nStock del producto disponible: " + productoSeleccionado.getStock() + "\nCantidad que desea ingresar: " + cantidad, MessageAlerts.MessageType.ERROR);
                 }
             }
             seteoJLabelTotal();
