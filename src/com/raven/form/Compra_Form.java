@@ -659,6 +659,16 @@ public class Compra_Form extends Form {
     //Metodo la cual me retorna los productos de la tabla para el pdf u excel
     public List<Productos> listaProductos() {
         try {
+            //Logica para obtener la lista de la Jtable
+            List<Productos> listaProductos = new ArrayList<>();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            int rowCount = model.getRowCount();
+
+            for (int i = 0; i < rowCount; i++) {
+                int codigo = (int) model.getValueAt(i, 1);
+                aux = ps.buscarProductoPorID(codigo);
+                listaProductos.add(aux);
+            }
             
         } catch (Exception e) {
             System.out.println("Error en la lista de productos de la clase Compra_Form");
