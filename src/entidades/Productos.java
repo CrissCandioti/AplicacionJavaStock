@@ -51,6 +51,14 @@ public class Productos {
     public Productos() {
     }
 
+    public Productos(int id, String nombre, String contenido, int stock, double precioventa) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contenido = contenido;
+        this.stock = stock;
+        this.precioventa = precioventa;
+    }
+
     public Productos(String variedad, String nombre, Date fechaIngreso, String marca, String tipoProducto, String contenido, int stock, double precioCosto, double precioventa, double ganancias, double porcentajeGanancias, byte[] imagen, Proveedor proveedor, String descripcion) {
         this.variedad = variedad;
         this.nombre = nombre;

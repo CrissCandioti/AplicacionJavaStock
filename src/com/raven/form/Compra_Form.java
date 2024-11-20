@@ -33,22 +33,22 @@ import services.CompraServices;
 import services.ProductoServices;
 
 public class Compra_Form extends Form {
-
+    
     public Compra_Form() {
         initComponents();
         init();
     }
-
+    
     private void init() {
         jTextFieldIdCliente.setVisible(false);
-
+        
         jTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "height:30;"
                 + "hoverBackground:null;"
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background;"
                 + "font:bold;");
-
+        
         jTable.putClientProperty(FlatClientProperties.STYLE, ""
                 + "rowHeight:30;"
                 + "showHorizontalLines:true;"
@@ -56,17 +56,17 @@ public class Compra_Form extends Form {
                 + "cellFocusColor:$TableHeader.hoverBackground;"
                 + "selectionBackground:$TableHeader.hoverBackground;"
                 + "selectionForeground:$Table.foreground;");
-
+        
         jTextFieldBuscador.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
         jTextFieldBuscador.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
-
+        
         jTextFieldBuscador.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;");
-
+        
         jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
         jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
         jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.STYLE, ""
@@ -75,13 +75,13 @@ public class Compra_Form extends Form {
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;");
-
+        
         jScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
-
+        
         jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
         jLabel8.putClientProperty(FlatClientProperties.STYLE, ""
@@ -95,17 +95,17 @@ public class Compra_Form extends Form {
 
         // Metodo para las celdas del cliente y enable boolean false
         styleCeldasCliente();
-
+        
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
-
+        
         seteoComboBoxClientes();
         seteoComboBoxProductos();
         timerDate();
         ScrollBarComboBoxClientes();
         ScrollBarComboBoxProductos();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -500,7 +500,7 @@ public class Compra_Form extends Form {
             List<Productos> listaProductos = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
-
+            
             for (int i = 0; i < rowCount; i++) {
                 int codigo = (int) model.getValueAt(i, 1);
                 aux = ps.buscarProductoPorID(codigo);
@@ -527,14 +527,14 @@ public class Compra_Form extends Form {
         String busqueda = jTextFieldBuscador.getText().toLowerCase();
         DefaultComboBoxModel<Cliente> model = (DefaultComboBoxModel<Cliente>) jComboBoxClientes.getModel();
         model.removeAllElements();
-
+        
         for (Cliente cliente : cs.listaCliente()) {
             String nombreCompleto = (cliente.getNombre() + " " + cliente.getApellido()).toLowerCase();
             if (nombreCompleto.contains(busqueda)) {
                 model.addElement(cliente);
             }
         }
-
+        
         if (model.getSize() > 0) {
             jComboBoxClientes.setSelectedIndex(0);
             jComboBoxClientes.showPopup();
@@ -549,14 +549,14 @@ public class Compra_Form extends Form {
         String busqueda = jTextFieldBuscadorProductos.getText().toLowerCase();
         DefaultComboBoxModel<Productos> model = (DefaultComboBoxModel<Productos>) jComboBoxProductos.getModel();
         model.removeAllElements();
-
+        
         for (Productos producto : ps.listaProductos()) {
             String nombreProducto = producto.getNombre().toLowerCase();
             if (nombreProducto.contains(busqueda)) {
                 model.addElement(producto);
             }
         }
-
+        
         if (model.getSize() > 0) {
             jComboBoxProductos.setSelectedIndex(0);
             jComboBoxProductos.showPopup();
@@ -569,7 +569,7 @@ public class Compra_Form extends Form {
         // Lógica para eliminar productos seleccionados de la tabla
         DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
         int filas = jTable.getRowCount();
-
+        
         for (int i = filas - 1; i >= 0; i--) {
             Boolean seleccionado = (Boolean) jTable.getValueAt(i, 0);
             if (seleccionado) {
@@ -635,7 +635,7 @@ public class Compra_Form extends Form {
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
-
+            
             Productos productoSeleccionado = (Productos) jComboBoxProductos.getSelectedItem();
             int cantidad = Integer.parseInt(jTextFieldContenidoStock.getText());
             if (productoSeleccionado != null) {
@@ -663,13 +663,16 @@ public class Compra_Form extends Form {
             List<Productos> listaProductos = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
-
+            
             for (int i = 0; i < rowCount; i++) {
                 int codigo = (int) model.getValueAt(i, 1);
-                aux = ps.buscarProductoPorID(codigo);
-                listaProductos.add(aux);
+                String nomgre = (String) model.getValueAt(i, 2);
+                String contenido = (String) model.getValueAt(i, 3);
+                int stock = (int) model.getValueAt(i, 4);
+                double precioVenta = (int) model.getValueAt(i, 5);
+                listaProductos.add(new Productos(codigo, nomgre, contenido, stock, precioVenta));
             }
-            
+            return listaProductos;
         } catch (Exception e) {
             System.out.println("Error en la lista de productos de la clase Compra_Form");
         }
@@ -840,7 +843,7 @@ public class Compra_Form extends Form {
                 scrollPane.setHorizontalScrollBar(new JScrollBar(JScrollBar.HORIZONTAL));
                 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error en el metodo ScrollBarComboBoxClientes() de la clase Compra_Form");
         }
@@ -882,7 +885,7 @@ public class Compra_Form extends Form {
             double total = 0.0;
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
-
+            
             for (int i = 0; i < rowCount; i++) {
                 Object precioObj = model.getValueAt(i, 5); // Obtengo el precio que esta en la columna 5
                 Object cantidadObj = model.getValueAt(i, 4); // Obtengo la cantidad que esta en la columna 4
@@ -893,7 +896,7 @@ public class Compra_Form extends Form {
                     total += precio * cantidad;
                 }
             }
-
+            
             jLabel12.setText(String.format(Locale.US, "%.2f", total));
         } catch (Exception e) {
             System.out.println("Error en el método seteoJLabelGananciaPorcentajeTotal() de la clase Compra_Form");
@@ -909,7 +912,7 @@ public class Compra_Form extends Form {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
             Productos aux = null;
-
+            
             for (int i = 0; i < rowCount; i++) {
                 Object codigo = model.getValueAt(i, 1); // Obtenemos el codigo de la base de datos para obtener el precio de venta
                 Object cantidadObj = model.getValueAt(i, 4); // Obtenemos la cantidad(stock)
@@ -923,7 +926,7 @@ public class Compra_Form extends Form {
                     gananciaTotal += gananciaProducto;
                 }
             }
-
+            
             jLabeVerGanancia.setText(String.format("%.2f", gananciaTotal));
         } catch (Exception e) {
             System.out.println("Error en el método seteoJLabelGanancias() de la clase Compra_Form");
@@ -951,11 +954,11 @@ public class Compra_Form extends Form {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
             Productos aux = null;
-
+            
             for (int i = 0; i < rowCount; i++) {
                 Object codigo = model.getValueAt(i, 1);
                 Object cantidadObj = model.getValueAt(i, 4);
-
+                
                 if (cantidadObj instanceof Integer) {
                     aux = ps.buscarProductoPorID((int) codigo);
                     double precioCompra = aux.getPrecioCosto();
@@ -965,10 +968,10 @@ public class Compra_Form extends Form {
                     totalVenta += precioVenta * cantidad;
                 }
             }
-
+            
             double ganancia = totalVenta - totalCompra;
             double porcentajeGanancia = (ganancia / totalCompra) * 100;
-
+            
             jLabelVerPorcentajeDeLaGanancia.setText(String.format("%.2f%%", porcentajeGanancia));
         } catch (Exception e) {
             System.out.println("Error en el método calcularYSetearPorcentajeGanancia() de la clase Compra_Form");
