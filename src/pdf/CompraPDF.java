@@ -13,7 +13,6 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import entidades.Compra;
 import entidades.Productos;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,9 +31,9 @@ import raven.alerts.MessageAlerts;
 public class CompraPDF {
 
     //Metodo para imprimir el pdf del presupuesto
-    public void pdfPresupuesto(Date fechaYHora, List<Productos> listaProductos, int total) {
+    public void pdfPresupuesto(Date fechaYHora, List<Productos> listaProductos, double total) {
         try {
-            DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
+            DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy HH:mm:ss");
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
@@ -61,68 +60,71 @@ public class CompraPDF {
                     return; // Si el usuario elige no sobrescribir, salimos
                 }
             }
+
             Document documento = new Document();
             PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
-            //Logica para guardar-----------------------------------------------
-            //-------------------------------------------------------------------------------------------------------
+            documento.open();
+
+            // Agregar imagen de encabezado
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
             header.scaleToFit(650, 1000);
             header.setAlignment(Chunk.ALIGN_CENTER);
-
-            Paragraph parrafo = new Paragraph();
-            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Angel Tienda Holística y Esotérica © \n\n");
-            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
-            parrafo.add("Presupuesto \n\n");
-
-            Paragraph texto = new Paragraph();
-            texto.setAlignment(Paragraph.ALIGN_LEFT);
-
-            Chunk CODIGO = new Chunk("Fecha y Hora:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
-            Chunk TOTAL = new Chunk("TOTAL:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
-//-------------------------------------------------------------------------------------------------------
-            texto.add(CODIGO);
-            texto.add(" " + df.format(fechaYHora) + "\n\n");
-
-            texto.add(TOTAL);
-            texto.add(" " + total + "\n\n");
-
-//-------------------------------------------------------------------------------------------------------
-//TABLA
-//-------------------------------------------------------------------------------------------------------
-            PdfPTable tabla = new PdfPTable(14);
-            tabla.addCell("Codigo");
-            tabla.addCell("Variedad");
-            tabla.addCell("Nombre");
-            tabla.addCell("FechaIngreso");
-
-            for (Productos aux : listaProductos) {
-                tabla.addCell(String.valueOf(aux.getId()));
-                tabla.addCell(aux.getVariedad());
-                tabla.addCell(aux.getNombre());
-                tabla.addCell(df.format(aux.getFechaIngreso()));
-                tabla.addCell(aux.getMarca());
-                tabla.addCell(aux.getTipoProducto());
-                tabla.addCell(aux.getContenido());
-                tabla.addCell(String.valueOf(aux.getStock()));
-                tabla.addCell(String.valueOf(aux.getPrecioCosto()));
-                tabla.addCell(String.valueOf(aux.getPrecioventa()));
-                tabla.addCell(String.valueOf(aux.getGanancias()));
-                tabla.addCell(String.valueOf(aux.getPorcentajeGanancias()));
-                tabla.addCell(aux.getProveedor().toString());
-                tabla.addCell(aux.getDescripcion());
-            }
-//-------------------------------------------------------------------------------------------------------
-            documento.open();
             documento.add(header);
-            documento.add(parrafo);
-            documento.add(texto);
+
+            // Agregar fecha en esquina superior derecha
+            Paragraph fecha = new Paragraph();
+            fecha.setAlignment(Paragraph.ALIGN_RIGHT);
+            fecha.add(new Chunk("Fecha: " + df.format(fechaYHora),
+                    FontFactory.getFont("Tahoma", 12, Font.NORMAL, BaseColor.BLACK)));
+            documento.add(fecha);
+            
+            // Agregar espacio entre fecha y título
+            documento.add(new Paragraph("\n"));
+
+            // Título
+            Paragraph titulo = new Paragraph();
+            titulo.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n",
+                    FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)));
+            titulo.add(new Chunk("Presupuesto\n\n",
+                    FontFactory.getFont("Tahoma", 16, Font.BOLD, BaseColor.DARK_GRAY)));
+            documento.add(titulo);
+
+            // Crear tabla de productos
+            PdfPTable tabla = new PdfPTable(4);
+            tabla.setWidthPercentage(100);
+            
+            // Establecer anchos relativos de las columnas (total debe sumar 100)
+            float[] anchos = {35f, 35f, 10f, 20f}; // Stock ahora ocupa solo 10%
+            tabla.setWidths(anchos);
+
+            // Encabezados de tabla
+            tabla.addCell(new Paragraph("Nombre", FontFactory.getFont("Tahoma", 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("Contenido", FontFactory.getFont("Tahoma", 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("Stock", FontFactory.getFont("Tahoma", 12, Font.BOLD)));
+            tabla.addCell(new Paragraph("Precio", FontFactory.getFont("Tahoma", 12, Font.BOLD)));
+
+            // Agregar productos
+            for (Productos producto : listaProductos) {
+                tabla.addCell(producto.getNombre());
+                tabla.addCell(producto.getContenido());
+                tabla.addCell(String.valueOf(producto.getStock()));
+                tabla.addCell("$" + String.format("%.2f", producto.getPrecioventa()));
+            }
             documento.add(tabla);
 
+            // Agregar total
+            Paragraph totalParrafo = new Paragraph();
+            totalParrafo.setAlignment(Paragraph.ALIGN_RIGHT);
+            totalParrafo.add(new Chunk("\nTotal: $" + String.format("%.2f", total),
+                    FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK)));
+            documento.add(totalParrafo);
+
             documento.close();
-            MessageAlerts.getInstance().showMessage("EL PDF se creó correctamente", "El PDF se genero en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("PDF Generado", "El PDF del presupuesto se ha generado exitosamente", MessageAlerts.MessageType.SUCCESS);
+
         } catch (Exception e) {
-            MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
+            MessageAlerts.getInstance().showMessage("Error", "Error al generar PDF: " + e.getMessage(), MessageAlerts.MessageType.ERROR);
         }
     }
 }

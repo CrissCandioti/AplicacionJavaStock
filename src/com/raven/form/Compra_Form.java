@@ -600,8 +600,14 @@ public class Compra_Form extends Form {
 
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
-        CompraPDF pdf = new CompraPDF();
-        pdf.pdfPresupuesto(obtenerFechaHoraActual(), listaCompra, WIDTH);
+        try {
+            ProductoServices ps = new ProductoServices();
+            CompraPDF pdf = new CompraPDF();
+            Double total = Double.parseDouble(jLabel12.getText());
+            pdf.pdfPresupuesto(obtenerFechaHoraActual(), ps.listaProductos(), total);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo crear pdf de presupuesto:" + e.fillInStackTrace());
+        }
     }
 
     //JButon para crear el excel
@@ -666,15 +672,23 @@ public class Compra_Form extends Form {
             
             for (int i = 0; i < rowCount; i++) {
                 int codigo = (int) model.getValueAt(i, 1);
-                String nomgre = (String) model.getValueAt(i, 2);
+                String nombre = (String) model.getValueAt(i, 2);
                 String contenido = (String) model.getValueAt(i, 3);
-                int stock = (int) model.getValueAt(i, 4);
-                double precioVenta = (int) model.getValueAt(i, 5);
-                listaProductos.add(new Productos(codigo, nomgre, contenido, stock, precioVenta));
+                int stockIngresado = (int) model.getValueAt(i, 4);
+                double precioVenta = (double) model.getValueAt(i, 5);
+                
+                // Calcular el total para este producto
+                double totalProducto = precioVenta * stockIngresado;
+                
+                // Crear producto con el stock ingresado y el total calculado
+                Productos producto = new Productos(codigo, nombre, contenido, stockIngresado, precioVenta);
+                producto.setPreciototal(totalProducto);
+                
+                listaProductos.add(producto);
             }
             return listaProductos;
         } catch (Exception e) {
-            System.out.println("Error en la lista de productos de la clase Compra_Form");
+            System.out.println("Error en la lista de productos de la clase Compra_Form: " + e.getMessage());
         }
         return null;
     }
