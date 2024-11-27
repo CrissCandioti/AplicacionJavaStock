@@ -84,7 +84,7 @@ public class CompraPDF {
             // Título
             Paragraph titulo = new Paragraph();
             titulo.setAlignment(Paragraph.ALIGN_CENTER);
-            titulo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n",
+            titulo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n\n",
                     FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)));
             titulo.add(new Chunk("Presupuesto\n\n",
                     FontFactory.getFont("Tahoma", 16, Font.BOLD, BaseColor.DARK_GRAY)));
