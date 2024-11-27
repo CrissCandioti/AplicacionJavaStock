@@ -38,7 +38,7 @@ public class ProductoPDF {
             // Crear una imagen a partir de los bytes
             Image imagen = Image.getInstance(imagenBytes);
             // Ajustar el tamaño y alineación de la imagen
-            imagen.scaleToFit(200, 200);
+            imagen.scaleToFit(150, 150); // Reducido de 200x200 a 150x150
             imagen.setAlignment(Chunk.ALIGN_CENTER);
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
@@ -71,7 +71,7 @@ public class ProductoPDF {
             //Logica para guardar-----------------------------------------------
             //-------------------------------------------------------------------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(650, 1000);
+            header.scaleToFit(300, 300); // Reducido de 650x1000 a 300x300
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph parrafo = new Paragraph();
@@ -184,7 +184,7 @@ public class ProductoPDF {
             PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
             //Logica para guardar-----------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(900, 1000); // Ajustado para formato horizontal
+            header.scaleToFit(200, 200); // Reducido de 900x1000 a 200x200
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph parrafo = new Paragraph();

@@ -69,7 +69,7 @@ public class ClienteCompraPDF {
 
             // Agregar imagen de encabezado
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(650, 1000);
+            header.scaleToFit(300, 300); // Reducido de 650,1000 a 300,300
             header.setAlignment(Chunk.ALIGN_CENTER);
             documento.add(header);
 
