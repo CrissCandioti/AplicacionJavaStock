@@ -26,6 +26,7 @@ import services.ClienteServices;
  */
 public class ClientePDF {
 
+    //Metodo para crear la tabla de los cliente
     public void pdfTablaProveedores() {
         try {
             ClienteServices cs = new ClienteServices();

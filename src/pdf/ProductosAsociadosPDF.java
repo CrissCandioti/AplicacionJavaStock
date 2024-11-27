@@ -109,7 +109,6 @@ public class ProductosAsociadosPDF {
 
     public void pdfTablaProveedores() {
         try {
-
             ProductoServices pros = new ProductoServices();
             ProveedorServices ps = new ProveedorServices();
             String index = null;
@@ -139,11 +138,12 @@ public class ProductosAsociadosPDF {
                     return; // Si el usuario elige no sobrescribir, salimos
                 }
             }
-            Document documento = new Document();
+            // Crear documento en orientación horizontal
+            Document documento = new Document(com.itextpdf.text.PageSize.A4.rotate());
             PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
             //Logica para guardar-----------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(650, 1000);
+            header.scaleToFit(900, 1000); // Ajustado para formato horizontal
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph parrafo = new Paragraph();
@@ -157,17 +157,29 @@ public class ProductosAsociadosPDF {
             documento.add(parrafo);
 
             PdfPTable tabla = new PdfPTable(4);
-            tabla.addCell("Codigo");
-            tabla.addCell("Nombre");
-            tabla.addCell("Productos");
-            tabla.addCell("Notas");
+            tabla.setWidthPercentage(100); // Usar todo el ancho disponible
+            
+            // Establecer anchos relativos de las columnas
+            float[] anchos = {10f, 20f, 50f, 20f};
+            tabla.setWidths(anchos);
+
+            // Estilo para encabezados
+            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.BLACK);
+            
+            tabla.addCell(new Paragraph("Código", headerFont));
+            tabla.addCell(new Paragraph("Nombre", headerFont));
+            tabla.addCell(new Paragraph("Productos", headerFont));
+            tabla.addCell(new Paragraph("Notas", headerFont));
+
+            // Estilo para el contenido
+            Font contentFont = FontFactory.getFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
 
             for (Proveedor aux : ps.listaProveedores()) {
                 index = pros.listaDeProductosDeXProveedor(aux.getId()).toString();
-                tabla.addCell(String.valueOf(aux.getId()));
-                tabla.addCell(aux.getNombre());
-                tabla.addCell(index);
-                tabla.addCell(aux.getNotas());
+                tabla.addCell(new Paragraph(String.valueOf(aux.getId()), contentFont));
+                tabla.addCell(new Paragraph(aux.getNombre(), contentFont));
+                tabla.addCell(new Paragraph(index, contentFont));
+                tabla.addCell(new Paragraph(aux.getNotas(), contentFont));
             }
             documento.add(tabla);
             documento.close();

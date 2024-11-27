@@ -29,6 +29,7 @@ import services.ProductoServices;
  */
 public class ProductoPDF {
 
+    //Metodo la cual crea el pdf del producto
     public void pdfPorProducto(int id) {
         try {
             ProductoServices ps = new ProductoServices();
@@ -148,9 +149,9 @@ public class ProductoPDF {
         }
     }
 
+    //Metodo la cual crea una tabla con todos los productos
     public void pdfTablaProductos() {
         try {
-
             ProductoServices pros = new ProductoServices();
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
@@ -178,11 +179,12 @@ public class ProductoPDF {
                     return; // Si el usuario elige no sobrescribir, salimos
                 }
             }
-            Document documento = new Document();
+            // Crear documento en orientación horizontal
+            Document documento = new Document(com.itextpdf.text.PageSize.A4.rotate());
             PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
             //Logica para guardar-----------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(650, 1000);
+            header.scaleToFit(900, 1000); // Ajustado para formato horizontal
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph parrafo = new Paragraph();
@@ -196,31 +198,49 @@ public class ProductoPDF {
             documento.add(parrafo);
 
             PdfPTable tabla = new PdfPTable(14);
-            tabla.addCell("Codigo");
-            tabla.addCell("Variedad");
-            tabla.addCell("Nombre");
-            tabla.addCell("FechaIngreso");
+            tabla.setWidthPercentage(100); // Usar todo el ancho disponible
+            
+            // Estilo para encabezados
+            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK);
+            
+            tabla.addCell(new Paragraph("Código", headerFont));
+            tabla.addCell(new Paragraph("Variedad", headerFont));
+            tabla.addCell(new Paragraph("Nombre", headerFont));
+            tabla.addCell(new Paragraph("Fecha Ingreso", headerFont));
+            tabla.addCell(new Paragraph("Marca", headerFont));
+            tabla.addCell(new Paragraph("Tipo Producto", headerFont));
+            tabla.addCell(new Paragraph("Contenido", headerFont));
+            tabla.addCell(new Paragraph("Stock", headerFont));
+            tabla.addCell(new Paragraph("Precio Costo", headerFont));
+            tabla.addCell(new Paragraph("Precio Venta", headerFont));
+            tabla.addCell(new Paragraph("Ganancias", headerFont));
+            tabla.addCell(new Paragraph("% Ganancia", headerFont));
+            tabla.addCell(new Paragraph("Proveedor", headerFont));
+            tabla.addCell(new Paragraph("Descripción", headerFont));
+
+            // Estilo para el contenido
+            Font contentFont = FontFactory.getFont(FontFactory.HELVETICA, 9, BaseColor.BLACK);
 
             for (Productos aux : pros.listaProductos()) {
                 DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
-                tabla.addCell(String.valueOf(aux.getId()));
-                tabla.addCell(aux.getVariedad());
-                tabla.addCell(aux.getNombre());
-                tabla.addCell(df.format(aux.getFechaIngreso()));
-                tabla.addCell(aux.getMarca());
-                tabla.addCell(aux.getTipoProducto());
-                tabla.addCell(aux.getContenido());
-                tabla.addCell(String.valueOf(aux.getStock()));
-                tabla.addCell(String.valueOf(aux.getPrecioCosto()));
-                tabla.addCell(String.valueOf(aux.getPrecioventa()));
-                tabla.addCell(String.valueOf(aux.getGanancias()));
-                tabla.addCell(String.valueOf(aux.getPorcentajeGanancias()));
-                tabla.addCell(aux.getProveedor().toString());
-                tabla.addCell(aux.getDescripcion());
+                tabla.addCell(new Paragraph(String.valueOf(aux.getId()), contentFont));
+                tabla.addCell(new Paragraph(aux.getVariedad(), contentFont));
+                tabla.addCell(new Paragraph(aux.getNombre(), contentFont));
+                tabla.addCell(new Paragraph(df.format(aux.getFechaIngreso()), contentFont));
+                tabla.addCell(new Paragraph(aux.getMarca(), contentFont));
+                tabla.addCell(new Paragraph(aux.getTipoProducto(), contentFont));
+                tabla.addCell(new Paragraph(aux.getContenido(), contentFont));
+                tabla.addCell(new Paragraph(String.valueOf(aux.getStock()), contentFont));
+                tabla.addCell(new Paragraph(String.valueOf(aux.getPrecioCosto()), contentFont));
+                tabla.addCell(new Paragraph(String.valueOf(aux.getPrecioventa()), contentFont));
+                tabla.addCell(new Paragraph(String.valueOf(aux.getGanancias()), contentFont));
+                tabla.addCell(new Paragraph(String.valueOf(aux.getPorcentajeGanancias()), contentFont));
+                tabla.addCell(new Paragraph(aux.getProveedor().toString(), contentFont));
+                tabla.addCell(new Paragraph(aux.getDescripcion(), contentFont));
             }
             documento.add(tabla);
             documento.close();
-            MessageAlerts.getInstance().showMessage("EL PDF se creo correctamente", "El PDF de la tabla de los productos se genero correctamente en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("EL PDF se creó correctamente", "El PDF de la tabla de los productos se generó correctamente en: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Error al crear el PDF", "Se produjo un error al intentar crear el reporte", MessageAlerts.MessageType.ERROR);
         }
