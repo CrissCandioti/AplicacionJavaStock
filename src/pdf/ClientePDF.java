@@ -55,11 +55,12 @@ public class ClientePDF {
                     return; // Si el usuario elige no sobrescribir, salimos
                 }
             }
-            Document documento = new Document();
+            // Crear documento en orientación horizontal
+            Document documento = new Document(com.itextpdf.text.PageSize.A4.rotate());
             PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
             //Logica para guardar-----------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(650, 1000);
+            header.scaleToFit(900, 1000); // Ajustado para formato horizontal
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph parrafo = new Paragraph();
