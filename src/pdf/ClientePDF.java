@@ -28,7 +28,6 @@ public class ClientePDF {
 
     public void pdfTablaProveedores() {
         try {
-
             ClienteServices cs = new ClienteServices();
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
@@ -73,27 +72,42 @@ public class ClientePDF {
             documento.add(header);
             documento.add(parrafo);
 
+            // Crear tabla con 9 columnas
             PdfPTable tabla = new PdfPTable(9);
-            tabla.addCell("Codigo");
-            tabla.addCell("Nombre");
-            tabla.addCell("Apellido");
-            tabla.addCell("N° Documento");
-            tabla.addCell("Email");
-            tabla.addCell("N° WhatsApp");
-            tabla.addCell("Localidad");
-            tabla.addCell("Direccion");
-            tabla.addCell("Notas");
+            tabla.setWidthPercentage(100); // Usar todo el ancho disponible
+            
+            // Definir anchos relativos de las columnas (debe sumar 100)
+            float[] anchos = {8f, 12f, 12f, 12f, 15f, 10f, 10f, 11f, 10f};
+            tabla.setWidths(anchos);
 
+            // Estilo para encabezados
+            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK);
+            
+            // Agregar encabezados
+            tabla.addCell(new Paragraph("Código", headerFont));
+            tabla.addCell(new Paragraph("Nombre", headerFont));
+            tabla.addCell(new Paragraph("Apellido", headerFont));
+            tabla.addCell(new Paragraph("N° Documento", headerFont));
+            tabla.addCell(new Paragraph("Email", headerFont));
+            tabla.addCell(new Paragraph("N° WhatsApp", headerFont));
+            tabla.addCell(new Paragraph("Localidad", headerFont));
+            tabla.addCell(new Paragraph("Dirección", headerFont));
+            tabla.addCell(new Paragraph("Notas", headerFont));
+
+            // Estilo para el contenido
+            Font contentFont = FontFactory.getFont(FontFactory.HELVETICA, 9, BaseColor.BLACK);
+
+            // Agregar datos
             for (Cliente aux : cs.listaCliente()) {
-                tabla.addCell(String.valueOf(aux.getId()));
-                tabla.addCell(aux.getNombre());
-                tabla.addCell(aux.getApellido());
-                tabla.addCell(String.valueOf(aux.getDocumento()));
-                tabla.addCell(aux.getEmail());
-                tabla.addCell(aux.getWhatsapp());
-                tabla.addCell(aux.getLocalidad());
-                tabla.addCell(aux.getDireccion());
-                tabla.addCell(aux.getNotas());
+                tabla.addCell(new Paragraph(String.valueOf(aux.getId()), contentFont));
+                tabla.addCell(new Paragraph(aux.getNombre(), contentFont));
+                tabla.addCell(new Paragraph(aux.getApellido(), contentFont));
+                tabla.addCell(new Paragraph(String.valueOf(aux.getDocumento()), contentFont));
+                tabla.addCell(new Paragraph(aux.getEmail(), contentFont));
+                tabla.addCell(new Paragraph(aux.getWhatsapp(), contentFont));
+                tabla.addCell(new Paragraph(aux.getLocalidad(), contentFont));
+                tabla.addCell(new Paragraph(aux.getDireccion(), contentFont));
+                tabla.addCell(new Paragraph(aux.getNotas(), contentFont));
             }
 
             documento.add(tabla);
