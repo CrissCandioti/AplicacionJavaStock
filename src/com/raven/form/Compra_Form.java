@@ -25,7 +25,6 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-import pdf.ClientePDF;
 import pdf.CompraPDF;
 import raven.alerts.MessageAlerts;
 import services.ClienteServices;
@@ -33,22 +32,22 @@ import services.CompraServices;
 import services.ProductoServices;
 
 public class Compra_Form extends Form {
-    
+
     public Compra_Form() {
         initComponents();
         init();
     }
-    
+
     private void init() {
         jTextFieldIdCliente.setVisible(false);
-        
+
         jTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "height:30;"
                 + "hoverBackground:null;"
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background;"
                 + "font:bold;");
-        
+
         jTable.putClientProperty(FlatClientProperties.STYLE, ""
                 + "rowHeight:30;"
                 + "showHorizontalLines:true;"
@@ -56,17 +55,17 @@ public class Compra_Form extends Form {
                 + "cellFocusColor:$TableHeader.hoverBackground;"
                 + "selectionBackground:$TableHeader.hoverBackground;"
                 + "selectionForeground:$Table.foreground;");
-        
+
         jTextFieldBuscador.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
         jTextFieldBuscador.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
-        
+
         jTextFieldBuscador.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:15;"
                 + "borderWidth:0;"
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;");
-        
+
         jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
         jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
         jTextFieldBuscadorProductos.putClientProperty(FlatClientProperties.STYLE, ""
@@ -75,13 +74,13 @@ public class Compra_Form extends Form {
                 + "focusWidth:0;"
                 + "innerFocusWidth:0;"
                 + "margin:5,20,5,20;");
-        
+
         jScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "trackArc:999;"
                 + "trackInsets:3,3,3,3;"
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
-        
+
         jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
         jLabel8.putClientProperty(FlatClientProperties.STYLE, ""
@@ -95,17 +94,17 @@ public class Compra_Form extends Form {
 
         // Metodo para las celdas del cliente y enable boolean false
         styleCeldasCliente();
-        
+
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
-        
+
         seteoComboBoxClientes();
         seteoComboBoxProductos();
         timerDate();
         ScrollBarComboBoxClientes();
         ScrollBarComboBoxProductos();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -500,7 +499,7 @@ public class Compra_Form extends Form {
             List<Productos> listaProductos = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
-            
+
             for (int i = 0; i < rowCount; i++) {
                 int codigo = (int) model.getValueAt(i, 1);
                 aux = ps.buscarProductoPorID(codigo);
@@ -527,14 +526,14 @@ public class Compra_Form extends Form {
         String busqueda = jTextFieldBuscador.getText().toLowerCase();
         DefaultComboBoxModel<Cliente> model = (DefaultComboBoxModel<Cliente>) jComboBoxClientes.getModel();
         model.removeAllElements();
-        
+
         for (Cliente cliente : cs.listaCliente()) {
             String nombreCompleto = (cliente.getNombre() + " " + cliente.getApellido()).toLowerCase();
             if (nombreCompleto.contains(busqueda)) {
                 model.addElement(cliente);
             }
         }
-        
+
         if (model.getSize() > 0) {
             jComboBoxClientes.setSelectedIndex(0);
             jComboBoxClientes.showPopup();
@@ -549,14 +548,14 @@ public class Compra_Form extends Form {
         String busqueda = jTextFieldBuscadorProductos.getText().toLowerCase();
         DefaultComboBoxModel<Productos> model = (DefaultComboBoxModel<Productos>) jComboBoxProductos.getModel();
         model.removeAllElements();
-        
+
         for (Productos producto : ps.listaProductos()) {
             String nombreProducto = producto.getNombre().toLowerCase();
             if (nombreProducto.contains(busqueda)) {
                 model.addElement(producto);
             }
         }
-        
+
         if (model.getSize() > 0) {
             jComboBoxProductos.setSelectedIndex(0);
             jComboBoxProductos.showPopup();
@@ -569,7 +568,7 @@ public class Compra_Form extends Form {
         // Lógica para eliminar productos seleccionados de la tabla
         DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
         int filas = jTable.getRowCount();
-        
+
         for (int i = filas - 1; i >= 0; i--) {
             Boolean seleccionado = (Boolean) jTable.getValueAt(i, 0);
             if (seleccionado) {
@@ -601,10 +600,10 @@ public class Compra_Form extends Form {
     //Jbutton para crear el pdf
     private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            ProductoServices ps = new ProductoServices();
             CompraPDF pdf = new CompraPDF();
             Double total = Double.parseDouble(jLabel12.getText());
-            pdf.pdfPresupuesto(obtenerFechaHoraActual(), ps.listaProductos(), total);
+            System.out.println(listaProductos());
+            pdf.pdfPresupuesto(obtenerFechaHoraActual(), listaProductos(), total);
         } catch (Exception e) {
             System.out.println("Error en el metodo crear pdf de presupuesto:" + e.fillInStackTrace());
         }
@@ -616,24 +615,6 @@ public class Compra_Form extends Form {
         ce.TablaClientesExcelReporte();
     }
 
-    // Esta es la logica para que se aplique cuando se selecciona un producto o
-    // varios o ninguno de la tabla
-    private List<Productos> SeleccionarProducto() {
-        try {
-            List<Productos> list = new ArrayList<>();
-            for (int i = 0; i < jTable.getRowCount(); i++) {
-                if ((boolean) jTable.getValueAt(i, 0)) {
-                    Productos data = (Productos) jTable.getValueAt(i, 2);
-                    list.add(data);
-                }
-            }
-            return list;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error lista");
-        }
-        return null;
-    }
-
     // Metodo la cual carga la tabla con los prodcutos seleccionado por el usuario
     public void loadData() {
         try {
@@ -641,7 +622,7 @@ public class Compra_Form extends Form {
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
-            
+
             Productos productoSeleccionado = (Productos) jComboBoxProductos.getSelectedItem();
             int cantidad = Integer.parseInt(jTextFieldContenidoStock.getText());
             if (productoSeleccionado != null) {
@@ -666,25 +647,24 @@ public class Compra_Form extends Form {
     public List<Productos> listaProductos() {
         try {
             //Logica para obtener la lista de la Jtable
+            ProductoServices ps = new ProductoServices();
             List<Productos> listaProductos = new ArrayList<>();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
-            
+
             for (int i = 0; i < rowCount; i++) {
                 int codigo = (int) model.getValueAt(i, 1);
-                String nombre = (String) model.getValueAt(i, 2);
-                String contenido = (String) model.getValueAt(i, 3);
                 int stockIngresado = (int) model.getValueAt(i, 4);
                 double precioVenta = (double) model.getValueAt(i, 5);
-                
+
                 // Calcular el total para este producto
                 double totalProducto = precioVenta * stockIngresado;
-                
-                // Crear producto con el stock ingresado y el total calculado
-                Productos producto = new Productos(codigo, nombre, contenido, stockIngresado, precioVenta);
-                producto.setPreciototal(totalProducto);
-                
-                listaProductos.add(producto);
+
+                // Busca el producto con el codigo u id, y setea stock ingresado y el total calculado
+                Productos aux = ps.buscarProductoPorID(codigo);
+                aux.setStock(stockIngresado);
+                aux.setPrecioventa(totalProducto);
+                listaProductos.add(aux);
             }
             return listaProductos;
         } catch (Exception e) {
@@ -857,7 +837,7 @@ public class Compra_Form extends Form {
                 scrollPane.setHorizontalScrollBar(new JScrollBar(JScrollBar.HORIZONTAL));
                 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             }
-            
+
         } catch (Exception e) {
             System.out.println("Error en el metodo ScrollBarComboBoxClientes() de la clase Compra_Form");
         }
@@ -899,7 +879,7 @@ public class Compra_Form extends Form {
             double total = 0.0;
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
-            
+
             for (int i = 0; i < rowCount; i++) {
                 Object precioObj = model.getValueAt(i, 5); // Obtengo el precio que esta en la columna 5
                 Object cantidadObj = model.getValueAt(i, 4); // Obtengo la cantidad que esta en la columna 4
@@ -910,7 +890,7 @@ public class Compra_Form extends Form {
                     total += precio * cantidad;
                 }
             }
-            
+
             jLabel12.setText(String.format(Locale.US, "%.2f", total));
         } catch (Exception e) {
             System.out.println("Error en el método seteoJLabelGananciaPorcentajeTotal() de la clase Compra_Form");
@@ -926,7 +906,7 @@ public class Compra_Form extends Form {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
             Productos aux = null;
-            
+
             for (int i = 0; i < rowCount; i++) {
                 Object codigo = model.getValueAt(i, 1); // Obtenemos el codigo de la base de datos para obtener el precio de venta
                 Object cantidadObj = model.getValueAt(i, 4); // Obtenemos la cantidad(stock)
@@ -940,7 +920,7 @@ public class Compra_Form extends Form {
                     gananciaTotal += gananciaProducto;
                 }
             }
-            
+
             jLabeVerGanancia.setText(String.format("%.2f", gananciaTotal));
         } catch (Exception e) {
             System.out.println("Error en el método seteoJLabelGanancias() de la clase Compra_Form");
@@ -968,11 +948,11 @@ public class Compra_Form extends Form {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             int rowCount = model.getRowCount();
             Productos aux = null;
-            
+
             for (int i = 0; i < rowCount; i++) {
                 Object codigo = model.getValueAt(i, 1);
                 Object cantidadObj = model.getValueAt(i, 4);
-                
+
                 if (cantidadObj instanceof Integer) {
                     aux = ps.buscarProductoPorID((int) codigo);
                     double precioCompra = aux.getPrecioCosto();
@@ -982,10 +962,10 @@ public class Compra_Form extends Form {
                     totalVenta += precioVenta * cantidad;
                 }
             }
-            
+
             double ganancia = totalVenta - totalCompra;
             double porcentajeGanancia = (ganancia / totalCompra) * 100;
-            
+
             jLabelVerPorcentajeDeLaGanancia.setText(String.format("%.2f%%", porcentajeGanancia));
         } catch (Exception e) {
             System.out.println("Error en el método calcularYSetearPorcentajeGanancia() de la clase Compra_Form");
