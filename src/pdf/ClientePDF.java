@@ -66,7 +66,8 @@ public class ClientePDF {
 
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Angel Tienda Holística y Esotérica © \n\n");
+            parrafo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n\n",
+                    FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)));
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Clientes \n\n");
 
@@ -77,14 +78,14 @@ public class ClientePDF {
             // Crear tabla con 9 columnas
             PdfPTable tabla = new PdfPTable(9);
             tabla.setWidthPercentage(100); // Usar todo el ancho disponible
-            
+
             // Definir anchos relativos de las columnas (debe sumar 100)
             float[] anchos = {8f, 12f, 12f, 12f, 15f, 10f, 10f, 11f, 10f};
             tabla.setWidths(anchos);
 
             // Estilo para encabezados
             Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK);
-            
+
             // Agregar encabezados
             tabla.addCell(new Paragraph("Código", headerFont));
             tabla.addCell(new Paragraph("Nombre", headerFont));

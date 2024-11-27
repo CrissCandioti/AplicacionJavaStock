@@ -71,7 +71,8 @@ public class ProductosAsociadosPDF {
 
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Angel Tienda Holística y Esotérica © \n\n");
+            parrafo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n\n",
+                    FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)));
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Proveedor \n\n");
 
@@ -148,7 +149,8 @@ public class ProductosAsociadosPDF {
 
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Angel Tienda Holística y Esotérica © \n\n");
+            parrafo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n\n",
+                    FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)));
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Proveedores \n\n");
 
@@ -158,14 +160,14 @@ public class ProductosAsociadosPDF {
 
             PdfPTable tabla = new PdfPTable(4);
             tabla.setWidthPercentage(100); // Usar todo el ancho disponible
-            
+
             // Establecer anchos relativos de las columnas
             float[] anchos = {10f, 20f, 50f, 20f};
             tabla.setWidths(anchos);
 
             // Estilo para encabezados
             Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.BLACK);
-            
+
             tabla.addCell(new Paragraph("Código", headerFont));
             tabla.addCell(new Paragraph("Nombre", headerFont));
             tabla.addCell(new Paragraph("Productos", headerFont));
