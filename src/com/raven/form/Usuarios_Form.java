@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import pdf.ClienteCompraPDF;
 import pdf.ClientePDF;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
@@ -358,7 +359,8 @@ public class Usuarios_Form extends Form {
                     if (i == 0) {
                         System.out.println("Se imprime el excel");
                     } else if (i == 1) {
-                        System.out.println("Se imprime el PDF");
+                        ClienteCompraPDF pdf = new ClienteCompraPDF();
+                        pdf.pdfPresupuesto(data);
                     } else if (i == 2) {
                         pc.closePopup();
                     }
