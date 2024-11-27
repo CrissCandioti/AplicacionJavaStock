@@ -91,7 +91,7 @@ public class ClienteCompraPDF {
             totalParrafo.add(new Chunk("Nombre del cliente: " + aux.getNombre() + " " + aux.getApellido(),
                     FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK)));
             documento.add(totalParrafo);
-            
+
             // Agregar espacio entre nombre del cliente y tabla
             documento.add(new Paragraph("\n"));
 
@@ -112,24 +112,24 @@ public class ClienteCompraPDF {
             // Agregar compra
             for (Compra compra : cs.listaCompraPorCliente(aux.getId())) {
                 tabla.addCell(df.format(compra.getDate()));
-                
+
                 // Crear celda para lista de productos
                 StringBuilder productosStr = new StringBuilder();
                 for (Productos prod : compra.getListaProductos()) {
                     productosStr.append(prod.getNombre())
-                              .append(" (")
-                              .append(prod.getStock())
-                              .append(" unidades)\n");
+                            .append(" (")
+                            .append(prod.getStock())
+                            .append(" unidades)\n");
                 }
                 tabla.addCell(productosStr.toString());
-                
+
                 tabla.addCell("$" + String.format("%.2f", compra.getTotal()));
                 tabla.addCell(compra.getDetalles());
             }
             documento.add(tabla);
 
             documento.close();
-            MessageAlerts.getInstance().showMessage("PDF Generado", "El PDF del presupuesto se ha generado exitosamente", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("PDF Generado", "El PDF del historial de compra se generó en la ubicación seleccionada: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
 
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Error", "Error al generar PDF: " + e.getMessage(), MessageAlerts.MessageType.ERROR);

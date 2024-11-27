@@ -77,7 +77,7 @@ public class CompraPDF {
             fecha.add(new Chunk("Fecha: " + df.format(fechaYHora),
                     FontFactory.getFont("Tahoma", 12, Font.NORMAL, BaseColor.BLACK)));
             documento.add(fecha);
-            
+
             // Agregar espacio entre fecha y título
             documento.add(new Paragraph("\n"));
 
@@ -93,7 +93,7 @@ public class CompraPDF {
             // Crear tabla de productos
             PdfPTable tabla = new PdfPTable(4);
             tabla.setWidthPercentage(100);
-            
+
             // Establecer anchos relativos de las columnas (total debe sumar 100)
             float[] anchos = {35f, 35f, 10f, 20f}; // Stock ahora ocupa solo 10%
             tabla.setWidths(anchos);
@@ -121,7 +121,7 @@ public class CompraPDF {
             documento.add(totalParrafo);
 
             documento.close();
-            MessageAlerts.getInstance().showMessage("PDF Generado", "El PDF del presupuesto se ha generado exitosamente", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("PDF Generado", "El PDF del presupuesto se generó en la ubicación seleccionada: " + finalFileName, MessageAlerts.MessageType.SUCCESS);
 
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Error", "Error al generar PDF: " + e.getMessage(), MessageAlerts.MessageType.ERROR);
