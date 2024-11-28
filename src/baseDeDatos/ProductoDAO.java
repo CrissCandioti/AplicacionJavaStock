@@ -31,6 +31,8 @@ public final class ProductoDAO extends DAO<Productos> {
     public List<Productos> listaProductos() {
         try {
             conectar();
+            em.getEntityManagerFactory().getCache().evictAll(); // Limpiar caché
+            em.clear(); // Limpiar contexto de persistencia
             return (List<Productos>) em.createQuery("Select f From Productos f").getResultList();
         } catch (Exception e) {
             System.out.println("Error en el metodo listaProductos() de la clase productosDAO");
