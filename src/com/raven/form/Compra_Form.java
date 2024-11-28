@@ -153,6 +153,7 @@ public class Compra_Form extends Form {
         jTextFieldIdCliente = new javax.swing.JTextField();
         jTextFieldBuscador = new javax.swing.JTextField();
         jTextFieldBuscadorProductos = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -289,6 +290,13 @@ public class Compra_Form extends Form {
             }
         });
 
+        jButton4.setText("Refrescar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -320,6 +328,8 @@ public class Compra_Form extends Form {
                                 .addComponent(jButtonEliminarCliente))
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton4)
+                                .addGap(39, 39, 39)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelVerFechaYHora))
@@ -392,12 +402,17 @@ public class Compra_Form extends Form {
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabelVerFechaYHora))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabelVerFechaYHora))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEliminarCliente)
@@ -565,6 +580,38 @@ public class Compra_Form extends Form {
             jComboBoxProductos.hidePopup();
         }
     }//GEN-LAST:event_jTextFieldBuscadorProductosActionPerformed
+//Metodo la cual refresca la pestaña
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            // Limpiar la tabla
+            DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+            modelo.setRowCount(0);
+            jTable.setModel(modelo);
+            
+            // Limpiar detalles y totales
+            jLabel12.setText("0.0"); // Total
+            jLabel14.setText("0.0"); // Ganancias
+//            jLabel16.setText("0.0"); // Porcentaje ganancia
+            
+            // Limpiar datos del cliente
+            setCeldasClienteEmpty();
+            
+            // Actualizar stock en combobox productos
+            ProductoServices ps = new ProductoServices();
+            DefaultComboBoxModel<Productos> modeloProductos = new DefaultComboBoxModel<>();
+            for (Productos producto : ps.listaProductos()) {
+                modeloProductos.addElement(producto);
+            }
+            jComboBoxProductos.setModel(modeloProductos);
+            
+            // Limpiar buscadores
+            jTextFieldBuscador.setText("");
+            jTextFieldBuscadorProductos.setText("");
+            
+        } catch (Exception e) {
+            System.out.println("Error al refrescar la página: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
     //JButton para quitar el producto de la lista
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Lógica para eliminar productos seleccionados de la tabla
@@ -994,6 +1041,7 @@ public class Compra_Form extends Form {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonBuscarCliente;
     private javax.swing.JButton jButtonEliminarCliente;
     private javax.swing.JButton jButtonExcelTabla;
