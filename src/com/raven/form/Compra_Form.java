@@ -604,6 +604,14 @@ public class Compra_Form extends Form {
             }
             jComboBoxProductos.setModel(modeloProductos);
             
+            // Actualizar combobox clientes
+            ClienteServices cs = new ClienteServices();
+            DefaultComboBoxModel<Cliente> modeloClientes = new DefaultComboBoxModel<>();
+            for (Cliente cliente : cs.listaCliente()) {
+                modeloClientes.addElement(cliente);
+            }
+            jComboBoxClientes.setModel(modeloClientes);
+            
             // Limpiar buscadores
             jTextFieldBuscador.setText("");
             jTextFieldBuscadorProductos.setText("");
