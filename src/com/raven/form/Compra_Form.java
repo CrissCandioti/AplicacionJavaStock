@@ -589,9 +589,9 @@ public class Compra_Form extends Form {
             jTable.setModel(modelo);
             
             // Limpiar detalles y totales
-            jLabel12.setText("0.0"); // Total
-            jLabel14.setText("0.0"); // Ganancias
-//            jLabel16.setText("0.0"); // Porcentaje ganancia
+            jLabel12.setText("0.00"); // Total
+            jLabeVerGanancia.setText("0,00"); // Ganancias
+            jLabelVerPorcentajeDeLaGanancia.setText("NaN%"); // Porcentaje ganancia
             
             // Limpiar datos del cliente
             setCeldasClienteEmpty();
