@@ -487,6 +487,7 @@ public class Compra_Form extends Form {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             //Variables para utilizar
+            CompraPDF pdf = new CompraPDF();
             ProductoServices ps = new ProductoServices();
             ClienteServices cs = new ClienteServices();
             Productos aux = null;
@@ -512,6 +513,7 @@ public class Compra_Form extends Form {
             double total = Double.parseDouble(jLabel12.getText());
             //Llamamos a CompraServices para ejecutar la compra
             css.persistirEntidad(obtenerFechaHoraActual(), index, listaProductos, detalles, total);
+            pdf.facturacionPDF(index, obtenerFechaHoraActual(), listaProductos, total);
         } catch (NumberFormatException e) {
             MessageAlerts.getInstance().showMessage("Error al realizar la compra", "No selecciono un cliente", MessageAlerts.MessageType.ERROR);
             System.out.println(e.fillInStackTrace());
@@ -625,6 +627,22 @@ public class Compra_Form extends Form {
 
             Productos productoSeleccionado = (Productos) jComboBoxProductos.getSelectedItem();
             int cantidad = Integer.parseInt(jTextFieldContenidoStock.getText());
+            
+            // Verificar si el producto ya existe en la tabla
+            boolean productoExistente = false;
+            for (int i = 0; i < model.getRowCount(); i++) {
+                int idProductoEnTabla = (int) model.getValueAt(i, 1); // Asumiendo que el ID está en la columna 1
+                if (idProductoEnTabla == productoSeleccionado.getId()) {
+                    productoExistente = true;
+                    break;
+                }
+            }
+
+            if (productoExistente) {
+                MessageAlerts.getInstance().showMessage("Error", "Este producto ya ha sido agregado a la tabla", MessageAlerts.MessageType.ERROR);
+                return;
+            }
+
             if (productoSeleccionado != null) {
                 if (cantidad <= productoSeleccionado.getStock()) {
                     Object[] fila = productoSeleccionado.toTableRowCompraForm(productoSeleccionado.getId());
