@@ -24,7 +24,7 @@ public class AplicacionJavaStock {
         ClienteServices css = new ClienteServices();
         ProductoServices ps = new ProductoServices();
         CompraDAO dao = new CompraDAO();
-        System.out.println(dao.barraBusquedaDeCompras("cris"));
+        System.out.println(cs.listaCompraPorCliente(15));
     }
 
 }

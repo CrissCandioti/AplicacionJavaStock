@@ -30,7 +30,7 @@ public class CompraServices {
             }
             Compra index = new Compra(date, aux, listaProductos, detalles, total);
             dao.persistirEntidad(index);
-            MessageAlerts.getInstance().showMessage("Compra exitosa", "La compra fue realizada correctamente a continuacion se imprimira la factura", MessageAlerts.MessageType.SUCCESS);
+            MessageAlerts.getInstance().showMessage("Compra exitosa", "La compra fue realizada correctamente a continuacion se imprimira el recibo", MessageAlerts.MessageType.SUCCESS);
             stockProductosRestar(listaProductos);
         } catch (Exception e) {
             System.out.println("Error en la clase persistirEntidad de la clase CompraDAO");
