@@ -61,7 +61,7 @@ public class ClientePDF {
             PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
             //Logica para guardar-----------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(300, 300); // Reducido de 900,1000 a 300,300
+            header.scaleToFit(150, 150); // Reducido de 900,1000 a 300,300
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph parrafo = new Paragraph();

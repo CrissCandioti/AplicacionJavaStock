@@ -67,15 +67,6 @@ public class CompraPDF {
             PdfWriter.getInstance(documento, new FileOutputStream(finalFileName));
             documento.open();
 
-            // Agregar imagen de encabezado
-            Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(300, 300); // Reducido de 650,1000 a 300,300
-            header.setAlignment(Chunk.ALIGN_CENTER);
-            documento.add(header);
-            
-            // Agregar espacio entre imagen y fecha
-            documento.add(new Paragraph("\n"));
-
             // Agregar fecha en esquina superior derecha
             Paragraph fecha = new Paragraph();
             fecha.setAlignment(Paragraph.ALIGN_RIGHT);
@@ -83,17 +74,37 @@ public class CompraPDF {
                     FontFactory.getFont("Tahoma", 12, Font.NORMAL, BaseColor.BLACK)));
             documento.add(fecha);
 
-            // Agregar espacio entre fecha y título
+            // Agregar espacio
             documento.add(new Paragraph("\n"));
 
-            // Título
+            // Crear tabla para encabezado con logo y título
+            PdfPTable headerTable = new PdfPTable(2);
+            headerTable.setWidthPercentage(100);
+            float[] headerWidths = {30f, 70f};
+            headerTable.setWidths(headerWidths);
+
+            // Agregar imagen en la primera celda
+            Image header = Image.getInstance("src/com/raven/icon/inicio.png");
+            header.scaleToFit(150, 150);
+            PdfPCell imageCell = new PdfPCell(header);
+            imageCell.setBorder(0);
+            headerTable.addCell(imageCell);
+
+            // Agregar título en la segunda celda
             Paragraph titulo = new Paragraph();
-            titulo.setAlignment(Paragraph.ALIGN_CENTER);
-            titulo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n\n",
+            titulo.setAlignment(Paragraph.ALIGN_LEFT);
+            titulo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n",
                     FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)));
-            titulo.add(new Chunk("Presupuesto\n\n",
+            titulo.add(new Chunk("Presupuesto\n",
                     FontFactory.getFont("Tahoma", 16, Font.BOLD, BaseColor.DARK_GRAY)));
-            documento.add(titulo);
+            PdfPCell titleCell = new PdfPCell(titulo);
+            titleCell.setBorder(0);
+            titleCell.setVerticalAlignment(5);
+            headerTable.addCell(titleCell);
+            documento.add(headerTable);
+
+            // Agregar espacio
+            documento.add(new Paragraph("\n"));
 
             // Crear tabla de productos
             PdfPTable tabla = new PdfPTable(4);
