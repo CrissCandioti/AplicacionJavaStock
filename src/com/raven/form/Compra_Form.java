@@ -18,15 +18,20 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import pdf.CompraPDF;
 import raven.alerts.MessageAlerts;
+import raven.popup.DefaultOption;
+import raven.popup.GlassPanePopup;
+import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
 import services.CompraServices;
 import services.ProductoServices;
@@ -323,13 +328,13 @@ public class Compra_Form extends Form {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButtonBuscarCliente)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonEliminarCliente))
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton4)
-                                .addGap(39, 39, 39)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelVerFechaYHora))
@@ -402,23 +407,19 @@ public class Compra_Form extends Form {
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabelVerFechaYHora))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton4)))
+                .addGap(23, 23, 23)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabelVerFechaYHora))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEliminarCliente)
                     .addComponent(jButtonBuscarCliente)
                     .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addGap(25, 25, 25)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -501,39 +502,46 @@ public class Compra_Form extends Form {
     //Metodo la cual al pulsar el JButton se realiza la compra
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            //Variables para utilizar
-            CompraPDF pdf = new CompraPDF();
-            ProductoServices ps = new ProductoServices();
-            ClienteServices cs = new ClienteServices();
-            Productos aux = null;
-            Cliente index = null;
-            CompraServices css = new CompraServices();
+            DefaultOption option = new DefaultOption() {
+                @Override
+                public boolean closeWhenClickOutside() {
+                    return true;
+                }
+            };
+            String actions[] = new String[]{"Cancelar", "Confirmar"};
+            JLabel label = new JLabel("Estas seguro que deseas realizar esta compra?");
+            label.setBorder(new EmptyBorder(0, 25, 0, 25));
+            GlassPanePopup.showPopup(new SimplePopupBorder(label, "Confirmar compra", actions, (pc, i) -> {
+                if (i == 1) {
+                    //Variables para utilizar
+                    CompraPDF pdf = new CompraPDF();
+                    ProductoServices ps = new ProductoServices();
+                    ClienteServices cs = new ClienteServices();
+                    Productos aux = null;
+                    Cliente index = null;
+                    CompraServices css = new CompraServices();
 
-            //Logica para obtener el cliente
-            index = cs.buscarClienteID(Integer.parseInt(jTextFieldIdCliente.getText()));
-            //Logica para obtener la lista de la Jtable
-            List<Productos> listaProductos = new ArrayList<>();
-            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            int rowCount = model.getRowCount();
-
-            for (int i = 0; i < rowCount; i++) {
-                int codigo = (int) model.getValueAt(i, 1);
-                aux = ps.buscarProductoPorID(codigo);
-                listaProductos.add(aux);
-            }
-            //Metodo que me retorna la fecha y hora actual obtenerFechaHoraActual();
-            //Variale la cual se obtiene lo del campo detalles
-            String detalles = jTextAreaDetalles.getText();
-            //Total a pagar
-            double total = Double.parseDouble(jLabel12.getText());
-            //Llamamos a CompraServices para ejecutar la compra
-            css.persistirEntidad(obtenerFechaHoraActual(), index, listaProductos, detalles, total);
-            pdf.facturacionPDF(index, obtenerFechaHoraActual(), listaProductos, total);
+                    //Logica para obtener el cliente
+                    index = cs.buscarClienteID(Integer.parseInt(jTextFieldIdCliente.getText()));
+                    //Metodo que me retorna la fecha y hora actual obtenerFechaHoraActual();
+                    //Variale la cual se obtiene lo del campo detalles
+                    String detalles = jTextAreaDetalles.getText();
+                    //Total a pagar
+                    double total = Double.parseDouble(jLabel12.getText());
+                    //Llamamos a CompraServices para ejecutar la compra
+                    css.persistirEntidad(obtenerFechaHoraActual(), index, listaProductos(), detalles, total);
+                    pdf.facturacionPDF(index, obtenerFechaHoraActual(), listaProductos(), total);
+                    refrescar();
+                    pc.closePopup();
+                } else {
+                    MessageAlerts.getInstance().showMessage("Compra cancelada", "La compra fue cancelada", MessageAlerts.MessageType.WARNING);
+                    pc.closePopup();
+                }
+            }), option);
         } catch (NumberFormatException e) {
             MessageAlerts.getInstance().showMessage("Error al realizar la compra", "No selecciono un cliente", MessageAlerts.MessageType.ERROR);
-            System.out.println(e.fillInStackTrace());
         } catch (Exception f) {
-            System.out.println(f.fillInStackTrace());
+            MessageAlerts.getInstance().showMessage("Error al realizar la compra", "Verifique los datos e intente nuevamente", MessageAlerts.MessageType.ERROR);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     //JTextfield la cual busca al cliente en el comboBox
@@ -583,39 +591,7 @@ public class Compra_Form extends Form {
 //Metodo la cual refresca la pestaña
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
-            // Limpiar la tabla
-            DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
-            modelo.setRowCount(0);
-            jTable.setModel(modelo);
-            
-            // Limpiar detalles y totales
-            jLabel12.setText("0.00"); // Total
-            jLabeVerGanancia.setText("0,00"); // Ganancias
-            jLabelVerPorcentajeDeLaGanancia.setText("NaN%"); // Porcentaje ganancia
-            
-            // Limpiar datos del cliente
-            setCeldasClienteEmpty();
-            
-            // Actualizar stock en combobox productos
-            ProductoServices ps = new ProductoServices();
-            DefaultComboBoxModel<Productos> modeloProductos = new DefaultComboBoxModel<>();
-            for (Productos producto : ps.listaProductos()) {
-                modeloProductos.addElement(producto);
-            }
-            jComboBoxProductos.setModel(modeloProductos);
-            
-            // Actualizar combobox clientes
-            ClienteServices cs = new ClienteServices();
-            DefaultComboBoxModel<Cliente> modeloClientes = new DefaultComboBoxModel<>();
-            for (Cliente cliente : cs.listaCliente()) {
-                modeloClientes.addElement(cliente);
-            }
-            jComboBoxClientes.setModel(modeloClientes);
-            
-            // Limpiar buscadores
-            jTextFieldBuscador.setText("");
-            jTextFieldBuscadorProductos.setText("");
-            
+            refrescar();
         } catch (Exception e) {
             System.out.println("Error al refrescar la página: " + e.getMessage());
         }
@@ -661,6 +637,7 @@ public class Compra_Form extends Form {
             Double total = Double.parseDouble(jLabel12.getText());
             System.out.println(listaProductos());
             pdf.pdfPresupuesto(obtenerFechaHoraActual(), listaProductos(), total);
+            refrescar();
         } catch (Exception e) {
             System.out.println("Error en el metodo crear pdf de presupuesto:" + e.fillInStackTrace());
         }
@@ -682,7 +659,7 @@ public class Compra_Form extends Form {
 
             Productos productoSeleccionado = (Productos) jComboBoxProductos.getSelectedItem();
             int cantidad = Integer.parseInt(jTextFieldContenidoStock.getText());
-            
+
             // Verificar si el producto ya existe en la tabla
             boolean productoExistente = false;
             for (int i = 0; i < model.getRowCount(); i++) {
@@ -1043,6 +1020,46 @@ public class Compra_Form extends Form {
         } catch (Exception e) {
             System.out.println("Error en el método calcularYSetearPorcentajeGanancia() de la clase Compra_Form");
             e.printStackTrace();
+        }
+    }
+
+    //Metodo crado para refrescar una vez realizada la compra y para el JButton refrescar
+    public void refrescar() {
+        try {
+            // Limpiar la tabla
+            DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+            modelo.setRowCount(0);
+            jTable.setModel(modelo);
+
+            // Limpiar detalles y totales
+            jLabel12.setText("0.00"); // Total
+            jLabeVerGanancia.setText("0,00"); // Ganancias
+            jLabelVerPorcentajeDeLaGanancia.setText("NaN%"); // Porcentaje ganancia
+
+            // Limpiar datos del cliente
+            setCeldasClienteEmpty();
+
+            // Actualizar stock en combobox productos
+            ProductoServices ps = new ProductoServices();
+            DefaultComboBoxModel<Productos> modeloProductos = new DefaultComboBoxModel<>();
+            for (Productos producto : ps.listaProductos()) {
+                modeloProductos.addElement(producto);
+            }
+            jComboBoxProductos.setModel(modeloProductos);
+
+            // Actualizar combobox clientes
+            ClienteServices cs = new ClienteServices();
+            DefaultComboBoxModel<Cliente> modeloClientes = new DefaultComboBoxModel<>();
+            for (Cliente cliente : cs.listaCliente()) {
+                modeloClientes.addElement(cliente);
+            }
+            jComboBoxClientes.setModel(modeloClientes);
+
+            // Limpiar buscadores
+            jTextFieldBuscador.setText("");
+            jTextFieldBuscadorProductos.setText("");
+        } catch (Exception e) {
+            System.out.println("Error en el metodo refrescar del metodo Compra_Form: " + e.fillInStackTrace());
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -141,8 +141,8 @@ public class CompraPDF {
             //Logica para guardar-----------------------------------------------
             // Usamos JFileChooser para seleccionar la ubicación y el nombre del archivo
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar PDF de la facturacion de la compra");
-            fileChooser.setSelectedFile(new File("Factura_Compra.pdf"));
+            fileChooser.setDialogTitle("Guardar PDF del recibo de la compra");
+            fileChooser.setSelectedFile(new File("Recibo_Compra.pdf"));
 
             // Mostrar el diálogo de guardar
             int userSelection = fileChooser.showSaveDialog(null);
@@ -197,7 +197,7 @@ public class CompraPDF {
             titulo.setAlignment(Paragraph.ALIGN_LEFT);
             titulo.add(new Chunk("Angel Tienda Holística y Esotérica ©\n",
                     FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)));
-            titulo.add(new Chunk("Factura\n",
+            titulo.add(new Chunk("Recibo\n",
                     FontFactory.getFont("Tahoma", 16, Font.BOLD, BaseColor.DARK_GRAY)));
             PdfPCell titleCell = new PdfPCell(titulo);
             titleCell.setBorder(0);
