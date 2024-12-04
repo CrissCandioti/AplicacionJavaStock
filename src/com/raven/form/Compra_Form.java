@@ -723,6 +723,9 @@ public class Compra_Form extends Form {
         return null;
     }
 
+    //Metodo la cual obtengo la cantidad de stock comprada de los productos
+    //public List<Integer>
+    
     // Seteo para el comboBox de los clientes
     public void seteoComboBoxClientes() {
         try {

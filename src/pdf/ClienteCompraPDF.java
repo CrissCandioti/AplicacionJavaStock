@@ -115,11 +115,13 @@ public class ClienteCompraPDF {
 
                 // Crear celda para lista de productos
                 StringBuilder productosStr = new StringBuilder();
+                int index = 0;
                 for (Productos prod : compra.getListaProductos()) {
                     productosStr.append(prod.getNombre())
                             .append(" (")
-                            .append(prod.getStock())
+                            .append(compra.getCantidadComprada().get(index))
                             .append(" unidades)\n");
+                    index++;
                 }
                 tabla.addCell(productosStr.toString());
 

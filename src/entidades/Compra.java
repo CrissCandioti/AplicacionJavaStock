@@ -42,6 +42,7 @@ public class Compra {
     )
 
     private List<Productos> listaProductos;
+    private List<Integer> cantidadComprada;
     private String detalles;
     private double total;
 
@@ -95,6 +96,14 @@ public class Compra {
 
     public void setListaProductos(List<Productos> listaProductos) {
         this.listaProductos = listaProductos;
+    }
+
+    public List<Integer> getCantidadComprada() {
+        return cantidadComprada;
+    }
+
+    public void setCantidadComprada(List<Integer> cantidadComprada) {
+        this.cantidadComprada = cantidadComprada;
     }
 
     public String getDetalles() {
