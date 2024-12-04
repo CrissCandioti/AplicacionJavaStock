@@ -350,7 +350,7 @@ public class Producto_Form extends Form {
                     }
                 };
                 String actions[] = new String[]{"Cancelar", "Imprimir Excel", "Imprimir PDF"};
-                GlassPanePopup.showPopup(new SimplePopupBorder(vp, "Historial de compras del cliente", actions, (pc, i) -> {
+                GlassPanePopup.showPopup(new SimplePopupBorder(vp, "Ver producto", actions, (pc, i) -> {
                     if (i == 0) {
                         pc.closePopup();
                     } else if (i == 1) {
