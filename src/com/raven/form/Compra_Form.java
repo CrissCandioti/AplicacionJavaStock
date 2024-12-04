@@ -529,10 +529,11 @@ public class Compra_Form extends Form {
                     //Total a pagar
                     double total = Double.parseDouble(jLabel12.getText());
                     //Llamamos a CompraServices para ejecutar la compra
-                    css.persistirEntidad(obtenerFechaHoraActual(), index, listaProductos(), detalles, total);
-                    pdf.facturacionPDF(index, obtenerFechaHoraActual(), listaProductos(), total);
-                    refrescar();
-                    pc.closePopup();
+                    System.out.println(cantidadComprada());
+//                    css.persistirEntidad(obtenerFechaHoraActual(), index, listaProductos(), detalles, total);
+//                    pdf.facturacionPDF(index, obtenerFechaHoraActual(), listaProductos(), total);
+//                    refrescar();
+//                    pc.closePopup();
                 } else {
                     MessageAlerts.getInstance().showMessage("Compra cancelada", "La compra fue cancelada", MessageAlerts.MessageType.WARNING);
                     pc.closePopup();
@@ -724,7 +725,23 @@ public class Compra_Form extends Form {
     }
 
     //Metodo la cual obtengo la cantidad de stock comprada de los productos
-    //public List<Integer>
+    public List<Integer> cantidadComprada() {
+        try {
+            List<Integer> cantidadComprada = new ArrayList<>();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            int rowCount = model.getRowCount();
+
+            for (int i = 0; i < rowCount; i++) {
+                int cantidadIngresado = (int) model.getValueAt(i, 4);
+                cantidadComprada.add(cantidadIngresado);
+            }
+            return cantidadComprada;
+        } catch (Exception e) {
+            System.out.println("Error en el metodo cantidadComrpada de la clase compra_Form");
+            System.out.println(e.fillInStackTrace());
+        }
+        return null;
+    }
     
     // Seteo para el comboBox de los clientes
     public void seteoComboBoxClientes() {
