@@ -45,7 +45,7 @@ import services.ProductoServices;
  */
 public class ProductoExcel {
 
-    //Metodo creado para crear el PDF de un producto
+    //Metodo creado para crear el excel de un producto
     public void excelProductoSeleccionado(int id) {
         //Para la fecha
         DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");

@@ -9,6 +9,7 @@ import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
 import excel.ClientesExcel;
+import excel.HistorialCompraClienteExcel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -354,15 +355,16 @@ public class Usuarios_Form extends Form {
                         return true;
                     }
                 };
-                String actions[] = new String[]{"Imprimir Excel", "Imprimir PDF", "Cancelar"};
+                String actions[] = new String[]{"Cancelar", "Imprimir PDF", "Imprimir Excel"};
                 GlassPanePopup.showPopup(new SimplePopupBorder(historialcliente, "Historial de compras del cliente", actions, (pc, i) -> {
                     if (i == 0) {
-                        System.out.println("Se imprime el excel");
+                        pc.closePopup();
                     } else if (i == 1) {
                         ClienteCompraPDF pdf = new ClienteCompraPDF();
                         pdf.pdfPresupuesto(data);
                     } else if (i == 2) {
-                        pc.closePopup();
+                        HistorialCompraClienteExcel hcc = new HistorialCompraClienteExcel();
+                        hcc.HistorialCompraClienteExcel(data);
                     }
                 }), option);
             } else {

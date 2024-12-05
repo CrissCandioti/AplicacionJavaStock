@@ -295,7 +295,7 @@ public class Compra_Form extends Form {
             }
         });
 
-        jButton4.setText("Refrescar");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/arrow-clockwise.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
