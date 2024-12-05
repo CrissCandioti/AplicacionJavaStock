@@ -330,7 +330,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonPDFTabla">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Imprimir factura previa PDF"/>
+            <Property name="text" type="java.lang.String" value="Imprimir recibo previa PDF"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPDFTablaActionPerformed"/>
@@ -338,7 +338,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonExcelTabla">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Imprimir factura previa Excel"/>
+            <Property name="text" type="java.lang.String" value="Imprimir recibo previa Excel"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcelTablaActionPerformed"/>

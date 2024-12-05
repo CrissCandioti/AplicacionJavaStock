@@ -206,14 +206,14 @@ public class Compra_Form extends Form {
 
         jLabel.setText("Ingrese el cliente");
 
-        jButtonPDFTabla.setText("Imprimir factura previa PDF");
+        jButtonPDFTabla.setText("Imprimir recibo previa PDF");
         jButtonPDFTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPDFTablaActionPerformed(evt);
             }
         });
 
-        jButtonExcelTabla.setText("Imprimir factura previa Excel");
+        jButtonExcelTabla.setText("Imprimir recibo previa Excel");
         jButtonExcelTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcelTablaActionPerformed(evt);
@@ -1078,6 +1078,7 @@ public class Compra_Form extends Form {
             jTextFieldBuscador.setText("");
             jTextFieldBuscadorProductos.setText("");
             jTextFieldContenidoStock.setText("");
+            jTextAreaDetalles.setText("");
         } catch (Exception e) {
             System.out.println("Error en el metodo refrescar del metodo Compra_Form: " + e.fillInStackTrace());
         }

@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +47,8 @@ public class ProductoExcel {
 
     //Metodo creado para crear el PDF de un producto
     public void excelProductoSeleccionado(int id) {
-
+        //Para la fecha
+        DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
         //Conexion a services
         ProductoServices ps = new ProductoServices();
         Productos aux = ps.buscarProductoPorID(id);
@@ -170,7 +173,7 @@ public class ProductoExcel {
             //CeldaFechaIngreso
             Cell celdaFechaIngreso = row1.createCell(4);
             celdaFechaIngreso.setCellStyle(headerSyleContenido);
-            celdaFechaIngreso.setCellValue(aux.getFechaIngreso());
+            celdaFechaIngreso.setCellValue(df.format(aux.getFechaIngreso()));
 
             //CeldaMarca
             Cell celdaMarca = row1.createCell(5);

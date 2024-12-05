@@ -34,6 +34,7 @@ public class ProductoPDF {
         try {
             ProductoServices ps = new ProductoServices();
             Productos aux = ps.buscarProductoPorID(id);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); //Formato para la fecha
             byte[] imagenBytes = aux.getImagen(); // Suponiendo que este método devuelve el arreglo de bytes
             // Crear una imagen a partir de los bytes
             Image imagen = Image.getInstance(imagenBytes);
@@ -71,7 +72,7 @@ public class ProductoPDF {
             //Logica para guardar-----------------------------------------------
             //-------------------------------------------------------------------------------------------------------
             Image header = Image.getInstance("src/com/raven/icon/inicio.png");
-            header.scaleToFit(300, 300); // Reducido de 650x1000 a 300x300
+            header.scaleToFit(150, 150); // Reducido de 650x1000 a 300x300
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph parrafo = new Paragraph();
@@ -87,9 +88,10 @@ public class ProductoPDF {
             Chunk CODIGO = new Chunk("CODIGO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk VARIEDAD = new Chunk("VARIEDAD:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk NOMBRE = new Chunk("NOMBRE:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk FECHAINGRESO = new Chunk("FECHA INGRESO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk MARCA = new Chunk("MARCA:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk TIPOPRODUCTO = new Chunk("TIPO PRODUCTO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
-            Chunk CONTENIDO = new Chunk("TCONTENIDO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
+            Chunk CONTENIDO = new Chunk("CONTENIDO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk STOCK = new Chunk("STOCK:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk PRECIOCOSTO = new Chunk("PRECIO COSTO:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk PRECIOVENTA = new Chunk("PRECIO VENTA:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
@@ -106,6 +108,9 @@ public class ProductoPDF {
 
             texto.add(NOMBRE);
             texto.add(" " + aux.getNombre() + "\n\n");
+            
+            texto.add(FECHAINGRESO);
+            texto.add(" " + dateFormat.format(aux.getFechaIngreso()) + "\n\n");
 
             texto.add(MARCA);
             texto.add(" " + aux.getMarca() + "\n\n");
