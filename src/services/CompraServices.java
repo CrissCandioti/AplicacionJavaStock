@@ -18,7 +18,7 @@ import raven.alerts.MessageAlerts;
  */
 public class CompraServices {
 
-    public void persistirEntidad(Date date, Cliente aux, List<Productos> listaProductos, String detalles, double total) {
+    public void persistirEntidad(Date date, Cliente aux, List<Productos> listaProductos, List<Integer> cantidadComprada, String detalles, double total) {
         try {
             CompraDAO dao = new CompraDAO();
             if (listaProductos.isEmpty()) {
@@ -28,7 +28,7 @@ public class CompraServices {
             if (detalles.isEmpty()) {
                 detalles = "Ver detalles";
             }
-            Compra index = new Compra(date, aux, listaProductos, detalles, total);
+            Compra index = new Compra(date, aux, listaProductos, cantidadComprada, detalles, total);
             dao.persistirEntidad(index);
             MessageAlerts.getInstance().showMessage("Compra exitosa", "La compra fue realizada correctamente a continuacion se imprimira el recibo", MessageAlerts.MessageType.SUCCESS);
             stockProductosRestar(listaProductos);

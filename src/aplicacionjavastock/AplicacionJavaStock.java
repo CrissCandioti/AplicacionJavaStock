@@ -8,7 +8,6 @@ import baseDeDatos.CompraDAO;
 import entidades.Cliente;
 import entidades.Compra;
 import entidades.Productos;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,16 +29,6 @@ public class AplicacionJavaStock {
         ClienteServices css = new ClienteServices();
         ProductoServices ps = new ProductoServices();
         CompraDAO dao = new CompraDAO();
-        Cliente c = css.buscarClienteID(1);
-        Productos p = ps.buscarProductoPorID(1);
-        List<Productos> listap= new ArrayList<>();
-        listap.add(p);
-        Date now = new Date();
-        List<Integer> cantidad = new ArrayList<>();
-        cantidad.add(30);
-        Compra cc = new Compra(now, c, listap, "hola", 1);
-        cc.setCantidadComprada(cantidad);
-        dao.persistirEntidad(cc);
     }
 
 }

@@ -529,11 +529,10 @@ public class Compra_Form extends Form {
                     //Total a pagar
                     double total = Double.parseDouble(jLabel12.getText());
                     //Llamamos a CompraServices para ejecutar la compra
-                    System.out.println(cantidadComprada());
-//                    css.persistirEntidad(obtenerFechaHoraActual(), index, listaProductos(), detalles, total);
-//                    pdf.facturacionPDF(index, obtenerFechaHoraActual(), listaProductos(), total);
-//                    refrescar();
-//                    pc.closePopup();
+                    css.persistirEntidad(obtenerFechaHoraActual(), index, listaProductos(), cantidadComprada(), detalles, total);
+                    pdf.facturacionPDF(index, obtenerFechaHoraActual(), listaProductos(), total);
+                    refrescar();
+                    pc.closePopup();
                 } else {
                     MessageAlerts.getInstance().showMessage("Compra cancelada", "La compra fue cancelada", MessageAlerts.MessageType.WARNING);
                     pc.closePopup();
@@ -742,7 +741,7 @@ public class Compra_Form extends Form {
         }
         return null;
     }
-    
+
     // Seteo para el comboBox de los clientes
     public void seteoComboBoxClientes() {
         try {
@@ -1078,6 +1077,7 @@ public class Compra_Form extends Form {
             // Limpiar buscadores
             jTextFieldBuscador.setText("");
             jTextFieldBuscadorProductos.setText("");
+            jTextFieldContenidoStock.setText("");
         } catch (Exception e) {
             System.out.println("Error en el metodo refrescar del metodo Compra_Form: " + e.fillInStackTrace());
         }

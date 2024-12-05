@@ -49,10 +49,11 @@ public class Compra {
     public Compra() {
     }
 
-    public Compra(Date date, Cliente cliente, List<Productos> listaProductos, String detalles, double total) {
+    public Compra(Date date, Cliente cliente, List<Productos> listaProductos, List<Integer> cantidadComprada, String detalles, double total) {
         this.date = date;
         this.cliente = cliente;
         this.listaProductos = listaProductos;
+        this.cantidadComprada = cantidadComprada;
         this.detalles = detalles;
         this.total = total;
     }
@@ -124,7 +125,7 @@ public class Compra {
 
     @Override
     public String toString() {
-        return "Compra{" + "id=" + id + ", date=" + date + ", cliente=" + cliente + ", listaProductos=" + listaProductos + ", detalles=" + detalles + ", total=" + total + '}';
+        return "Compra{" + "id=" + id + ", date=" + date + ", cliente=" + cliente + ", listaProductos=" + listaProductos + ", cantidadComprada=" + cantidadComprada + ", detalles=" + detalles + ", total=" + total + '}';
     }
 
     public Object[] toTableRow(int rowNum) {
