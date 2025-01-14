@@ -18,18 +18,18 @@ public class Notas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date fechaMensaje;
+    private String fechaMensaje;
     private String nota;
 
     public Notas() {
     }
 
-    public Notas(Date fechaMensaje, String nota) {
+    public Notas(String fechaMensaje, String nota) {
         this.fechaMensaje = fechaMensaje;
         this.nota = nota;
     }
 
-    public Notas(int id, Date fechaMensaje, String nota) {
+    public Notas(int id, String fechaMensaje, String nota) {
         this.id = id;
         this.fechaMensaje = fechaMensaje;
         this.nota = nota;
@@ -43,11 +43,11 @@ public class Notas {
         this.id = id;
     }
 
-    public Date getFechaMensaje() {
+    public String getFechaMensaje() {
         return fechaMensaje;
     }
 
-    public void setFechaMensaje(Date fechaMensaje) {
+    public void setFechaMensaje(String fechaMensaje) {
         this.fechaMensaje = fechaMensaje;
     }
 
