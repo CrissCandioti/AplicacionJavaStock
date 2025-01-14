@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import raven.chat.component.ChatBox;
 import raven.chat.model.ModelMessage;
 import raven.chat.swing.ChatEvent;
@@ -17,26 +18,62 @@ public class ChatGPT_Form extends Form {
         initComponents();
         chatArea.setTitle("OpenAI");
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy, hh:mmaa");
+        cargarMensajesAnteriores();
         chatArea.addChatEvent(new ChatEvent() {
             @Override
             public void mousePressedSendButton(ActionEvent evt) {
-                Icon icon = new ImageIcon(getClass().getResource("/com/raven/icon/logo.png"));
-                String name = "AngelTienda";
-                String date = df.format(new Date());
-                String message = chatArea.getText().trim();
-                chatArea.addChatBox(new ModelMessage(icon, name, date, message), ChatBox.BoxType.RIGHT);
+                try {
+                    Icon icon = new ImageIcon(getClass().getResource("/com/raven/icon/logo.png"));
+                    String name = "AngelTienda";
+                    String date = df.format(new Date());
+                    String message = chatArea.getText().trim();
+
+                    if (!message.isEmpty()) {
+//                        // Guardar mensaje en la base de datos
+//                        ChatServices chatServices = new ChatServices();
+//                        Chat chat = new Chat();
+//                        chat.setMensaje(message);
+//                        chat.setFechaHora(new Date());
+//                        chat.setUsuario(name);
+//                        chatServices.guardarMensaje(chat);
+
+                        // Mostrar mensaje en el chat
+                        chatArea.addChatBox(new ModelMessage(icon, name, date, message), ChatBox.BoxType.RIGHT);
+                        chatArea.setText("");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error al guardar el mensaje: " + e.getMessage());
+                }
             }
 
             @Override
             public void mousePressedFileButton(ActionEvent evt) {
-                
+                // Implementar lógica para archivos si es necesario
             }
 
             @Override
             public void keyTyped(KeyEvent evt) {
-                
+                // Implementar lógica de escritura si es necesario  
             }
         });
+    }
+
+    private void cargarMensajesAnteriores() {
+        try {
+//            ChatServices chatServices = new ChatServices();
+//            List<Chat> mensajes = chatServices.obtenerMensajes();
+            Icon icon = new ImageIcon(getClass().getResource("/com/raven/icon/logo.png"));
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy, hh:mmaa");
+            String date = df.format(new Date());
+//            for (Chat chat : mensajes) {
+//                String date = df.format(chat.getFechaHora());
+//                chatArea.addChatBox(new ModelMessage(icon, chat.getUsuario(), 
+//                    date, chat.getMensaje()), ChatBox.BoxType.RIGHT);
+//            }
+            chatArea.addChatBox(new ModelMessage(icon, "AngelTienda", date, "vamo lo pibe"), ChatBox.BoxType.LEFT);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar mensajes anteriores: " + e.getMessage());
+        }
     }
 
     @SuppressWarnings("unchecked")

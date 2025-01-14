@@ -402,7 +402,7 @@ public class Usuarios_Form extends Form {
     }//GEN-LAST:event_jButtonExcelTablaActionPerformed
 //JButton creado para recargar la tabla con los nuevos datos (si ocurre un problema al ingresar un nuevo usuario y no se muestra este boton hara ese trabajo) 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+        loadData();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.

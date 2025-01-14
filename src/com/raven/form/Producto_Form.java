@@ -398,7 +398,7 @@ public class Producto_Form extends Form {
     }//GEN-LAST:event_jButtonExcelTablaActionPerformed
 //JButton creado para recargar la tabla con los nuevos datos (si ocurre un problema al ingresar un nuevo usuario y no se muestra este boton hara ese trabajo) 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        loadData();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un producto o varios o ninguno.
@@ -433,23 +433,23 @@ public class Producto_Form extends Form {
             }
             model.setRowCount(0);
             List<Productos> list = ps.listaProductos();
-            
+
             // Configurar scroll horizontal
             jTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             jScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            
+
             // Agregar los datos a la tabla
             for (Productos p : list) {
                 model.addRow(p.toTableRow(p.getId()));
             }
-            
+
             // Ajustar ancho de columnas basado en el contenido
             for (int column = 0; column < jTable.getColumnCount(); column++) {
                 int maxWidth = 0;
                 // Revisar el ancho del encabezado
                 String headerValue = jTable.getColumnName(column);
                 maxWidth = Math.max(maxWidth, headerValue.length() * 10);
-                
+
                 // Revisar el ancho del contenido
                 for (int row = 0; row < jTable.getRowCount(); row++) {
                     Object value = jTable.getValueAt(row, column);
@@ -462,11 +462,11 @@ public class Producto_Form extends Form {
                 maxWidth = Math.max(50, Math.min(maxWidth + 20, 300));
                 jTable.getColumnModel().getColumn(column).setPreferredWidth(maxWidth);
             }
-            
+
             // Asegurar que la tabla se actualice visualmente
             jTable.revalidate();
             jTable.repaint();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al cargar los datos de productos: " + e.getMessage());
         }
