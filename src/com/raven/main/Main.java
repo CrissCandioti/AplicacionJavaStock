@@ -39,7 +39,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 2) {
                     mainBody.displayForm(proveedoresForm, "Proveedores");
                 } else if (index == 7) {
-                    mainBody.displayForm(ChatGPTForm, "ChatGPT");
+                    mainBody.displayForm(ChatGPTForm, "Notas");
                 } else if (index == 4) {
                     mainBody.displayForm(Compra_Form, "Facturacion Compra");
                 }
