@@ -5,6 +5,7 @@
 package entidades;
 
 import java.util.Date;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
  *
  * @author criss
  */
+@Entity
 public class Notas {
 
     @Id

@@ -19,7 +19,7 @@ public class ChatGPT_Form extends Form {
 
     public ChatGPT_Form() {
         initComponents();
-        chatArea.setTitle("OpenAI");
+        chatArea.setTitle("*Las notas del lado izquierdo son las almacenadas en la base de datos, las notas de la derecha son las recien registradas");
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy, hh:mmaa");
         cargarMensajesAnteriores();
         chatArea.addChatEvent(new ChatEvent() {
