@@ -109,11 +109,42 @@ public class HistorialCliente extends javax.swing.JPanel {
             }
             model.setRowCount(0);
             List<Compra> list = cs.listaCompraPorCliente(id);
+
+            // Configurar scroll horizontal
+            jTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+            jScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            
+            // Agregar los datos a la tabla
             for (Compra c : list) {
                 model.addRow(c.toTableRow(c.getId()));
             }
+            
+            // Ajustar ancho de columnas basado en el contenido
+            for (int column = 0; column < jTable.getColumnCount(); column++) {
+                int maxWidth = 0;
+                // Revisar el ancho del encabezado
+                String headerValue = jTable.getColumnName(column);
+                maxWidth = Math.max(maxWidth, headerValue.length() * 10);
+                
+                // Revisar el ancho del contenido
+                for (int row = 0; row < jTable.getRowCount(); row++) {
+                    Object value = jTable.getValueAt(row, column);
+                    if (value != null) {
+                        int width = String.valueOf(value).length() * 10;
+                        maxWidth = Math.max(maxWidth, width);
+                    }
+                }
+                // Establecer un ancho mínimo y máximo razonable
+                maxWidth = Math.max(50, Math.min(maxWidth + 20, 300));
+                jTable.getColumnModel().getColumn(column).setPreferredWidth(maxWidth);
+            }
+            
+            // Asegurar que la tabla se actualice visualmente
+            jTable.revalidate();
+            jTable.repaint();
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
+            JOptionPane.showMessageDialog(this, "Error al cargar el historial de compras: " + e.getMessage());
         }
     }
 
