@@ -206,14 +206,14 @@ public class Compra_Form extends Form {
 
         jLabel.setText("Ingrese el cliente");
 
-        jButtonPDFTabla.setText("Imprimir recibo previa PDF");
+        jButtonPDFTabla.setText("Imprimir presupuesto PDF");
         jButtonPDFTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPDFTablaActionPerformed(evt);
             }
         });
 
-        jButtonExcelTabla.setText("Imprimir recibo previa Excel");
+        jButtonExcelTabla.setText("Imprimir presupuesto Excel");
         jButtonExcelTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcelTablaActionPerformed(evt);
