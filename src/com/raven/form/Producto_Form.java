@@ -86,6 +86,7 @@ public class Producto_Form extends Form {
         jLabel = new javax.swing.JLabel();
         jButtonPDFTabla = new javax.swing.JButton();
         jButtonExcelTabla = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,6 +169,14 @@ public class Producto_Form extends Form {
             }
         });
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/arrow-clockwise.png"))); // NOI18N
+        jButton4.setText("Refrescar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -188,7 +197,9 @@ public class Producto_Form extends Form {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButtonExcelTabla)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonPDFTabla))
+                                .addComponent(jButtonPDFTabla)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4))
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -218,7 +229,8 @@ public class Producto_Form extends Form {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPDFTabla)
-                    .addComponent(jButtonExcelTabla))
+                    .addComponent(jButtonExcelTabla)
+                    .addComponent(jButton4))
                 .addContainerGap())
         );
 
@@ -384,6 +396,10 @@ public class Producto_Form extends Form {
         ProductoExcel pe = new ProductoExcel();
         pe.excelTablaProductos();
     }//GEN-LAST:event_jButtonExcelTablaActionPerformed
+//JButton creado para recargar la tabla con los nuevos datos (si ocurre un problema al ingresar un nuevo usuario y no se muestra este boton hara ese trabajo) 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un producto o varios o ninguno.
     private List<Productos> Seleccionarusuario() {
@@ -448,6 +464,7 @@ public class Producto_Form extends Form {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonExcelTabla;
     private javax.swing.JButton jButtonPDFTabla;
     private javax.swing.JButton jButtonVer;
