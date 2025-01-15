@@ -19,7 +19,7 @@ public class ChatGPT_Form extends Form {
 
     public ChatGPT_Form() {
         initComponents();
-        chatArea.setTitle("*Las notas del lado izquierdo son las almacenadas en la base de datos, las notas de la derecha son las recien registradas");
+        chatArea.setTitle("*Las notas del lado izquierdo son de días anteriores, las notas de la derecha son del día actual");
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy, hh:mmaa");
         cargarMensajesAnteriores();
         chatArea.addChatEvent(new ChatEvent() {
@@ -34,7 +34,7 @@ public class ChatGPT_Form extends Form {
                     if (!message.isEmpty()) {
                         // Guardar mensaje en la base de datos
                         NotaServices chatServices = new NotaServices();
-                        chatServices.persistirNota( date, message);
+                        chatServices.persistirNota(date, message);
 
                         // Mostrar mensaje en el chat
                         chatArea.addChatBox(new ModelMessage(icon, name, date, message), ChatBox.BoxType.RIGHT);
@@ -62,10 +62,25 @@ public class ChatGPT_Form extends Form {
             NotaServices chatServices = new NotaServices();
             List<Notas> mensajes = chatServices.listaNotas();
             Icon icon = new ImageIcon(getClass().getResource("/com/raven/icon/logo.png"));
+            
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy, hh:mmaa");
+            String fechaActual = df.format(new Date()).split(",")[0];
+            String fechaAnterior = "";
+            
             for (Notas chat : mensajes) {
-                String date = chat.getFechaMensaje();
+                String fechaMensaje = chat.getFechaMensaje().split(",")[0];
+                
+                // Si cambia la fecha, agregamos un separador
+                if (!fechaMensaje.equals(fechaAnterior)) {
+                    chatArea.addChatBox(new ModelMessage(null, "", "", "--- " + fechaMensaje + " ---"), ChatBox.BoxType.LEFT);
+                    fechaAnterior = fechaMensaje;
+                }
+                
+                // Si es del día actual, mostrar a la derecha
+                ChatBox.BoxType lado = fechaMensaje.equals(fechaActual) ? ChatBox.BoxType.RIGHT : ChatBox.BoxType.LEFT;
+                
                 chatArea.addChatBox(new ModelMessage(icon, "AngelTienda", 
-                    date, chat.getNota()), ChatBox.BoxType.LEFT);
+                    chat.getFechaMensaje(), chat.getNota()), lado);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al cargar mensajes anteriores: " + e.getMessage());
