@@ -7,6 +7,7 @@ import com.raven.form.Compra_Form;
 import com.raven.form.Home_Form;
 import com.raven.form.Producto_Form;
 import com.raven.form.Proveedores_Form;
+import com.raven.form.RegistroCompra_Form1;
 import com.raven.form.Usuarios_Form;
 import com.raven.menu.EventMenu;
 import raven.popup.GlassPanePopup;
@@ -19,6 +20,8 @@ public class Main extends javax.swing.JFrame {
     private Proveedores_Form proveedoresForm;
     private ChatGPT_Form ChatGPTForm;
     private Compra_Form Compra_Form;
+    private RegistroCompra_Form1 RegistroCompra_Form1;
+
     public Main() {
         initComponents();
         init();
@@ -42,6 +45,8 @@ public class Main extends javax.swing.JFrame {
                     mainBody.displayForm(ChatGPTForm, "Notas");
                 } else if (index == 4) {
                     mainBody.displayForm(Compra_Form, "Facturacion Compra");
+                } else if (index == 5) {
+                    mainBody.displayForm(RegistroCompra_Form1, "Registro Compra");
                 }
             }
         });
@@ -49,7 +54,9 @@ public class Main extends javax.swing.JFrame {
         ChatGPTForm = new ChatGPT_Form();
         productosForm = new Producto_Form();
         usuariosForm = new Usuarios_Form();
+        RegistroCompra_Form1 = new RegistroCompra_Form1();
         proveedoresForm = new Proveedores_Form();
+        
         mainBody.displayForm(new Home_Form());
     }
 
