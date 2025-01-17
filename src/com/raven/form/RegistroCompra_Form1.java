@@ -80,7 +80,6 @@ public class RegistroCompra_Form1 extends Form {
         jTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jTextField = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel = new javax.swing.JLabel();
@@ -129,13 +128,6 @@ public class RegistroCompra_Form1 extends Form {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Agregar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -204,8 +196,6 @@ public class RegistroCompra_Form1 extends Form {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton4)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3)
-                                .addGap(18, 18, 18)
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1)))
@@ -220,7 +210,6 @@ public class RegistroCompra_Form1 extends Form {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
                     .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
@@ -245,38 +234,7 @@ public class RegistroCompra_Form1 extends Form {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    //JButton para abrir una ventana y guardar un cliente a la base de datos
-    @SuppressWarnings("empty-statement")
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            UsuariosAgregarBaseDatos agregar = new UsuariosAgregarBaseDatos();
-            ClienteServices cs = new ClienteServices();
-            DefaultOption option = new DefaultOption() {
-                @Override
-                public boolean closeWhenClickOutside() {
-                    return true;
-                }
-            };
-            String actions[] = new String[]{"Cancelar", "Guardar"};
-            GlassPanePopup.showPopup(new SimplePopupBorder(agregar, "Guardar cliente", actions, (pc, i) -> {
-                if (i == 1) {
-                    if (agregar.retornarCLienteAgregar() == null) {
-                        MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del documento vacia o con letras", MessageAlerts.MessageType.ERROR);
-                    } else {
-                        cs.persistirCliente(agregar.retornarCLienteAgregar().getNombre(), agregar.retornarCLienteAgregar().getApellido(), agregar.retornarCLienteAgregar().getDocumento(), agregar.retornarCLienteAgregar().getEmail(), agregar.retornarCLienteAgregar().getWhatsapp(), agregar.retornarCLienteAgregar().getLocalidad(), agregar.retornarCLienteAgregar().getDireccion(), agregar.retornarCLienteAgregar().getNotas());
-                        MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El cliente fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
-                        loadData();
-                        pc.closePopup();
-                    }
-                } else {
-                    pc.closePopup();
-                }
-            }), option);
-        } catch (Exception e) {
-            System.out.println("Error en el JButton de guardar cliente de la clase Usuarios_Form");
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-    //JButon para modificar un cliente de la base de datos 
+   //JButon para modificar un cliente de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
@@ -492,7 +450,6 @@ public class RegistroCompra_Form1 extends Form {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonExcelTabla;
