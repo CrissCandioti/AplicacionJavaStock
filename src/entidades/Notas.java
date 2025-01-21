@@ -70,4 +70,13 @@ public class Notas {
         return "Notas{" + "id=" + id + ", fechaMensaje=" + fechaMensaje + ", nota=" + nota + '}';
     }
 
+    public Object[] toTableRow(int rowNum) {
+        try {
+            return new Object[]{false, rowNum, fechaMensaje, nota};
+        } catch (Exception e) {
+            System.out.println("Error metodo toTableRow de la clase notas");
+        }
+        return null;
+    }
+
 }
