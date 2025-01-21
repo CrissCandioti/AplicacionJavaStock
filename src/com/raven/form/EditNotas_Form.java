@@ -181,13 +181,13 @@ public class EditNotas_Form extends Form {
                         }
                     };
                     String actions[] = new String[]{"Cancelar", "Modificar"};
-                    GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar cliente", actions, (pc, i) -> {
+                    GlassPanePopup.showPopup(new SimplePopupBorder(UsuariosAgregarBaseDatos, "Modificar nota", actions, (pc, i) -> {
                         if (i == 1) {
                             if (UsuariosAgregarBaseDatos.retornarCliente() == null) {
-                                MessageAlerts.getInstance().showMessage("Se produjo un error", "El cliente no puede tener la celda del documento vacia o con letras", MessageAlerts.MessageType.ERROR);
+                                MessageAlerts.getInstance().showMessage("Se produjo un error", "La nota no puedo modificarse, verifique y vuelva a intentarlo", MessageAlerts.MessageType.ERROR);
                             } else {
                                 cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
-                                MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El cliente fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
+                                MessageAlerts.getInstance().showMessage("Se modifico correctamente", "La nota fue modificada correctamente", MessageAlerts.MessageType.SUCCESS);
                                 loadData();
                                 pc.closePopup();
                             }
