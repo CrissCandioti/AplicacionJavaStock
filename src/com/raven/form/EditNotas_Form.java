@@ -2,6 +2,7 @@ package com.raven.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.raven.component.Form;
+import com.raven.crud.NotasBaseDatos;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
@@ -164,13 +165,13 @@ public class EditNotas_Form extends Form {
    //JButon para modificar una nota de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
-            ClienteServices cs = new ClienteServices();
-            List<Cliente> list = Seleccionarusuario();
+            NotasBaseDatos UsuariosAgregarBaseDatos = new NotasBaseDatos();
+            NotaServices cs = new NotaServices();
+            List<Notas> list = Seleccionarusuario();
             if (!list.isEmpty()) {
                 if (list.size() == 1) {
                     //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
-                    Cliente aux = list.get(0);
+                    Notas aux = list.get(0);
                     //Metodo probisorio para modificar
                     UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
                     //Creamos nuevamente la ventana emergente para mostrar los datos
@@ -242,12 +243,12 @@ public class EditNotas_Form extends Form {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     //Esta es la logica para que se aplique cuando se selecciona un cliente o varios o ninguno.
-    private List<Cliente> Seleccionarusuario() {
+    private List<Notas> Seleccionarusuario() {
         try {
-            List<Cliente> list = new ArrayList<>();
+            List<Notas> list = new ArrayList<>();
             for (int i = 0; i < jTable.getRowCount(); i++) {
                 if ((boolean) jTable.getValueAt(i, 0)) {
-                    Cliente data = (Cliente) jTable.getValueAt(i, 2);
+                    Notas data = (Notas) jTable.getValueAt(i, 2);
                     list.add(data);
                 }
             }

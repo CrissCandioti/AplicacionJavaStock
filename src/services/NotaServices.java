@@ -57,4 +57,14 @@ public class NotaServices {
         return null;
     }
 
+    public Notas buscarNotaPorID(int id) {
+        try {
+            NotaDAO dao = new NotaDAO();
+            return dao.buscarNotaPorID(id);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo buscarNotaPorID del metodo notaServices()");
+        }
+        return null;
+    }
+
 }
