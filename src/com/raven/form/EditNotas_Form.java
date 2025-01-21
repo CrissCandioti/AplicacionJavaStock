@@ -275,9 +275,10 @@ public class EditNotas_Form extends Form {
             model.setRowCount(0);
             List<Notas> list = cs.listaNotas();
 
-            // Configurar scroll horizontal
+            // Configurar scroll horizontal y vertical
             jTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-            jScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            jScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+            jScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
             // Agregar los datos a la tabla
             for (Notas c : list) {
@@ -289,18 +290,18 @@ public class EditNotas_Form extends Form {
                 int maxWidth = 0;
                 // Revisar el ancho del encabezado
                 String headerValue = jTable.getColumnName(column);
-                maxWidth = Math.max(maxWidth, headerValue.length() * 10);
+                maxWidth = Math.max(maxWidth, headerValue.length() * 12); // Aumentado factor de multiplicación
 
                 // Revisar el ancho del contenido
                 for (int row = 0; row < jTable.getRowCount(); row++) {
                     Object value = jTable.getValueAt(row, column);
                     if (value != null) {
-                        int width = String.valueOf(value).length() * 10;
+                        int width = String.valueOf(value).length() * 16; // Aumentado factor de multiplicación
                         maxWidth = Math.max(maxWidth, width);
                     }
                 }
-                // Establecer un ancho mínimo y máximo razonable
-                maxWidth = Math.max(50, Math.min(maxWidth + 20, 300));
+                // Establecer un ancho mínimo y máximo más amplio
+                maxWidth = Math.max(75, Math.min(maxWidth + 30, 400));
                 jTable.getColumnModel().getColumn(column).setPreferredWidth(maxWidth);
             }
 
@@ -310,24 +311,6 @@ public class EditNotas_Form extends Form {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al cargar los datos de las notas, verifique la conexion a la base de datos");
-        }
-    }
-
-    //Metodo la cual busca el cliente en el jTextField
-    public void search(String search) {
-        try {
-            ClienteServices cs = new ClienteServices();
-            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            if (jTable.isEditing()) {
-                jTable.getCellEditor().stopCellEditing();
-            }
-            model.setRowCount(0);
-            List<Cliente> list = cs.busquedaCliente(search);
-            for (Cliente c : list) {
-                model.addRow(c.toTableRow(jTable.getRowCount() + 1));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error metodo loadDATA() clase usuario_Form");
         }
     }
 
