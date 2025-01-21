@@ -67,12 +67,12 @@ public class Notas {
 
     @Override
     public String toString() {
-        return "Notas{" + "id=" + id + ", fechaMensaje=" + fechaMensaje + ", nota=" + nota + '}';
+        return fechaMensaje;
     }
 
     public Object[] toTableRow(int rowNum) {
         try {
-            return new Object[]{false, rowNum, fechaMensaje, nota};
+            return new Object[]{false, rowNum, this, nota};
         } catch (Exception e) {
             System.out.println("Error metodo toTableRow de la clase notas");
         }

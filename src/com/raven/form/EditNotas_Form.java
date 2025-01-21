@@ -8,6 +8,7 @@ import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
+import entidades.Notas;
 import excel.ClientesExcel;
 import excel.HistorialCompraClienteExcel;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.SimplePopupBorder;
 import services.ClienteServices;
+import services.NotaServices;
 
 public class EditNotas_Form extends Form {
 
@@ -53,19 +55,6 @@ public class EditNotas_Form extends Form {
                 + "thumbInsets:3,3,3,3;"
                 + "background:$Table.background;");
 
-        jLabel.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:bold +5;");
-
-        jTextField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
-        jTextField.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("com/raven/icon/search.svg"));
-
-        jTextField.putClientProperty(FlatClientProperties.STYLE, ""
-                + "arc:15;"
-                + "borderWidth:0;"
-                + "focusWidth:0;"
-                + "innerFocusWidth:0;"
-                + "margin:5,20,5,20;");
-
         jTable.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxTableHeaderRenderer(jTable, 0));
         jTable.getTableHeader().setDefaultRenderer(new TableHeaderAlignment(jTable));
         loadData();
@@ -80,10 +69,6 @@ public class EditNotas_Form extends Form {
         jTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField = new javax.swing.JTextField();
-        jLabel = new javax.swing.JLabel();
-        jButtonPDFTabla = new javax.swing.JButton();
-        jButtonExcelTabla = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -130,28 +115,6 @@ public class EditNotas_Form extends Form {
             }
         });
 
-        jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldKeyReleased(evt);
-            }
-        });
-
-        jLabel.setText("Ingrese el nombre del cliente");
-
-        jButtonPDFTabla.setText("PDF Tabla");
-        jButtonPDFTabla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPDFTablaActionPerformed(evt);
-            }
-        });
-
-        jButtonExcelTabla.setText("Excel Tabla");
-        jButtonExcelTabla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcelTablaActionPerformed(evt);
-            }
-        });
-
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/arrow-clockwise.png"))); // NOI18N
         jButton5.setText("Refrescar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -169,45 +132,26 @@ public class EditNotas_Form extends Form {
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
                 .addGap(100, 100, 100))
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(45, 497, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton5)
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonExcelTabla)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonPDFTabla)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton5))
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
-                        .addGap(45, 45, 45))))
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addGap(45, 45, 45))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(79, 79, 79)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonPDFTabla)
-                    .addComponent(jButtonExcelTabla)
-                    .addComponent(jButton5))
+                .addComponent(jButton5)
                 .addContainerGap())
         );
 
@@ -298,20 +242,6 @@ public class EditNotas_Form extends Form {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-   //jTextField la cual buscaremos el cliente por nombre o apellido
-    private void jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldKeyReleased
-        search(jTextField.getText().trim());
-    }//GEN-LAST:event_jTextFieldKeyReleased
-    //JButton para crear el PDF
-    private void jButtonPDFTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPDFTablaActionPerformed
-        ClientePDF pdf = new ClientePDF();
-        pdf.pdfTablaProveedores();
-    }//GEN-LAST:event_jButtonPDFTablaActionPerformed
-    //JButton para crear el Excel
-    private void jButtonExcelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcelTablaActionPerformed
-        ClientesExcel ce = new ClientesExcel();
-        ce.TablaClientesExcelReporte();
-    }//GEN-LAST:event_jButtonExcelTablaActionPerformed
 //JButton creado para recargar la tabla con los nuevos datos (si ocurre un problema al ingresar un nuevo usuario y no se muestra este boton hara ese trabajo) 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         loadData();
@@ -337,20 +267,20 @@ public class EditNotas_Form extends Form {
     //Metodo la cual carga la tabla
     public void loadData() {
         try {
-            ClienteServices cs = new ClienteServices();
+            NotaServices cs = new NotaServices();
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             if (jTable.isEditing()) {
                 jTable.getCellEditor().stopCellEditing();
             }
             model.setRowCount(0);
-            List<Cliente> list = cs.listaCliente();
+            List<Notas> list = cs.listaNotas();
 
             // Configurar scroll horizontal
             jTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             jScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
             // Agregar los datos a la tabla
-            for (Cliente c : list) {
+            for (Notas c : list) {
                 model.addRow(c.toTableRow(c.getId()));
             }
 
@@ -405,12 +335,8 @@ public class EditNotas_Form extends Form {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButtonExcelTabla;
-    private javax.swing.JButton jButtonPDFTabla;
-    private javax.swing.JLabel jLabel;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
-    private javax.swing.JTextField jTextField;
     // End of variables declaration//GEN-END:variables
 }
