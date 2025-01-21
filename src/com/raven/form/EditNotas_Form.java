@@ -1,24 +1,18 @@
 package com.raven.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.raven.component.Form;
-import com.raven.crud.HistorialCliente;
 import com.raven.crud.UsuariosAgregarBaseDatos;
 import com.raven.table.CheckBoxTableHeaderRenderer;
 import com.raven.table.TableHeaderAlignment;
 import entidades.Cliente;
 import entidades.Notas;
-import excel.ClientesExcel;
-import excel.HistorialCompraClienteExcel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import pdf.ClienteCompraPDF;
-import pdf.ClientePDF;
 import raven.alerts.MessageAlerts;
 import raven.popup.DefaultOption;
 import raven.popup.GlassPanePopup;
@@ -167,7 +161,7 @@ public class EditNotas_Form extends Form {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-   //JButon para modificar un cliente de la base de datos 
+   //JButon para modificar una nota de la base de datos 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             UsuariosAgregarBaseDatos UsuariosAgregarBaseDatos = new UsuariosAgregarBaseDatos();
@@ -211,7 +205,7 @@ public class EditNotas_Form extends Form {
             System.out.println(e.fillInStackTrace());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    //JButton para eliminar el cliente de la base de datos
+    //JButton para eliminar la nota de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<Cliente> list = Seleccionarusuario();
         ClienteServices cs = new ClienteServices();
