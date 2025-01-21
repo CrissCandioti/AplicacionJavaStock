@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.raven.form.ChatGPT_Form;
 import com.raven.form.Compra_Form;
+import com.raven.form.EditNotas_Form;
 import com.raven.form.Home_Form;
 import com.raven.form.Producto_Form;
 import com.raven.form.Proveedores_Form;
@@ -21,6 +22,7 @@ public class Main extends javax.swing.JFrame {
     private ChatGPT_Form ChatGPTForm;
     private Compra_Form Compra_Form;
     private RegistroCompra_Form1 RegistroCompra_Form1;
+    private EditNotas_Form EditNotas_Form;
 
     public Main() {
         initComponents();
@@ -47,6 +49,8 @@ public class Main extends javax.swing.JFrame {
                     mainBody.displayForm(Compra_Form, "Facturacion Compra");
                 } else if (index == 5) {
                     mainBody.displayForm(RegistroCompra_Form1, "Registro Compra");
+                } else if (index == 8) {
+                    mainBody.displayForm(EditNotas_Form, "Editor Notas");
                 }
             }
         });
@@ -56,7 +60,8 @@ public class Main extends javax.swing.JFrame {
         usuariosForm = new Usuarios_Form();
         RegistroCompra_Form1 = new RegistroCompra_Form1();
         proveedoresForm = new Proveedores_Form();
-        
+        EditNotas_Form = new EditNotas_Form();
+
         mainBody.displayForm(new Home_Form());
     }
 

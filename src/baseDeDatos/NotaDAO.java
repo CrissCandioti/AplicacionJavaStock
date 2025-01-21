@@ -40,4 +40,16 @@ public final class NotaDAO extends DAO<Notas> {
         return null;
     }
 
+    public Notas buscarNotaPorID(int id) {
+        try {
+            conectar();
+            return em.find(Notas.class, id);
+        } catch (Exception e) {
+            System.out.println("Error en el metodo buscarNotaPorID de la clase NotaDAO");
+        } finally {
+            desconectar();
+        }
+        return null;
+    }
+
 }

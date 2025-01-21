@@ -4,7 +4,6 @@
  */
 package entidades;
 
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +33,11 @@ public class Notas {
     public Notas(int id, String fechaMensaje, String nota) {
         this.id = id;
         this.fechaMensaje = fechaMensaje;
+        this.nota = nota;
+    }
+
+    public Notas(int id, String nota) {
+        this.id = id;
         this.nota = nota;
     }
 

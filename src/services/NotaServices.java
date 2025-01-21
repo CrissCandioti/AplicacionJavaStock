@@ -6,7 +6,6 @@ package services;
 
 import baseDeDatos.NotaDAO;
 import entidades.Notas;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,17 +25,25 @@ public class NotaServices {
         }
     }
 
-    public void modificarNota() {
+    public void modificarNota(int id, String nota) {
         try {
-
+            NotaDAO dao = new NotaDAO();
+            Notas n = new Notas(id, nota);
+            dao.actualizarEntidad(n);
+            System.out.println("Se actualizo correctamente la nota");
         } catch (Exception e) {
+            System.out.println("Error al modificar la nota");
         }
     }
 
-    public void borrarNota() {
+    public void borrarNota(int id) {
         try {
-
+            NotaDAO dao = new NotaDAO();
+            Notas n = dao.buscarNotaPorID(id);
+            dao.borrarEntidad(n);
+            System.out.println("Se elimino con exito la nota");
         } catch (Exception e) {
+            System.out.println("Error al eliminar la nota");
         }
     }
 
