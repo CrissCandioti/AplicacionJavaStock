@@ -83,7 +83,7 @@ public class ChatGPT_Form extends Form {
                     chat.getFechaMensaje(), chat.getNota()), lado);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar mensajes anteriores: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al cargar mensajes anteriores, verifique la conexion a la base de datos");
         }
     }
 

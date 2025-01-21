@@ -463,7 +463,7 @@ public class Proveedores_Form extends Form {
             jTable.repaint();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar los datos de proveedores: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos de proveedores, verifique la conexiona a la base de datos " );
         }
     }
 

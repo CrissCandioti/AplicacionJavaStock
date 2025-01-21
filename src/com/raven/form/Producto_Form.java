@@ -468,7 +468,7 @@ public class Producto_Form extends Form {
             jTable.repaint();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar los datos de productos: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos de productos, verifique la conexiona la base de datos ");
         }
     }
 
