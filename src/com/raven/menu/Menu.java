@@ -60,9 +60,8 @@ public class Menu extends javax.swing.JPanel {
         addMenu("Productos", "3", 3);
         addMenu("Facturacion Compra", "8", 4);
         addMenu("Registro Compras", "9", 5);
-        addMenu("Reportes", "5", 6);
-        addMenu("Notas", "10", 7);
-        addMenu("Editor Notas", "4", 8);
+        addMenu("Notas", "10", 6);
+        addMenu("Editor Notas", "4", 7);
         //  add more menu here
         menu.repaint();
         menu.revalidate();

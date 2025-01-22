@@ -43,13 +43,13 @@ public class Main extends javax.swing.JFrame {
                     mainBody.displayForm(productosForm, "Productos");
                 } else if (index == 2) {
                     mainBody.displayForm(proveedoresForm, "Proveedores");
-                } else if (index == 7) {
+                } else if (index == 6) {
                     mainBody.displayForm(ChatGPTForm, "Notas");
                 } else if (index == 4) {
                     mainBody.displayForm(Compra_Form, "Facturacion Compra");
                 } else if (index == 5) {
                     mainBody.displayForm(RegistroCompra_Form1, "Registro Compra");
-                } else if (index == 8) {
+                } else if (index == 7) {
                     mainBody.displayForm(EditNotas_Form, "Editor Notas");
                 }
             }
