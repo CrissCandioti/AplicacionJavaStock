@@ -57,7 +57,7 @@ public class ChatGPT_Form extends Form {
         });
     }
 
-    private void cargarMensajesAnteriores() {
+   private void cargarMensajesAnteriores() {
         try {
             NotaServices chatServices = new NotaServices();
             List<Notas> mensajes = chatServices.listaNotas();

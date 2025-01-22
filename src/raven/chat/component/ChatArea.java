@@ -1,5 +1,7 @@
 package raven.chat.component;
 
+import com.raven.form.ChatGPT_Form;
+import entidades.Notas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -8,13 +10,17 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javaswingdev.FontAwesome;
 import javaswingdev.FontAwesomeIcon;
 import javaswingdev.GoogleMaterialDesignIcon;
 import javaswingdev.GoogleMaterialIcon;
 import javaswingdev.GradientType;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import raven.chat.animation.AnimationFloatingButton;
 import raven.chat.animation.AnimationScroll;
@@ -24,12 +30,14 @@ import raven.chat.swing.RoundPanel;
 import raven.chat.swing.TextField;
 import raven.chat.swing.scroll.ScrollBar;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import raven.chat.swing.ChatEvent;
+import services.NotaServices;
 
 public class ChatArea extends JPanel {
 
@@ -113,7 +121,7 @@ public class ChatArea extends JPanel {
         RoundPanel panel = new RoundPanel();
         panel.setBackground(new Color(255, 255, 255, 20));
         panel.setLayout(new MigLayout("fill, inset 2", "[fill,34!]2[fill]2[fill,34!]", "[bottom]"));
-        GoogleMaterialIcon iconFile = new GoogleMaterialIcon(GoogleMaterialDesignIcon.ATTACH_FILE, GradientType.VERTICAL, new Color(210, 210, 210), new Color(255, 255, 255), 20);
+        GoogleMaterialIcon iconFile = new GoogleMaterialIcon(GoogleMaterialDesignIcon.REFRESH, GradientType.VERTICAL, new Color(210, 210, 210), new Color(255, 255, 255), 20);
         GoogleMaterialIcon iconSend = new GoogleMaterialIcon(GoogleMaterialDesignIcon.SEND, GradientType.VERTICAL, new Color(0, 133, 237), new Color(90, 182, 255), 20);
         GoogleMaterialIcon iconEmot = new GoogleMaterialIcon(GoogleMaterialDesignIcon.INSERT_EMOTICON, GradientType.VERTICAL, new Color(210, 210, 210), new Color(255, 255, 255), 20);
         Button cmdFile = new Button();
@@ -144,7 +152,38 @@ public class ChatArea extends JPanel {
         cmdFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                runEventMousePressedFileButton(e);
+                try {
+                    NotaServices chatServices = new NotaServices();
+                    List<Notas> mensajes = chatServices.listaNotas();
+                    Icon icon = new ImageIcon(getClass().getResource("/com/raven/icon/logo.png"));
+                    
+                    body.removeAll(); // Eliminar mensajes actuales
+                    
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy, hh:mmaa");
+                    String fechaActual = df.format(new Date()).split(",")[0];
+                    String fechaAnterior = "";
+                    
+                    for (Notas chat : mensajes) {
+                        String fechaMensaje = chat.getFechaMensaje().split(",")[0];
+                        
+                        if (!fechaMensaje.equals(fechaAnterior)) {
+                            addChatBox(new ModelMessage(null, "", "", "--- " + fechaMensaje + " ---"), ChatBox.BoxType.LEFT);
+                            fechaAnterior = fechaMensaje;
+                        }
+                        
+                        ChatBox.BoxType lado = fechaMensaje.equals(fechaActual) ? ChatBox.BoxType.RIGHT : ChatBox.BoxType.LEFT;
+                        
+                        addChatBox(new ModelMessage(icon, "AngelTienda", 
+                            chat.getFechaMensaje(), chat.getNota()), lado);
+                    }
+                    
+                    body.revalidate();
+                    body.repaint();
+                    runEventMousePressedFileButton(e);
+                    
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Error al cargar mensajes anteriores, verifique la conexion a la base de datos");
+                }
             }
         });
         JScrollPane scroll = createScroll();
