@@ -4,7 +4,7 @@
  */
 package com.raven.crud;
 
-import entidades.Cliente;
+import entidades.Notas;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +19,7 @@ public class NotasBaseDatos extends javax.swing.JPanel {
     public NotasBaseDatos() {
         initComponents();
         jTextFieldID.setVisible(false);
+        jLabelFecha.setVisible(false);
     }
 
     /**
@@ -34,6 +35,7 @@ public class NotasBaseDatos extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaNotas = new javax.swing.JTextArea();
         jTextFieldID = new javax.swing.JTextField();
+        jLabelFecha = new javax.swing.JLabel();
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Notas");
@@ -43,6 +45,8 @@ public class NotasBaseDatos extends javax.swing.JPanel {
         jTextAreaNotas.setRows(5);
         jTextAreaNotas.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextAreaNotas);
+
+        jLabelFecha.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -55,7 +59,10 @@ public class NotasBaseDatos extends javax.swing.JPanel {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabelFecha)))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
@@ -64,34 +71,38 @@ public class NotasBaseDatos extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelFecha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     //Metodo para setear los valores del cliente en las celdas
-    public void modificacionPrueba(Cliente aux) {
+    public void modificacionPrueba(Notas aux) {
         try {
             jTextFieldID.setText(String.valueOf(aux.getId()));
-            jTextAreaNotas.setText(aux.getNotas());
+            jTextAreaNotas.setText(aux.getNota());
+            jLabelFecha.setText(aux.getFechaMensaje());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
         }
     }
 
 //Metodo que retorna al cliente modificado para ser modificado en la base de datos
-    public Cliente retornarCliente() {
+    public Notas retornarCliente() {
         try {
-            Cliente aux = new Cliente();
+            Notas aux = new Notas();
             aux.setId(Integer.parseInt(jTextFieldID.getText()));
-            aux.setNotas(jTextAreaNotas.getText());
+            aux.setNota(jTextAreaNotas.getText());
+            aux.setFechaMensaje(jLabelFecha.getText());
             return aux;
         } catch (Exception e) {
             System.out.println("Error en el metodo retornarCliente() en la clase UsuariosAgregarBaseDeDatos");
@@ -101,6 +112,7 @@ public class NotasBaseDatos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelFecha;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaNotas;
     private javax.swing.JTextField jTextFieldID;

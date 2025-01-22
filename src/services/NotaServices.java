@@ -25,10 +25,10 @@ public class NotaServices {
         }
     }
 
-    public void modificarNota(int id, String nota) {
+    public void modificarNota(int id, String fecha, String nota) {
         try {
             NotaDAO dao = new NotaDAO();
-            Notas n = new Notas(id, nota);
+            Notas n = new Notas(id, fecha, nota);
             dao.actualizarEntidad(n);
             System.out.println("Se actualizo correctamente la nota");
         } catch (Exception e) {
@@ -36,11 +36,10 @@ public class NotaServices {
         }
     }
 
-    public void borrarNota(int id) {
+    public void borrarNota(Notas aux) {
         try {
             NotaDAO dao = new NotaDAO();
-            Notas n = dao.buscarNotaPorID(id);
-            dao.borrarEntidad(n);
+            dao.borrarEntidad(aux);
             System.out.println("Se elimino con exito la nota");
         } catch (Exception e) {
             System.out.println("Error al eliminar la nota");

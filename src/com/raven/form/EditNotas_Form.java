@@ -173,7 +173,7 @@ public class EditNotas_Form extends Form {
                     //Con esto obtendremos al cliente en la posicion que selecciono el usuario para luego abrir una ventana emergente para su modificacion
                     Notas aux = list.get(0);
                     //Metodo probisorio para modificar
-                    UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarClienteID(aux.getId()));
+                    UsuariosAgregarBaseDatos.modificacionPrueba(cs.buscarNotaPorID(aux.getId()));
                     //Creamos nuevamente la ventana emergente para mostrar los datos
                     DefaultOption option = new DefaultOption() {
                         @Override
@@ -187,7 +187,8 @@ public class EditNotas_Form extends Form {
                             if (UsuariosAgregarBaseDatos.retornarCliente() == null) {
                                 MessageAlerts.getInstance().showMessage("Se produjo un error", "La nota no puedo modificarse, verifique y vuelva a intentarlo", MessageAlerts.MessageType.ERROR);
                             } else {
-                                cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
+//                                cs.modificarCliente(UsuariosAgregarBaseDatos.retornarCliente().getId(), UsuariosAgregarBaseDatos.retornarCliente().getNombre(), UsuariosAgregarBaseDatos.retornarCliente().getApellido(), UsuariosAgregarBaseDatos.retornarCliente().getDocumento(), UsuariosAgregarBaseDatos.retornarCliente().getEmail(), UsuariosAgregarBaseDatos.retornarCliente().getWhatsapp(), UsuariosAgregarBaseDatos.retornarCliente().getLocalidad(), UsuariosAgregarBaseDatos.retornarCliente().getDireccion(), UsuariosAgregarBaseDatos.retornarCliente().getNotas());
+                                cs.modificarNota(UsuariosAgregarBaseDatos.retornarCliente().getId(),UsuariosAgregarBaseDatos.retornarCliente().getFechaMensaje(), UsuariosAgregarBaseDatos.retornarCliente().getNota());
                                 MessageAlerts.getInstance().showMessage("Se modifico correctamente", "La nota fue modificada correctamente", MessageAlerts.MessageType.SUCCESS);
                                 loadData();
                                 pc.closePopup();
@@ -208,8 +209,8 @@ public class EditNotas_Form extends Form {
     }//GEN-LAST:event_jButton2ActionPerformed
     //JButton para eliminar la nota de la base de datos
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        List<Cliente> list = Seleccionarusuario();
-        ClienteServices cs = new ClienteServices();
+        List<Notas> list = Seleccionarusuario();
+        NotaServices cs = new NotaServices();
         if (!list.isEmpty()) {
             DefaultOption option = new DefaultOption() {
                 @Override
@@ -218,14 +219,14 @@ public class EditNotas_Form extends Form {
                 }
             };
             String actions[] = new String[]{"Cancelar", "Eliminar"};
-            JLabel label = new JLabel("Estas seguro que deseas eliminar de forma permanente a estos clientes: " + list);
+            JLabel label = new JLabel("Estas seguro que deseas eliminar de forma permanente a estas notas: " + list);
             label.setBorder(new EmptyBorder(0, 25, 0, 25));
             GlassPanePopup.showPopup(new SimplePopupBorder(label, "Confirmar eliminacion", actions, (pc, i) -> {
                 if (i == 1) {
-                    for (Cliente aux : list) {
-                        cs.borrarCliente(aux);
+                    for (Notas aux : list) {
+                        cs.borrarNota(aux);
                     }
-                    MessageAlerts.getInstance().showMessage("Se elimino correctamente", "El cliente fue eliminado correctamente de la base de datos", MessageAlerts.MessageType.SUCCESS);
+                    MessageAlerts.getInstance().showMessage("Se elimino correctamente", "Las notas fueron eliminadas correctamente de la base de datos", MessageAlerts.MessageType.SUCCESS);
                     loadData();
                     pc.closePopup();
                 } else {
