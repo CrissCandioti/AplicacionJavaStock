@@ -16,9 +16,7 @@ public class NotaServices {
 
     public void persistirNota(String fecha, String nota) {
         try {
-            NotaDAO dao = new NotaDAO();
-            Notas n = new Notas(fecha, nota);
-            dao.persistirEntidad(n);
+            new NotaDAO().persistirEntidad(new Notas(fecha, nota));
             System.out.println("Se agrego correctamente la nota a la base de datos");
         } catch (Exception e) {
             System.out.println("Error en el metodo persistirNota de la clase NotaSerivces");
@@ -27,9 +25,7 @@ public class NotaServices {
 
     public void modificarNota(int id, String fecha, String nota) {
         try {
-            NotaDAO dao = new NotaDAO();
-            Notas n = new Notas(id, fecha, nota);
-            dao.actualizarEntidad(n);
+            new NotaDAO().actualizarEntidad(new Notas(id, fecha, nota));
             System.out.println("Se actualizo correctamente la nota");
         } catch (Exception e) {
             System.out.println("Error al modificar la nota");
@@ -38,8 +34,7 @@ public class NotaServices {
 
     public void borrarNota(Notas aux) {
         try {
-            NotaDAO dao = new NotaDAO();
-            dao.borrarEntidad(aux);
+            new NotaDAO().borrarEntidad(aux);
             System.out.println("Se elimino con exito la nota");
         } catch (Exception e) {
             System.out.println("Error al eliminar la nota");
@@ -48,22 +43,20 @@ public class NotaServices {
 
     public List<Notas> listaNotas() {
         try {
-            NotaDAO dao = new NotaDAO();
-            return dao.listaNotas();
+            return new NotaDAO().listaNotas();
         } catch (Exception e) {
             System.out.println("Error en el metodo listaNota de la clase NotaSerivces");
+            return null;
         }
-        return null;
     }
 
     public Notas buscarNotaPorID(int id) {
         try {
-            NotaDAO dao = new NotaDAO();
-            return dao.buscarNotaPorID(id);
+            return new NotaDAO().buscarNotaPorID(id);
         } catch (Exception e) {
             System.out.println("Error en el metodo buscarNotaPorID del metodo notaServices()");
+            return null;
         }
-        return null;
     }
 
 }

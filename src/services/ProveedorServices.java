@@ -16,13 +16,12 @@ import raven.alerts.MessageAlerts;
 public class ProveedorServices {
 
     public void persistirProveedor(String nombre, String notas) {
+        if (nombre.isEmpty()) {
+            MessageAlerts.getInstance().showMessage("Se produjo un error", "El Proveedor no puede tener la celda del nombre vacia", MessageAlerts.MessageType.ERROR);
+            return;
+        }
         try {
-            ProveedorDAO dao = new ProveedorDAO();
-            if (nombre.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El Proveedor no puede tener la celda del nombre vacia", MessageAlerts.MessageType.ERROR);
-                return;
-            }
-            dao.persistirEntidad(new Proveedor(nombre, notas));
+            new ProveedorDAO().persistirEntidad(new Proveedor(nombre, notas));
             MessageAlerts.getInstance().showMessage("Se agrego correctamente", "El Proveedor fue agregado correctamente a la base de datos", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             System.out.println("Error en el metodo persistirProveedor() en la clase proveedorService");
@@ -30,13 +29,12 @@ public class ProveedorServices {
     }
 
     public void modificarProveedor(int id, String nombre, String notas) {
+        if (nombre.isEmpty()) {
+            MessageAlerts.getInstance().showMessage("Se produjo un error", "El Proveedor no puede tener la celda del nombre vacia", MessageAlerts.MessageType.ERROR);
+            return;
+        }
         try {
-            ProveedorDAO dao = new ProveedorDAO();
-            if (nombre.isEmpty()) {
-                MessageAlerts.getInstance().showMessage("Se produjo un error", "El Proveedor no puede tener la celda del nombre vacia", MessageAlerts.MessageType.ERROR);
-                return;
-            }
-            dao.actualizarEntidad(new Proveedor(id, nombre, notas));
+            new ProveedorDAO().actualizarEntidad(new Proveedor(id, nombre, notas));
             MessageAlerts.getInstance().showMessage("Se modifico correctamente", "El proveedore fue modificado correctamente", MessageAlerts.MessageType.SUCCESS);
         } catch (Exception e) {
             System.out.println("Error en el metodo modificarProveedor() en la clase proveedorService");
@@ -45,9 +43,8 @@ public class ProveedorServices {
 
     public void borrarProveedor(Proveedor aux) {
         try {
-            ProveedorDAO dao = new ProveedorDAO();
+            new ProveedorDAO().borrarEntidad(aux);
             System.out.println("Se agrego correctamente el proveedor a la base de datos");
-            dao.borrarEntidad(aux);
         } catch (Exception e) {
             System.out.println("Error en el metodo borrarProveedor() de la clase proveedorServices");
         }
@@ -55,31 +52,28 @@ public class ProveedorServices {
 
     public Proveedor buscarProveedorPorId(int id) {
         try {
-            ProveedorDAO dao = new ProveedorDAO();
-            return dao.buscarProveedorPorID(id);
+            return new ProveedorDAO().buscarProveedorPorID(id);
         } catch (Exception e) {
             System.out.println("Error en el metodo buscarProveedorPorId() en la clase proveedorService");
+            return null;
         }
-        return null;
     }
 
     public List<Proveedor> listaProveedores() {
         try {
-            ProveedorDAO dao = new ProveedorDAO();
-            return dao.listaProveedores();
+            return new ProveedorDAO().listaProveedores();
         } catch (Exception e) {
             System.out.println("Error en el metodo listaProveedores() en la clase proveedorService");
+            return null;
         }
-        return null;
     }
 
     public List<Proveedor> barraBusqueda(String busqueda) {
         try {
-            ProveedorDAO dao = new ProveedorDAO();
-            return dao.barraBusqueda(busqueda);
+            return new ProveedorDAO().barraBusqueda(busqueda);
         } catch (Exception e) {
             System.out.println("Error en el metodo barraBusqueda() de la clase proveedorService");
+            return null;
         }
-        return null;
     }
 }

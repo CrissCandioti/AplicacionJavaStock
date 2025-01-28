@@ -255,13 +255,12 @@ public class VerProducto extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void seteoValores(Productos aux) {
-        try {
-            DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
+        if (aux != null) {
             jLabelVerNombre.setText(aux.getNombre());
             jLabelVerContenido.setText(aux.getContenido());
             jLabelVerMarca.setText(aux.getMarca());
             jLabelVerProveedor.setText(aux.getProveedor().getNombre());
-            jLabelVerFecha.setText(df.format(aux.getFechaIngreso()));
+            jLabelVerFecha.setText(new SimpleDateFormat("dd-MMMM-yyyy").format(aux.getFechaIngreso()));
             jLabelVerVariedad.setText(aux.getVariedad());
             jLabelVerPrecioCosto.setText(String.valueOf(aux.getPrecioCosto()));
             jLabelVerPrecioVenta.setText(String.valueOf(aux.getPrecioventa()));
@@ -270,8 +269,6 @@ public class VerProducto extends javax.swing.JPanel {
             jLabelVerDescripcion.setText(aux.getDescripcion());
             jLabelVerPorcentajeGanancia.setText(String.valueOf(aux.getPorcentajeGanancias()));
             jLabelVerGanancia.setText(String.valueOf(aux.getGanancias()));
-        } catch (Exception e) {
-            System.out.println("Error en el metodo seteoValores de la clase VerProducto");
         }
     }
 }

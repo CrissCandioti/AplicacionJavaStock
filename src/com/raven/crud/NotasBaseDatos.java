@@ -87,27 +87,23 @@ public class NotasBaseDatos extends javax.swing.JPanel {
 
     //Metodo para setear los valores del cliente en las celdas
     public void modificacionPrueba(Notas aux) {
-        try {
+        if (aux != null) {
             jTextFieldID.setText(String.valueOf(aux.getId()));
             jTextAreaNotas.setText(aux.getNota());
             jLabelFecha.setText(aux.getFechaMensaje());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error -Clase: UsuariosAgregarBaseDatos - metodo: modificacionPrueba()");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error - La nota es nula");
         }
     }
 
-//Metodo que retorna al cliente modificado para ser modificado en la base de datos
+    //Metodo que retorna al cliente modificado para ser modificado en la base de datos
     public Notas retornarCliente() {
         try {
-            Notas aux = new Notas();
-            aux.setId(Integer.parseInt(jTextFieldID.getText()));
-            aux.setNota(jTextAreaNotas.getText());
-            aux.setFechaMensaje(jLabelFecha.getText());
-            return aux;
-        } catch (Exception e) {
-            System.out.println("Error en el metodo retornarCliente() en la clase UsuariosAgregarBaseDeDatos");
+            return new Notas(Integer.parseInt(jTextFieldID.getText()), jLabelFecha.getText(), jTextAreaNotas.getText());
+        } catch (NumberFormatException e) {
+            System.out.println("Error al convertir ID: " + e.getMessage());
+            return null;
         }
-        return null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
